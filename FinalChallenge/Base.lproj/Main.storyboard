@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,31 +21,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-Fd-82M">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back@x" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-Fd-82M">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-Nj-xtR" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="19" y="464" width="337" height="66"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-Nj-xtR" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="19" y="591" width="337" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="337" id="33t-J9-Z8k"/>
-                                    <constraint firstAttribute="height" constant="66" id="Id1-zr-Fxm"/>
+                                    <constraint firstAttribute="height" constant="41" id="5cg-Zs-qfB"/>
+                                    <constraint firstAttribute="width" constant="337" id="9gM-SG-dLw"/>
                                 </constraints>
-                                <state key="normal" title="Sing In"/>
+                                <state key="normal" title="Facebook"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="33"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-Im-5bh">
-                                <rect key="frame" x="19" y="541" width="337" height="66"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-Im-5bh">
+                                <rect key="frame" x="19" y="508" width="337" height="66"/>
+                                <color key="backgroundColor" red="0.91764705882352937" green="0.51764705882352935" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="337" id="iTf-CN-eag"/>
-                                    <constraint firstAttribute="height" constant="66" id="lkE-Zd-jg5"/>
+                                    <constraint firstAttribute="width" constant="337" id="fZk-Y9-HXC"/>
+                                    <constraint firstAttribute="height" constant="66" id="tHW-Xn-6Fq"/>
                                 </constraints>
-                                <state key="normal" title="Sing Up"/>
+                                <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="21"/>
+                                <state key="normal" title="Start without login">
+                                    <color key="titleColor" red="0.94901960784313721" green="0.85490196078431369" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="33"/>
@@ -55,14 +58,28 @@
                                     <action selector="singUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z4K-6H-FLe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's share food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK0-gW-5g7">
+                                <rect key="frame" x="68" y="451" width="238" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="NVS-Pn-NNk"/>
+                                    <constraint firstAttribute="height" constant="41" id="efl-ZT-397"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="25"/>
+                                <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="8tI-Nj-xtR" secondAttribute="bottom" constant="11" id="4Qs-Ns-OZ2"/>
-                            <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="8tI-Nj-xtR" secondAttribute="centerX" id="9EM-Gb-Asa"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="6sX-uI-Bys"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" constant="-76" id="PNn-o3-Xep"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="16" id="RhY-gU-869"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="Sc2-i2-cDu"/>
                             <constraint firstItem="Vdm-Fd-82M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VSN-gA-lrF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="ZYu-1a-UOB"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="XK1-Im-5bh" secondAttribute="bottom" constant="17" id="cnU-6U-toC"/>
                             <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="kGJ-V4-P8Z"/>
+                            <constraint firstItem="MK0-gW-5g7" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="rkX-dU-sTW"/>
                             <constraint firstItem="Vdm-Fd-82M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u1m-ag-GnJ"/>
                         </constraints>
                     </view>
@@ -79,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1641" y="287"/>
+            <point key="canvasLocation" x="1640.8" y="286.50674662668666"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Lf4-A9-0N1">
@@ -164,7 +181,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="604" height="1065"/>
+        <image name="back@x" width="375" height="661"/>
         <image name="profile1" width="40" height="40"/>
     </resources>
 </document>
