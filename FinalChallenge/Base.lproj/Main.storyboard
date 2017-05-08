@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-Fd-82M">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-Nj-xtR" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="19" y="464" width="337" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="337" id="33t-J9-Z8k"/>
+                                    <constraint firstAttribute="height" constant="66" id="Id1-zr-Fxm"/>
+                                </constraints>
+                                <state key="normal" title="Sing In"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="33"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-Im-5bh">
+                                <rect key="frame" x="19" y="541" width="337" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="337" id="iTf-CN-eag"/>
+                                    <constraint firstAttribute="height" constant="66" id="lkE-Zd-jg5"/>
+                                </constraints>
+                                <state key="normal" title="Sing Up"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="33"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="singUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z4K-6H-FLe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="8tI-Nj-xtR" secondAttribute="bottom" constant="11" id="4Qs-Ns-OZ2"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="8tI-Nj-xtR" secondAttribute="centerX" id="9EM-Gb-Asa"/>
+                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VSN-gA-lrF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="ZYu-1a-UOB"/>
+                            <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="kGJ-V4-P8Z"/>
+                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u1m-ag-GnJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="oCh-Wd-n6s">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="XTr-Mq-lh9">
+                            <connections>
+                                <segue destination="Jyc-1E-XYP" kind="show" identifier="segue" id="rox-mY-kn0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="facebookLoginBtn" destination="8tI-Nj-xtR" id="Rq1-md-Mwa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1641" y="287"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="Lf4-A9-0N1">
+            <objects>
+                <viewController id="b5z-ud-nTd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C8I-iU-NsP"/>
+                        <viewControllerLayoutGuide type="bottom" id="rKA-cy-3iM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="87u-Df-7ck">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile1" id="qbF-Xx-KXq">
+                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="JBo-Ge-XJD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PQM-cC-QPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4396" y="1110"/>
+        </scene>
+        <!--Finder-->
+        <scene sceneID="TiS-EX-3UO">
+            <objects>
+                <viewController id="v2N-1W-59M" customClass="FinderViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d16-Pa-ADm"/>
+                        <viewControllerLayoutGuide type="bottom" id="fqK-gW-tx8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B4G-aJ-5Gs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Finder" image="profile1" id="YRu-aS-pPO">
+                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uqa-eY-bpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3441" y="1110"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VOf-sa-I1A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jyc-1E-XYP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sW2-Oy-6mD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WLZ-VP-EhG" kind="relationship" relationship="rootViewController" id="yLU-ml-VNs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gCG-hz-b7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2501.5999999999999" y="287.40629685157421"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="4Yh-fI-FTd">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WLZ-VP-EhG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="eKc-Ti-wzr"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7ro-JG-ZFF">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="b5z-ud-nTd" kind="relationship" relationship="viewControllers" id="rcn-xa-anY"/>
+                        <segue destination="v2N-1W-59M" kind="relationship" relationship="viewControllers" id="SEw-oP-Mpm"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yRo-5z-KI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3440.8000000000002" y="287.40629685157421"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="604" height="1065"/>
+        <image name="profile1" width="40" height="40"/>
+    </resources>
+</document>
