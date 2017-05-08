@@ -18,6 +18,8 @@ class FinderViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
+        let parameters = ["":""]
+        
         let token = FBSDKAccessToken.current()
         
         
