@@ -12,6 +12,10 @@ import FBSDKCoreKit
 
 class FinderViewController: UIViewController {
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.selectedIndex = 1
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
