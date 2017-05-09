@@ -29,8 +29,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if let token = FBSDKAccessToken.current(){
             
-            fetchProfile()
-            performSegue(withIdentifier: "segue", sender: nil)
+            DispatchQueue.main.async {
+                self.fetchProfile()
+            }
+            
+
 
         }
         
@@ -49,7 +52,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         }
         
-        
+        performSegue(withIdentifier: "segue", sender: nil)
+
         
     }
 
