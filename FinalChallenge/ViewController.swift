@@ -34,10 +34,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     print(error.debugDescription)
                 }
                 else{
-                    self.performSegue(withIdentifier: "segue", sender: nil)
+                    DispatchQueue.main.async {
+                        self.fetchProfile()
+                    }
                 }
             })
-            fetchProfile()
 
         }
         
