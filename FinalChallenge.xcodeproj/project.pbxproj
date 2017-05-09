@@ -19,7 +19,7 @@
 		06F800071EB21BA2008FB503 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800031EB21BA2008FB503 /* FBSDKCoreKit.framework */; };
 		06F800081EB21BA2008FB503 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800041EB21BA2008FB503 /* FBSDKLoginKit.framework */; };
 		06F800091EB21BA2008FB503 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800051EB21BA2008FB503 /* FBSDKShareKit.framework */; };
-		978A685D1EC0A01B00F3FA7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978A685C1EC0A01B00F3FA7D /* GoogleService-Info.plist */; };
+		97002A5F1EC0B30300F6BF6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97002A5E1EC0B30300F6BF6D /* GoogleService-Info.plist */; };
 		A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED261EAE36B8004264CF /* ProfileViewController.swift */; };
 		A7FBED291EAE36C5004264CF /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED281EAE36C5004264CF /* FinderViewController.swift */; };
 		AA96608E573313CB8F2E220E /* Pods_FinalChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5769EA2714C437956003C3 /* Pods_FinalChallenge.framework */; };
@@ -67,7 +67,7 @@
 		438A1466E43841616517446B /* Pods-FinalChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeTests/Pods-FinalChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		84C0E8ECE3C6AD9E8D88177B /* Pods-FinalChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		96FE36F7C09688C8B276D98A /* Pods-FinalChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
-		978A685C1EC0A01B00F3FA7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		97002A5E1EC0B30300F6BF6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FBED261EAE36B8004264CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A7FBED281EAE36C5004264CF /* FinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderViewController.swift; sourceTree = "<group>"; };
 		C2A4D4AAC1BE1D4FB8C1A31E /* Pods-FinalChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				0697E1741EAE2ABF002AF2FF /* LaunchScreen.storyboard */,
 				0697E1771EAE2ABF002AF2FF /* Info.plist */,
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
-				978A685C1EC0A01B00F3FA7D /* GoogleService-Info.plist */,
+				97002A5E1EC0B30300F6BF6D /* GoogleService-Info.plist */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0697E1761EAE2ABF002AF2FF /* LaunchScreen.storyboard in Resources */,
-				978A685D1EC0A01B00F3FA7D /* GoogleService-Info.plist in Resources */,
+				97002A5F1EC0B30300F6BF6D /* GoogleService-Info.plist in Resources */,
 				0697E1731EAE2ABF002AF2FF /* Assets.xcassets in Resources */,
 				0697E16E1EAE2ABF002AF2FF /* Main.storyboard in Resources */,
 			);
