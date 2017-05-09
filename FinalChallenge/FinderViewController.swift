@@ -10,6 +10,11 @@ import UIKit
 import FBSDKCoreKit
 
 
+let token = FBSDKAccessToken.current()
+var id = ""
+var parameters = ["":""]
+
+
 class FinderViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -18,22 +23,51 @@ class FinderViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        let parameters = ["":""]
-        
-        let token = FBSDKAccessToken.current()
+    
         
         
         
-        
-        FBSDKGraphRequest(graphPath: "/\(token)/friends", parameters: nil).start { (connection, result, error) in
+        DispatchQueue.main.async {
             
-            if error != nil {
-                print(error!)
-                return
+            FBSDKGraphRequest(graphPath: "me", parameters: nil).start { (connection, result, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                    
+                }
+                
+                
+                print(result!)
+                
+                let dict = result! as! NSDictionary
+                
+                id =  dict["id"] as! String
             }
             
-            print(result!)
+        }
+        
+        
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        DispatchQueue.main.async {
             
+            parameters = ["fields": "name"]
+
+            
+            FBSDKGraphRequest(graphPath: "/\(id)/friends", parameters: parameters).start { (connection, result, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                print(result!)
+                
+            }
         }
     }
 
