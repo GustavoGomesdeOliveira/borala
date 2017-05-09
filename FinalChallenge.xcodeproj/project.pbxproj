@@ -20,6 +20,7 @@
 		06F800081EB21BA2008FB503 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800041EB21BA2008FB503 /* FBSDKLoginKit.framework */; };
 		06F800091EB21BA2008FB503 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800051EB21BA2008FB503 /* FBSDKShareKit.framework */; };
 		9706431B1EC1FB5B0038B8FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */; };
+		9706431E1EC1FF290038B8FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706431D1EC1FF290038B8FD /* User.swift */; };
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
 		A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */; };
 		A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED261EAE36B8004264CF /* ProfileViewController.swift */; };
@@ -70,6 +71,7 @@
 		84C0E8ECE3C6AD9E8D88177B /* Pods-FinalChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		96FE36F7C09688C8B276D98A /* Pods-FinalChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9706431D1EC1FF290038B8FD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		A7FBED261EAE36B8004264CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		0697E1671EAE2ABF002AF2FF /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				9706431C1EC1FF070038B8FD /* Model */,
 				0697E1681EAE2ABF002AF2FF /* AppDelegate.swift */,
 				0697E16A1EAE2ABF002AF2FF /* ViewController.swift */,
 				A7FBED2A1EAE36CC004264CF /* TabBarViewControllers */,
@@ -196,6 +199,14 @@
 				96FE36F7C09688C8B276D98A /* Pods-FinalChallengeUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9706431C1EC1FF070038B8FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9706431D1EC1FF290038B8FD /* User.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		A7FBED2A1EAE36CC004264CF /* TabBarViewControllers */ = {
@@ -504,6 +515,7 @@
 				A7FBED291EAE36C5004264CF /* FinderViewController.swift in Sources */,
 				A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */,
 				0697E1711EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld in Sources */,
+				9706431E1EC1FF290038B8FD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
