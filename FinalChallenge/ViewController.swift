@@ -57,6 +57,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         }
         
+        self.performSegue(withIdentifier: "segue", sender: nil)
+
     }
 
     
