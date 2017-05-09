@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Firebase
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
@@ -18,8 +19,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var facebookLoginBtn: FBSDKLoginButton!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,9 +27,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
         
         if let token = FBSDKAccessToken.current(){
-            
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
+            FIRAuth.auth()?.signIn(with: credential, completion: {
+                user, error in
+                if let _ = error{
+                    print(error.debugDescription)
+                }
+                else{
+                    self.performSegue(withIdentifier: "segue", sender: nil)
+                }
+            })
             fetchProfile()
-            performSegue(withIdentifier: "segue", sender: nil)
 
         }
         
@@ -49,17 +56,28 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         }
         
-        
-        
     }
 
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        performSegue(withIdentifier: "segue", sender: nil)
+        
+        if let token = result.token{
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
+            FIRAuth.auth()?.signIn(with: credential, completion: {
+                user, error in
+                if let _ = error{
+                    print(error.debugDescription)
+                }
+                else{
+                    self.performSegue(withIdentifier: "segue", sender: nil)
+                }
+            })
+        }
+        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
+        try! FIRAuth.auth()!.signOut()//log out from firebase
     }
     
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {

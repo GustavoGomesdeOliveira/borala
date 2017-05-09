@@ -147,7 +147,7 @@
 				0697E1741EAE2ABF002AF2FF /* LaunchScreen.storyboard */,
 				0697E1771EAE2ABF002AF2FF /* Info.plist */,
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
-				978A685C1EC0A01B00F3FA7D /* GoogleService-Info.plist */,
+				97002A5E1EC0B30300F6BF6D /* GoogleService-Info.plist */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0697E1761EAE2ABF002AF2FF /* LaunchScreen.storyboard in Resources */,
-				978A685D1EC0A01B00F3FA7D /* GoogleService-Info.plist in Resources */,
+				97002A5F1EC0B30300F6BF6D /* GoogleService-Info.plist in Resources */,
 				0697E1731EAE2ABF002AF2FF /* Assets.xcassets in Resources */,
 				0697E16E1EAE2ABF002AF2FF /* Main.storyboard in Resources */,
 			);
