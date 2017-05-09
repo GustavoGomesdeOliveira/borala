@@ -55,7 +55,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="singUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z4K-6H-FLe"/>
+                                    <action selector="start:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vfn-1d-4NA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's share food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK0-gW-5g7">
@@ -131,15 +131,26 @@
                     <view key="view" contentMode="scaleToFill" id="B4G-aJ-5Gs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-re-CCk">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bdJ-re-CCk" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="3eM-eo-au0"/>
+                            <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="F6S-qe-Eyq"/>
+                            <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="bdJ-re-CCk" secondAttribute="bottom" id="Mb4-zC-e1D"/>
+                            <constraint firstAttribute="trailing" secondItem="bdJ-re-CCk" secondAttribute="trailing" id="NKK-OT-9vO"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Finder" image="profile1" id="YRu-aS-pPO">
+                    <tabBarItem key="tabBarItem" tag="1" title="Finder" image="profile1" id="YRu-aS-pPO">
                         <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqa-eY-bpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3441" y="1110"/>
+            <point key="canvasLocation" x="3440.8000000000002" y="1109.5952023988007"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VOf-sa-I1A">
@@ -159,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="2501.5999999999999" y="287.40629685157421"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="4Yh-fI-FTd">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WLZ-VP-EhG" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WLZ-VP-EhG" customClass="TabBarViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eKc-Ti-wzr"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7ro-JG-ZFF">
@@ -171,6 +182,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="tabBar" destination="7ro-JG-ZFF" id="94J-n0-8eg"/>
                         <segue destination="b5z-ud-nTd" kind="relationship" relationship="viewControllers" id="rcn-xa-anY"/>
                         <segue destination="v2N-1W-59M" kind="relationship" relationship="viewControllers" id="SEw-oP-Mpm"/>
                     </connections>

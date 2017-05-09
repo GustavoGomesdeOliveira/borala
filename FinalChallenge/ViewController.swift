@@ -71,9 +71,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func signIn(_ sender: UIButton) {
-    }
-    @IBAction func singUp(_ sender: UIButton) {
+
+    @IBAction func start(_ sender: UIButton) {
+        performSegue(withIdentifier: "segue", sender: nil)
+        
     }
 
 
