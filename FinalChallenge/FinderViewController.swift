@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import MapKit
 
 
 let token = FBSDKAccessToken.current()
@@ -15,19 +16,28 @@ var id = ""
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController {
+class FinderViewController: UIViewController, CLLocationManagerDelegate {
 
-    override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.selectedIndex = 1
-    }
+    @IBOutlet weak var mapView: MKMapView!
+
+    
+    //User initial location
+    var myLocation : CLLocationCoordinate2D?
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
+        self.locationManager.delegate = self
+        //Requesting user location authorization
+        self.locationManager.requestAlwaysAuthorization()
         
-    
+        //if user give permission we'll get the current location
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+            self.mapView.showsUserLocation = true
+        }
         
         
         
@@ -81,14 +91,28 @@ class FinderViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    
+    // MARK: - CoreLocation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     //Updating user location on the mapView
+     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        self.myLocation = locations.first?.coordinate
+        
+        let distanceSpan: CLLocationDegrees = 2000
+        
+        let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
+        self.mapView.setRegion(myRegion, animated: true)
+//        self.mapView.an
+        
+        
+
+     }
+    
+     //Needs to be here
+     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+     print("ERRO: --- \(error)")
+     }
+    
 
 }
