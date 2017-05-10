@@ -27,9 +27,6 @@ class FinderViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
-    
-        
-        
         
         DispatchQueue.main.async {
             

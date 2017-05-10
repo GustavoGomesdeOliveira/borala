@@ -14,6 +14,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let userData = UserDefaults.standard.object(forKey: "user") as! Data
+        let user = NSKeyedUnarchiver.unarchiveObject(with: userData)
+        print("\(user)")
     }
 
     override func didReceiveMemoryWarning() {

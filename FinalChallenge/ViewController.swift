@@ -30,14 +30,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
             FIRAuth.auth()?.signIn(with: credential, completion: {
-                
                 user, error in
                 if let _ = error{
                     
                     print(error.debugDescription)
                 } else {
-                    
-                    self.performSegue(withIdentifier: "segue", sender: nil)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "segue", sender: nil)
+                    }
 
                 }
             })
@@ -68,12 +68,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
             
             DispatchQueue.main.async {
-                
                 self.getImageFromURL(url: data["url"] as! String, name: name, id: id)
-                
             }
-            
-            
         }
         
         self.performSegue(withIdentifier: "segue", sender: nil)
@@ -102,8 +98,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                         // Finally convert that Data into an image and do what you wish with it.
                         
                         let user = User(withId: id, name: name, pic: imageData)
-                        
-                        
+                        print("user id \(user.id)")
+                        let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                        UserDefaults.standard.set(userData, forKey: "user")
                         // Do something with your image.
                     } else {
                         print("Couldn't get image: Image is nil")
@@ -125,9 +122,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
        
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
             FIRAuth.auth()?.signIn(with: credential, completion: {
-                
                 user, error in
-                
                 if let _ = error{
                     
                     print(error.debugDescription)
@@ -135,8 +130,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 } else {
                     
                     DispatchQueue.main.async {
-
-                        self.fetchProfile(id: (user?.providerID)!)
+                        self.fetchProfile(id: (user?.uid)!)
                     }
                 }
             })
