@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -139,34 +139,45 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-Bc-B7s">
                                 <rect key="frame" x="0.0" y="532" width="375" height="86"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyB-Wd-R9h" customClass="FBSDKLoginButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyB-Wd-R9h" customClass="FBSDKLoginButton">
                                         <rect key="frame" x="32.5" y="48" width="310" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="310" id="2Zh-V2-ByF"/>
+                                            <constraint firstAttribute="width" constant="310" id="Gzb-Bg-Hk6"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are not logged!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lx6-gl-lGs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are not logged!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lx6-gl-lGs">
                                         <rect key="frame" x="113" y="19" width="149" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="A1P-Ti-cxh"/>
+                                            <constraint firstAttribute="width" constant="149" id="BQT-s9-9P0"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.57284979347068787" green="0.57852157360406098" blue="0.57852157360406098" alpha="0.32000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Lx6-gl-lGs" firstAttribute="centerX" secondItem="D3W-Bc-B7s" secondAttribute="centerX" id="KK0-42-4NU"/>
+                                    <constraint firstItem="vyB-Wd-R9h" firstAttribute="top" secondItem="Lx6-gl-lGs" secondAttribute="bottom" constant="8" id="Lcn-ds-weH"/>
+                                    <constraint firstAttribute="bottom" secondItem="vyB-Wd-R9h" secondAttribute="bottom" constant="8" id="jGl-aQ-L4p"/>
+                                    <constraint firstItem="vyB-Wd-R9h" firstAttribute="centerX" secondItem="D3W-Bc-B7s" secondAttribute="centerX" id="me9-ap-8DV"/>
+                                    <constraint firstAttribute="height" constant="86" id="smH-XG-xGa"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="bdJ-re-CCk" secondAttribute="leading" id="1Jm-8z-Vkv"/>
-                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" constant="468" id="1Qc-gd-5Ye"/>
-                            <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="D3W-Bc-B7s" secondAttribute="bottom" id="3Db-46-lyf"/>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="3eM-eo-au0"/>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="F6S-qe-Eyq"/>
-                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="bottom" secondItem="fqK-gW-tx8" secondAttribute="top" id="LGM-H1-Dbj"/>
+                            <constraint firstAttribute="trailing" secondItem="D3W-Bc-B7s" secondAttribute="trailing" id="KaF-mb-Yn2"/>
                             <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="bdJ-re-CCk" secondAttribute="bottom" id="Mb4-zC-e1D"/>
                             <constraint firstAttribute="trailing" secondItem="bdJ-re-CCk" secondAttribute="trailing" id="NKK-OT-9vO"/>
-                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="dHj-TO-8wu"/>
-                            <constraint firstAttribute="trailing" secondItem="D3W-Bc-B7s" secondAttribute="trailing" id="i1Q-fz-omn"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="centerX" secondItem="B4G-aJ-5Gs" secondAttribute="centerX" id="Nry-hZ-3tW"/>
+                            <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="D3W-Bc-B7s" secondAttribute="bottom" id="xLD-Dp-qq3"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="zzG-w2-Opk"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Finder" image="profile1" id="YRu-aS-pPO">
