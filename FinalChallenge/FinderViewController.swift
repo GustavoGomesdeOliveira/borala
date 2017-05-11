@@ -16,7 +16,9 @@ var id = ""
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+    
+    
 
     @IBOutlet weak var notLoggedView: UIView!
     
@@ -36,6 +38,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
         self.notLoggedView.isHidden == true
         
         self.locationManager.delegate = self
+        self.mapView.delegate = self
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -132,27 +135,31 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
      print("ERRO: --- \(error)")
      }
     
-    //adding custom Annotation
-//        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//            if let customAnnotation = annotation as? CustomPin{
-//                let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
-//                let mapItem = MKMapItem(placemark: placemark)
-//    
-//                self.mapItem = (mapItem, customAnnotation)
-////                self.showRoute.isEnabled = true
-//    
-//                return customAnnotation.annotationView!
-//            }else{
-//                return nil
-//            }
-//        }
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else {
-            return nil
+            //if i want to set my pin
+            let annotationIdentifier = "mylocation"
+            
+            var annotationView: MKAnnotationView?
+            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
+                annotationView?.annotation = annotation
+            }
+            else {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            
+            if let annotationView = annotationView {
+                
+                annotationView.canShowCallout = true
+                annotationView.image = UIImage(named: "myPin")
+            }
+            return annotationView
         }
         
+        //if i want to set the pin for an event
         let annotationIdentifier = "Identifier"
         var annotationView: MKAnnotationView?
         if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
