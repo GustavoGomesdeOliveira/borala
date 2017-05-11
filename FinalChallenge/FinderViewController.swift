@@ -19,7 +19,8 @@ var parameters = ["":""]
 class FinderViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    //var mapItem: (map: MKMapItem, pin: MyPin)? = nil
+//    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
+//    var pin: CustomPin?
 
     
     //User initial location
@@ -112,14 +113,52 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
-        
-
-     }
+      }
     
      //Needs to be here
      func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
      print("ERRO: --- \(error)")
      }
+    
+    //adding custom Annotation
+//        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//            if let customAnnotation = annotation as? CustomPin{
+//                let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
+//                let mapItem = MKMapItem(placemark: placemark)
+//    
+//                self.mapItem = (mapItem, customAnnotation)
+////                self.showRoute.isEnabled = true
+//    
+//                return customAnnotation.annotationView!
+//            }else{
+//                return nil
+//            }
+//        }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+        
+        let annotationIdentifier = "Identifier"
+        var annotationView: MKAnnotationView?
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        if let annotationView = annotationView {
+            
+            annotationView.canShowCallout = true
+            annotationView.image = UIImage(named: "myPin")
+        }
+        return annotationView
+    }
     
 
 }
