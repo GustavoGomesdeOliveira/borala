@@ -25,6 +25,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
     
     
+    
     @IBOutlet weak var mapView: MKMapView!
 //    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
 //    var pin: CustomPin?
@@ -32,16 +33,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //User initial location
     var myLocation : CLLocationCoordinate2D?
+    var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.notLoggedView.isHidden == true
-        
+                
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
 
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
+        longGesture.minimumPressDuration = 1.0
+        self.mapView.addGestureRecognizer(longGesture)
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
@@ -286,6 +290,25 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         downloadPicTask.resume()
         
+    }
+    
+    func addMyPoint(press : UIGestureRecognizer) {
+        if press.state == .began{
+            //Get the coordinate where the user pressed than performa segue
+            
+            let locationOnView = press.location(in: self.mapView)
+            let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+            self.coordenate = coordinate
+            let image = #imageLiteral(resourceName: "poke2")
+            
+//            self.pin = MyPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "Alguma coisa", andPinImage: image)
+            
+            
+            
+            performSegue(withIdentifier: "choosePoke", sender: self)
+            
+            
+        }
     }
 
 
