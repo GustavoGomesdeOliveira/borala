@@ -16,6 +16,7 @@ class User: NSObject, NSCoding{
     var pic: Data?
     var rate: Int?
     var preference: [ String ]?
+    var location: Location?
     
     init(withId: String, name:String?, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?) {
         self.id = withId

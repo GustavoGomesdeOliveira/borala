@@ -36,9 +36,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     print(error.debugDescription)
                 } else {
                     DispatchQueue.main.async {
+                        FirebaseHelper.registerMeOnline(id: (user?.uid)!)
                         self.performSegue(withIdentifier: "segue", sender: nil)
                     }
-
                 }
             })
 

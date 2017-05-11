@@ -2,7 +2,7 @@
 //  Location.swift
 //  FinalChallenge
 //
-//  Created by padrao on 11/05/17.
+//  Created by C. Williamberg on 11/05/17.
 //  Copyright © 2017 Gustavo Gomes de Oliveira. All rights reserved.
 //
 
