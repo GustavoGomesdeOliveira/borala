@@ -17,7 +17,7 @@ var id = ""
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate{
     
     
 

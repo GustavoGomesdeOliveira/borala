@@ -27,6 +27,7 @@
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
 		A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */; };
 		A76357BC1EC4888700F2CFE6 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76357BB1EC4888700F2CFE6 /* CustomPin.swift */; };
+		A76357BE1EC4A45500F2CFE6 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76357BD1EC4A45500F2CFE6 /* CustomPin.swift */; };
 		A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED261EAE36B8004264CF /* ProfileViewController.swift */; };
 		A7FBED291EAE36C5004264CF /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED281EAE36C5004264CF /* FinderViewController.swift */; };
 		AA96608E573313CB8F2E220E /* Pods_FinalChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5769EA2714C437956003C3 /* Pods_FinalChallenge.framework */; };
@@ -82,6 +83,7 @@
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		A76357BB1EC4888700F2CFE6 /* CustomPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
+		A76357BD1EC4A45500F2CFE6 /* CustomPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		A7FBED261EAE36B8004264CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A7FBED281EAE36C5004264CF /* FinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderViewController.swift; sourceTree = "<group>"; };
 		C2A4D4AAC1BE1D4FB8C1A31E /* Pods-FinalChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				0640FBC21EC3415800C1B16A /* Event.swift */,
 				97016C9F1EC4814100DA1194 /* FirebaseHelper.swift */,
 				97016CA11EC4863700DA1194 /* Location.swift */,
+				A76357BD1EC4A45500F2CFE6 /* CustomPin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A76357BE1EC4A45500F2CFE6 /* CustomPin.swift in Sources */,
 				0640FBC31EC3415800C1B16A /* Event.swift in Sources */,
 				0697E16B1EAE2ABF002AF2FF /* ViewController.swift in Sources */,
 				97016CA21EC4863700DA1194 /* Location.swift in Sources */,
