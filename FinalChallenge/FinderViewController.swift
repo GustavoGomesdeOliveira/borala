@@ -106,9 +106,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
         if let token = FBSDKAccessToken.current() {
+            
             self.mapView.setRegion(myRegion, animated: true)
+            
         }else{
+            
             //avisar o usuario que ele nao esta logado
+            
+            let testFrame : CGRect = CGRect(x: 0, y: 350, width: self.view.frame.width, height: 100)
+            var testView : UIView = UIView(frame: testFrame)
+            testView.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+            testView.alpha=0.5
+            self.view.addSubview(testView)
         
         }
         
