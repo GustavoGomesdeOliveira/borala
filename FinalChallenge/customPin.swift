@@ -11,15 +11,31 @@ import MapKit
 
 class customPinAnnotation: NSObject,MKAnnotation{
 
-    var title: String?
-    var coordinate: CLLocationCoordinate2D
-    var image: UIImage?
+    let title: String?
+    let subtitle: String?
     
-    init(title: String, coordinate: CLLocationCoordinate2D, imageName: String) {
+    let coordinate: CLLocationCoordinate2D
+    let pinImage: UIImage
+    
+    init(withTitle title:String, andLocation location:CLLocationCoordinate2D, andSubtitle subtitle:String, andPinImage image: UIImage) {
+        self.pinImage = image
         self.title = title
-        self.coordinate = coordinate
-        self.image = UIImage(named: imageName)
-       
+        self.subtitle = subtitle
+        self.coordinate = location
     }
-
+    
+    var annotationView: MKAnnotationView?{
+        
+        let view = MKAnnotationView(annotation: self, reuseIdentifier: "event")
+        view.image = self.pinImage
+        view.isEnabled = true
+        view.canShowCallout = true
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        button.setImage(UIImage(named: "poke")!, for: .normal)
+        
+        return view
+    }
+    
+    
 }
