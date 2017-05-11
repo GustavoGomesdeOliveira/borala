@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import MapKit
-
+import FBSDKLoginKit
 
 let token = FBSDKAccessToken.current()
 var id = ""
@@ -18,6 +18,9 @@ var parameters = ["":""]
 
 class FinderViewController: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var notLoggedView: UIView!
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     //var mapItem: (map: MKMapItem, pin: MyPin)? = nil
 
@@ -28,6 +31,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.notLoggedView.isHidden == true
         
         self.locationManager.delegate = self
         //Requesting user location authorization
@@ -104,19 +109,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate {
         
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
+        self.mapView.setRegion(myRegion, animated: true)
+
+        
         if let token = FBSDKAccessToken.current() {
             
-            self.mapView.setRegion(myRegion, animated: true)
             
         }else{
             
             //avisar o usuario que ele nao esta logado
             
-            let testFrame : CGRect = CGRect(x: 0, y: 350, width: self.view.frame.width, height: 100)
-            var testView : UIView = UIView(frame: testFrame)
-            testView.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
-            testView.alpha=0.5
-            self.view.addSubview(testView)
+            self.notLoggedView.isHidden = false
         
         }
         

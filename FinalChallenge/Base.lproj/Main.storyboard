@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -136,13 +136,37 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-re-CCk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-Bc-B7s">
+                                <rect key="frame" x="0.0" y="532" width="375" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyB-Wd-R9h" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="32.5" y="48" width="310" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are not logged!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lx6-gl-lGs">
+                                        <rect key="frame" x="113" y="19" width="149" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.57284979347068787" green="0.57852157360406098" blue="0.57852157360406098" alpha="0.32000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="bdJ-re-CCk" secondAttribute="leading" id="1Jm-8z-Vkv"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" constant="468" id="1Qc-gd-5Ye"/>
+                            <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="D3W-Bc-B7s" secondAttribute="bottom" id="3Db-46-lyf"/>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="3eM-eo-au0"/>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="F6S-qe-Eyq"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="bottom" secondItem="fqK-gW-tx8" secondAttribute="top" id="LGM-H1-Dbj"/>
                             <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="bdJ-re-CCk" secondAttribute="bottom" id="Mb4-zC-e1D"/>
                             <constraint firstAttribute="trailing" secondItem="bdJ-re-CCk" secondAttribute="trailing" id="NKK-OT-9vO"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="dHj-TO-8wu"/>
+                            <constraint firstAttribute="trailing" secondItem="D3W-Bc-B7s" secondAttribute="trailing" id="i1Q-fz-omn"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Finder" image="profile1" id="YRu-aS-pPO">
@@ -150,6 +174,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="mapView" destination="bdJ-re-CCk" id="wtG-Yc-EoJ"/>
+                        <outlet property="notLoggedView" destination="D3W-Bc-B7s" id="giH-k1-fbg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqa-eY-bpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
