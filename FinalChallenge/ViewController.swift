@@ -95,13 +95,20 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 if let res = response as? HTTPURLResponse {
                     print("Downloaded cat picture with response code \(res.statusCode)")
                     if let imageData = data {
-                        // Finally convert that Data into an image and do what you wish with it.
-                        
-                        let user = User(withId: id, name: name, pic: imageData)
-                        print("user id \(user.id)")
-                        let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                        UserDefaults.standard.set(userData, forKey: "user")
-                        // Do something with your image.
+                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
+                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
+                            if (imageData != user.pic){
+                                //save on firebase
+                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                            }
+                        }
+                        else{
+                            let user = User(withId: id, name: name, pic: imageData)
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                            UserDefaults.standard.set(userData, forKey: "user")
+                            FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                            FirebaseHelper.saveString(path: "users/\(id)/name/username", object: name, completionHandler: nil)
+                        }
                     } else {
                         print("Couldn't get image: Image is nil")
                     }
