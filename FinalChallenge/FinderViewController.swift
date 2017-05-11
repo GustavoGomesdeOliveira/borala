@@ -8,23 +8,43 @@
 
 import UIKit
 import FBSDKCoreKit
-
+import MapKit
+import FBSDKLoginKit
 
 let token = FBSDKAccessToken.current()
 var id = ""
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController {
+class FinderViewController: UIViewController, CLLocationManagerDelegate {
 
-    override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.selectedIndex = 1
-    }
+    @IBOutlet weak var notLoggedView: UIView!
+    
+    
+    @IBOutlet weak var mapView: MKMapView!
+//    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
+//    var pin: CustomPin?
+
+    
+    //User initial location
+    var myLocation : CLLocationCoordinate2D?
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.notLoggedView.isHidden == true
+        
+        self.locationManager.delegate = self
+        //Requesting user location authorization
+        self.locationManager.requestAlwaysAuthorization()
+        
+        //if user give permission we'll get the current location
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+            self.mapView.showsUserLocation = true
+        }
         
         
         
@@ -78,14 +98,79 @@ class FinderViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    
+    // MARK: - CoreLocation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+     //Updating user location on the mapView
+     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        self.myLocation = locations.first?.coordinate
+        
+        let distanceSpan: CLLocationDegrees = 2000
+        
+        let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
+        
+        self.mapView.setRegion(myRegion, animated: true)
+
+        
+        if let token = FBSDKAccessToken.current() {
+            
+            
+        }else{
+            
+            //avisar o usuario que ele nao esta logado
+            
+            self.notLoggedView.isHidden = false
+        
+        }
+        
+        
+      }
+    
+     //Needs to be here
+     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+     print("ERRO: --- \(error)")
+     }
+    
+    //adding custom Annotation
+//        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//            if let customAnnotation = annotation as? CustomPin{
+//                let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
+//                let mapItem = MKMapItem(placemark: placemark)
+//    
+//                self.mapItem = (mapItem, customAnnotation)
+////                self.showRoute.isEnabled = true
+//    
+//                return customAnnotation.annotationView!
+//            }else{
+//                return nil
+//            }
+//        }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+        
+        let annotationIdentifier = "Identifier"
+        var annotationView: MKAnnotationView?
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        if let annotationView = annotationView {
+            
+            annotationView.canShowCallout = true
+            annotationView.image = UIImage(named: "myPin")
+        }
+        return annotationView
     }
-    */
+    
 
 }

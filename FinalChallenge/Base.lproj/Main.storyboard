@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,8 +29,7 @@
                                 <rect key="frame" x="19" y="591" width="337" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="5cg-Zs-qfB"/>
-                                    <constraint firstAttribute="width" constant="337" id="9gM-SG-dLw"/>
+                                    <constraint firstAttribute="height" constant="41" id="6E9-1Z-OgB"/>
                                 </constraints>
                                 <state key="normal" title="Facebook"/>
                                 <userDefinedRuntimeAttributes>
@@ -42,8 +42,7 @@
                                 <rect key="frame" x="19" y="508" width="337" height="66"/>
                                 <color key="backgroundColor" red="0.91764705882352937" green="0.51764705882352935" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="337" id="fZk-Y9-HXC"/>
-                                    <constraint firstAttribute="height" constant="66" id="tHW-Xn-6Fq"/>
+                                    <constraint firstAttribute="height" constant="66" id="fGS-xs-AUP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="21"/>
                                 <state key="normal" title="Start without login">
@@ -61,8 +60,8 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's share food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK0-gW-5g7">
                                 <rect key="frame" x="68" y="451" width="238" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="238" id="NVS-Pn-NNk"/>
-                                    <constraint firstAttribute="height" constant="41" id="efl-ZT-397"/>
+                                    <constraint firstAttribute="height" constant="41" id="9Ch-Ib-t6I"/>
+                                    <constraint firstAttribute="width" constant="238" id="SdE-WV-YQQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="25"/>
                                 <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,16 +70,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="6sX-uI-Bys"/>
-                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" constant="-76" id="PNn-o3-Xep"/>
-                            <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="16" id="RhY-gU-869"/>
-                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="Sc2-i2-cDu"/>
-                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VSN-gA-lrF"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="ZYu-1a-UOB"/>
-                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="XK1-Im-5bh" secondAttribute="bottom" constant="17" id="cnU-6U-toC"/>
-                            <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="kGJ-V4-P8Z"/>
-                            <constraint firstItem="MK0-gW-5g7" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="rkX-dU-sTW"/>
-                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u1m-ag-GnJ"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="14u-Kq-5Z2"/>
+                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="69G-Ls-RcA"/>
+                            <constraint firstItem="Vdm-Fd-82M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="79R-N3-xro"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="16" id="CQh-IZ-WWd"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I2T-H5-yq2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="175" id="QiY-Sr-Zz8"/>
+                            <constraint firstItem="MK0-gW-5g7" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="Ubp-Ml-XdH"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="width" secondItem="XK1-Im-5bh" secondAttribute="width" id="XVg-fZ-Qvu"/>
+                            <constraint firstItem="XK1-Im-5bh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="337:667" id="g2P-o1-XMh"/>
+                            <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="XK1-Im-5bh" secondAttribute="bottom" constant="17" id="kJD-MA-xKe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="o8y-je-OPQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="pZr-5E-fuE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oCh-Wd-n6s">
@@ -135,18 +136,57 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-re-CCk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-Bc-B7s">
+                                <rect key="frame" x="0.0" y="532" width="375" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyB-Wd-R9h" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="32.5" y="48" width="310" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="310" id="2Zh-V2-ByF"/>
+                                            <constraint firstAttribute="width" constant="310" id="Gzb-Bg-Hk6"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are not logged!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lx6-gl-lGs">
+                                        <rect key="frame" x="113" y="19" width="149" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="A1P-Ti-cxh"/>
+                                            <constraint firstAttribute="width" constant="149" id="BQT-s9-9P0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.57284979347068787" green="0.57852157360406098" blue="0.57852157360406098" alpha="0.32000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Lx6-gl-lGs" firstAttribute="centerX" secondItem="D3W-Bc-B7s" secondAttribute="centerX" id="KK0-42-4NU"/>
+                                    <constraint firstItem="vyB-Wd-R9h" firstAttribute="top" secondItem="Lx6-gl-lGs" secondAttribute="bottom" constant="8" id="Lcn-ds-weH"/>
+                                    <constraint firstAttribute="bottom" secondItem="vyB-Wd-R9h" secondAttribute="bottom" constant="8" id="jGl-aQ-L4p"/>
+                                    <constraint firstItem="vyB-Wd-R9h" firstAttribute="centerX" secondItem="D3W-Bc-B7s" secondAttribute="centerX" id="me9-ap-8DV"/>
+                                    <constraint firstAttribute="height" constant="86" id="smH-XG-xGa"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="3eM-eo-au0"/>
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="F6S-qe-Eyq"/>
+                            <constraint firstAttribute="trailing" secondItem="D3W-Bc-B7s" secondAttribute="trailing" id="KaF-mb-Yn2"/>
                             <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="bdJ-re-CCk" secondAttribute="bottom" id="Mb4-zC-e1D"/>
                             <constraint firstAttribute="trailing" secondItem="bdJ-re-CCk" secondAttribute="trailing" id="NKK-OT-9vO"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="centerX" secondItem="B4G-aJ-5Gs" secondAttribute="centerX" id="Nry-hZ-3tW"/>
+                            <constraint firstItem="fqK-gW-tx8" firstAttribute="top" secondItem="D3W-Bc-B7s" secondAttribute="bottom" id="xLD-Dp-qq3"/>
+                            <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="zzG-w2-Opk"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Finder" image="profile1" id="YRu-aS-pPO">
                         <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="mapView" destination="bdJ-re-CCk" id="wtG-Yc-EoJ"/>
+                        <outlet property="notLoggedView" destination="D3W-Bc-B7s" id="giH-k1-fbg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqa-eY-bpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
