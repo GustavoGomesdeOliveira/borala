@@ -19,6 +19,7 @@ var parameters = ["":""]
 class FinderViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    //var mapItem: (map: MKMapItem, pin: MyPin)? = nil
 
     
     //User initial location
