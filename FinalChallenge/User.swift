@@ -11,6 +11,8 @@ import UIKit
 class User: NSObject, NSCoding{
     
     var id: String!
+    var facebookID: String!
+    var gender: String!
     var name: String!
     var friends: [ String ]?
     var pic: Data?
@@ -18,19 +20,23 @@ class User: NSObject, NSCoding{
     var preference: [ String ]?
     var location: Location?
     
-    init(withId: String, name:String?, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?) {
+    init(withId: String, facebookID: String, name:String?, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, gender: String!) {
         self.id = withId
+        self.facebookID = facebookID
         self.name = name
         self.friends = friends
         self.pic = pic
         self.rate = rate
         self.preference = preference
+        self.gender = gender
     }
     
-    init(withId: String, name:String!, pic: Data!) {
+    init(withId: String, name:String!, pic: Data!, facebookID: String, gender: String!) {
         self.id = withId
+        self.facebookID = facebookID
         self.name = name
         self.pic = pic
+        self.gender = gender
     }
     
     required public init?(coder aDecoder: NSCoder) {
