@@ -23,7 +23,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
-    
+    var pin: CustomPin?
+
     
     
     @IBOutlet weak var mapView: MKMapView!
@@ -153,7 +154,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             if let annotationView = annotationView {
                 
                 annotationView.canShowCallout = true
-                annotationView.image = UIImage(named: "myPin")
+                annotationView.image = UIImage(named: "myPin1")
             }
             return annotationView
         }
@@ -287,16 +288,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if press.state == .began{
             //Get the coordinate where the user pressed than performa segue
             
-            let locationOnView = press.location(in: self.mapView)
-            let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
-            self.coordenate = coordinate
-            let image = #imageLiteral(resourceName: "poke2")
             
-//            self.pin = MyPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "Alguma coisa", andPinImage: image)
-            
-            
-            
-            performSegue(withIdentifier: "choosePoke", sender: self)
             
             
         }
