@@ -26,6 +26,43 @@ class FirebaseHelper{
         }
     }
     
+    static func saveUser(user: User){
+        let idRef   = rootRefStorage.child("users/" + user.id + "/")
+        let nameRef = idRef.child("name/userName")
+        let facebookIdRef = idRef.child("facebookId/facebookId")
+        let genderRef  = idRef.child("gender/userGender")
+        let friendsRef = idRef.child("friends/userFriends")
+        let picRef     = idRef.child("pic/profilePic.jpg")
+        let rateRef    = idRef.child("rate/userRate")
+        let preferenceRef = idRef.child("preference/userPreference")
+        let locationRef   = idRef.child("location/userLocation")
+        
+        
+        if let nameData = user.name.data(using: .utf8){
+            nameRef.put(nameData)
+        }
+        if let facebookIdData = user.facebookID.data(using: .utf8){
+            facebookIdRef.put(facebookIdData)
+        }
+        if let genderData = user.gender.data(using: .utf8){
+            genderRef.put(genderData)
+        }
+        if let userFriends = user.friends{
+            let friendsData = NSKeyedArchiver.archivedData(withRootObject: userFriends)
+            friendsRef.put(friendsData)
+        }
+        picRef.put(user.pic!)
+        if let userRate = user.rate{
+            rateRef.put(NSKeyedArchiver.archivedData(withRootObject: userRate))
+        }
+        if let userPreference = user.preference{
+            preferenceRef.put(NSKeyedArchiver.archivedData(withRootObject: userPreference))
+        }
+        if let userLocation = user.location{
+            locationRef.put(NSKeyedArchiver.archivedData(withRootObject: userLocation))
+        }
+    }
+    
     static func saveString(path : String, object: String, completionHandler:((_ error: Error?) -> ())?){
         let firebaseReference = rootRefStorage.child(path)
         
