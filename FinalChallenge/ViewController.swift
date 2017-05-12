@@ -36,19 +36,18 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     print(error.debugDescription)
                 } else {
                     DispatchQueue.main.async {
-                        FirebaseHelper.registerMeOnline(id: (user?.uid)!)
+                        FirebaseHelper.registerMeOnline()
                         self.performSegue(withIdentifier: "segue", sender: nil)
                     }
                 }
             })
-
         }
         
     }
     
     func fetchProfile(id: String){
         
-        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender"]
+        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
         
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
 
@@ -67,8 +66,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
             
+            let gender = userDictionary["gender"] as! String
+            
+            let facebookID = userDictionary["id"] as! String
+            
             DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id)
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
         
@@ -77,7 +80,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
     
-    func getImageFromURL(url: String, name: String, id: String){
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
         
         let catPictureURL = URL(string: url)!
         
@@ -103,11 +106,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                             }
                         }
                         else{
-                            let user = User(withId: id, name: name, pic: imageData)
+                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
-                            FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-                            FirebaseHelper.saveString(path: "users/\(id)/name/username", object: name, completionHandler: nil)
+//                            FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+//                            FirebaseHelper.saveString(path: "users/\(id)/name/username", object: name, completionHandler: nil)
+                            FirebaseHelper.saveUser(user: user)
                         }
                     } else {
                         print("Couldn't get image: Image is nil")

@@ -13,8 +13,8 @@ import FBSDKLoginKit
 import Firebase
 
 let token = FBSDKAccessToken.current()
-var id = ""
 var parameters = ["":""]
+var facebookFriendsID = [String]()
 
 
 class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate{
@@ -61,49 +61,38 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         
         
-        DispatchQueue.main.async {
+        
+        
+        DispatchQueue.global(qos: .background).async {
             
-            FBSDKGraphRequest(graphPath: "me", parameters: nil).start { (connection, result, error) in
+            
+            let parameters = ["fields": "name"]
+            
+            
+            FBSDKGraphRequest(graphPath: "me/friends", parameters: parameters).start { (connection, result, error) in
                 
                 if error != nil {
                     print(error!)
                     return
-                    
                 }
                 
+                let data = result as! NSDictionary
                 
-                print(result!)
                 
-                let dict = result! as! NSDictionary
+                for friends in data["data"] as! NSArray{
+                    
+                    facebookFriendsID.append((friends as! NSDictionary)["id"]! as! String)
+                }
                 
-                id =  dict["id"] as! String
             }
             
+            
         }
-        
         
         
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            
-            parameters = ["fields": "name"]
-
-            
-            FBSDKGraphRequest(graphPath: "/\(id)/friends", parameters: parameters).start { (connection, result, error) in
-                
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                print(result!)
-                
-            }
-        }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -192,9 +181,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
-        
-        print("HEEEEEEEREEEEE")
-        
+            
         self.notLoggedView.isHidden = true
         if let token = result.token{
 
@@ -226,7 +213,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func fetchProfile(id: String){
         
-        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender"]
+        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
         
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
             
@@ -241,12 +228,16 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             let data = picture["data"] as! NSDictionary
             
+            let gender = userDictionary["gender"] as! String
+            
+            let facebookID = userDictionary["id"] as! String
+            
             print(userDictionary["picture"] as! NSDictionary)
             
             let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
             
             DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id)
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
         
@@ -254,7 +245,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
-    func getImageFromURL(url: String, name: String, id: String){
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
         
         let catPictureURL = URL(string: url)!
         
@@ -274,8 +265,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
                         
-                        let user = User(withId: id, name: name, pic: imageData)
-                        print("user id \(user.id)")
+                        let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+
                         let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                         UserDefaults.standard.set(userData, forKey: "user")
                         // Do something with your image.
