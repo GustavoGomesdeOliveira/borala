@@ -164,7 +164,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             if let annotationView = annotationView {
                 
                 annotationView.canShowCallout = true
-                annotationView.image = UIImage(named: "myPin")
+                annotationView.image = UIImage(named: "myPin1")
             }
             return annotationView
         }
@@ -299,7 +299,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let locationOnView = press.location(in: self.mapView)
             let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
             self.coordenate = coordinate
-            let image = #imageLiteral(resourceName: "poke2")
+            let image = #imageLiteral(resourceName: "myPin1")
             
 //            self.pin = MyPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "Alguma coisa", andPinImage: image)
             
