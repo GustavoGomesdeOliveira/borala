@@ -25,7 +25,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
     var pin: CustomPin?
 
-    
+    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
+
     
     @IBOutlet weak var mapView: MKMapView!
 //    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
@@ -45,8 +46,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
+        
         longGesture.minimumPressDuration = 1.0
         self.mapView.addGestureRecognizer(longGesture)
+        
+        
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
@@ -60,10 +64,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
-        
-        
-        
-        
+      
         DispatchQueue.global(qos: .background).async {
             
             
@@ -159,24 +160,37 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             return annotationView
         }
         
-        //if i want to set the pin for an event
-        let annotationIdentifier = "Identifier"
-        var annotationView: MKAnnotationView?
-        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-            annotationView = dequeuedAnnotationView
-            annotationView?.annotation = annotation
-        }
-        else {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        //Código que funciona para adicionar o pin a partir de um longpress
+        if let customAnnotation = annotation as? CustomPin{
+            let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            
+            self.mapItem = (mapItem, customAnnotation)
+            //self.showRoute.isEnabled = true
+            
+            return customAnnotation.annotationView!
+        }else{
+            return nil
         }
         
-        if let annotationView = annotationView {
-            
-            annotationView.canShowCallout = true
-            annotationView.image = UIImage(named: "myPin")
-        }
-        return annotationView
+        //if i want to set the pin for an event
+//        let annotationIdentifier = "Identifier"
+//        var annotationView: MKAnnotationView?
+//        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+//            annotationView = dequeuedAnnotationView
+//            annotationView?.annotation = annotation
+//        }
+//        else {
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//        }
+//        
+//        if let annotationView = annotationView {
+//            
+//            annotationView.canShowCallout = true
+//            annotationView.image = UIImage(named: "myPin")
+//        }
+//        return annotationView
     }
     
     
@@ -285,13 +299,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func addMyPoint(press : UIGestureRecognizer) {
+        
         if press.state == .began{
             //Get the coordinate where the user pressed than performa segue
             
+            let locationOnView = press.location(in: self.mapView)
+            let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+
+            mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), 1000, 1000), animated: true)
             
+            let pin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "myPin1")!)
+
+            pin.annotationView?.image = UIImage(named: "myPin1")
             
-            
+            mapView.addAnnotation(pin)
         }
+        
+       
     }
 
 

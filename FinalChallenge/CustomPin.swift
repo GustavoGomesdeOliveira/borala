@@ -23,7 +23,7 @@ class CustomPin: NSObject, MKAnnotation{
         view.canShowCallout = true
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        button.setImage(#imageLiteral(resourceName: "sushipin"), for: .normal)
+        button.setImage(self.pinImage, for: .normal)
         
         return view
     }
