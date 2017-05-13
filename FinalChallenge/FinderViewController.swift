@@ -305,19 +305,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             let locationOnView = press.location(in: self.mapView)
             let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
-<<<<<<< HEAD
 
-            mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), 1000, 1000), animated: true)
-=======
-            self.coordenate = coordinate
-            let image = #imageLiteral(resourceName: "myPin1")
-            
-//            self.pin = MyPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "Alguma coisa", andPinImage: image)
-            
-            
-            
-            performSegue(withIdentifier: "choosePoke", sender: self)
->>>>>>> 7f003984798964c17085ea3e6ffbb11cf9bf9581
             
             let pin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "myPin1")!)
 
