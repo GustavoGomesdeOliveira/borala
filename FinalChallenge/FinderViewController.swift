@@ -165,17 +165,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
                 annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             }
+            
             annotationView?.annotation = myAnnotation
             if let annotationView = annotationView {
-
                 annotationView.canShowCallout = true
-                if event == true {
-                    annotationView.image = UIImage(named: "mypin2")
-                }else{
-                    annotationView.image = UIImage(named: "mypin1")
-                }
+                annotationView.image = UIImage(named: "mypin1")
 
             }
+            
             return annotationView
         }
     
@@ -183,7 +180,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let customAnnotation = annotation as? CustomPin{
             let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
             let mapItem = MKMapItem(placemark: placemark)
-            
+            mapView.showsUserLocation = false
             self.mapItem = (mapItem, customAnnotation)
             //self.showRoute.isEnabled = true
             
@@ -303,18 +300,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         if press.state == .began{
             //Get the coordinate where the user pressed than performa segue
-
-           let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
-
-            pin.annotationView?.image = UIImage(named: "mypin2")
-
-            mapView.addAnnotation(pin)
+            if event == false{
             
-
+                let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
+                
+                pin.annotationView?.image = UIImage(named: "mypin2")
+                
+                mapView.addAnnotation(pin)
+                
+            }
             
         }
-        
-       
     }
 
 
