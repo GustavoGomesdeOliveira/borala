@@ -38,6 +38,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
+    var events: [Event]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -64,10 +66,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
-        FirebaseHelper.getOnlineUsers(completionHandler: {
-            users in
-            
-        })
+//        FirebaseHelper.getEvents(completionHandler: {
+//            events in
+//            if let eventsFromFirebase = events{
+//            
+//            }
+//        })
         
         
         

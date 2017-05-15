@@ -34,8 +34,8 @@ class ProfileViewController: UIViewController {
         
         
         let userData = UserDefaults.standard.object(forKey: "user") as! Data
-        let user = NSKeyedUnarchiver.unarchiveObject(with: userData)
-//        print("\(user)")
+        let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
+        print("\(user.name)")
     }
 
     override func didReceiveMemoryWarning() {
