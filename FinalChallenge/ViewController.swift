@@ -47,7 +47,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func fetchProfile(id: String){
         
-        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
+        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id, age"]
         
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
 
@@ -70,8 +70,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let facebookID = userDictionary["id"] as! String
             
+            let age = userDictionary["age"] as! String
+            
             DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender, age: age)
             }
         }
         
@@ -80,7 +82,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
     
-    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String, age: String){
         
         let catPictureURL = URL(string: url)!
         
@@ -106,7 +108,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                             }
                         }
                         else{
-                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender, age: age)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
 //                            FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)

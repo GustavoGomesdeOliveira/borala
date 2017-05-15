@@ -17,6 +17,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backAgeView: UIView!
     @IBOutlet weak var backPreferencesView: UIView!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userAgeLabel: UILabel!
+    @IBOutlet weak var userGenderLabel: UILabel!
+    
 
 
     override func viewDidLoad() {
@@ -31,11 +36,21 @@ class ProfileViewController: UIViewController {
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backPreferencesView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
+
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        let userData = UserDefaults.standard.object(forKey: "user") as! Data
-        let user = NSKeyedUnarchiver.unarchiveObject(with: userData)
-//        print("\(user)")
+        if let userData = UserDefaults.standard.data(forKey: "user") {
+            
+            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            
+            self.userNameLabel.text = user?.name
+            self.userGenderLabel.text = user?.gender
+            print(user?.gender)
+            self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
+        }
     }
 
     override func didReceiveMemoryWarning() {

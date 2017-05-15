@@ -14,13 +14,14 @@ class User: NSObject, NSCoding{
     var facebookID: String!
     var name: String!
     var gender: String!
+    var age: String!
     var friends: [ String ]?
     var pic: Data?
     var rate: Int?
     var preference: [ String ]?
     var location: Location?
     
-    init(withId: String, facebookID: String, name:String?, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, gender: String) {
+    init(withId: String, facebookID: String, name:String?, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, gender: String, age: String!) {
         self.id = withId
         self.facebookID = facebookID
         self.name = name
@@ -29,14 +30,16 @@ class User: NSObject, NSCoding{
         self.rate = rate
         self.preference = preference
         self.gender = gender
+        self.age = age
     }
     
-    init(withId: String, name:String!, pic: Data!, facebookID: String, gender: String) {
+    init(withId: String, name:String!, pic: Data!, facebookID: String, gender: String, age: String!) {
         self.id = withId
         self.facebookID = facebookID
         self.name = name
         self.pic = pic
         self.gender = gender
+        self.age = age
     }
     
     required public init?(coder aDecoder: NSCoder) {
