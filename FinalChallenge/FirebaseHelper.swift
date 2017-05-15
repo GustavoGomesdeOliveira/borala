@@ -90,6 +90,18 @@ class FirebaseHelper{
         
     }
     
+    static func getEvents(completionHandler:@escaping (_ events: [Event]?) -> ()){
+        rootRefDatabase.child("events").observe(.value,with:{
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+                for kk in dic.keys{
+                    print(kk)
+                }
+            }
+        })
+        
+    }
+    
     static func removeOnlineUsersLister(){
         rootRefDatabase.child("onlineUsers").removeAllObservers()
     }

@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController {
             print(user?.gender)
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
