@@ -24,14 +24,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
     var pin: CustomPin?
+    var myAnnotation: CustomPin?
 
     var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
-
     
     @IBOutlet weak var mapView: MKMapView!
-//    var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
-//    var pin: CustomPin?
+    var annotationView: MKAnnotationView?
 
+    var event: Bool = false
     
     //User initial location
     var myLocation : CLLocationCoordinate2D?
@@ -54,6 +54,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
+        
+       
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -61,9 +63,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
-            self.mapView.showsUserLocation = true
+            //self.mapView.showsUserLocation = true
         }
         
+        let annotations = self.mapView.annotations
+        mapView.removeAnnotations(annotations)
       
         DispatchQueue.global(qos: .background).async {
             
@@ -114,8 +118,15 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
+         myAnnotation = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin1")!)
+        //mandar adicionar o pin agora
+        
+        
         self.mapView.setRegion(myRegion, animated: true)
-
+       
+        self.myAnnotation?.annotationView?.image = UIImage(named: "mypin1")
+        
+        mapView.addAnnotation(self.myAnnotation!)
         
         if let token = FBSDKAccessToken.current() {
             
@@ -138,27 +149,31 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else {
-            //if i want to set my pin
-            let annotationIdentifier = "mylocation"
-            
-            var annotationView: MKAnnotationView?
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = annotation
-            }
-            else {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            
-            if let annotationView = annotationView {
-                
-                annotationView.canShowCallout = true
-                annotationView.image = UIImage(named: "myPin1")
-            }
-            return annotationView
-        }
+//        guard !(annotation is MKUserLocation) else {
+////            //if i want to set my pin
+////            let annotationIdentifier = "mylocation"
+////            
+////            
+////            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+////                annotationView = dequeuedAnnotationView
+////                annotationView?.annotation = annotation
+////            }
+////            else {
+////                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+////                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+////            }
+////            
+////            if let annotationView = annotationView {
+////                
+////                annotationView.canShowCallout = true
+//////                if event{
+//////                    annotationView.image = UIImage(named: "myPin2")
+//////                }else{
+////                    annotationView.image = UIImage(named: "myPin1")
+//////                }
+////            }
+////            return annotationView
+//        }
         
         //Código que funciona para adicionar o pin a partir de um longpress
         if let customAnnotation = annotation as? CustomPin{
@@ -303,15 +318,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if press.state == .began{
             //Get the coordinate where the user pressed than performa segue
             
-            let locationOnView = press.location(in: self.mapView)
-            let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
-
+            //let locationOnView = press.location(in: self.mapView)
+        
+//
+//            let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
+//            
+//           // self.myAnnotation?.annotationView?.image = UIImage(named: "mypin2")
+//
+//            pin.annotationView?.image = UIImage(named: "mypin2")
+//            
+//            mapView.removeAnnotation(self.myAnnotation!)
+//            mapView.addAnnotation(pin)
+//            let allAnnotations = self.mapView.annotations
+//            
+//            mapView.removeAnnotation(self.myAnnotation!)
+//            print("to aqui")
+            mapView.removeAnnotation(myAnnotation!)
             
-            let pin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "myPin1")!)
-
-            pin.annotationView?.image = UIImage(named: "myPin1")
-            
-            mapView.addAnnotation(pin)
         }
         
        
