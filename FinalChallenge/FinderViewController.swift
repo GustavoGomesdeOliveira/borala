@@ -96,9 +96,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             
         }
-        
-        
-        
     }
     
 
