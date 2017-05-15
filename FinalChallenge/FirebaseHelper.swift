@@ -90,12 +90,16 @@ class FirebaseHelper{
         
     }
     
-    static func getEvents(completionHandler:@escaping (_ events: [Event]?) -> ()){
+    static func getEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
         rootRefDatabase.child("events").observe(.value,with:{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
+                var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
                     print(kk)
+                    print(dic[kk] as! [String: Any])
+                    eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
+                    completionHandler(eventsFromFirebase)
                 }
             }
         })
