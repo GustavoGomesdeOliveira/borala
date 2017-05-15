@@ -30,7 +30,6 @@ class User: NSObject, NSCoding{
         self.pic = pic
         self.rate = rate
         self.preference = preference
-        self.gender = gender
         self.location = location
     }
     
@@ -57,6 +56,7 @@ class User: NSObject, NSCoding{
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.gender, forKey: "gender")
         aCoder.encode(self.friends, forKey: "friends")
         aCoder.encode(self.pic, forKey: "pic")
         aCoder.encode(self.rate, forKey: "rate")
