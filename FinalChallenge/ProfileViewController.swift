@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
             
             self.userNameLabel.text = user?.name
             self.userGenderLabel.text = user?.gender
-            print(user?.gender)
+
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
         
