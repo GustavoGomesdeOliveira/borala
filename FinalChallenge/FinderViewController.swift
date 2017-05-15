@@ -38,6 +38,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
+    var events: [Event]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -262,12 +264,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             let facebookID = userDictionary["id"] as! String
             
+            let age = userDictionary["age"] as! String
+            
             print(userDictionary["picture"] as! NSDictionary)
             
             let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
             
             DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender, age: age)
             }
         }
         
@@ -275,7 +279,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
-    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String, age: String){
         
         let catPictureURL = URL(string: url)!
         

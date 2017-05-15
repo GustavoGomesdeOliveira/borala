@@ -13,19 +13,17 @@ class Event {
     var id: String!
     var name: String!
     var date: Date?
-    var locationLatitude: Float?
-    var locationLongitude: Float?
+    var location: Location
     var locationDescription: String?
     var description: String?
     
-    init(id: String, name: String, date: Date, locationLatitude: Float, locationLongitude: Float,
+    init(id: String, name: String, date: Date, location: Location,
          locationDescription: String, description: String) {
         
         self.id = id
         self.name = name
         self.date = date
-        self.locationLatitude = locationLatitude
-        self.locationLongitude = locationLongitude
+        self.location = location
         self.description = description
     }
     
