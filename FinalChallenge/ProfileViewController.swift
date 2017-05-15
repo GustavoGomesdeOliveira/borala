@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backUserView: UIView!
     @IBOutlet weak var backGenderView: UIView!
     @IBOutlet weak var backAgeView: UIView!
+    @IBOutlet weak var backPreferencesView: UIView!
     
 
 
@@ -29,11 +30,12 @@ class ProfileViewController: UIViewController {
         self.backAgeView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
+        self.backPreferencesView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
         
         let userData = UserDefaults.standard.object(forKey: "user") as! Data
         let user = NSKeyedUnarchiver.unarchiveObject(with: userData)
-        print("\(user)")
+//        print("\(user)")
     }
 
     override func didReceiveMemoryWarning() {
