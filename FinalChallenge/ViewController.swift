@@ -109,8 +109,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                             let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
-//                            FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-//                            FirebaseHelper.saveString(path: "users/\(id)/name/username", object: name, completionHandler: nil)
                             FirebaseHelper.saveUser(user: user)
                         }
                     } else {

@@ -59,7 +59,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
-        
+        FirebaseHelper.getOnlineUsers(completionHandler: {
+            users in
+            
+        })
         
         
         
