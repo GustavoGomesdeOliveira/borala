@@ -256,14 +256,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             let facebookID = userDictionary["id"] as! String
             
-            let age = userDictionary["age"] as! String
-            
             print(userDictionary["picture"] as! NSDictionary)
             
             let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
             
             DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender, age: age)
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
         
@@ -271,7 +269,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
-    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String, age: String){
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
         
         let catPictureURL = URL(string: url)!
         
@@ -314,7 +312,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if press.state == .began{
             //Get the coordinate where the user pressed than performa segue
             
-            let locationOnView = press.location(in: self.mapView)
+            let customY = press.location(in: self.mapView).y
+            
+            var locationOnView = press.location(in: self.mapView)
+            locationOnView.y = customY -  30
             let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
 
             
