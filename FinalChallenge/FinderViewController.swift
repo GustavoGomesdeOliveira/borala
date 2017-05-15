@@ -38,7 +38,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
-    var events: [Event]?
+    var events = [Event]()
     
     
 
@@ -99,12 +99,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         
         
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

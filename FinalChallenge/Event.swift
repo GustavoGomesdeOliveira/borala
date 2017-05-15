@@ -12,12 +12,12 @@ class Event {
     
     var id: String!
     var name: String!
-    var date: Date?
+    var date: String?
     var location: Location
     var locationDescription: String?
     var description: String?
     
-    init(id: String, name: String, date: Date, location: Location,
+    init(id: String, name: String, date: String, location: Location,
          locationDescription: String, description: String) {
         
         self.id = id
@@ -25,6 +25,16 @@ class Event {
         self.date = date
         self.location = location
         self.description = description
+    }
+    
+    init(dict: [String: Any]) {
+        self.id = dict["id"] as! String!
+        self.name = dict["name"] as! String!
+        self.date = dict["date"] as! String?
+        let locationDict = dict["location"] as! [String: Float]
+        self.location = Location( latitude: locationDict["latitude"]!, longitude: locationDict["longitude"]!)
+        self.locationDescription = dict["locationDescription"] as! String?
+        self.description = dict["description"] as! String?
     }
     
 }
