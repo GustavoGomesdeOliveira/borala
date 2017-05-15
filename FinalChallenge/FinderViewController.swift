@@ -319,6 +319,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             locationOnView.y = customY -  30
             let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
 
+            let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
+            
+            let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
+            
+            let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
+            
+            let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
+            
+            print(northEast)
+            print(southWest)
+            
             
             let pin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "myPin1")!)
 
