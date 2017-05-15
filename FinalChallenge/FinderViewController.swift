@@ -38,7 +38,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
-    var events: [Event]?
+    var events = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +66,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
-//        FirebaseHelper.getEvents(completionHandler: {
-//            events in
-//            if let eventsFromFirebase = events{
-//            
-//            }
-//        })
+        FirebaseHelper.getEvents(completionHandler: {
+            events in
+            self.events = events
+            print(self.events.count)
+            for event in self.events{
+                print(event.name)
+                print(event.location.latitude)
+                print(event.location.longitude)
+
+            }
+        })
         
         
         
@@ -103,12 +108,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         
         
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
