@@ -66,16 +66,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
+        //it adds a observer to events on firebase. Every time the bd updates this updates the
+        //events array.
         FirebaseHelper.getEvents(completionHandler: {
             events in
-            self.events = events
-            print(self.events.count)
-            for event in self.events{
-                print(event.name)
-                print(event.location.latitude)
-                print(event.location.longitude)
-
-            }
+                self.events = events
         })
         
         
