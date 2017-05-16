@@ -40,6 +40,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var events = [Event]()
     var pins = [CustomPin]()
+    var myID: String?
     
 
     override func viewDidLoad() {
@@ -71,6 +72,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             locationManager.requestLocation()
             self.mapView.showsUserLocation = true
         }
+        let user = getUser()
+        self.myID = user.id
         
         FirebaseHelper.getEvents(completionHandler: {
             eventsFromFirebase in
@@ -80,9 +83,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.pins.append(annotation)
             }
             for event in self.events{
-                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
-                let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
-                self.pins.append(eventPin)
+                if (event.id != self.myID){
+                    let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
+                    let imageName = event.preference
+                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
+                    self.pins.append(eventPin)
+                }
             }
             
             self.mapView.addAnnotations(self.pins)
@@ -92,6 +98,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 print(element.coordinate)
                 print("----------------")
             }
+            
         })
       
         DispatchQueue.global(qos: .background).async {
