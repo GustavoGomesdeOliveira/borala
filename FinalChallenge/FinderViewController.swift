@@ -84,21 +84,31 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.pins.append(annotation)
             }
             for event in self.events{
-                if (event.id != self.myID){
+//                print(self.myID)
+//                print("-=>-")
+//                print(event.creatorId)
+                if (event.creatorId != self.myID){
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
-                    let imageName = event.preference
+                    
+                    var imageName = event.preference
+                    if imageName == nil {
+                        imageName = "mypin1"
+                    }else{
+                        imageName?.append("pin")
+                    }
+                    
                     let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
                     self.pins.append(eventPin)
                 }
             }
-            
+
             self.mapView.addAnnotations(self.pins)
-            
-            for element in self.pins{
-                print("----------------")
-                print(element.coordinate)
-                print("----------------")
-            }
+//
+//            for element in self.pins{
+//                print("----------------")
+//                print(element.coordinate)
+//                print("----------------")
+//            }
             
         })
       
