@@ -10,13 +10,11 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 //    
-    override func viewDidAppear(_ animated: Bool) {
-
-        self.selectedIndex = 1
-    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()        
+        self.selectedIndex = 1
 
 
         // Do any additional setup after loading the view.
