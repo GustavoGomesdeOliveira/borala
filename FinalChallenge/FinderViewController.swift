@@ -70,6 +70,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         
+        FirebaseHelper.getEvents(completionHandler: {
+            eventsFromFirebase in
+            self.events = eventsFromFirebase
+        })
       
         DispatchQueue.global(qos: .background).async {
             
