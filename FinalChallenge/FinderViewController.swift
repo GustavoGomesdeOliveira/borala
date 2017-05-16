@@ -76,11 +76,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             eventsFromFirebase in
             self.events = eventsFromFirebase
             self.pins.removeAll()
+            if let annotation = self.myAnnotation{
+                self.pins.append(annotation)
+            }
             for event in self.events{
                 let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
                 let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
                 self.pins.append(eventPin)
             }
+            
+            self.mapView.addAnnotations(self.pins)
+            
             for element in self.pins{
                 print("----------------")
                 print(element.coordinate)
@@ -130,7 +136,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
          myAnnotation = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin1")!)
         //mandar adicionar o pin agora
-        
+        self.pins.append(myAnnotation!)
         
         self.mapView.setRegion(myRegion, animated: true)
        
