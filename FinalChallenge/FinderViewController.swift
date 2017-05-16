@@ -346,19 +346,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     mapView.addAnnotation(pin)
                     
-                    //puxar o usuario do User Defaults para pegar o ID e o nome
+                    let user = getUser()
+                    
+                    let location = Location(latitude: Float(coordinate.latitude), longitude: Float(coordinate.longitude))
                     
                     
-                    //converter a hora atual para string
-                    getHour()
-                    
-//                    var event = Event(id: nil, name: pin.title, location: <#T##Location#>, creatorId: String, creatorName: <#T##String#>, preference: "Pizza", hora: <#T##String#>)
+                    let event = Event(id: "", name: pin.title!, location: location, creatorId: user.id, creatorName: user.name, preference: "Pizza", hora: getHour())
                     
                 }
                 
             }
-            
-            
+        
+        
         }
         
         
@@ -376,6 +375,21 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return dateFormatter.string(from: date)
         
     }
+    
+    
+    func getUser() -> User{
+        
+        var user: User?
+        
+        if let userData = UserDefaults.standard.data(forKey: "user") {
+            
+            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            
+            
+        }
+        
+        return user!
 
+    }
 
 }
