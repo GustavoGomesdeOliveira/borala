@@ -39,7 +39,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     let locationManager = CLLocationManager()
     
     var events = [Event]()
-    
+    var pins = [CustomPin]()
     
 
     override func viewDidLoad() {
@@ -73,6 +73,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         FirebaseHelper.getEvents(completionHandler: {
             eventsFromFirebase in
             self.events = eventsFromFirebase
+            self.pins.removeAll()
+            for event in self.events{
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
+                let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
+                self.pins.append(eventPin)
+            }
+            for element in self.pins{
+                print("----------------")
+                print(element.coordinate)
+                print("----------------")
+            }
         })
       
         DispatchQueue.global(qos: .background).async {
