@@ -109,6 +109,10 @@ class FirebaseHelper{
     static func removeOnlineUsersLister(){
         rootRefDatabase.child("onlineUsers").removeAllObservers()
     }
+    
+    static func removeEventLister(){
+        rootRefDatabase.child("events").removeAllObservers()
+    }
 }
 
 
