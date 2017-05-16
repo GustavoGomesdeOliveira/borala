@@ -302,15 +302,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         } else {
             
             if press.state == .began{
-                //Get the coordinate where the user pressed than performa segue
+
                 if event == false{
                     
                     
                     let customY = press.location(in: self.mapView).y
                     
                     var locationOnView = press.location(in: self.mapView)
-                    
-                    locationOnView.y = customY -  30
                     
                     let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
                     
@@ -321,29 +319,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
                     
                     let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
-                    
-                    print("Norte")
 
-                    print(northEast)
-                    print(northWest)
-
-                    print("Sul")
-
-                    print(southWest)
-                    print(southEast)
                     
                     
                     let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
                     
-                    //Add pin above finger - code
-//                    let pin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
 
-                    
-                    
-                    
                     pin.annotationView?.image = UIImage(named: "mypin2")
                     
                     mapView.addAnnotation(pin)
+                    
+                    //puxar o usuario do User Defaults para pegar o ID e o nome
+                    
+                    
+                    //converter a hora atual para string
+                    getHour()
+                    
+//                    var event = Event(id: nil, name: pin.title, location: <#T##Location#>, creatorId: String, creatorName: <#T##String#>, preference: "Pizza", hora: <#T##String#>)
                     
                 }
                 
@@ -352,6 +344,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         }
         
+        
+    }
+    
+    func getHour() -> String{
+        
+        let date = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        
+        print("Dateobj: \(dateFormatter.string(from: date))")
+        
+        return dateFormatter.string(from: date)
         
     }
 
