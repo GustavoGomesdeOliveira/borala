@@ -36,7 +36,7 @@ class Event {
         self.location = Location( latitude: locationDict["latitude"]!, longitude: locationDict["longitude"]!)
         self.creatorId = dict["creatorId"] as! String?
         self.creatorName = dict["creatorName"] as! String?
-        self.preference = dict["preference"] as! String?
+        //self.preference = dict["preference"] as! String?
         self.hora = dict["hora"] as! String?
 
 
