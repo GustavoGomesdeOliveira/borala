@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backUserView: UIView!
     @IBOutlet weak var backGenderView: UIView!
     @IBOutlet weak var backAgeView: UIView!
-    @IBOutlet weak var backPreferencesView: UIView!
+
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController {
         self.backAgeView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        self.backPreferencesView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
+        
 
         
     }
