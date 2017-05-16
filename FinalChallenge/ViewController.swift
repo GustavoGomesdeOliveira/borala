@@ -28,19 +28,26 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if let token = FBSDKAccessToken.current(){
             
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
-            FIRAuth.auth()?.signIn(with: credential, completion: {
-                user, error in
-                if let _ = error{
-                    
-                    print(error.debugDescription)
-                } else {
-                    DispatchQueue.main.async {
-                        FirebaseHelper.registerMeOnline()
-                        self.performSegue(withIdentifier: "segue", sender: nil)
+            DispatchQueue.main.async{
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
+                FIRAuth.auth()?.signIn(with: credential, completion: {
+                    user, error in
+                    if let _ = error{
+                        
+                        print(error.debugDescription)
+                    } else {
+                        DispatchQueue.main.async {
+                            FirebaseHelper.registerMeOnline()
+                        }
                     }
-                }
-            })
+                })
+                
+                self.performSegue(withIdentifier: "segue", sender: nil)
+
+            }
+            
+            
         }
         
     }

@@ -47,7 +47,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
+        self.notLoggedView.isHidden = true
 
+        
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
@@ -143,7 +145,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             //avisar o usuario que ele nao esta logado
             
-            self.notLoggedView.isHidden = false
+            //self.notLoggedView.isHidden = false
         
         }
         
@@ -304,39 +306,69 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addMyPoint(press : UIGestureRecognizer) {
         
-        if press.state == .began{
-            //Get the coordinate where the user pressed than performa segue
-            if event == false{
+        if (FBSDKAccessToken.current() == nil){
             
+            self.notLoggedView.isHidden = false
+            
+        } else {
+            
+            if press.state == .began{
 
-            let customY = press.location(in: self.mapView).y
-            
-            var locationOnView = press.location(in: self.mapView)
-            locationOnView.y = customY -  30
-            let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+                if event == false{
+                    
+                    
+                    let customY = press.location(in: self.mapView).y
+                    
+                    var locationOnView = press.location(in: self.mapView)
+                    
+                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+                    
+                    let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
+                    
+                    let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
+                    
+                    let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
+                    
+                    let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
 
-            let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
-            
-            let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-            
-            let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
-            
-            let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
-            
-            print(northEast)
-            print(southWest)
-            
+                    
+                    
+                    let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
+                    
 
-
-            let pin = CustomPin(withTitle: "teste", andLocation: myLocation!, andSubtitle: "teste", andPinImage: UIImage(named: "mypin2")!)
-                
-            pin.annotationView?.image = UIImage(named: "mypin2")
-                
-            mapView.addAnnotation(pin)
+                    pin.annotationView?.image = UIImage(named: "mypin2")
+                    
+                    mapView.addAnnotation(pin)
+                    
+                    //puxar o usuario do User Defaults para pegar o ID e o nome
+                    
+                    
+                    //converter a hora atual para string
+                    getHour()
+                    
+//                    var event = Event(id: nil, name: pin.title, location: <#T##Location#>, creatorId: String, creatorName: <#T##String#>, preference: "Pizza", hora: <#T##String#>)
+                    
+                }
                 
             }
             
+            
         }
+        
+        
+    }
+    
+    func getHour() -> String{
+        
+        let date = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        
+        print("Dateobj: \(dateFormatter.string(from: date))")
+        
+        return dateFormatter.string(from: date)
+        
     }
 
 
