@@ -75,6 +75,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let user = getUser()
         self.myID = user.id
         
+        //FirebaseHelper.saveEvent()
         FirebaseHelper.getEvents(completionHandler: {
             eventsFromFirebase in
             self.events = eventsFromFirebase
@@ -358,7 +359,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     let location = Location(latitude: Float(coordinate.latitude), longitude: Float(coordinate.longitude))
                     
                     
-                    let event = Event(id: "", name: pin.title!, location: location, creatorId: user.id, creatorName: user.name, preference: "Pizza", hora: getHour())
+                    let event = Event(id: "", name: pin.title!, location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: "Pizza")
+                    FirebaseHelper.saveEvent(event: event)
                     
                 }
                 

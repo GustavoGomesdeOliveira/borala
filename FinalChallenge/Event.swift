@@ -11,22 +11,22 @@ import Foundation
 class Event {
     
     var id: String!
-    var hora: String?
     var name: String!
-    var location: Location
-    var creatorId: String?
-    var creatorName: String?
+    var location: Location!
+    var creatorId: String!
+    var creatorName: String!
+    var hora: String!
     var preference: String?
     
-    init(id: String, name: String, location: Location, creatorId: String, creatorName: String, preference: String, hora: String) {
+    init(id: String, name: String, location: Location, creatorId: String, creatorName: String, hora: String, preference: String) {
         
         self.id = id
         self.name = name
         self.location = location
         self.creatorId = creatorId
         self.creatorName = creatorName
-        self.preference = preference
         self.hora = hora
+        self.preference = preference
     }
     
     init(dict: [String: Any]) {
@@ -36,10 +36,10 @@ class Event {
         self.location = Location( latitude: locationDict["latitude"]!, longitude: locationDict["longitude"]!)
         self.creatorId = dict["creatorId"] as! String?
         self.creatorName = dict["creatorName"] as! String?
-        //self.preference = dict["preference"] as! String?
         self.hora = dict["hora"] as! String?
-
-
+        self.preference = dict["preference"] as! String?
     }
+    
+    
     
 }
