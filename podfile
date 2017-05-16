@@ -8,6 +8,7 @@ target 'FinalChallenge' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'Google/SignIn'
 
   # Pods for FinalChallenge
 
