@@ -10,18 +10,24 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate {
+class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
+    
+    @IBOutlet weak var googleLoginBtn: GIDSignInButton!
     
     @IBOutlet weak var facebookLoginBtn: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
         
         facebookLoginBtn.delegate = self
         facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
