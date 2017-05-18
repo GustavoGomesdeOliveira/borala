@@ -11,18 +11,20 @@ import FBSDKCoreKit
 import MapKit
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 
 let token = FBSDKAccessToken.current()
 var parameters = ["":""]
 var facebookFriendsID = [String]()
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate{
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
     
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
+    
     var pin: CustomPin?
     var myAnnotation: CustomPin?
 
@@ -49,6 +51,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true
+        GIDSignIn.sharedInstance().uiDelegate = self
 
         
         
