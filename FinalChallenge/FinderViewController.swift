@@ -53,7 +53,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true
 
-        
+      //------
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
@@ -87,10 +87,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         }
         
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
-        
-        longGesture.minimumPressDuration = 1.0
-        self.mapView.addGestureRecognizer(longGesture)
+        //
+//        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
+//        
+//        longGesture.minimumPressDuration = 1.0
+//        self.mapView.addGestureRecognizer(longGesture)
         
     
         
