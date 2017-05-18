@@ -342,14 +342,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             
                             if (imageData != user.pic){
                                 //save on firebase
-                                //FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
                             }
                             
                         } else{
                             let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
-                            //FirebaseHelper.saveUser(user: user)
+                            FirebaseHelper.saveUser(user: user)
                         }
                         
                     } else {
