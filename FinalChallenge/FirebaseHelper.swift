@@ -80,6 +80,16 @@ class FirebaseHelper{
         let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)
     }
+    
+    static func saveMessage(chatId: String, text: String){
+        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
+        let msgDict = ["id": key,
+                       "senderId": "",
+                       "senderName": "",
+                       "timeStamp": FIRServerValue.timestamp(),
+                       "text": text] as [String : Any]
+        rootRefDatabase.child("chats/\(chatId)").setValue(msgDict)
+    }
 
     
     static func registerMeOnline(){
@@ -88,6 +98,12 @@ class FirebaseHelper{
             currentUserRef.setValue(true)
             currentUserRef.onDisconnectRemoveValue()
         }
+    }
+    
+    static func createChat(){
+        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
+        rootRefDatabase.child("chats").child(key).setValue(["lastMessage": "bla bla",
+                                        "senderName": "berg"])
     }
     
     static func getOnlineUsers(completionHandler:@escaping (_ onlineUsers: [String]?) -> ()){

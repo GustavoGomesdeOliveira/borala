@@ -45,7 +45,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+                //FirebaseHelper.saveMessage(chatId: "567", text: "nbl")
+        FirebaseHelper.createChat()
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true

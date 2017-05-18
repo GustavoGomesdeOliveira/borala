@@ -23,6 +23,7 @@
 		06F800091EB21BA2008FB503 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F800051EB21BA2008FB503 /* FBSDKShareKit.framework */; };
 		97016CA01EC4814100DA1194 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97016C9F1EC4814100DA1194 /* FirebaseHelper.swift */; };
 		97016CA21EC4863700DA1194 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97016CA11EC4863700DA1194 /* Location.swift */; };
+		970265111ECDC13E004FD49D /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970265101ECDC13E004FD49D /* GoogleToolboxForMac.framework */; };
 		9706431B1EC1FB5B0038B8FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */; };
 		9706431E1EC1FF290038B8FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706431D1EC1FF290038B8FD /* User.swift */; };
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
@@ -78,6 +79,7 @@
 		96FE36F7C09688C8B276D98A /* Pods-FinalChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97016C9F1EC4814100DA1194 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		97016CA11EC4863700DA1194 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		970265101ECDC13E004FD49D /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "Pods/../build/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9706431D1EC1FF290038B8FD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970265111ECDC13E004FD49D /* GoogleToolboxForMac.framework in Frameworks */,
 				06F800091EB21BA2008FB503 /* FBSDKShareKit.framework in Frameworks */,
 				06F800061EB21BA2008FB503 /* Bolts.framework in Frameworks */,
 				06F800071EB21BA2008FB503 /* FBSDKCoreKit.framework in Frameworks */,
@@ -185,6 +188,7 @@
 		06F800011EB21B83008FB503 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				970265101ECDC13E004FD49D /* GoogleToolboxForMac.framework */,
 				A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */,
 				06F800021EB21BA2008FB503 /* Bolts.framework */,
 				06F800031EB21BA2008FB503 /* FBSDKCoreKit.framework */,
@@ -688,6 +692,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
 				);
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -706,6 +711,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/GoogleToolboxForMac",
 				);
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
