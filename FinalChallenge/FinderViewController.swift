@@ -47,25 +47,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        facebookLoginBTN.delegate = self
-        facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-        self.notLoggedView.isHidden = true
-        GIDSignIn.sharedInstance().uiDelegate = self
-
-        
-        
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
-        
-        longGesture.minimumPressDuration = 1.0
-        self.mapView.addGestureRecognizer(longGesture)
-        
         
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
         
-       
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -75,6 +61,27 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             locationManager.requestLocation()
             self.mapView.showsUserLocation = true
         }
+        
+        facebookLoginBTN.delegate = self
+        
+        facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
+        self.notLoggedView.isHidden = true
+        GIDSignIn.sharedInstance().uiDelegate = self
+
+        if GIDSignIn.sharedInstance().hasAuthInKeychain(){
+            
+            self.notLoggedView.isHidden = true
+
+        }
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
+        
+        longGesture.minimumPressDuration = 1.0
+        self.mapView.addGestureRecognizer(longGesture)
+        
+    
+        
+        
         let user = getUser()
         
 //        if user != nil {
@@ -269,7 +276,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addMyPoint(press : UIGestureRecognizer) {
         
-        if (FBSDKAccessToken.current() == nil){
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            print("tem")
+        }
+        
+        if ((FBSDKAccessToken.current() == nil) && (!GIDSignIn.sharedInstance().hasAuthInKeychain())){
             
             self.notLoggedView.isHidden = false
             
