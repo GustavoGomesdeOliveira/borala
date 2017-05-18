@@ -74,11 +74,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
         let user = getUser()
         
-        if user != nil {
+//        if user != nil {
             
             self.myID = user.id
 
-        }
+//        }
         
         
         //FirebaseHelper.saveEvent()
@@ -103,7 +103,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         imageName?.append("pin")
                     }
                     
-                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
+                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
                     self.pins.append(eventPin)
                 }
             }
