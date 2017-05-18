@@ -31,20 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        //checkFacebookLogin()
+        
+        if UserDefaults.standard.data(forKey: "user") != nil{
+            
+            if !checkFacebookLogin(){
+                
+                GIDSignIn.sharedInstance().signInSilently()
+                
+                
+            }
+        }
         
         return true
         
     }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        if let err = error{
-            print(err)
-        }
-        
-        print("Logged google", user.profile.name)
-    }
+    
     
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -127,117 +129,243 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    
+    
+    func checkFacebookLogin() -> Bool{
+        
+        var logged = false
+        
+        if let token = FBSDKAccessToken.current(){
+            
+            logged = true
+            
+            DispatchQueue.main.async{
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
+                FIRAuth.auth()?.signIn(with: credential, completion: {
+                    user, error in
+                    if let _ = error{
+                        
+                        print(error.debugDescription)
+                    } else {
+                        DispatchQueue.main.async {
+                            FirebaseHelper.registerMeOnline()
+                        }
+                    }
+                })
+                
+                
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil);
+            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+            
+            self.window?.rootViewController = viewController
+            
+        }
+        
+        return logged
+        
+    }
+    
+    func checkGoogleLogin(){
+        
+        
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            
+            let token = GIDSignIn.sharedInstance().currentUser.authentication.accessToken
+            
+            
+            DispatchQueue.main.async{
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: token!)
+                FIRAuth.auth()?.signIn(with: credential, completion: {
+                    user, error in
+                    if let _ = error{
+                        
+                        print(error.debugDescription)
+                    } else {
+                        DispatchQueue.main.async {
+                            FirebaseHelper.registerMeOnline()
+                        }
+                    }
+                })
+                
+                
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil);
+            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+            
+            self.window?.rootViewController = viewController
+            
+        }
+        
+        
+        
+    }
+    
+    func fetchProfile(id: String){
+        
+        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
+        
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            let userDictionary = result! as! NSDictionary
+            
+            let picture = userDictionary["picture"] as! NSDictionary
+            
+            let data = picture["data"] as! NSDictionary
+            
+            
+            let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
+            
+            let gender = userDictionary["gender"] as! String
+            
+            let facebookID = userDictionary["id"] as! String
+            
+            DispatchQueue.main.async {
+                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
+            }
+        }
+        
+        
+        
+    }
+    
+    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
+        
+        let catPictureURL = URL(string: url)!
+        
+        
+        let session = URLSession(configuration: .default)
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading cat picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
+                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
+                            if (imageData != user.pic){
+                                //save on firebase
+                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                            }
+                        }
+                        else{
+                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                            UserDefaults.standard.set(userData, forKey: "user")
+                            FirebaseHelper.saveUser(user: user)
+                        }
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        
+        downloadPicTask.resume()
+        
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let err = error{
+            print(err)
+        }
+        
+        if UserDefaults.standard.data(forKey: "user") != nil{
+            
+            checkGoogleLogin()
+
+        } else {
+           
+            if user.profile.hasImage {
+                
+                self.getImageFromGoogle(catPictureURL: user.profile.imageURL(withDimension: 1), name: user.profile.name, id: "", facebookID: user.userID, gender: "")
+                
+            } else {
+                
+                let url = URL(fileURLWithPath: "")
+                
+                self.getImageFromGoogle(catPictureURL: url , name: user.profile.name, id: "", facebookID: user.userID, gender: "")
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil);
+            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+            
+            self.window?.rootViewController = viewController
+            
+        }
+     
+        
+    }
+    
+    func getImageFromGoogle(catPictureURL: URL, name: String, id: String, facebookID: String, gender: String){
+        
+        let session = URLSession(configuration: .default)
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            
+            // The download has finished.
+            if let e = error {
+                
+                print("Error downloading cat picture: \(e)")
+                
+            } else {
+                
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        
+                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
+                            
+                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
+                            
+                            if (imageData != user.pic){
+                                //save on firebase
+                                //FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                            }
+                            
+                        } else{
+                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                            UserDefaults.standard.set(userData, forKey: "user")
+                            //FirebaseHelper.saveUser(user: user)
+                        }
+                        
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                    
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        
+        downloadPicTask.resume()
+
+        
+    }
+
 }
-
-//    func checkFacebookLogin(){
-//        
-//        if let token = FBSDKAccessToken.current(){
-//            
-//            DispatchQueue.main.async{
-//                
-//                let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
-//                FIRAuth.auth()?.signIn(with: credential, completion: {
-//                    user, error in
-//                    if let _ = error{
-//                        
-//                        print(error.debugDescription)
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            FirebaseHelper.registerMeOnline()
-//                        }
-//                    }
-//                })
-//                
-//                
-//            }
-//            
-//            
-//        }
-//        
-//    }
-//    
-//    func fetchProfile(id: String){
-//        
-//        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
-//        
-//        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
-//            
-//            if error != nil {
-//                print(error!)
-//                return
-//            }
-//            
-//            let userDictionary = result! as! NSDictionary
-//            
-//            let picture = userDictionary["picture"] as! NSDictionary
-//            
-//            let data = picture["data"] as! NSDictionary
-//            
-//            print(userDictionary["picture"] as! NSDictionary)
-//            
-//            let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
-//            
-//            let gender = userDictionary["gender"] as! String
-//            
-//            let facebookID = userDictionary["id"] as! String
-//            
-//            DispatchQueue.main.async {
-//                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
-//            }
-//        }
-//        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil);
-//        let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! UITabBarController;
-//        
-//        // Then push that view controller onto the navigation stack
-//        let rootViewController = self.window!.rootViewController as! UINavigationController;
-//        rootViewController.pushViewController(viewController, animated: true);
-//        
-//    }
-//    
-//    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
-//        
-//        let catPictureURL = URL(string: url)!
-//        
-//        
-//        let session = URLSession(configuration: .default)
-//        
-//        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-//        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
-//            // The download has finished.
-//            if let e = error {
-//                print("Error downloading cat picture: \(e)")
-//            } else {
-//                // No errors found.
-//                // It would be weird if we didn't have a response, so check for that too.
-//                if let res = response as? HTTPURLResponse {
-//                    print("Downloaded cat picture with response code \(res.statusCode)")
-//                    if let imageData = data {
-//                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
-//                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
-//                            if (imageData != user.pic){
-//                                //save on firebase
-//                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-//                            }
-//                        }
-//                        else{
-//                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
-//                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-//                            UserDefaults.standard.set(userData, forKey: "user")
-//                            FirebaseHelper.saveUser(user: user)
-//                        }
-//                    } else {
-//                        print("Couldn't get image: Image is nil")
-//                    }
-//                } else {
-//                    print("Couldn't get response code for some reason")
-//                }
-//            }
-//        }
-//        
-//        downloadPicTask.resume()
-//        
-//    }
-
-
 

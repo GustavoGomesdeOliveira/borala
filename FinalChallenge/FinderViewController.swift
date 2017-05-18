@@ -73,7 +73,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.showsUserLocation = true
         }
         let user = getUser()
-        self.myID = user.id
+        
+        if user != nil {
+            
+            self.myID = user.id
+
+        }
+        
         
         //FirebaseHelper.saveEvent()
         FirebaseHelper.getEvents(completionHandler: {
@@ -86,8 +92,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             for event in self.events{
                 if (event.id != self.myID){
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
+                    
                     let imageName = event.preference
-                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
+//                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
+                    
+                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
                     self.pins.append(eventPin)
                 }
             }
@@ -230,7 +239,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 } else {
                     
                     DispatchQueue.main.async {
-                        self.fetchProfile(id: (user?.uid)!)
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        
+                        appDelegate.fetchProfile(id: (user?.uid)!)
                     }
                 }
             })
@@ -246,78 +257,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return true
     }
     
-    func fetchProfile(id: String){
-        
-        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
-        
-        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
-            
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            let userDictionary = result! as! NSDictionary
-            
-            let picture = userDictionary["picture"] as! NSDictionary
-            
-            let data = picture["data"] as! NSDictionary
-            
-            let gender = userDictionary["gender"] as! String
-            
-            let facebookID = userDictionary["id"] as! String
-            
-            print(userDictionary["picture"] as! NSDictionary)
-            
-            let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
-            
-            DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
-            }
-        }
-        
-        
-    }
-    
-    
-    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
-        
-        let catPictureURL = URL(string: url)!
-        
-        
-        let session = URLSession(configuration: .default)
-        
-        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
-            // The download has finished.
-            if let e = error {
-                print("Error downloading cat picture: \(e)")
-            } else {
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
-                        // Finally convert that Data into an image and do what you wish with it.
-                        
-                        let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
-
-                        let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                        UserDefaults.standard.set(userData, forKey: "user")
-                        // Do something with your image.
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
-            }
-        }
-        
-        downloadPicTask.resume()
-        
-    }
-    
     func addMyPoint(press : UIGestureRecognizer) {
         
         if (FBSDKAccessToken.current() == nil){
@@ -331,19 +270,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 if event == false{
                     
                     
-                    let customY = press.location(in: self.mapView).y
-                    
+//                    let customY = press.location(in: self.mapView).y
+//                    
                     var locationOnView = press.location(in: self.mapView)
-                    
+//                    
                     let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
-                    
-                    let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
-                    
-                    let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-                    
-                    let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
-                    
-                    let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
+//
+//                    let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
+//                    
+//                    let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
+//                    
+//                    let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
+//                    
+//                    let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
 
                     
                     
@@ -388,16 +327,16 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func getUser() -> User{
         
-        var user: User?
+        var user = User()
         
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
-            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            user = (NSKeyedUnarchiver.unarchiveObject(with: userData) as? User)!
             
             
         }
         
-        return user!
+        return user
 
     }
 
