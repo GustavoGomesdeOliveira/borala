@@ -21,6 +21,10 @@ class User: NSObject, NSCoding{
     var location: Location?
     
 
+    override init() {
+        
+    }
+    
     init(withId: String, facebookID: String, name:String?, gender: String, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, location: Location?) {
         self.id = withId
         self.facebookID = facebookID
