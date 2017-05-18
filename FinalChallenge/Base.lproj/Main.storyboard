@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -71,29 +71,34 @@
                                 <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-He-Kbn">
-                                <rect key="frame" x="19" y="611" width="337" height="41"/>
-                                <state key="normal" title="Google"/>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oa-ts-2KH" customClass="GIDSignInButton">
+                                <rect key="frame" x="19" y="611" width="337" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="337" id="VNv-qc-c2T"/>
+                                    <constraint firstAttribute="height" constant="48" id="yuJ-T7-Q9V"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XK1-Im-5bh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="14u-Kq-5Z2"/>
                             <constraint firstItem="Vdm-Fd-82M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="69G-Ls-RcA"/>
                             <constraint firstItem="Vdm-Fd-82M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="79R-N3-xro"/>
+                            <constraint firstItem="2Oa-ts-2KH" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="Ak8-03-FEX"/>
                             <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="25" id="BTb-id-qZ1"/>
                             <constraint firstItem="8tI-Nj-xtR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I2T-H5-yq2"/>
-                            <constraint firstItem="fMm-He-Kbn" firstAttribute="top" secondItem="8tI-Nj-xtR" secondAttribute="bottom" constant="8" id="L4z-gZ-QtP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2Oa-ts-2KH" secondAttribute="trailing" constant="3" id="LiX-Dr-6EH"/>
                             <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="XK1-Im-5bh" secondAttribute="bottom" constant="8" id="M6q-n1-NiC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MK0-gW-5g7" secondAttribute="bottom" constant="175" id="QiY-Sr-Zz8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Oa-ts-2KH" secondAttribute="bottom" constant="8" id="ROu-cf-eOZ"/>
                             <constraint firstItem="MK0-gW-5g7" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="Ubp-Ml-XdH"/>
                             <constraint firstItem="8tI-Nj-xtR" firstAttribute="width" secondItem="XK1-Im-5bh" secondAttribute="width" id="XVg-fZ-Qvu"/>
                             <constraint firstItem="XK1-Im-5bh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="337:667" id="g2P-o1-XMh"/>
+                            <constraint firstItem="2Oa-ts-2KH" firstAttribute="top" secondItem="8tI-Nj-xtR" secondAttribute="bottom" constant="8" id="hUc-6r-sRE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="o8y-je-OPQ"/>
-                            <constraint firstItem="fMm-He-Kbn" firstAttribute="centerX" secondItem="8tI-Nj-xtR" secondAttribute="centerX" id="oRQ-bG-iOi"/>
                             <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="pZr-5E-fuE"/>
-                            <constraint firstItem="fMm-He-Kbn" firstAttribute="height" secondItem="8tI-Nj-xtR" secondAttribute="height" id="v4c-ID-L6M"/>
-                            <constraint firstItem="fMm-He-Kbn" firstAttribute="width" secondItem="XK1-Im-5bh" secondAttribute="width" id="zkj-xz-7iD"/>
+                            <constraint firstItem="2Oa-ts-2KH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="3" id="vvq-Ub-GRW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oCh-Wd-n6s">
@@ -101,6 +106,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="facebookLoginBtn" destination="8tI-Nj-xtR" id="Rq1-md-Mwa"/>
+                        <outlet property="googleLoginBtn" destination="2Oa-ts-2KH" id="8xv-iE-Epp"/>
                         <segue destination="WLZ-VP-EhG" kind="show" identifier="segue" id="vbV-Qc-Fy0"/>
                     </connections>
                 </viewController>
@@ -392,7 +398,7 @@
                                 <rect key="frame" x="0.0" y="532" width="375" height="86"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyB-Wd-R9h" customClass="FBSDKLoginButton">
-                                        <rect key="frame" x="32.5" y="48" width="310" height="30"/>
+                                        <rect key="frame" x="33" y="48" width="310" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="310" id="2Zh-V2-ByF"/>
                                             <constraint firstAttribute="width" constant="310" id="Gzb-Bg-Hk6"/>
@@ -448,7 +454,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="4Yh-fI-FTd">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WLZ-VP-EhG" customClass="TabBarViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarVC" automaticallyAdjustsScrollViewInsets="NO" id="WLZ-VP-EhG" customClass="TabBarViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eKc-Ti-wzr"/>
