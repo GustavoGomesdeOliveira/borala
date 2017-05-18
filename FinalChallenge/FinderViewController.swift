@@ -11,18 +11,20 @@ import FBSDKCoreKit
 import MapKit
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 
 let token = FBSDKAccessToken.current()
 var parameters = ["":""]
 var facebookFriendsID = [String]()
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate{
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
     
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
+    
     var pin: CustomPin?
     var myAnnotation: CustomPin?
 
@@ -63,7 +65,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.locationManager.delegate = self
         self.mapView.delegate = self
         
-       
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -73,13 +74,34 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             locationManager.requestLocation()
             self.mapView.showsUserLocation = true
         }
+        
+        facebookLoginBTN.delegate = self
+        
+        facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
+        self.notLoggedView.isHidden = true
+        GIDSignIn.sharedInstance().uiDelegate = self
+
+        if GIDSignIn.sharedInstance().hasAuthInKeychain(){
+            
+            self.notLoggedView.isHidden = true
+
+        }
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
+        
+        longGesture.minimumPressDuration = 1.0
+        self.mapView.addGestureRecognizer(longGesture)
+        
+    
+        
+        
         let user = getUser()
         
-        if user != nil {
+//        if user != nil {
             
             self.myID = user.id
 
-        }
+//        }
         
         
         //FirebaseHelper.saveEvent()
@@ -91,24 +113,31 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.pins.append(annotation)
             }
             for event in self.events{
-                if (event.id != self.myID){
+//                print(self.myID)
+//                print("-=>-")
+//                print(event.creatorId)
+                if (event.creatorId != self.myID){
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
                     
-                    let imageName = event.preference
-//                    let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: imageName!)!)
+                    var imageName = event.preference
+                    if imageName == nil {
+                        imageName = "mypin1"
+                    }else{
+                        imageName?.append("pin")
+                    }
                     
                     let eventPin = CustomPin(withTitle: "teste", andLocation: coordinate, andSubtitle: "teste", andPinImage: UIImage(named: "pizzapin")!)
                     self.pins.append(eventPin)
                 }
             }
-            
+
             self.mapView.addAnnotations(self.pins)
-            
-            for element in self.pins{
-                print("----------------")
-                print(element.coordinate)
-                print("----------------")
-            }
+//
+//            for element in self.pins{
+//                print("----------------")
+//                print(element.coordinate)
+//                print("----------------")
+//            }
             
         })
       
@@ -260,7 +289,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addMyPoint(press : UIGestureRecognizer) {
         
-        if (FBSDKAccessToken.current() == nil){
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            print("tem")
+        }
+        
+        if ((FBSDKAccessToken.current() == nil) && (!GIDSignIn.sharedInstance().hasAuthInKeychain())){
             
             self.notLoggedView.isHidden = false
             
