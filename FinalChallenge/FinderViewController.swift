@@ -354,7 +354,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     let event = Event(id: "", name: pin.title!, location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: "Pizza")
                     FirebaseHelper.saveEvent(event: event)
-                    
                 }
                 
             }
