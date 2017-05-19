@@ -14,7 +14,7 @@ class FirebaseHelper{
 
     static let rootRefStorage = FIRStorage.storage().reference()
     static let rootRefDatabase = FIRDatabase.database().reference()
-    //static var databaseHand = nil
+    static var firebaseUser: FIRUser? = nil
     
     static func saveProfilePic(userId : String, pic: Data, completionHandler:((_ error: Error?) -> ())? ){
         let profilePicRef = rootRefStorage.child("/users/\(userId)/profilePic.jpg")
@@ -82,15 +82,21 @@ class FirebaseHelper{
     }
     
     static func saveMessage(chatId: String, text: String){
-        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
-        let msgDict = ["id": key,
-                       "senderId": "",
-                       "senderName": "",
-                       "timeStamp": FIRServerValue.timestamp(),
+        let key = rootRefDatabase.child("messages/\(chatId)").childByAutoId()//it adds a unique id to msg.
+        let timeStamp = FIRServerValue.timestamp()
+        let msgDict = ["senderName": firebaseUser?.displayName! ?? "anonymous",
+                       "timeStamp": timeStamp,
                        "text": text] as [String : Any]
-        rootRefDatabase.child("chats/\(chatId)").setValue(msgDict)
+        key.setValue(msgDict)//it added the message to firebase
+        rootRefDatabase.child("chats/" + chatId).setValue(["lastMessage" : text,
+                                                           "timeStamp": timeStamp])
+        //rootRefDatabase.child("chats")
     }
 
+    static func createChat(){
+        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
+        rootRefDatabase.child("chats").child(key).setValue(true)
+    }
     
     static func registerMeOnline(){
         if let currentUser = FIRAuth.auth()?.currentUser{
@@ -98,12 +104,6 @@ class FirebaseHelper{
             currentUserRef.setValue(true)
             currentUserRef.onDisconnectRemoveValue()
         }
-    }
-    
-    static func createChat(){
-        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
-        rootRefDatabase.child("chats").child(key).setValue(["lastMessage": "bla bla",
-                                        "senderName": "berg"])
     }
     
     static func getOnlineUsers(completionHandler:@escaping (_ onlineUsers: [String]?) -> ()){
@@ -120,7 +120,6 @@ class FirebaseHelper{
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
-                    print(kk)
                     print(dic[kk] as! [String: Any])
                     eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)
@@ -130,12 +129,38 @@ class FirebaseHelper{
         
     }
     
+    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
+        rootRefDatabase.child("messages").observe( .childAdded , with:{
+            snapshot in
+            
+            if let messageDictionary = snapshot.value as? [String: Any]{
+                print(messageDictionary)
+                for kk in messageDictionary.keys{
+                    let msg = messageDictionary[kk] as! [String: Any]
+                    let dateStr = msg["timeStamp"] as! Int
+                    let date = Date.init(timeIntervalSince1970: Double.init(dateStr))
+                    //print(date)
+                }
+                completionHandler(nil)
+            }
+        })
+    }
+    
     static func removeOnlineUsersLister(){
         rootRefDatabase.child("onlineUsers").removeAllObservers()
     }
     
     static func removeEventLister(){
         rootRefDatabase.child("events").removeAllObservers()
+    }
+    
+    static func observerUser(){
+        FIRAuth.auth()?.addStateDidChangeListener({
+            auth, user in
+            if let user = user{
+                firebaseUser = user
+            }
+        })
     }
 }
 

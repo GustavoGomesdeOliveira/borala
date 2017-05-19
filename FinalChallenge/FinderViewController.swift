@@ -47,8 +47,15 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                //FirebaseHelper.saveMessage(chatId: "567", text: "nbl")
-        FirebaseHelper.createChat()
+        
+        //FirebaseHelper.createChat()
+        FirebaseHelper.saveMessage(chatId: "KkVaD_OsJonB4mxwUgj", text: "num credito...")
+
+        //FirebaseHelper.observerMessages(ofChatId: "KkVaD_OsJonB4mxwUgj", completionHandler: {
+            //gh in
+            
+            //FirebaseHelper.saveMessage(chatId: "KkVaD_OsJonB4mxwUgj", text: "toma outra...")
+        //})
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
@@ -102,8 +109,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.myID = user.id
 
         
-        
-        //FirebaseHelper.saveEvent()
         FirebaseHelper.getEvents(completionHandler: {
             eventsFromFirebase in
             self.events = eventsFromFirebase
