@@ -286,6 +286,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         if let err = error{
             print(err)
+            return
         }
         
         if UserDefaults.standard.data(forKey: "user") != nil{
@@ -294,16 +295,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         } else {
            
-            if user.profile.hasImage {
-                
-                self.getImageFromGoogle(catPictureURL: user.profile.imageURL(withDimension: 1), name: user.profile.name, id: "", facebookID: user.userID, gender: "")
-                
-            } else {
-                
-                let url = URL(fileURLWithPath: "")
-                
-                self.getImageFromGoogle(catPictureURL: url , name: user.profile.name, id: "", facebookID: user.userID, gender: "")
-            }
+            let authentication = user.authentication
+            let credential = FIRGoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!, accessToken: (authentication?.accessToken)!)
+            FIRAuth.auth()?.signIn(with: credential, completion: {
+                firebaseUser, error in
+                if error != nil{
+                    print("error to authentice with google \(error)")
+                    return
+                }
+                if user.profile.hasImage {
+                    
+                    self.getImageFromGoogle(catPictureURL: user.profile.imageURL(withDimension: 1), name: user.profile.name, id: (firebaseUser?.uid)!, facebookID: user.userID, gender: "")
+                    
+                } else {
+                    
+                    let url = URL(fileURLWithPath: "")
+                    
+                    self.getImageFromGoogle(catPictureURL: url , name: user.profile.name, id: "", facebookID: user.userID, gender: "")
+                }
+            })
+            
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil);
             let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
@@ -342,14 +353,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             
                             if (imageData != user.pic){
                                 //save on firebase
-                                //FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
                             }
                             
                         } else{
                             let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
-                            //FirebaseHelper.saveUser(user: user)
+                            FirebaseHelper.saveUser(user: user)
                         }
                         
                     } else {

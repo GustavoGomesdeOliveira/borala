@@ -49,6 +49,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         super.viewDidLoad()
                 //FirebaseHelper.saveMessage(chatId: "567", text: "nbl")
         FirebaseHelper.createChat()
+        
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true
@@ -97,12 +98,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         
         let user = getUser()
-        
-//        if user != nil {
-            
-            self.myID = user.id
+                    
+        self.myID = user.id
 
-//        }
         
         
         //FirebaseHelper.saveEvent()
@@ -420,4 +418,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
 
+}
+
+extension MKMapView {
+    func animatedZoom(zoomRegion:MKCoordinateRegion, duration:TimeInterval) {
+        MKMapView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 10, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.setRegion(zoomRegion, animated: true)
+        }, completion: nil)
+    }
 }
