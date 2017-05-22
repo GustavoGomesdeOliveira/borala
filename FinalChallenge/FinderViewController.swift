@@ -221,6 +221,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      print("ERRO: --- \(error)")
      }
     
+    // MARK: - Mapkit
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else {
@@ -254,7 +255,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         if myannotationView == nil{
             myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "mylocation")
-            myannotationView?.canShowCallout = true
+            myannotationView?.canShowCallout = false
         }else{
             //aqui n enentdi
             myannotationView?.annotation = annotation
@@ -264,6 +265,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         myannotationView?.detailCalloutAccessoryView = UIImageView(image: pinAnnotation.pinImage)
         
         let pinImage = UIImage.init(named: "pizzapin")
+//        myannotationView?.image = pinImage
         myannotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         myannotationView?.mapPin = UIButton(frame: (myannotationView?.frame)!)
         myannotationView?.mapPin.addTarget(self, action: #selector(FinderViewController.showPopup(sender:)), for: .touchDown)
@@ -289,6 +291,20 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
     }
     
+    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        let coordinate = view.annotation?.coordinate
+//        let myRegion: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (coordinate!.latitude), longitude: (coordinate!.longitude))
+//        
+////        let distanceSpan: CLLocationDegrees = 2000
+////        
+////        let myRegion = MKCoordinateRegionMakeWithDistance(coordinate!, distanceSpan, distanceSpan)
+////        
+//        mapView.centerCoordinate = myRegion
+////        mapView.setCenter(myRegion, animated: true)
+////        mapView.animatedZoom(zoomRegion: myRegion, duration: 0.2)
+//    }
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
         // The map item is the restaurant location
@@ -297,6 +313,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
         mapItem.openInMaps(launchOptions: launchOptions)
     }
+    
+    
+    
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
