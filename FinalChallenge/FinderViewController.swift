@@ -126,6 +126,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     }
                     
                     let eventPin = CustomPin(coordinate: coordinate)
+                    eventPin.title = "teste"
                     self.pins.append(eventPin)
                 }
             }
@@ -292,18 +293,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        let coordinate = view.annotation?.coordinate
 //        let myRegion: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (coordinate!.latitude), longitude: (coordinate!.longitude))
+        
+//        let distanceSpan: CLLocationDegrees = 2000
 //        
-////        let distanceSpan: CLLocationDegrees = 2000
-////        
-////        let myRegion = MKCoordinateRegionMakeWithDistance(coordinate!, distanceSpan, distanceSpan)
-////        
+//        let myRegion = MKCoordinateRegionMakeWithDistance(coordinate!, distanceSpan, distanceSpan)
+//        
 //        mapView.centerCoordinate = myRegion
-////        mapView.setCenter(myRegion, animated: true)
-////        mapView.animatedZoom(zoomRegion: myRegion, duration: 0.2)
-//    }
+//        mapView.setCenter(myRegion, animated: true)
+//        mapView.animatedZoom(zoomRegion: myRegion, duration: 0.2)
+        print("test")
+    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
