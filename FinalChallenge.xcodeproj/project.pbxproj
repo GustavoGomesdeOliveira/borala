@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062C78851ED30C1E001F9022 /* CustomChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062C78841ED30C1E001F9022 /* CustomChatCell.swift */; };
 		06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06376C9B1EC5FCBD00020470 /* CustomPin.swift */; };
 		0640FBC31EC3415800C1B16A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640FBC21EC3415800C1B16A /* Event.swift */; };
 		0697E1691EAE2ABF002AF2FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697E1681EAE2ABF002AF2FF /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062C78841ED30C1E001F9022 /* CustomChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChatCell.swift; sourceTree = "<group>"; };
 		06376C9B1EC5FCBD00020470 /* CustomPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		0640FBC21EC3415800C1B16A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0697E1651EAE2ABF002AF2FF /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
 				9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */,
 				06376C9B1EC5FCBD00020470 /* CustomPin.swift */,
+				062C78841ED30C1E001F9022 /* CustomChatCell.swift */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				0697E16B1EAE2ABF002AF2FF /* ViewController.swift in Sources */,
 				97016CA21EC4863700DA1194 /* Location.swift in Sources */,
 				0697E1691EAE2ABF002AF2FF /* AppDelegate.swift in Sources */,
+				062C78851ED30C1E001F9022 /* CustomChatCell.swift in Sources */,
 				06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */,
 				A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */,
 				A775A0D41ECDDA4400E230C1 /* AnnotationView.swift in Sources */,
