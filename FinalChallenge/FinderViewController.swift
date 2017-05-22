@@ -345,6 +345,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
     }
     
+    
+    //setar action do botao
+    @IBAction func addEvent(_ sender: Any) {
+    }
+    
+    
+    
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         try! FIRAuth.auth()!.signOut()//log out from firebase
     }
