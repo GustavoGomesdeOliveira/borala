@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -890,7 +890,7 @@
                                 <rect key="frame" x="0.0" y="61" width="375" height="557"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAF-Mz-X3o">
+                            <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAF-Mz-X3o">
                                 <rect key="frame" x="37" y="158" width="300" height="351"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your event image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfT-9v-wXX">
@@ -958,10 +958,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </textView>
                                     <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="X4G-fc-X6S">
-                                        <rect key="frame" x="90" y="42" width="120" height="120"/>
+                                        <rect key="frame" x="100" y="42" width="100" height="100"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="MgU-bS-iH7"/>
-                                            <constraint firstAttribute="height" constant="120" id="nqJ-Hr-hXo"/>
+                                            <constraint firstAttribute="width" constant="100" id="8mB-QH-LGj"/>
+                                            <constraint firstAttribute="height" constant="100" id="apv-1x-e1C"/>
                                         </constraints>
                                     </pickerView>
                                 </subviews>
@@ -970,9 +970,9 @@
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="6II-mw-lEm"/>
                                     <constraint firstAttribute="width" secondItem="mAF-Mz-X3o" secondAttribute="height" multiplier="100:117" id="6KF-ST-wIh"/>
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="leading" secondItem="mAF-Mz-X3o" secondAttribute="leading" id="6gN-qg-BYh"/>
-                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="top" secondItem="EfT-9v-wXX" secondAttribute="bottom" constant="8" id="NtT-qh-PG8"/>
+                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="84J-3O-fiU"/>
+                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="top" secondItem="EfT-9v-wXX" secondAttribute="bottom" constant="8" id="9L2-QF-Frh"/>
                                     <constraint firstItem="eMR-c9-UM3" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="RlM-cf-7VH"/>
-                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="h8K-b1-2Js"/>
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="top" secondItem="mAF-Mz-X3o" secondAttribute="top" constant="13" id="nd3-3r-Ojb"/>
                                     <constraint firstAttribute="trailing" secondItem="EfT-9v-wXX" secondAttribute="trailing" id="vbl-SR-rv2"/>
                                 </constraints>

@@ -51,16 +51,16 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         return pickerData.count
     }
     
-//    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-//        return 50
-//    }
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return CGFloat(70)
+    }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
    
         
-        var myView = UIView(frame: CGRect(x: 0, y: 0, width: pickerView.bounds.width, height: 60))
+        var myView = UIView(frame: CGRect(x: 0 , y: 0, width: pickerView.bounds.width, height: 60))
         
-        var myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        var myImageView = UIImageView(frame: CGRect(x: (pickerView.bounds.width/2)-20, y: 0, width: 50, height: 50))
         
         myImageView.image = pickerData[row]
         myView.addSubview(myImageView)
