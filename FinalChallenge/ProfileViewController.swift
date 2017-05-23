@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+
+class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     
     @IBOutlet weak var backRoundView: UIView!
@@ -23,11 +24,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userGenderLabel: UILabel!
     
     var user: User!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
@@ -40,16 +42,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if let userData = UserDefaults.standard.data(forKey: "user") {
-            
-            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
-            
-            self.userNameLabel.text = user?.name
-            self.userGenderLabel.text = user?.gender
-
-            self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
-        }
-        
+        getUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +56,7 @@ class ProfileViewController: UIViewController {
         
         self.addChildViewController(popUpOverVC)
         popUpOverVC.userToChange = self.user
+        popUpOverVC.delegate = self
         popUpOverVC.view.frame = self.view.frame
         self.view.addSubview(popUpOverVC.view)
         popUpOverVC.didMove(toParentViewController: self)
@@ -70,8 +64,26 @@ class ProfileViewController: UIViewController {
     }
     
     
+    func getUser(){
+        
+        if let userData = UserDefaults.standard.data(forKey: "user") {
+            
+            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            
+            self.userNameLabel.text = user?.name
+            self.userGenderLabel.text = user?.gender
+            
+            self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
+        }
 
+    }
+    
+    func didUpdateUser() {
+        
+        self.getUser()
+    }
 
+    
     /*
     // MARK: - Navigation
 
@@ -83,3 +95,4 @@ class ProfileViewController: UIViewController {
     */
 
 }
+
