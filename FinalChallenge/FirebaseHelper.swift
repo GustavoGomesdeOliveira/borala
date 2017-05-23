@@ -28,38 +28,25 @@ class FirebaseHelper{
     
     static func saveUser(user: User){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
-        let nameRef = idRef.child("name/userName")
-        let facebookIdRef = idRef.child("facebookId/facebookId")
-        let genderRef  = idRef.child("gender/userGender")
-        let friendsRef = idRef.child("friends/userFriends")
         let picRef     = idRef.child("pic/profilePic.jpg")
-        let rateRef    = idRef.child("rate/userRate")
-        let preferenceRef = idRef.child("preference/userPreference")
-        let locationRef   = idRef.child("location/userLocation")
+        var userDictionary = user.toDictionary()
+        let picdownloadUrl = ""
         
-        
-        if let nameData = user.name.data(using: .utf8){
-            nameRef.put(nameData)
-        }
-        if let facebookIdData = user.facebookID.data(using: .utf8){
-            facebookIdRef.put(facebookIdData)
-        }
-        if let genderData = user.gender.data(using: .utf8){
-            genderRef.put(genderData)
-        }
-        if let userFriends = user.friends{
-            let friendsData = NSKeyedArchiver.archivedData(withRootObject: userFriends)
-            friendsRef.put(friendsData)
-        }
-        picRef.put(user.pic!)
-        if let userRate = user.rate{
-            rateRef.put(NSKeyedArchiver.archivedData(withRootObject: userRate))
-        }
-        if let userPreference = user.preference{
-            preferenceRef.put(NSKeyedArchiver.archivedData(withRootObject: userPreference))
-        }
-        if let userLocation = user.location{
-            locationRef.put(NSKeyedArchiver.archivedData(withRootObject: userLocation))
+        if let userPic = user.pic{
+            picRef.put(userPic, metadata: nil, completion: {
+                metadata, error in
+                
+                userDictionary.updateValue(picdownloadUrl, forKey: "picURL")
+                if let error = error{
+                    print("An error ocurred to send pic to firebase. \(error)")
+                }
+                else{
+                    if let downloadUrl = metadata!.downloadURL()?.absoluteString{
+                        userDictionary.updateValue(downloadUrl, forKey: "picURL")
+                    }
+                }
+                rootRefDatabase.child("users").updateChildValues([user.id: userDictionary])
+            })
         }
     }
     
@@ -75,10 +62,16 @@ class FirebaseHelper{
     }
     
     static func saveEvent(event: Event){
+        let chatIdReference = rootRefDatabase.child("chats").childByAutoId()//it creates a new chat ID and adds it as a child of chats.
+        chatIdReference.setValue(true)//it sets the value of the new reference
+        
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
-        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? ""] as [String : Any]
-        rootRefDatabase.child("events").child(key).setValue(eventDict)
+        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? "",
+                         "chatId": chatIdReference.key] as [String : Any]
+        rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
+        //rootRefDatabase.child("users").updateChildValues([chatIdReference.key: true])//it adds chatId to the user that created it.
+        
     }
     
     static func saveMessage(chatId: String, text: String){
@@ -93,9 +86,18 @@ class FirebaseHelper{
         //rootRefDatabase.child("chats")
     }
 
-    static func createChat(){
-        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
-        rootRefDatabase.child("chats").child(key).setValue(true)
+    static func createChat(event: Event){
+        let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
+        rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds t
+        rootRefDatabase.child("users/\(firebaseUser?.uid)/chatsId").updateChildValues([chatId: true])
+        rootRefDatabase.child("users/\(event.creatorId)/chatsId").updateChildValues([chatId: true])
+    }
+    
+    static func getChats(){
+        rootRefDatabase.child("users/\(firebaseUser?.uid)/chatsId").observe(.childAdded, with: {
+            snapshot in
+            print(snapshot.key)
+        })
     }
     
     static func registerMeOnline(){
@@ -126,7 +128,6 @@ class FirebaseHelper{
                 }
             }
         })
-        
     }
     
     static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){

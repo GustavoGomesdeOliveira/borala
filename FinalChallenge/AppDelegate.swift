@@ -264,7 +264,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             }
                         }
                         else{
-                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+                            let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: user)
@@ -357,7 +357,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             }
                             
                         } else{
-                            let user = User(withId: id, name: name, pic: imageData, facebookID: facebookID, gender: gender)
+                            let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: user)
