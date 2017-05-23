@@ -33,8 +33,8 @@ class FirebaseHelper{
     static func saveUser(user: User){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
         let picRef  = idRef.child("pic/profilePic.jpg")
-        rootRefDatabase.child("users/" + user.id + "/eventsId").setValue(true)
         var userDictionary = user.toDictionary()
+        userDictionary["eventsId"] = true
         let picdownloadUrl = ""
         
         if let userPic = user.pic{
@@ -91,15 +91,14 @@ class FirebaseHelper{
     static func createChat(event: Event){
         rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").observeSingleEvent(of: .value, with: {
             snapshot in
-            if snapshot.exists(){
-                let eventsIdDictionary = snapshot.value as! [String: Bool]
-                if !eventsIdDictionary.keys.contains(event.id){
-                    let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-                    rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-                    rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").updateChildValues([chatId: true])
-                    rootRefDatabase.child("users/\(event.creatorId)/chatsId").updateChildValues([chatId: true])
-                }
-            }
+            
+//            let eventsIdDictionary = snapshot.value as! [String: Bool]
+//            if !eventsIdDictionary.keys.contains(event.id){
+//                let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
+//                rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
+//                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").updateChildValues([chatId: true])
+//                rootRefDatabase.child("users/\(event.creatorId)/chatsId").updateChildValues([chatId: true])
+//            }
         })
     }
     
