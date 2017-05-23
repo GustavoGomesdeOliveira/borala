@@ -873,7 +873,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4G-fc-X6S">
+                                    <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="X4G-fc-X6S">
                                         <rect key="frame" x="90" y="42" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="MgU-bS-iH7"/>

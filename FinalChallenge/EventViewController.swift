@@ -8,15 +8,21 @@
 
 import UIKit
 
-class EventViewController: UIViewController {
-    
+class EventViewController: UIViewController, UIPickerViewDelegate {
+    let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
+                                UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
+
     
     @IBOutlet weak var imagePicker: UIPickerView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+   
+        
+        
+        imagePicker.delegate = self
+       // imagePicker.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -34,14 +40,32 @@ class EventViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: UIPickerViewDataSource
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
     }
-    */
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+//    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+//        return 50
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+   
+        
+        var myView = UIView(frame: CGRect(x: 0, y: 0, width: pickerView.bounds.width, height: 60))
+        
+        var myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        
+        myImageView.image = pickerData[row]
+        myView.addSubview(myImageView)
+        return myView
+    }
+ 
 
 }
