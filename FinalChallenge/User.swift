@@ -14,6 +14,7 @@ class User: NSObject, NSCoding{
     var socialNetworkID: String!
     var name: String!
     var gender: String!
+    var age: Int?
     var friends: [ String ]?
     var pic: Data?
     var rate: Int?
@@ -48,6 +49,7 @@ class User: NSObject, NSCoding{
         self.socialNetworkID = aDecoder.decodeObject(forKey: "socialNetworkID") as? String
         self.name = aDecoder.decodeObject(forKey: "name") as? String
         self.gender = aDecoder.decodeObject(forKey: "gender") as? String
+        self.age = aDecoder.decodeObject(forKey: "age") as? Int
         self.friends = aDecoder.decodeObject(forKey: "friends") as? [String]
         self.pic = aDecoder.decodeObject(forKey: "pic") as? Data
         self.rate = aDecoder.decodeObject(forKey: "rate") as? Int
@@ -59,6 +61,7 @@ class User: NSObject, NSCoding{
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.gender, forKey: "gender")
+        aCoder.encode(self.age, forKey: "age")
         aCoder.encode(self.friends, forKey: "friends")
         aCoder.encode(self.pic, forKey: "pic")
         aCoder.encode(self.rate, forKey: "rate")
@@ -85,6 +88,7 @@ class User: NSObject, NSCoding{
                 preferenceDictionary.updateValue( true , forKey: chatId.key)
             }
         }
-        return ["id": self.id, "socialNetworkID": socialNetworkID, "name": self.name, "gender": self.gender, "friends": friendsDictionary,"rate": self.rate ?? -1, "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
+        return ["id": self.id, "socialNetworkID": socialNetworkID, "name": self.name, "gender": self.gender,
+                "age": self.age ?? -1, "friends": friendsDictionary,"rate": self.rate ?? -1, "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
     }
 }
