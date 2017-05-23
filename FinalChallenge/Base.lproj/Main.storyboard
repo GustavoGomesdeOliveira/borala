@@ -192,8 +192,11 @@
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Profile" id="Cro-7t-V4Q">
-                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ArC-or-fte">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="ArC-or-fte">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="editProfile:" destination="b5z-ud-nTd" id="aAj-OS-ZZz"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
