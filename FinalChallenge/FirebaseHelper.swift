@@ -70,8 +70,6 @@ class FirebaseHelper{
         let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? "",
                          "chatId": chatIdReference.key] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
-        //rootRefDatabase.child("users").updateChildValues([chatIdReference.key: true])//it adds chatId to the user that created it.
-        
     }
     
     static func saveMessage(chatId: String, text: String){
