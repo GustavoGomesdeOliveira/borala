@@ -14,12 +14,16 @@ class FirebaseHelper{
 
     static let rootRefStorage = FIRStorage.storage().reference()
     static let rootRefDatabase = FIRDatabase.database().reference()
-    //static var databaseHand = nil
+    static var firebaseUser: FIRUser? = nil
     
     static func saveProfilePic(userId : String, pic: Data, completionHandler:((_ error: Error?) -> ())? ){
         let profilePicRef = rootRefStorage.child("/users/\(userId)/profilePic.jpg")
         let _ = profilePicRef.put(pic, metadata: nil) {
             metadata, error in
+            
+            if let downloadUrl = metadata!.downloadURL()?.absoluteString{
+                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["picURL": downloadUrl])
+            }
             if let errorOnPutData = completionHandler{
                 errorOnPutData(error)
             }
@@ -28,38 +32,26 @@ class FirebaseHelper{
     
     static func saveUser(user: User){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
-        let nameRef = idRef.child("name/userName")
-        let facebookIdRef = idRef.child("facebookId/facebookId")
-        let genderRef  = idRef.child("gender/userGender")
-        let friendsRef = idRef.child("friends/userFriends")
-        let picRef     = idRef.child("pic/profilePic.jpg")
-        let rateRef    = idRef.child("rate/userRate")
-        let preferenceRef = idRef.child("preference/userPreference")
-        let locationRef   = idRef.child("location/userLocation")
+        let picRef  = idRef.child("pic/profilePic.jpg")
+        var userDictionary = user.toDictionary()
+        userDictionary["eventsId"] = true
+        let picdownloadUrl = ""
         
-        
-        if let nameData = user.name.data(using: .utf8){
-            nameRef.put(nameData)
-        }
-        if let facebookIdData = user.facebookID.data(using: .utf8){
-            facebookIdRef.put(facebookIdData)
-        }
-        if let genderData = user.gender.data(using: .utf8){
-            genderRef.put(genderData)
-        }
-        if let userFriends = user.friends{
-            let friendsData = NSKeyedArchiver.archivedData(withRootObject: userFriends)
-            friendsRef.put(friendsData)
-        }
-        picRef.put(user.pic!)
-        if let userRate = user.rate{
-            rateRef.put(NSKeyedArchiver.archivedData(withRootObject: userRate))
-        }
-        if let userPreference = user.preference{
-            preferenceRef.put(NSKeyedArchiver.archivedData(withRootObject: userPreference))
-        }
-        if let userLocation = user.location{
-            locationRef.put(NSKeyedArchiver.archivedData(withRootObject: userLocation))
+        if let userPic = user.pic{
+            picRef.put(userPic, metadata: nil, completion: {
+                metadata, error in
+                
+                userDictionary.updateValue(picdownloadUrl, forKey: "picURL")
+                if let error = error{
+                    print("An error ocurred to send pic to firebase. \(error)")
+                }
+                else{
+                    if let downloadUrl = metadata!.downloadURL()?.absoluteString{
+                        userDictionary.updateValue(downloadUrl, forKey: "picURL")
+                    }
+                }
+                rootRefDatabase.child("users").updateChildValues([user.id: userDictionary])
+            })
         }
     }
     
@@ -75,22 +67,47 @@ class FirebaseHelper{
     }
     
     static func saveEvent(event: Event){
+        //let chatIdReference = rootRefDatabase.child("chats").childByAutoId()//it creates a new chat ID and adds it as a child of chats.
+        //chatIdReference.setValue(true)//it sets the value of the new reference
+        
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
         let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? ""] as [String : Any]
-        rootRefDatabase.child("events").child(key).setValue(eventDict)
+        rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
     }
     
     static func saveMessage(chatId: String, text: String){
-        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
-        let msgDict = ["id": key,
-                       "senderId": "",
-                       "senderName": "",
-                       "timeStamp": FIRServerValue.timestamp(),
+        let key = rootRefDatabase.child("messages/\(chatId)").childByAutoId()//it adds a unique id to msg.
+        let timeStamp = FIRServerValue.timestamp()
+        let msgDict = ["senderName": firebaseUser?.displayName! ?? "anonymous",
+                       "timeStamp": timeStamp,
                        "text": text] as [String : Any]
-        rootRefDatabase.child("chats/\(chatId)").setValue(msgDict)
+        key.setValue(msgDict)//it added the message to firebase
+        rootRefDatabase.child("chats/" + chatId).setValue(["lastMessage" : text,
+                                                           "timeStamp": timeStamp])
+        //rootRefDatabase.child("chats")
     }
 
+    static func createChat(event: Event){
+        rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").observeSingleEvent(of: .value, with: {
+            snapshot in
+            
+//            let eventsIdDictionary = snapshot.value as! [String: Bool]
+//            if !eventsIdDictionary.keys.contains(event.id){
+//                let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
+//                rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
+//                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").updateChildValues([chatId: true])
+//                rootRefDatabase.child("users/\(event.creatorId)/chatsId").updateChildValues([chatId: true])
+//            }
+        })
+    }
+    
+    static func getChats(){
+        rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/chatsId").observe(.childAdded, with: {
+            snapshot in
+            print(snapshot.key)
+        })
+    }
     
     static func registerMeOnline(){
         if let currentUser = FIRAuth.auth()?.currentUser{
@@ -98,12 +115,6 @@ class FirebaseHelper{
             currentUserRef.setValue(true)
             currentUserRef.onDisconnectRemoveValue()
         }
-    }
-    
-    static func createChat(){
-        let key = rootRefDatabase.child("chats").childByAutoId().key//it adds a unique id.
-        rootRefDatabase.child("chats").child(key).setValue(["lastMessage": "bla bla",
-                                        "senderName": "berg"])
     }
     
     static func getOnlineUsers(completionHandler:@escaping (_ onlineUsers: [String]?) -> ()){
@@ -120,14 +131,29 @@ class FirebaseHelper{
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
-                    print(kk)
                     print(dic[kk] as! [String: Any])
                     eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)
                 }
             }
         })
-        
+    }
+    
+    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
+        rootRefDatabase.child("messages").observe( .childAdded , with:{
+            snapshot in
+            
+            if let messageDictionary = snapshot.value as? [String: Any]{
+                print(messageDictionary)
+                for kk in messageDictionary.keys{
+                    let msg = messageDictionary[kk] as! [String: Any]
+                    let dateStr = msg["timeStamp"] as! Int
+                    let date = Date.init(timeIntervalSince1970: Double.init(dateStr))
+                    //print(date)
+                }
+                completionHandler(nil)
+            }
+        })
     }
     
     static func removeOnlineUsersLister(){
@@ -136,6 +162,15 @@ class FirebaseHelper{
     
     static func removeEventLister(){
         rootRefDatabase.child("events").removeAllObservers()
+    }
+    
+    static func observerUser(){
+        FIRAuth.auth()?.addStateDidChangeListener({
+            auth, user in
+            if let user = user{
+                firebaseUser = user
+            }
+        })
     }
 }
 

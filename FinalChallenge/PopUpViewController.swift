@@ -8,9 +8,18 @@
 
 import UIKit
 
+protocol PopUpViewControllerDelegate:  class{
+    
+    func didUpdateUser()
+}
+
+
+
 class PopUpViewController: UIViewController, UITextFieldDelegate {
-    
-    
+
+
+    weak var delegate: PopUpViewControllerDelegate?
+
     @IBOutlet weak var popUpView: UIView!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -44,8 +53,11 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         userToChange.name = self.nameTextField.text
         userToChange.gender = self.genderTextField.text
         changeUser()
-        self.view.superview?.reloadInputViews()
+        
+        delegate?.didUpdateUser()
+
         self.view.removeFromSuperview()
+        
     }
     
     func changeUser(){
@@ -55,7 +67,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
             let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
             
             user?.name = self.nameTextField.text
-            user?.gender = user?.gender
+            user?.gender = self.genderTextField.text
             
             user?.pic = user?.pic
             let userData = NSKeyedArchiver.archivedData(withRootObject: user!)
@@ -66,6 +78,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         
         
     }
+
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
