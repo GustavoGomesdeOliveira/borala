@@ -18,12 +18,14 @@ var parameters = ["":""]
 var facebookFriendsID = [String]()
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate {
     
     
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
+    
+    var eventVC: EventViewController?
     
     var pin: CustomPin?
     var myAnnotation: CustomPin?
@@ -65,7 +67,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
-        
+        self.eventVC?.delegate = self
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -445,6 +447,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     }
     
+    func sendEvent( event : String) {
+        print(event)
+    }
 
 }
 

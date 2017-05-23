@@ -899,17 +899,10 @@
                                         <color key="textColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meal schedule" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAa-sO-Ytm">
-                                        <rect key="frame" x="0.0" y="181" width="300" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="17"/>
-                                        <color key="textColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eMR-c9-UM3">
-                                        <rect key="frame" x="55" y="210" width="190" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eMR-c9-UM3">
+                                        <rect key="frame" x="55" y="169" width="190" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DOM-mW-6Yq">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DOM-mW-6Yq">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -920,7 +913,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JYO-ZV-YRk">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JYO-ZV-YRk">
                                                 <rect key="frame" x="110" y="0.0" width="80" height="30"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -933,16 +926,35 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meal Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjX-bn-Sx4">
-                                        <rect key="frame" x="0.0" y="254" width="300" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjX-bn-Sx4">
+                                        <rect key="frame" x="0.0" y="207" width="300" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="Omg-B8-YCx"/>
+                                            <constraint firstAttribute="height" constant="21" id="uDB-U3-dNV"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="17"/>
                                         <color key="textColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mRG-Ft-KXz">
-                                        <rect key="frame" x="30" y="283" width="240" height="46"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="X4G-fc-X6S">
+                                        <rect key="frame" x="100" y="36" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="8mB-QH-LGj"/>
+                                            <constraint firstAttribute="height" constant="100" id="apv-1x-e1C"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal schedule" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAa-sO-Ytm">
+                                        <rect key="frame" x="0.0" y="142" width="300" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="IKJ-GV-3hn"/>
+                                            <constraint firstAttribute="height" constant="21" id="USq-oj-riR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="17"/>
+                                        <color key="textColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mRG-Ft-KXz">
+                                        <rect key="frame" x="30" y="236" width="240" height="94"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore.</string>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -954,24 +966,27 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="X4G-fc-X6S">
-                                        <rect key="frame" x="100" y="42" width="100" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="8mB-QH-LGj"/>
-                                            <constraint firstAttribute="height" constant="100" id="apv-1x-e1C"/>
-                                        </constraints>
-                                    </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99797433609999997" green="0.93578034639999996" blue="0.76385861639999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="mRG-Ft-KXz" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="0Vj-g5-HTt"/>
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="6II-mw-lEm"/>
                                     <constraint firstAttribute="width" secondItem="mAF-Mz-X3o" secondAttribute="height" multiplier="100:117" id="6KF-ST-wIh"/>
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="leading" secondItem="mAF-Mz-X3o" secondAttribute="leading" id="6gN-qg-BYh"/>
+                                    <constraint firstItem="mRG-Ft-KXz" firstAttribute="top" secondItem="mjX-bn-Sx4" secondAttribute="bottom" constant="8" id="7yA-8v-I8Y"/>
                                     <constraint firstItem="X4G-fc-X6S" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="84J-3O-fiU"/>
-                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="top" secondItem="EfT-9v-wXX" secondAttribute="bottom" constant="8" id="9L2-QF-Frh"/>
+                                    <constraint firstItem="mjX-bn-Sx4" firstAttribute="top" secondItem="eMR-c9-UM3" secondAttribute="bottom" constant="8" id="9FD-jT-G68"/>
+                                    <constraint firstItem="X4G-fc-X6S" firstAttribute="top" secondItem="EfT-9v-wXX" secondAttribute="bottom" constant="2" id="C3s-ae-XhZ"/>
                                     <constraint firstItem="eMR-c9-UM3" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="RlM-cf-7VH"/>
+                                    <constraint firstItem="hAa-sO-Ytm" firstAttribute="top" secondItem="X4G-fc-X6S" secondAttribute="bottom" constant="6" id="WQY-Ke-2fN"/>
+                                    <constraint firstAttribute="trailing" secondItem="mRG-Ft-KXz" secondAttribute="trailing" constant="30" id="Yyj-z5-bxe"/>
+                                    <constraint firstItem="eMR-c9-UM3" firstAttribute="top" secondItem="hAa-sO-Ytm" secondAttribute="bottom" constant="6" id="ZdM-qh-mtv"/>
+                                    <constraint firstAttribute="bottom" secondItem="mRG-Ft-KXz" secondAttribute="bottom" constant="21" id="ZeC-dK-4Im"/>
+                                    <constraint firstItem="mRG-Ft-KXz" firstAttribute="leading" secondItem="mAF-Mz-X3o" secondAttribute="leading" constant="30" id="azd-wf-8Fb"/>
+                                    <constraint firstItem="mjX-bn-Sx4" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="iEN-F9-PgH"/>
                                     <constraint firstItem="EfT-9v-wXX" firstAttribute="top" secondItem="mAF-Mz-X3o" secondAttribute="top" constant="13" id="nd3-3r-Ojb"/>
                                     <constraint firstAttribute="trailing" secondItem="EfT-9v-wXX" secondAttribute="trailing" id="vbl-SR-rv2"/>
+                                    <constraint firstItem="hAa-sO-Ytm" firstAttribute="centerX" secondItem="mAF-Mz-X3o" secondAttribute="centerX" id="yLS-w7-yrx"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
