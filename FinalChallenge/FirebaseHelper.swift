@@ -32,7 +32,8 @@ class FirebaseHelper{
     
     static func saveUser(user: User){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
-        let picRef     = idRef.child("pic/profilePic.jpg")
+        let picRef  = idRef.child("pic/profilePic.jpg")
+        rootRefDatabase.child("users/" + user.id + "/eventsId").setValue(true)
         var userDictionary = user.toDictionary()
         let picdownloadUrl = ""
         
