@@ -300,7 +300,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             FIRAuth.auth()?.signIn(with: credential, completion: {
                 firebaseUser, error in
                 if error != nil{
-                    print("error to authentice with google \(error)")
+                    print("error to authentice with google \(String(describing: error))")
                     return
                 }
                 if user.profile.hasImage {
