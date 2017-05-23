@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userAgeLabel: UILabel!
     @IBOutlet weak var userGenderLabel: UILabel!
     
-
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
         
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
-            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
             
             self.userNameLabel.text = user?.name
             self.userGenderLabel.text = user?.gender
@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController {
         let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
         
         self.addChildViewController(popUpOverVC)
-        
+        popUpOverVC.userToChange = self.user
         popUpOverVC.view.frame = self.view.frame
         self.view.addSubview(popUpOverVC.view)
         popUpOverVC.didMove(toParentViewController: self)
