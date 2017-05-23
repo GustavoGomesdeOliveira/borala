@@ -67,7 +67,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
             let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
             
             user?.name = self.nameTextField.text
-            user?.gender = user?.gender
+            user?.gender = self.genderTextField.text
             
             user?.pic = user?.pic
             let userData = NSKeyedArchiver.archivedData(withRootObject: user!)
