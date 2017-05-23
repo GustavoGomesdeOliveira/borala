@@ -17,6 +17,7 @@ class Event {
     var creatorName: String!
     var hora: String!
     var preference: String?
+    var chatId: String?
     
     init(id: String, name: String, location: Location, creatorId: String, creatorName: String, hora: String, preference: String) {
         
@@ -38,6 +39,7 @@ class Event {
         self.creatorName = dict["creatorName"] as! String?
         self.hora = dict["hora"] as! String?
         self.preference = dict["preference"] as! String?
+        self.chatId = dict["chatId"] as! String!
     }
     
     
