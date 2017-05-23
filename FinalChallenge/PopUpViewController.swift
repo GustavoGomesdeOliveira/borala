@@ -17,7 +17,8 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var ageTextField: UITextField!
     
-    var gender: String!
+    @IBOutlet weak var genderTextField: UITextField!
+    
     
     var userToChange: User!
     
@@ -30,30 +31,40 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         self.popUpView.layer.borderWidth = 3
         
         self.nameTextField.delegate = self
+        self.nameTextField.text = userToChange.name
+        self.genderTextField.delegate = self
+        self.genderTextField.text = userToChange.gender
         self.ageTextField.delegate = self
+        
     }
     
     
     @IBAction func closeUp(_ sender: Any) {
         
         userToChange.name = self.nameTextField.text
-        userToChange.gender = self.gender!
-        
+        userToChange.gender = self.genderTextField.text
+        changeUser()
+        self.view.superview?.reloadInputViews()
         self.view.removeFromSuperview()
     }
     
-    
-    @IBAction func sexChanged(_ sender: UISegmentedControl) {
+    func changeUser(){
         
-        switch sender.selectedSegmentIndex {
-        case 0:
-            self.gender = "Male";
-        case 1:
-            self.gender = "Female"
-        default:
-            break
+        if let userData = UserDefaults.standard.data(forKey: "user") {
             
+            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            
+            user?.name = self.nameTextField.text
+            user?.gender = user?.gender
+            
+            user?.pic = user?.pic
+            let userData = NSKeyedArchiver.archivedData(withRootObject: user!)
+            UserDefaults.standard.set(userData, forKey: "user")
+            //Remember to save
+            UserDefaults.standard.synchronize()
         }
+        
+        
     }
     
     

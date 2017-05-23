@@ -421,17 +421,13 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4T0-bg-Ert">
-                                        <rect key="frame" x="8" y="150" width="121" height="29"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gender" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-Tb-0BM">
+                                        <rect key="frame" x="8" y="146" width="235" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="Male"/>
-                                            <segment title="Female"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="sexChanged:" destination="IPz-yj-EKi" eventType="valueChanged" id="dVa-09-bAy"/>
-                                        </connections>
-                                    </segmentedControl>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.92549019610000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -458,6 +454,7 @@
                     <size key="freeformSize" width="251" height="253"/>
                     <connections>
                         <outlet property="ageTextField" destination="w7q-M6-DZb" id="w1f-kr-wCz"/>
+                        <outlet property="genderTextField" destination="kIF-Tb-0BM" id="RzN-YQ-ywd"/>
                         <outlet property="nameTextField" destination="PgJ-Fb-JNt" id="RXw-YC-dHD"/>
                         <outlet property="popUpView" destination="2ak-Dc-Giz" id="Yzy-1o-pmK"/>
                     </connections>
