@@ -9,6 +9,10 @@
 import UIKit
 
 class EventViewController: UIViewController {
+    
+    
+    @IBOutlet weak var imagePicker: UIPickerView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
