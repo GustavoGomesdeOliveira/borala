@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061B75831ED4664E00CF2C2D /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061B75821ED4664E00CF2C2D /* PopUpViewController.swift */; };
+		062C78851ED30C1E001F9022 /* CustomChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062C78841ED30C1E001F9022 /* CustomChatCell.swift */; };
 		06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06376C9B1EC5FCBD00020470 /* CustomPin.swift */; };
 		0640FBC31EC3415800C1B16A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640FBC21EC3415800C1B16A /* Event.swift */; };
 		0697E1691EAE2ABF002AF2FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697E1681EAE2ABF002AF2FF /* AppDelegate.swift */; };
@@ -28,6 +30,7 @@
 		9706431E1EC1FF290038B8FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706431D1EC1FF290038B8FD /* User.swift */; };
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
 		A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */; };
+		A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76377311ED32EE600A5F199 /* EventViewController.swift */; };
 		A775A0D21ECDDA3700E230C1 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D11ECDDA3700E230C1 /* Popup.swift */; };
 		A775A0D41ECDDA4400E230C1 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */; };
 		A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED261EAE36B8004264CF /* ProfileViewController.swift */; };
@@ -55,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		061B75821ED4664E00CF2C2D /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		062C78841ED30C1E001F9022 /* CustomChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChatCell.swift; sourceTree = "<group>"; };
 		06376C9B1EC5FCBD00020470 /* CustomPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		0640FBC21EC3415800C1B16A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0697E1651EAE2ABF002AF2FF /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +91,7 @@
 		9706431D1EC1FF290038B8FD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		A76377311ED32EE600A5F199 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A775A0D11ECDDA3700E230C1 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		A7FBED261EAE36B8004264CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -159,14 +165,17 @@
 				9706431C1EC1FF070038B8FD /* Model */,
 				0697E1681EAE2ABF002AF2FF /* AppDelegate.swift */,
 				0697E16A1EAE2ABF002AF2FF /* ViewController.swift */,
-				A7FBED2A1EAE36CC004264CF /* TabBarViewControllers */,
+				A76377311ED32EE600A5F199 /* EventViewController.swift */,
 				0697E16C1EAE2ABF002AF2FF /* Main.storyboard */,
+				A7FBED2A1EAE36CC004264CF /* TabBarViewControllers */,
 				0697E1721EAE2ABF002AF2FF /* Assets.xcassets */,
 				0697E1741EAE2ABF002AF2FF /* LaunchScreen.storyboard */,
 				0697E1771EAE2ABF002AF2FF /* Info.plist */,
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
 				9706431A1EC1FB5B0038B8FD /* GoogleService-Info.plist */,
 				06376C9B1EC5FCBD00020470 /* CustomPin.swift */,
+				062C78841ED30C1E001F9022 /* CustomChatCell.swift */,
+				061B75821ED4664E00CF2C2D /* PopUpViewController.swift */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -535,7 +544,10 @@
 				0697E16B1EAE2ABF002AF2FF /* ViewController.swift in Sources */,
 				97016CA21EC4863700DA1194 /* Location.swift in Sources */,
 				0697E1691EAE2ABF002AF2FF /* AppDelegate.swift in Sources */,
+				062C78851ED30C1E001F9022 /* CustomChatCell.swift in Sources */,
+				A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */,
 				06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */,
+				061B75831ED4664E00CF2C2D /* PopUpViewController.swift in Sources */,
 				A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */,
 				A775A0D41ECDDA4400E230C1 /* AnnotationView.swift in Sources */,
 				A775A0D21ECDDA3700E230C1 /* Popup.swift in Sources */,

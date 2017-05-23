@@ -26,7 +26,6 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
 
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
@@ -35,7 +34,6 @@ class ProfileViewController: UIViewController {
         self.backAgeView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        
 
         
     }
@@ -59,6 +57,20 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func editProfile(_ sender: UIBarButtonItem) {
+        
+        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
+        
+        self.addChildViewController(popUpOverVC)
+        
+        popUpOverVC.view.frame = self.view.frame
+        self.view.addSubview(popUpOverVC.view)
+        popUpOverVC.didMove(toParentViewController: self)
+        
+    }
+    
+    
+
 
     /*
     // MARK: - Navigation
