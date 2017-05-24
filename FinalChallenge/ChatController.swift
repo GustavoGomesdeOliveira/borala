@@ -11,14 +11,17 @@ import UIKit
 class ChatController: UIViewController {
    
     @IBOutlet weak var chatView: UIScrollView!
+    @IBOutlet weak var navigation: UINavigationBar!
     
+    @IBOutlet weak var navItem: UINavigationItem!
     
     override func viewDidLoad() {
         
-        
         super.viewDidLoad()
         
+        self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton.png"), style: .plain, target: self, action: #selector(self.backAction))
     }
+
     
     @IBAction func send(_ sender: UIButton) {
         
@@ -27,7 +30,16 @@ class ChatController: UIViewController {
         
         self.chatView.addSubview(newMessage)
         
+        
     }
     
+    func backAction() -> Void {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatList") as! ChatViewController
+        self.present(nextViewController, animated:true, completion:nil)
+        
+    }
     
 }

@@ -501,15 +501,6 @@
                                     <constraint firstAttribute="width" secondItem="WCJ-hC-Cg0" secondAttribute="height" multiplier="15:19" id="aUg-Mt-kOM"/>
                                 </constraints>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-hy-e3U">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="2eh-Z3-bYb">
-                                        <barButtonItem key="backBarButtonItem" title="Back" style="plain" id="fvT-ra-y6m"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-pN-fed">
                                 <rect key="frame" x="311" y="609" width="64" height="58"/>
                                 <constraints>
@@ -534,12 +525,25 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" backIndicatorImage="BackButton" translatesAutoresizingMaskIntoConstraints="NO" id="mhU-JZ-IVd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="HTs-zE-347"/>
+                                    <constraint firstAttribute="width" constant="375" id="NGi-1o-X2A"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Chat" id="dHW-CX-2Ul"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="5nF-JO-58o"/>
                             <constraint firstItem="QMi-FU-o9W" firstAttribute="top" secondItem="QJC-6A-0Vf" secondAttribute="bottom" id="91O-TW-yIo"/>
                             <constraint firstAttribute="trailing" secondItem="WCJ-hC-Cg0" secondAttribute="trailing" id="EIF-vx-KLK"/>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="top" secondItem="Zqy-KX-fIQ" secondAttribute="top" id="Eea-nG-Xul"/>
                             <constraint firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" id="GYx-Ce-zNv"/>
+                            <constraint firstItem="3L1-Oz-h5u" firstAttribute="top" secondItem="mhU-JZ-IVd" secondAttribute="bottom" constant="4" id="Ly4-j0-lc1"/>
                             <constraint firstItem="3L1-Oz-h5u" firstAttribute="top" secondItem="gUW-f4-WcG" secondAttribute="bottom" constant="28" id="PP8-RA-w22"/>
                             <constraint firstItem="WCJ-hC-Cg0" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="QEm-KQ-8dx"/>
                             <constraint firstItem="9qI-vO-KIL" firstAttribute="leading" secondItem="3L1-Oz-h5u" secondAttribute="trailing" constant="27" id="VIt-ZU-OtX"/>
@@ -548,6 +552,7 @@
                             <constraint firstItem="QMi-FU-o9W" firstAttribute="top" secondItem="3ci-pN-fed" secondAttribute="bottom" id="imw-sH-eag"/>
                             <constraint firstItem="3ci-pN-fed" firstAttribute="leading" secondItem="QJC-6A-0Vf" secondAttribute="trailing" constant="-5" id="jc7-YN-16O"/>
                             <constraint firstItem="9qI-vO-KIL" firstAttribute="top" secondItem="gUW-f4-WcG" secondAttribute="bottom" constant="49" id="l7K-G1-onf"/>
+                            <constraint firstAttribute="trailing" secondItem="mhU-JZ-IVd" secondAttribute="trailing" id="mck-Qc-w3w"/>
                             <constraint firstAttribute="leadingMargin" secondItem="3L1-Oz-h5u" secondAttribute="leading" id="vao-dc-nQ9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9qI-vO-KIL" secondAttribute="trailing" constant="23" id="vcT-kW-k3t"/>
                         </constraints>
@@ -555,6 +560,8 @@
                     <tabBarItem key="tabBarItem" title="Chat" image="profile1" id="hXw-6S-EY1"/>
                     <connections>
                         <outlet property="chatView" destination="WCJ-hC-Cg0" id="Nve-p8-lSt"/>
+                        <outlet property="navItem" destination="dHW-CX-2Ul" id="7hG-LH-5vL"/>
+                        <outlet property="navigation" destination="mhU-JZ-IVd" id="oOW-KY-bYM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knw-yK-IhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -685,7 +692,7 @@
         <!--Item-->
         <scene sceneID="EnA-HE-zND">
             <objects>
-                <viewController id="xrc-ae-nFD" customClass="ChatViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatList" id="xrc-ae-nFD" customClass="ChatViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QTp-xO-8WA"/>
                         <viewControllerLayoutGuide type="bottom" id="h0W-WQ-ZMm"/>
@@ -1059,6 +1066,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackButton" width="24" height="40"/>
         <image name="back@x" width="375" height="661"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="186" height="186"/>
