@@ -28,7 +28,12 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        let event = Event(id: "id1", name: "foo", location: Location.init(latitude: 1.1, longitude: 1.1), creatorId: "qMfLWgumnaTcRIpXMpFJdtwHrIZ2", creatorName: "none", hora: "12:70", preference: "")
+//        FirebaseHelper.saveEvent(event: event)
+//        FirebaseHelper.createChat(event: event)
+        //FirebaseHelper.getChats()
+        //FirebaseHelper.saveMessage(chatId: "-KkuMp00JmjiqojKTxNX", text: "oi xapa..")
+        FirebaseHelper.getMessages(chatId: "-KkuMp00JmjiqojKTxNX")
         
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
