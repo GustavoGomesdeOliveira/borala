@@ -48,6 +48,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true

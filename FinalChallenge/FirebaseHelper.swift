@@ -77,35 +77,52 @@ class FirebaseHelper{
     }
     
     static func saveMessage(chatId: String, text: String){
-        let key = rootRefDatabase.child("messages/\(chatId)").childByAutoId()//it adds a unique id to msg.
+        let key = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
         let timeStamp = FIRServerValue.timestamp()
         let msgDict = ["senderName": firebaseUser?.displayName! ?? "anonymous",
                        "timeStamp": timeStamp,
                        "text": text] as [String : Any]
         key.setValue(msgDict)//it added the message to firebase
-        rootRefDatabase.child("chats/" + chatId).setValue(["lastMessage" : text,
-                                                           "timeStamp": timeStamp])
-        //rootRefDatabase.child("chats")
+        rootRefDatabase.child("chats/" + chatId).setValue(msgDict)
     }
 
     static func createChat(event: Event){
-        rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").observeSingleEvent(of: .value, with: {
-            snapshot in
-            
-//            let eventsIdDictionary = snapshot.value as! [String: Bool]
-//            if !eventsIdDictionary.keys.contains(event.id){
-//                let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/eventsId").updateChildValues([chatId: true])
-//                rootRefDatabase.child("users/\(event.creatorId)/chatsId").updateChildValues([chatId: true])
-//            }
-        })
+        if let userId = firebaseUser?.uid{
+            rootRefDatabase.child("users/" + userId + "/chatsId").observeSingleEvent(of: .value, with: {
+                snapshot in
+                if let eventsIdDictionary = snapshot.value as? [String: Any]{
+                    if !eventsIdDictionary.keys.contains(event.id){
+                        let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
+                        rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
+                        rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/chatsId").updateChildValues([chatId.key: true])
+                        rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
+                    }
+                }
+                else{
+                    let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
+                    rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
+                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/chatsId").setValue([chatId.key: true])
+                    rootRefDatabase.child("users/" + event.creatorId + "/chatsId").setValue([chatId.key: true])
+                }
+            })
+        }
     }
     
     static func getChats(){
-        rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))/chatsId").observe(.childAdded, with: {
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe(.value, with: {
             snapshot in
-            print(snapshot.key)
+            if let dic = snapshot.value as? [String: Bool]{
+                print(Array(dic.keys))
+            }
+        })
+    }
+    
+    static func getMessages(chatId: String){
+        rootRefDatabase.child("messages/" + chatId).observe(.childAdded, with: {
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+                print(Array(dic.keys))
+            }
         })
     }
     
