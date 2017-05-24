@@ -15,6 +15,8 @@ class ChatController: UIViewController {
     
     @IBOutlet weak var navItem: UINavigationItem!
     
+    let containerView =  UIView()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -25,21 +27,29 @@ class ChatController: UIViewController {
     
     @IBAction func send(_ sender: UIButton) {
         
-        let newMessage = UILabel(frame: CGRect(x: self.chatView.frame.maxX, y: self.chatView.frame.maxY + 10, width: 20, height: 20))
+        let newMessage = UILabel(frame: CGRect(x: 100, y:  110, width: self.chatView.frame.width/2, height: 100))
         newMessage.backgroundColor = UIColor.red
+        newMessage.text = "Messagem Um"
         
-        self.chatView.addSubview(newMessage)
+        containerView.addSubview(newMessage)
         
+        self.chatView.addSubview(containerView)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        containerView.frame = CGRect(x: self.chatView.layer.position.x - 50, y: 100, width: chatView.contentSize.width, height: chatView.contentSize.height)
     }
     
     func backAction() -> Void {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatList") as! ChatViewController
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarViewController
         self.present(nextViewController, animated:true, completion:nil)
         
     }
+
     
 }
