@@ -621,8 +621,7 @@
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Rph-d8-Gqf">
                                             <color key="tintColor" red="0.99797433609999997" green="0.93578034639999996" blue="0.76385861639999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
-                                                <action selector="addEvent:" destination="v2N-1W-59M" id="KIj-Br-RI8"/>
-                                                <segue destination="Z3a-uI-62M" kind="presentation" id="tCl-R5-cT7"/>
+                                                <action selector="addEventAction:" destination="v2N-1W-59M" id="55p-Ld-pzo"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -694,7 +693,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H0i-aX-95N" id="FGO-aZ-xf9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImage" translatesAutoresizingMaskIntoConstraints="NO" id="Mf1-aw-eyg">
@@ -874,7 +873,7 @@
         <!--Event View Controller-->
         <scene sceneID="PFv-w9-e8x">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="Z3a-uI-62M" customClass="EventViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventPopUp" modalPresentationStyle="overCurrentContext" id="Z3a-uI-62M" customClass="EventViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D8a-F5-8TA"/>
                         <viewControllerLayoutGuide type="bottom" id="Blp-2K-voz"/>
@@ -883,10 +882,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nm7-6F-4FD">
-                                <rect key="frame" x="0.0" y="61" width="375" height="557"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAF-Mz-X3o">
                                 <rect key="frame" x="37" y="158" width="300" height="351"/>
                                 <subviews>
@@ -1021,12 +1016,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Blp-2K-voz" firstAttribute="top" secondItem="Nm7-6F-4FD" secondAttribute="bottom" constant="49" id="FVE-kY-eA4"/>
                             <constraint firstItem="mAF-Mz-X3o" firstAttribute="width" secondItem="dMZ-bK-sGm" secondAttribute="height" multiplier="300:667" id="S6E-Yl-eRH"/>
-                            <constraint firstAttribute="trailing" secondItem="Nm7-6F-4FD" secondAttribute="trailing" id="TzQ-Uc-Foy"/>
                             <constraint firstItem="mAF-Mz-X3o" firstAttribute="centerX" secondItem="dMZ-bK-sGm" secondAttribute="centerX" id="dBy-Qy-XnA"/>
-                            <constraint firstItem="Nm7-6F-4FD" firstAttribute="leading" secondItem="dMZ-bK-sGm" secondAttribute="leading" id="gpC-8T-nyf"/>
-                            <constraint firstItem="Nm7-6F-4FD" firstAttribute="top" secondItem="D8a-F5-8TA" secondAttribute="bottom" constant="41" id="twk-Lo-rJt"/>
                             <constraint firstItem="mAF-Mz-X3o" firstAttribute="centerY" secondItem="dMZ-bK-sGm" secondAttribute="centerY" id="wJu-D2-GPS"/>
                         </constraints>
                     </view>

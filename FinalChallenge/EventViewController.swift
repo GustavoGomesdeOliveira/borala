@@ -29,25 +29,21 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         
         
         imagePicker.delegate = self
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        
        // imagePicker.dataSource = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func Cancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.view.removeFromSuperview()
     }
     
     @IBAction func Done(_ sender: UIBarButtonItem) {
         delegate?.sendEvent(event: "value")
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.view.removeFromSuperview()
     }
     
-
 
     // MARK: UIPickerViewDataSource
     
