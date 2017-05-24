@@ -12,6 +12,7 @@ class CustomChatCell: UITableViewCell {
     
     @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var personName: UILabel!
-    
+    @IBOutlet weak var shadownLayer: UIView!
+    @IBOutlet weak var mainBackground: UIView!
     
 }
