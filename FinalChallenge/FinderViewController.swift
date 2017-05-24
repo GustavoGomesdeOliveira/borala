@@ -98,9 +98,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             eventsFromFirebase in
             self.events = eventsFromFirebase
             self.pins.removeAll()
-            if let annotation = self.myAnnotation{
-                self.pins.append(annotation)
-            }
+            
+            var eventExist = false
+            
+            
             for event in self.events{
 //                print(self.myID)
 //                print("-=>-")
@@ -119,16 +120,20 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
                     self.pins.append(eventPin)
-                }else{
+                }
+                else{
+                    eventExist = true
+                    self.mapView.showsUserLocation = false
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
-                    
                     let myPin = CustomPin(coordinate: coordinate)
                     myPin.title = "teste"
                     myPin.pinImage = UIImage(named: "mypin2")
                     self.pins.append(myPin)
                 }
             }
-
+            if eventExist{
+                self.mapView.showsUserLocation = false
+            }
             self.mapView.addAnnotations(self.pins)
             
         })
@@ -191,13 +196,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
-         myAnnotation = CustomPin(coordinate: myLocation!)
+        // myAnnotation = CustomPin(coordinate: myLocation!)
         //mandar adicionar o pin agora
-        self.pins.append(myAnnotation!)
+       // self.pins.append(myAnnotation!)
         
         self.mapView.setRegion(myRegion, animated: true)
        
-        self.myAnnotation?.pinImage = UIImage(named: "mypin1")
+//        self.myAnnotation?.pinImage = UIImage(named: "mypin1")
         
 //        mapView.addAnnotation(self.myAnnotation!)
         
@@ -205,11 +210,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             
         }else{
-            
             //avisar o usuario que ele nao esta logado
-            
             //self.notLoggedView.isHidden = false
-        
         }
         
         
