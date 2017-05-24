@@ -67,8 +67,6 @@ class FirebaseHelper{
     }
     
     static func saveEvent(event: Event){
-        //let chatIdReference = rootRefDatabase.child("chats").childByAutoId()//it creates a new chat ID and adds it as a child of chats.
-        //chatIdReference.setValue(true)//it sets the value of the new reference
         
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]

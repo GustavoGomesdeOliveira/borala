@@ -17,6 +17,7 @@ class User: NSObject, NSCoding{
     var age: Int?
     var friends: [ String ]?
     var pic: Data?
+    var picUrl: String?
     var rate: Int?
     var preferences: [ String ]?
     var chatsIds:[String: Any]?

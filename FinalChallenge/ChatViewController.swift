@@ -16,7 +16,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         
-    
+        
         self.chatTableView.separatorStyle = UITableViewCellSeparatorStyle.none
     }
     
