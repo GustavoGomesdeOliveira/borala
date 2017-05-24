@@ -9,16 +9,17 @@
 import UIKit
 
 protocol EventViewControllerDelegate{
-    func sendEvent( event : String)
+    func sendEvent( preference : String)
 }
 
 class EventViewController: UIViewController, UIPickerViewDelegate {
     
     var delegate:EventViewControllerDelegate!
+    let imageNames = ["pizza","beer","food"]
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
-
+    var index = 0
     
     @IBOutlet weak var imagePicker: UIPickerView!
     
@@ -40,7 +41,11 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
     }
     
     @IBAction func Done(_ sender: UIBarButtonItem) {
-        delegate?.sendEvent(event: "value")
+        
+        let preference = self.imageNames[self.index]
+        
+        delegate?.sendEvent(preference: preference)
+        
         self.view.removeFromSuperview()
     }
     
@@ -69,6 +74,11 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         myImageView.image = pickerData[row]
         myView.addSubview(myImageView)
         return myView
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        self.index = row
     }
  
 

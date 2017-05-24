@@ -88,14 +88,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         }
         
-        //
-//        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
-//        
-//        longGesture.minimumPressDuration = 1.0
-//        self.mapView.addGestureRecognizer(longGesture)
-        
-    
-        
         
         let user = getUser()
                     
@@ -118,14 +110,22 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     var imageName = event.preference
                     if imageName == nil {
-                        imageName = "mypin1"
+                        imageName = "pizza"
                     }else{
                         imageName?.append("pin")
                     }
                     
                     let eventPin = CustomPin(coordinate: coordinate)
                     eventPin.title = "teste"
+                    eventPin.pinImage = UIImage(named: imageName!)
                     self.pins.append(eventPin)
+                }else{
+                    let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
+                    
+                    let myPin = CustomPin(coordinate: coordinate)
+                    myPin.title = "teste"
+                    myPin.pinImage = UIImage(named: "mypin2")
+                    self.pins.append(myPin)
                 }
             }
 
@@ -248,23 +248,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             return annotationView
         }
     
-        //aqui comeca
+        //for custom pins
         
-        var myannotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "mylocation") as! AnnotationView?
+        var myannotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView?
         
         if myannotationView == nil{
-            myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "mylocation")
+            myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "pins")
             myannotationView?.canShowCallout = false
         }else{
-            //aqui n enentdi
             myannotationView?.annotation = annotation
         }
         
         let pinAnnotation = annotation as! CustomPin
         myannotationView?.detailCalloutAccessoryView = UIImageView(image: pinAnnotation.pinImage)
-        
-        let pinImage = UIImage.init(named: "pizzapin")
-//        myannotationView?.image = pinImage
+
+//        let pinImage = UIImage.init(named: "pizzapin")
+
+        let pinImage = pinAnnotation.pinImage
         myannotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         myannotationView?.mapPin = UIButton(frame: (myannotationView?.frame)!)
         myannotationView?.mapPin.addTarget(self, action: #selector(FinderViewController.showPopup(sender:)), for: .touchDown)
@@ -275,35 +275,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         return myannotationView
         
-        //Código que funciona para adicionar o pin a partir de um longpress
-//        if let customAnnotation = annotation as? CustomPin{
-//            let placemark = MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil)
-//            let mapItem = MKMapItem(placemark: placemark)
-//            mapView.showsUserLocation = false
-//            self.mapItem = (mapItem, customAnnotation)
-//            //self.showRoute.isEnabled = true
-//            
-//            return customAnnotation.annotationView!
-//        }else{
-//            return nil
-//        }
-        
     }
     
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let coordinate = view.annotation?.coordinate
-//        let myRegion: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (coordinate!.latitude), longitude: (coordinate!.longitude))
-        
-//        let distanceSpan: CLLocationDegrees = 2000
-//        
-//        let myRegion = MKCoordinateRegionMakeWithDistance(coordinate!, distanceSpan, distanceSpan)
-//        
-//        mapView.centerCoordinate = myRegion
-//        mapView.setCenter(myRegion, animated: true)
-//        mapView.animatedZoom(zoomRegion: myRegion, duration: 0.2)
-        print("test")
-    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
@@ -376,9 +350,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
 //                    let customY = press.location(in: self.mapView).y
 //                    
-                    var locationOnView = press.location(in: self.mapView)
-//                    
-                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+//                    var locationOnView = press.location(in: self.mapView)
+//
+//                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
 //
 //                    let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
 //                    
@@ -387,22 +361,24 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 //                    let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
 //                    
 //                    let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
-
                     
-                    
-                    let pin = CustomPin(coordinate: coordinate)
+                    let pin = CustomPin(coordinate: self.myLocation!)
 
                     pin.pinImage = UIImage(named: "mypin2")
                     
-                    mapView.addAnnotation(pin)
+                    self.pins.append(pin)
                     
-                    let user = getUser()
+                    self.mapView.showsUserLocation = false
                     
-                    let location = Location(latitude: Float(coordinate.latitude), longitude: Float(coordinate.longitude))
+                    let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "eventPopUp") as! EventViewController
                     
+                    self.addChildViewController(popUpOverVC)
+                    popUpOverVC.delegate = self
+                    popUpOverVC.view.frame = self.view.frame
+                    self.view.addSubview(popUpOverVC.view)
+                    popUpOverVC.didMove(toParentViewController: self)
                     
-                    let event = Event(id: "", name: "teste", location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: "Pizza")
-                    FirebaseHelper.saveEvent(event: event)
+
                 }
                 
             }
@@ -442,17 +418,25 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     }
     
-    func sendEvent( event : String) {
-        print(event)
+    func sendEvent( preference : String) {
+        
+        
+        let user = getUser()
+        let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
+        
+        let event = Event(id: "", name: "teste", location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: preference)
+        FirebaseHelper.saveEvent(event: event)
+        
     }
     
     
     @IBAction func addEventAction(_ sender: UIBarButtonItem) {
         
+        self.mapView.showsUserLocation = false
+        
         let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "eventPopUp") as! EventViewController
         
         self.addChildViewController(popUpOverVC)
-//        popUpOverVC. = self.user
         popUpOverVC.delegate = self
         popUpOverVC.view.frame = self.view.frame
         self.view.addSubview(popUpOverVC.view)
