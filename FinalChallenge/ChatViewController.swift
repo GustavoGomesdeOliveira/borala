@@ -12,12 +12,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBOutlet weak var chatTableView: UITableView!
-    
+    var chats = [Chat]()
     
     override func viewDidLoad() {
-        
-        
         self.chatTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        FirebaseHelper.getChats(completionHandler: {
+            chatsFromFirebase in
+            self.chats = chatsFromFirebase
+        })
+        
+        FirebaseHelper.deleteChat(completionHandler: {
+            chatId in
+            
+        })
     }
     
     

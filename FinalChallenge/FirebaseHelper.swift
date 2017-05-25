@@ -126,7 +126,7 @@ class FirebaseHelper{
         })
     }
     
-    static func deleteChatFromFirebase(completionHandler: @escaping (_ chatsId: String) -> ()){
+    static func deleteChat(completionHandler: @escaping (_ chatsId: String) -> ()){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe(.childRemoved, with: {
             snapshot in
             let chatDict = snapshot.value as! [String: Any]

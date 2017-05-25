@@ -253,6 +253,7 @@
 				97016C9F1EC4814100DA1194 /* FirebaseHelper.swift */,
 				A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */,
 				97016CA11EC4863700DA1194 /* Location.swift */,
+				06F344801ED643E2007B78CB /* ChatConversation.swift */,
 				972D1F7B1ED601A0001895B4 /* Chat.swift */,
 				972D1F7D1ED60216001895B4 /* Message.swift */,
 			);
