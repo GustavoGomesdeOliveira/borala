@@ -177,6 +177,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         popupVC?.popoverPresentationController?.sourceRect = rect!
         popupVC?.popoverPresentationController?.backgroundColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1)
         
+        
         self.present(popupVC!, animated: true, completion: nil)
     }
     
@@ -252,34 +253,74 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
         //for custom pins
         
-        var myannotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView?
         
-        if myannotationView == nil{
-            myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "pins")
-            myannotationView?.canShowCallout = false
-        }else{
-            myannotationView?.annotation = annotation
+        
+        if let dequeuedAnnotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView? {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = myAnnotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pins")
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         
         let pinAnnotation = annotation as! CustomPin
-        myannotationView?.detailCalloutAccessoryView = UIImageView(image: pinAnnotation.pinImage)
-
-//        let pinImage = UIImage.init(named: "pizzapin")
-
-        let pinImage = pinAnnotation.pinImage
-        myannotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        myannotationView?.mapPin = UIButton(frame: (myannotationView?.frame)!)
-        myannotationView?.mapPin.addTarget(self, action: #selector(FinderViewController.showPopup(sender:)), for: .touchDown)
-        myannotationView?.mapPin.isUserInteractionEnabled = true
-        myannotationView?.addSubview((myannotationView?.mapPin)!)
-        myannotationView?.mapPin.setImage(pinImage, for: .normal)
+        annotationView?.annotation = myAnnotation
+        if let annotationView = annotationView {
+            annotationView.canShowCallout = false
+            annotationView.image = pinAnnotation.pinImage
+            
+        }
+        
+        return annotationView
         
         
-        return myannotationView
+//        var myannotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView?
+//        
+//        if myannotationView == nil{
+//            myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "pins")
+//            myannotationView?.canShowCallout = false
+//        }else{
+//            myannotationView?.annotation = annotation
+//        }
+//        
+//        let pinAnnotation = annotation as! CustomPin
+//        myannotationView?.detailCalloutAccessoryView = UIImageView(image: pinAnnotation.pinImage)
+
+
+
+//        let pinImage = pinAnnotation.pinImage
+//        myannotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        myannotationView?.mapPin = UIButton(frame: (myannotationView?.frame)!)
+//        myannotationView?.mapPin.addTarget(self, action: #selector(FinderViewController.showPopup(sender:)), for: .touchDown)
+//        myannotationView?.mapPin.isUserInteractionEnabled = true
+//        myannotationView?.addSubview((myannotationView?.mapPin)!)
+//        myannotationView?.mapPin.setImage(pinImage, for: .normal)
+        
+        
+//        return myannotationView
         
     }
     
-    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        
+        let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "Popup")
+        popupVC?.preferredContentSize = CGSize(width: 250, height: 150)
+        popupVC?.modalPresentationStyle = UIModalPresentationStyle.popover
+        
+        //let rect = sender.superview?.convert(sender.frame, to: self.view)
+        let rect = CGRect(x: 0, y: 0, width: 100, height: 100)
+        popupVC?.popoverPresentationController?.delegate = self as UIPopoverPresentationControllerDelegate
+        popupVC?.popoverPresentationController?.sourceView = self.view
+        popupVC?.popoverPresentationController?.sourceRect = rect
+        popupVC?.popoverPresentationController?.backgroundColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1)
+        
+        
+        self.present(popupVC!, animated: true, completion: nil)
+        
+        
+    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
