@@ -678,7 +678,7 @@
             </objects>
             <point key="canvasLocation" x="3440.8000000000002" y="287.40629685157421"/>
         </scene>
-        <!--Item-->
+        <!--Chat-->
         <scene sceneID="EnA-HE-zND">
             <objects>
                 <viewController storyboardIdentifier="chatList" id="xrc-ae-nFD" customClass="ChatViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -771,7 +771,7 @@
                             <constraint firstItem="h0W-WQ-ZMm" firstAttribute="top" secondItem="COl-Kv-Ngo" secondAttribute="bottom" id="sRE-tn-WA5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="profile1" id="Jx8-uK-tke"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="profile1" selectedImage="profile1" id="Jx8-uK-tke"/>
                     <connections>
                         <outlet property="chatTableView" destination="COl-Kv-Ngo" id="Bz2-rh-qFE"/>
                     </connections>
