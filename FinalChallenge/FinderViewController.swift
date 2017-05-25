@@ -105,9 +105,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             
             for event in self.events{
-//                print(self.myID)
-//                print("-=>-")
-//                print(event.creatorId)
+
                 if (event.creatorId != self.myID){
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
                     
