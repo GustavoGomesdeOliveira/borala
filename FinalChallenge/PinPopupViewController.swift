@@ -30,7 +30,19 @@ class PinPopupViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        
+        if touch?.view == self.view {
+            
+            self.view.removeFromSuperview()
+
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
