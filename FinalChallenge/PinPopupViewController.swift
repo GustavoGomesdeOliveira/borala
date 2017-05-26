@@ -27,6 +27,12 @@ class PinPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userNameLabel.text = event?.creatorName
+        if let hora: String = event?.hora{
+            print(hora)
+            self.eventScheduleLabel.text = hora
+        }
+        
         
         // Do any additional setup after loading the view.
     }
@@ -44,8 +50,7 @@ class PinPopupViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        self.userNameLabel.text = event?.creatorName
-        self.eventScheduleLabel.text = event?.hora
+       // self.event.
         // Dispose of any resources that can be recreated.
     }
     
