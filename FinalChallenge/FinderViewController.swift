@@ -118,6 +118,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
                     eventPin.event = event
+                    print("testando aqui")
+                    print(event.hora)
+                    print("---------------")
+                    
                     self.pins.append(eventPin)
                 }
                 else{
@@ -245,7 +249,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
         //for custom pins
         
-        if let dequeuedAnnotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView? {
+        if let dequeuedAnnotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins"){
             annotationView = dequeuedAnnotationView
             annotationView?.annotation = myAnnotation
         }
@@ -446,7 +450,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func transitionToChat( id: String){
         
-        print("to aqui")
+        print("to indo")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
+        self.present(newViewController, animated: true, completion: nil)
     }
     
     //--------------------------------------
