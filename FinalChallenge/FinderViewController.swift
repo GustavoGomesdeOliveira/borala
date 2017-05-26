@@ -223,7 +223,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             //if i want to set my pin
             let annotationIdentifier = "mylocation"
 
-            
             if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
                 annotationView = dequeuedAnnotationView
                 annotationView?.annotation = myAnnotation
@@ -295,9 +294,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
         mapItem.openInMaps(launchOptions: launchOptions)
     }
-    
-    
-    
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         

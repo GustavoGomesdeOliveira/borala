@@ -571,6 +571,7 @@
 				06F344811ED643E2007B78CB /* ChatConversation.swift in Sources */,
 				0697E1691EAE2ABF002AF2FF /* AppDelegate.swift in Sources */,
 				062C78851ED30C1E001F9022 /* CustomChatCell.swift in Sources */,
+				A7D2D2F01ED70BF700FCCA29 /* PinPopupViewController.swift in Sources */,
 				972D1F7E1ED60216001895B4 /* Message.swift in Sources */,
 				A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */,
 				06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */,

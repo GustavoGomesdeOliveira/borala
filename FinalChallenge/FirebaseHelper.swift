@@ -150,19 +150,7 @@ class FirebaseHelper{
     //**********************************************************************************************************************
     
     //**** Messages related methods   **************************************************************************************
-    
-//    static func saveMessage(chatId: String, text: String){
-//        let newRef = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
-//        let timeStamp = FIRServerValue.timestamp()
-//        let msgDict = ["id" : newRef.key,
-//                       "senderId": (firebaseUser?.uid)!,
-//                       "senderName": firebaseUser?.displayName! ?? "anonymous",
-//                       "timeStamp": timeStamp,
-//                       "text": text] as [String : Any]
-//        newRef.setValue(msgDict) //it added the message to firebase
-//        rootRefDatabase.child("chats/" + chatId).setValue(msgDict)
-//    }
-    
+        
     static func saveMessage(chatId: String, message: Message){
         let newRef = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
         let timeStamp = FIRServerValue.timestamp()
@@ -235,6 +223,8 @@ class FirebaseHelper{
             auth, user in
             if let user = user{
                 firebaseUser = user
+                firebaseUser?.displayName
+                print(firebaseUser?.displayName)
             }
         })
     }
