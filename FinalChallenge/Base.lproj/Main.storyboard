@@ -117,7 +117,7 @@
         <!--Profile-->
         <scene sceneID="Lf4-A9-0N1">
             <objects>
-                <viewController storyboardIdentifier="profile" hidesBottomBarWhenPushed="YES" id="b5z-ud-nTd" customClass="ProfileViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileController" hidesBottomBarWhenPushed="YES" id="b5z-ud-nTd" customClass="ProfileViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C8I-iU-NsP"/>
                         <viewControllerLayoutGuide type="bottom" id="rKA-cy-3iM"/>

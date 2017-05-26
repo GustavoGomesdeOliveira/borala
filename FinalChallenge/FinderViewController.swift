@@ -446,6 +446,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func transitionToProfile( id: String){
     
         print("to aqui")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController")
+        
+        tabBarController?.selectedIndex = 0
     }
     
     func transitionToChat( id: String){
@@ -457,6 +461,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     //--------------------------------------
+    
     @IBAction func addEventAction(_ sender: UIBarButtonItem) {
         
         self.mapView.showsUserLocation = false
