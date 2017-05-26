@@ -41,6 +41,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.backAgeView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         
     }
@@ -88,6 +91,29 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.getUser()
     }
 
+    
+    @IBAction func openChat(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
+        self.present(newViewController, animated: true, completion: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height - 80
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height - 80
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation

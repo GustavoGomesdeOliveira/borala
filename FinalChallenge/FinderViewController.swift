@@ -18,7 +18,7 @@ var parameters = ["":""]
 var facebookFriendsID = [String]()
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate {
     
     
 
@@ -56,8 +56,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
         self.notLoggedView.isHidden = true
 
-      //------
-        
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
         longGesture.minimumPressDuration = 1.0
@@ -67,7 +65,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
-//        self.eventVC?.delegate = self
+
         //Requesting user location authorization
         self.locationManager.requestAlwaysAuthorization()
         
@@ -119,6 +117,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     let eventPin = CustomPin(coordinate: coordinate)
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
+                    eventPin.event = event
                     self.pins.append(eventPin)
                 }
                 else{
@@ -128,6 +127,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     let myPin = CustomPin(coordinate: coordinate)
                     myPin.title = "teste"
                     myPin.pinImage = UIImage(named: "mypin2")
+                    myPin.event = event
                     self.pins.append(myPin)
                 }
             }
@@ -165,20 +165,21 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func showPopup(sender: UIButton!) {
-        
-        let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "Popup")
-        popupVC?.preferredContentSize = CGSize(width: 250, height: 150)
-        popupVC?.modalPresentationStyle = UIModalPresentationStyle.popover
-        
-        let rect = sender.superview?.convert(sender.frame, to: self.view)
-        popupVC?.popoverPresentationController?.delegate = self as UIPopoverPresentationControllerDelegate
-        popupVC?.popoverPresentationController?.sourceView = self.view
-        popupVC?.popoverPresentationController?.sourceRect = rect!
-        popupVC?.popoverPresentationController?.backgroundColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1)
-        
-        self.present(popupVC!, animated: true, completion: nil)
-    }
+//    func showPopup(sender: UIButton!) {
+//        
+//        let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "Popup")
+//        popupVC?.preferredContentSize = CGSize(width: 250, height: 150)
+//        popupVC?.modalPresentationStyle = UIModalPresentationStyle.popover
+//        
+//        let rect = sender.superview?.convert(sender.frame, to: self.view)
+//        popupVC?.popoverPresentationController?.delegate = self as UIPopoverPresentationControllerDelegate
+//        popupVC?.popoverPresentationController?.sourceView = self.view
+//        popupVC?.popoverPresentationController?.sourceRect = rect!
+//        popupVC?.popoverPresentationController?.backgroundColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1)
+//        
+//        
+//        self.present(popupVC!, animated: true, completion: nil)
+//    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         // This *forces* a popover to be displayed on the iPhone
@@ -196,15 +197,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
-        // myAnnotation = CustomPin(coordinate: myLocation!)
-        //mandar adicionar o pin agora
-       // self.pins.append(myAnnotation!)
-        
         self.mapView.setRegion(myRegion, animated: true)
        
-//        self.myAnnotation?.pinImage = UIImage(named: "mypin1")
-        
-//        mapView.addAnnotation(self.myAnnotation!)
         
         if let token = FBSDKAccessToken.current() {
             
@@ -213,7 +207,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             //avisar o usuario que ele nao esta logado
             //self.notLoggedView.isHidden = false
         }
-        
         
       }
     
@@ -252,34 +245,47 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
         //for custom pins
         
-        var myannotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView?
-        
-        if myannotationView == nil{
-            myannotationView = AnnotationView(annotation: annotation, reuseIdentifier: "pins")
-            myannotationView?.canShowCallout = false
-        }else{
-            myannotationView?.annotation = annotation
+        if let dequeuedAnnotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "pins") as! AnnotationView? {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = myAnnotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pins")
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         
         let pinAnnotation = annotation as! CustomPin
-        myannotationView?.detailCalloutAccessoryView = UIImageView(image: pinAnnotation.pinImage)
-
-//        let pinImage = UIImage.init(named: "pizzapin")
-
-        let pinImage = pinAnnotation.pinImage
-        myannotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        myannotationView?.mapPin = UIButton(frame: (myannotationView?.frame)!)
-        myannotationView?.mapPin.addTarget(self, action: #selector(FinderViewController.showPopup(sender:)), for: .touchDown)
-        myannotationView?.mapPin.isUserInteractionEnabled = true
-        myannotationView?.addSubview((myannotationView?.mapPin)!)
-        myannotationView?.mapPin.setImage(pinImage, for: .normal)
+        annotationView?.annotation = myAnnotation
+        if let annotationView = annotationView {
+            annotationView.canShowCallout = false
+            annotationView.image = pinAnnotation.pinImage
+            
+        }
         
-        
-        return myannotationView
+        return annotationView
         
     }
     
-    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        
+        let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
+        
+        //eh aqui que vai dar certo
+        let annotation = view.annotation as! CustomPin?
+        let event = annotation?.event
+        popUpPinVC.event = event
+        
+        
+        self.addChildViewController(popUpPinVC)
+        popUpPinVC.delegate = self
+        popUpPinVC.view.frame = self.view.frame
+
+        self.view.addSubview(popUpPinVC.view)
+        popUpPinVC.didMove(toParentViewController: self)
+        
+        
+    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
@@ -319,10 +325,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
-    //setar action do botao
-    @IBAction func addEvent(_ sender: Any) {
-    }
-    
+//    //setar action do botao
+//    @IBAction func addEvent(_ sender: Any) {
+//    }
+//    
     
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
@@ -432,6 +438,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
+    //MARK: - PinDelegate
+    func transitionToProfile( id: String){
+    
+        print("to aqui")
+    }
+    
+    func transitionToChat( id: String){
+        
+        print("to aqui")
+    }
+    
+    //--------------------------------------
     @IBAction func addEventAction(_ sender: UIBarButtonItem) {
         
         self.mapView.showsUserLocation = false
