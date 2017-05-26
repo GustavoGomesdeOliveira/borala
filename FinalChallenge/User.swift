@@ -15,7 +15,7 @@ class User: NSObject, NSCoding{
     var name: String!
     var gender: String!
     var age: Int?
-    var friends: [ String ]?
+    var friendsId: [ String ]?
     var pic: Data?
     var picUrl: String?
     var rate: Int?
@@ -31,7 +31,7 @@ class User: NSObject, NSCoding{
         self.socialNetworkID = socialNetworkID
         self.name = name
         self.gender = gender
-        self.friends = friends
+        self.friendsId = friends
         self.pic = pic
         self.rate = rate
         self.preferences = preference
@@ -51,7 +51,7 @@ class User: NSObject, NSCoding{
         self.name = aDecoder.decodeObject(forKey: "name") as? String
         self.gender = aDecoder.decodeObject(forKey: "gender") as? String
         self.age = aDecoder.decodeObject(forKey: "age") as? Int
-        self.friends = aDecoder.decodeObject(forKey: "friends") as? [String]
+        self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String]
         self.pic = aDecoder.decodeObject(forKey: "pic") as? Data
         self.rate = aDecoder.decodeObject(forKey: "rate") as? Int
         self.preferences = aDecoder.decodeObject(forKey: "preferences") as? [String]
@@ -63,7 +63,7 @@ class User: NSObject, NSCoding{
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.gender, forKey: "gender")
         aCoder.encode(self.age, forKey: "age")
-        aCoder.encode(self.friends, forKey: "friends")
+        aCoder.encode(self.friendsId, forKey: "friendsId")
         aCoder.encode(self.pic, forKey: "pic")
         aCoder.encode(self.rate, forKey: "rate")
         aCoder.encode(self.preferences, forKey: "preference")
@@ -74,7 +74,7 @@ class User: NSObject, NSCoding{
     func toDictionary() -> [String: Any] {
         var friendsDictionary = [String: Any]()
         var preferenceDictionary = [String: Any]()
-        if let friends = self.friends{
+        if let friends = self.friendsId{
             for friend in friends{
                 friendsDictionary.updateValue(true, forKey: friend)
             }
@@ -90,6 +90,6 @@ class User: NSObject, NSCoding{
             }
         }
         return ["id": self.id, "socialNetworkID": socialNetworkID, "name": self.name, "gender": self.gender,
-                "age": self.age ?? -1, "friends": friendsDictionary,"rate": self.rate ?? -1, "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
+                "age": self.age ?? -1, "friendsId": friendsDictionary,"rate": self.rate ?? -1, "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
     }
 }

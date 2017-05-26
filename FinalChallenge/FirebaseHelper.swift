@@ -92,7 +92,7 @@ class FirebaseHelper{
     //*** Chat related methods *******************************************************************************************************
     
     //it creates a chat for the given event
-    static func createChat(event: Event){
+    static func createChat(event: Event, completionHandler: @escaping (_ _chatId: String) -> ()){
         if let userId = firebaseUser?.uid{
             rootRefDatabase.child("users/" + userId + "/eventsWithChatsIds").observeSingleEvent(of: .value, with: {
                 snapshot in
@@ -100,22 +100,29 @@ class FirebaseHelper{
                     if !eventsIdDictionary.keys.contains(event.id){
                         let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
                         rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
+                        rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([event.id: true])
                         rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([chatId.key: true])
-                        rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([chatId.key: true])
+                        
+                        rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([event.id: true])
+                        rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
+                        completionHandler(chatId.key)
                     }
                 }
                 else{
                     let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
                     rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").setValue([chatId.key: true])
-                    rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([chatId.key: true])
+                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([event.id: true])
+                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([chatId.key: true])
+                    rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([event.id: true])
+                    rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
+                    completionHandler(chatId.key)
                 }
             })
         }
     }
     
     static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .value, with: {
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/eventsWithChatsIds").observe( .value, with: {
             snapshot in
             var chatsFromFirebase = [Chat]()
             if let dict = snapshot.value as? [String: Bool]{

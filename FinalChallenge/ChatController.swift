@@ -67,7 +67,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
-        cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.chatConversation.message[indexPath.row]).width + 20
+        cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20
         
         return cell
     }
@@ -88,7 +88,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.bubbleViewLeftAnchor?.isActive = true
             cell.bubbleViewRightAnchor?.isActive = false
             cell.profileImageChat.isHidden = false
-
         }
         
     }
@@ -99,7 +98,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var heigth: CGFloat = 80
         
         //Get value from text
-        let text = self.chatConversation.message[indexPath.row]
+        let text = self.messages[indexPath.row].text
             
         heigth = estimatedFrameForText(text: text).height + 20
         

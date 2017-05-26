@@ -18,7 +18,7 @@ protocol PinPopupViewControllerDelegate{
 class PinPopupViewController: UIViewController {
     
     var delegate: PinPopupViewControllerDelegate!
-    var event: Event?
+    var event: Event!
     
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -58,8 +58,12 @@ class PinPopupViewController: UIViewController {
     @IBAction func goToProfile(_ sender: UIButton) {
         delegate.transitionToProfile(id: (self.event?.creatorId)!)
     }
+    
     @IBAction func goToChat(_ sender: UIButton) {
-        delegate.transitionToChat(id: (self.event?.creatorId)!)
+        FirebaseHelper.createChat(event: self.event, completionHandler: {
+            chatId in
+            self.delegate.transitionToChat(id: chatId)
+        })
     }
 
 }

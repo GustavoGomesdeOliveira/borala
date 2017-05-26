@@ -452,7 +452,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         print("to indo")
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
+        newViewController.chatId = id
         self.present(newViewController, animated: true, completion: nil)
     }
     
