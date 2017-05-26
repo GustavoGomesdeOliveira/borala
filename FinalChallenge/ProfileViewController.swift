@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 //        FirebaseHelper.createChat(event: event)
         //FirebaseHelper.getChats()
         //FirebaseHelper.saveMessage(chatId: "-KkuMp00JmjiqojKTxNX", text: "oi xapa..")
-        FirebaseHelper.getMessages(chatId: "-KkuMp00JmjiqojKTxNX")
+        //FirebaseHelper.getMessages(chatId: "-KkuMp00JmjiqojKTxNX")
         
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor

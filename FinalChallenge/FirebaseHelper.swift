@@ -37,6 +37,7 @@ class FirebaseHelper{
         userDictionary["eventsId"] = true
         let picdownloadUrl = ""
         
+        
         if let userPic = user.pic{
             picRef.put(userPic, metadata: nil, completion: {
                 metadata, error in
@@ -74,16 +75,20 @@ class FirebaseHelper{
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
     }
     
-    static func saveMessage(chatId: String, text: String){
-        let key = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
-        let timeStamp = FIRServerValue.timestamp()
-        let msgDict = ["senderName": firebaseUser?.displayName! ?? "anonymous",
-                       "timeStamp": timeStamp,
-                       "text": text] as [String : Any]
-        key.setValue(msgDict) //it added the message to firebase
-        rootRefDatabase.child("chats/" + chatId).setValue(msgDict)
+    static func getEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
+        rootRefDatabase.child("events").observe(.value,with:{
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+                var eventsFromFirebase = [Event]()
+                for kk in dic.keys{
+                    print(dic[kk] as! [String: Any])
+                    eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
+                    completionHandler(eventsFromFirebase)
+                }
+            }
+        })
     }
-
+    
     //*** Chat related methods *******************************************************************************************************
     
     //it creates a chat for the given event
@@ -110,18 +115,23 @@ class FirebaseHelper{
     }
     
     static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .childAdded, with: {
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .value, with: {
             snapshot in
             var chatsFromFirebase = [Chat]()
             if let dict = snapshot.value as? [String: Bool]{
                 let chatIds = Array(dict.keys)
                 for chatId in chatIds{
-                    let chatDict = rootRefDatabase.child("chats").value(forKey: chatId) as! [String: Any]
-                    chatsFromFirebase.append(Chat.init(id: chatId,
-                                                       lastMessage: Message(id: "", senderName: chatDict["senderName"] as! String,
-                                                                                        text: chatDict["text"] as! String, timeStamp: chatDict["timeStamp"] as! Float)))
+                    rootRefDatabase.child("chats/").child(chatId).observeSingleEvent(of: .value, with: {
+                        snapshotChat in
+                        if let chatDict = snapshotChat.value as? [String: Any]{
+                        chatsFromFirebase.append(Chat.init(id: chatId,
+                                                              lastMessage: Message(id: "", senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
+                                                                      text: chatDict["text"] as! String,
+                                                                          timeStamp:chatDict["timeStamp"] as! Float)))
+                            completionHandler(chatsFromFirebase)
+                        }
+                    })
                 }
-                completionHandler(chatsFromFirebase)
             }
         })
     }
@@ -139,14 +149,45 @@ class FirebaseHelper{
     }
     //**********************************************************************************************************************
     
-    static func getMessages(chatId: String){
+    //**** Messages related methods   **************************************************************************************
+    
+//    static func saveMessage(chatId: String, text: String){
+//        let newRef = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
+//        let timeStamp = FIRServerValue.timestamp()
+//        let msgDict = ["id" : newRef.key,
+//                       "senderId": (firebaseUser?.uid)!,
+//                       "senderName": firebaseUser?.displayName! ?? "anonymous",
+//                       "timeStamp": timeStamp,
+//                       "text": text] as [String : Any]
+//        newRef.setValue(msgDict) //it added the message to firebase
+//        rootRefDatabase.child("chats/" + chatId).setValue(msgDict)
+//    }
+    
+    static func saveMessage(chatId: String, message: Message){
+        let newRef = rootRefDatabase.child("messages/" + chatId).childByAutoId()//it adds a unique id to msg.
+        let timeStamp = FIRServerValue.timestamp()
+        var msgDict = message.toDictionary()
+        msgDict.updateValue(newRef.key, forKey: "id")
+        msgDict.updateValue(timeStamp, forKey: "timeStamp")
+        newRef.setValue(msgDict) //it added the message to firebase
+        rootRefDatabase.child("chats/" + chatId).setValue(msgDict)
+    }
+
+    static func messageWasAdded(chatId: String, completionHandler: @escaping(_ message: Message) -> () ){
         rootRefDatabase.child("messages/" + chatId).observe(.childAdded, with: {
             snapshot in
-            if let dic = snapshot.value as? [String: Any]{
-                print(Array(dic.keys))
+            if let dict = snapshot.value as? [String: Any]{
+                let msg = Message(id: "", senderId: dict["senderId"] as! String, senderName: dict["senderName"] as! String,
+                                  text: dict["text"] as! String, timeStamp: dict["timeStamp"] as! Float)
+                completionHandler(msg)
             }
         })
     }
+    
+    static func removeMessagesObserver(chatId: String){
+        rootRefDatabase.child("messages/" + chatId).removeAllObservers()
+    }
+    //**********************************************************************************************************************
     
     static func registerMeOnline(){
         if let currentUser = FIRAuth.auth()?.currentUser{
@@ -159,41 +200,27 @@ class FirebaseHelper{
     static func getOnlineUsers(completionHandler:@escaping (_ onlineUsers: [String]?) -> ()){
         rootRefDatabase.child("onlineUsers").observe(.value,with:{
             snapshot in
-            print("online \(snapshot.value)")
+            //print("online \(snapshot.value)")
         })
         
     }
     
-    static func getEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
-        rootRefDatabase.child("events").observe(.value,with:{
-            snapshot in
-            if let dic = snapshot.value as? [String: Any]{
-                var eventsFromFirebase = [Event]()
-                for kk in dic.keys{
-                    print(dic[kk] as! [String: Any])
-                    eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
-                    completionHandler(eventsFromFirebase)
-                }
-            }
-        })
-    }
-    
-    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
-        rootRefDatabase.child("messages").observe( .childAdded , with:{
-            snapshot in
-            
-            if let messageDictionary = snapshot.value as? [String: Any]{
-                print(messageDictionary)
-                for kk in messageDictionary.keys{
-                    let msg = messageDictionary[kk] as! [String: Any]
-                    let dateStr = msg["timeStamp"] as! Int
-                    let date = Date.init(timeIntervalSince1970: Double.init(dateStr))
-                    //print(date)
-                }
-                completionHandler(nil)
-            }
-        })
-    }
+//    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
+//        rootRefDatabase.child("messages").observe( .childAdded , with:{
+//            snapshot in
+//            
+//            if let messageDictionary = snapshot.value as? [String: Any]{
+//                print(messageDictionary)
+//                for kk in messageDictionary.keys{
+//                    let msg = messageDictionary[kk] as! [String: Any]
+//                    let dateStr = msg["timeStamp"] as! Int
+//                    let date = Date.init(timeIntervalSince1970: Double.init(dateStr))
+//                    //print(date)
+//                }
+//                completionHandler(nil)
+//            }
+//        })
+//    }
     
     static func removeOnlineUsersLister(){
         rootRefDatabase.child("onlineUsers").removeAllObservers()

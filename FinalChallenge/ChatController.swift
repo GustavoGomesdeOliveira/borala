@@ -11,27 +11,23 @@ import UIKit
 class ChatController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
    
     @IBOutlet weak var navigation: UINavigationBar!
-    
     @IBOutlet weak var chatCollection: UICollectionView!
     @IBOutlet weak var navItem: UINavigationItem!
-    
     @IBOutlet weak var messageTextField: UITextField!
     
-    var flagParaTeste = false
     var chatConversation: ChatConversation!
+    
+    var chatId: String!
+    var messages = [Message]()
     
     let containerView =  UIView()
     
-    
-   
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton.png"), style: .plain, target: self, action: #selector(self.backAction))
-        
-        let stringArray = ["Teste", "Teste maior", "Teste maior ainda", "Teste maior que o anterior", "Teste maior de todos que meu deus que teste grande do caramba",]
     
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -42,37 +38,42 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.chatCollection.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
         self.chatCollection.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        self.chatConversation = ChatConversation(message: stringArray)
-        
+        //self.chatCollection.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        FirebaseHelper.messageWasAdded(chatId: self.chatId, completionHandler: {
+            messageFromFirebase in
+            self.messages.append(messageFromFirebase)
+            DispatchQueue.main.async {
+                self.chatCollection.reloadData()
+            }
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        FirebaseHelper.removeMessagesObserver(chatId: chatId)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.chatConversation.message.count
+        return self.messages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:ChatMessageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "chatCell", for: indexPath) as! ChatMessageCell
         
+        let currentMessage = self.messages[indexPath.row]
+        cell.textView.text = currentMessage.text
         
-        cell.textView.text = self.chatConversation.message[indexPath.row]
-        
-        setupCell(cell: cell)
-        
-        
-//        if mensagem.id == FIRAuth.auth()?.currentUser?.uid {
-//            
-//        }
-        
+        setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.chatConversation.message[indexPath.row]).width + 20
-
-        flagParaTeste = !flagParaTeste
         
         return cell
     }
     
-    func setupCell(cell: ChatMessageCell){
-        if flagParaTeste {
+    func setupCell(cell: ChatMessageCell, senderId: String){
+        if senderId == FirebaseHelper.firebaseUser?.uid {
             
             cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
             cell.textView.textColor = UIColor.white
@@ -104,7 +105,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         return CGSize(width: self.chatCollection.frame.width, height: heigth)
         
-        
     }
     
     private func estimatedFrameForText(text: String) -> CGRect{
@@ -127,10 +127,10 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if (messageTextField.text?.characters.count)! > 0{
             
-            let newMessage = self.messageTextField.text
-            
-            self.chatConversation.message.append(newMessage!)
-            
+            let textMessage = self.messageTextField.text
+            let newMessage = Message(senderId: (FirebaseHelper.firebaseUser?.uid)!, senderName: (FirebaseHelper.firebaseUser?.displayName)!, text: textMessage!)
+            FirebaseHelper.saveMessage(chatId: self.chatId, message: newMessage)
+            self.messages.append(newMessage)
             self.chatCollection.reloadData()
             
             self.messageTextField.text = nil

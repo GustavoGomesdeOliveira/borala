@@ -22,12 +22,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         FirebaseHelper.getChats(completionHandler: {
             chatsFromFirebase in
             self.chats = chatsFromFirebase
+            DispatchQueue.main.async {
+                self.chatTableView.reloadData()
+            }
         })
-        
-        FirebaseHelper.deleteChat(completionHandler: {
-            chatId in
-            
-        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        FirebaseHelper.removeChatObserver()
     }
     
     
@@ -36,7 +38,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,7 +46,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell") as! CustomChatCell
         
         cell.personImage.image = #imageLiteral(resourceName: "profileImage")
-        cell.personName.text = "Teste"
+        cell.personName.text = self.chats[indexPath.row].lastMessage.text
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true
@@ -59,16 +61,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.shadownLayer.layer.shouldRasterize = true
         cell.shadownLayer.layer.rasterizationScale = UIScreen.main.scale
         
-        
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
-        self.present(newViewController, animated: true, completion: nil)
+        let chatViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
+        chatViewController.chatId = self.chats[indexPath.row].id
+        self.present(chatViewController, animated: true, completion: nil)
         
         
         
