@@ -54,6 +54,10 @@
 	<string>We need do use your gps to get your location, could you give us permission?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
