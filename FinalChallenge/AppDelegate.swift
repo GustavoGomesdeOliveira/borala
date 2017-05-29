@@ -10,7 +10,9 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import Firebase
+import FirebaseMessaging
 import GoogleSignIn
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -25,7 +27,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        // Add any custom logic here.
+        
+        //configure notification
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {
+            (authorized, error) in
+            if (error != nil){
+                print("error on get Authorization Notification")
+                return
+            }
+            
+            //UIApplication.shared.registerUserNotificationSettings()
+            UIApplication.shared.registerForRemoteNotifications()
+        })
+        
         FIRApp.configure()
         FirebaseHelper.observerUser()
         
@@ -57,6 +72,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         return handled
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //self.enableRemoteNotificationFeatures()
+        //send token to firebase
+        
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // The token is not currently available.
+        print("Remote notification support is unavailable due to error: \(error.localizedDescription)")
+        //self.disableRemoteNotificationFeatures()
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Message ID: \(userInfo["gcm_message_id"])")
+        print(userInfo)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

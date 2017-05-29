@@ -123,7 +123,7 @@ class FirebaseHelper{
     }
     
     static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/eventsWithChatsIds").observe( .value, with: {
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .value, with: {
             snapshot in
             var chatsFromFirebase = [Chat]()
             if let dict = snapshot.value as? [String: Bool]{
@@ -133,7 +133,7 @@ class FirebaseHelper{
                         snapshotChat in
                         if let chatDict = snapshotChat.value as? [String: Any]{
                         chatsFromFirebase.append(Chat.init(id: chatId,
-                                                              lastMessage: Message(id: "", senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
+                                                              lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
                                                                       text: chatDict["text"] as! String,
                                                                           timeStamp:chatDict["timeStamp"] as! Float)))
                             completionHandler(chatsFromFirebase)
