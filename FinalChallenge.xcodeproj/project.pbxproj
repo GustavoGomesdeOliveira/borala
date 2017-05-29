@@ -66,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		060A3C041EDC3FD600368C77 /* FinalChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinalChallenge.entitlements; sourceTree = "<group>"; };
 		061B40D41ED646D000F23CEA /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		061B75821ED4664E00CF2C2D /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		062C78841ED30C1E001F9022 /* CustomChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChatCell.swift; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		0697E1671EAE2ABF002AF2FF /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				060A3C041EDC3FD600368C77 /* FinalChallenge.entitlements */,
 				9706431C1EC1FF070038B8FD /* Model */,
 				0697E1681EAE2ABF002AF2FF /* AppDelegate.swift */,
 				0697E16A1EAE2ABF002AF2FF /* ViewController.swift */,
@@ -351,10 +353,16 @@
 				TargetAttributes = {
 					0697E1641EAE2ABF002AF2FF = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 4XRA82V6CB;
+						DevelopmentTeam = J5ZWQ2W9CE;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -740,7 +748,8 @@
 			baseConfigurationReference = EA776D9BDD0DBBCF952E8542 /* Pods-FinalChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4XRA82V6CB;
+				CODE_SIGN_ENTITLEMENTS = FinalChallenge/FinalChallenge.entitlements;
+				DEVELOPMENT_TEAM = J5ZWQ2W9CE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -759,7 +768,8 @@
 			baseConfigurationReference = 84C0E8ECE3C6AD9E8D88177B /* Pods-FinalChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4XRA82V6CB;
+				CODE_SIGN_ENTITLEMENTS = FinalChallenge/FinalChallenge.entitlements;
+				DEVELOPMENT_TEAM = J5ZWQ2W9CE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
