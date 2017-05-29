@@ -351,7 +351,7 @@
 				TargetAttributes = {
 					0697E1641EAE2ABF002AF2FF = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = J5ZWQ2W9CE;
+						DevelopmentTeam = 4XRA82V6CB;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -740,7 +740,7 @@
 			baseConfigurationReference = EA776D9BDD0DBBCF952E8542 /* Pods-FinalChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J5ZWQ2W9CE;
+				DEVELOPMENT_TEAM = 4XRA82V6CB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -759,7 +759,7 @@
 			baseConfigurationReference = 84C0E8ECE3C6AD9E8D88177B /* Pods-FinalChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J5ZWQ2W9CE;
+				DEVELOPMENT_TEAM = 4XRA82V6CB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
