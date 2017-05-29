@@ -29,8 +29,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var pin: CustomPin?
     var myAnnotation: CustomPin?
-
+    var selectedUserID: String?
     var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
+    
+    var selectedUser: User?
     
     @IBOutlet weak var mapView: MKMapView!
     var annotationView: MKAnnotationView?
@@ -274,11 +276,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
         
-        //eh aqui que vai dar certo
         let annotation = view.annotation as! CustomPin?
+//        var selectedUserID = annotation?.event?.creatorId
+        
         let event = annotation?.event
         popUpPinVC.event = event
-        
         
         self.addChildViewController(popUpPinVC)
         popUpPinVC.delegate = self
@@ -287,6 +289,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.view.addSubview(popUpPinVC.view)
         popUpPinVC.didMove(toParentViewController: self)
         
+        var users = [User]()
+        
+            FirebaseHelper.getUserData(completionHandler: {
+            usersFromFirebase in
+             users = usersFromFirebase
+            print("----to aqui 123---")
+            })
+
         
     }
     
@@ -441,9 +451,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     //MARK: - PinDelegate
     func transitionToProfile( id: String){
     
-        print("to aqui")
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController")
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController") as! ProfileViewController
+        //newViewController.currentUser =
         
         tabBarController?.selectedIndex = 0
     }

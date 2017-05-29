@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var userGenderLabel: UILabel!
     
     var user: User!
-    
+//    var currenteUserID: String?
     var currentUser: User?
     
 
@@ -38,13 +38,16 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if currentUser == nil{
+            getUser()
+        }
         
-        getUser()
     }
 
     override func didReceiveMemoryWarning() {
