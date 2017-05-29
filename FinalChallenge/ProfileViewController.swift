@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     var user: User!
     
+    var currentUser: User?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
