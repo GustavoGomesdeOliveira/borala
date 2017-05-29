@@ -129,7 +129,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let textMessage = self.messageTextField.text
             let newMessage = Message(senderId: (FirebaseHelper.firebaseUser?.uid)!, senderName: (FirebaseHelper.firebaseUser?.displayName)!, text: textMessage!)
             FirebaseHelper.saveMessage(chatId: self.chatId, message: newMessage)
-            self.messages.append(newMessage)
             self.chatCollection.reloadData()
             
             self.messageTextField.text = nil
