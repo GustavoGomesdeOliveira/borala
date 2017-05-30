@@ -334,9 +334,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addMyPoint(press : UIGestureRecognizer) {
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            print("tem")
-        }
+//        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+//            print("tem")
+//        }
         
         if ((FBSDKAccessToken.current() == nil) && (!GIDSignIn.sharedInstance().hasAuthInKeychain())){
             
@@ -397,7 +397,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         
-        print("Dateobj: \(dateFormatter.string(from: date))")
+//        print("Dateobj: \(dateFormatter.string(from: date))")
         
         return dateFormatter.string(from: date)
         
