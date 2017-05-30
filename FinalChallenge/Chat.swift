@@ -13,8 +13,9 @@ class Chat{
     var lastMessage: Message!
     var pic: Data?
     
-    init(id: String, lastMessage: Message) {
+    init(id: String, pic: Data?, lastMessage: Message) {
         self.id = id
+        self.pic = pic
         self.lastMessage = lastMessage
     }
     

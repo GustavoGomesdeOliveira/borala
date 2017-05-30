@@ -37,7 +37,6 @@ class FirebaseHelper{
         userDictionary["eventsId"] = true
         let picdownloadUrl = ""
         
-        
         if let userPic = user.pic{
             picRef.put(userPic, metadata: nil, completion: {
                 metadata, error in
@@ -123,6 +122,8 @@ class FirebaseHelper{
                         
                         rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([event.id: true])
                         rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
+//                        rootRefDatabase.child("chatsMembers").child(chatId.key).updateChildValues(
+//                            [(FirebaseHelper.firebaseUser?.uid)!: rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)!).value(forKey: "picURL"), event.creatorId: rootRefDatabase.child("users/" + event.creatorId).value(forKey: "picURL")])
                         completionHandler(chatId.key)
                     }
                 }
@@ -134,6 +135,8 @@ class FirebaseHelper{
                     
                     rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([event.id: true])
                     rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
+                    //rootRefDatabase.child("chatsMembers").child(chatId.key).updateChildValues(
+//                        [(FirebaseHelper.firebaseUser?.uid)!: rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)!).value(forKey: "picURL"), event.creatorId: rootRefDatabase.child("users/" + event.creatorId).value(forKey: "picURL")])
                     completionHandler(chatId.key)
                 }
             })
@@ -150,31 +153,26 @@ class FirebaseHelper{
                     rootRefDatabase.child("chats/").child(chatId).observeSingleEvent(of: .value, with: {
                         snapshotChat in
                         if let chatDict = snapshotChat.value as? [String: Any]{
-//                            let picAddress = rootRefDatabase.child("users/" + (chatDict["senderId"] as! String)).value(forKey: "picUrl") as! String
-//                            let picUrl = URL(string: picAddress)!
-//                            let session = URLSession(configuration: .default)
-//                            let downloadPicTask = session.dataTask(with: picUrl) {
-//                                (data, response, error) in
-//                                if let error = error {
-//                                    print("Error downloading cat picture: \(error)")
-//                                } else {
-//                                    // It would be weird if we didn't have a response, so check for that too.
-//                                    if let res = response as? HTTPURLResponse {
-//                                        if let picData = data {
-//                                            
-//                                        } else {
-//                                        }
-//                                    } else {
-//                                        print("Couldn't get response code for some reason")
-//                                    }
-//                                }
-//                            }
-
-                        chatsFromFirebase.append(Chat.init(id: chatId,
-                                                              lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
-                                                                      text: chatDict["text"] as! String,
-                                                                          timeStamp:chatDict["timeStamp"] as! Float)))
-                            completionHandler(chatsFromFirebase)
+                            rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
+                                chatMembersSnapshot in
+                                if let chatMembersDictionary = chatMembersSnapshot.value as? [String: Any]{
+                                    let chatMembersKeys = Array(chatMembersDictionary.keys)
+                                    for chatMembersKey in chatMembersKeys{
+                                        if chatMembersKey != self.firebaseUser?.uid{
+                                            //get pic..
+                                            self.getPictureProfile(userId: chatMembersKey, completitionHandler: {
+                                                pictureData in
+                                                chatsFromFirebase.append(Chat.init(id: chatId, pic: pictureData,
+                                                                                   lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
+                                                                                                        text: chatDict["text"] as! String,
+                                                                                                        timeStamp:chatDict["timeStamp"] as! Float)))
+                                                completionHandler(chatsFromFirebase)
+                                                
+                                            })
+                                        }
+                                    }
+                                }
+                            })
                         }
                     })
                 }
@@ -274,11 +272,34 @@ class FirebaseHelper{
             }
         })
     }
+    
+    
+    static func getPictureProfile(userId: String, completitionHandler: @escaping (_ picture: Data?) -> ()){
+        let picAddress = rootRefDatabase.child("users/").child(userId).value(forKey: "picURL") as! String
+        let picUrl = URL(string: picAddress)!
+        let session = URLSession(configuration: .default)
+        let downloadPicTask = session.dataTask(with: picUrl) {
+            (data, response, error) in
+            if let error = error {
+                print("Error downloading cat picture: \(error)")
+                completitionHandler(nil)
+            } else {
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    if let picData = data {
+                        completitionHandler(picData)
+                    } else {
+                        completitionHandler(nil)
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                    completitionHandler(nil)
+                }
+            }
+        }
+        downloadPicTask.resume()
+    }
 }
-
-
-
-
 
 
 

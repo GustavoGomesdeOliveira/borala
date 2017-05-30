@@ -454,14 +454,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController") as! ProfileViewController
-        //newViewController.currentUser =
-        
         tabBarController?.selectedIndex = 0
     }
     
     func transitionToChat( id: String){
         
-        print("to indo")
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
         newViewController.chatId = id

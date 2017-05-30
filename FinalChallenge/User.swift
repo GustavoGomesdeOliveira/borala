@@ -15,7 +15,7 @@ class User: NSObject, NSCoding{
     var name: String!
     var gender: String!
     var age: Int?
-    var friendsId: [ String ]?
+    var friendsId: [String: Any]?
     var pic: Data?
     var picUrl: String?
     var rate: Int?
@@ -26,7 +26,7 @@ class User: NSObject, NSCoding{
         
     }
     
-    init(withId: String, socialNetworkID: String, name:String?, gender: String, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, location: Location?) {
+    init(withId: String, socialNetworkID: String, name:String?, gender: String, friends:[String: Any]?, pic: Data?, rate: Int?, preference: [String]?, location: Location?) {
         self.id = withId
         self.socialNetworkID = socialNetworkID
         self.name = name
@@ -51,7 +51,7 @@ class User: NSObject, NSCoding{
         self.name = aDecoder.decodeObject(forKey: "name") as? String
         self.gender = aDecoder.decodeObject(forKey: "gender") as? String
         self.age = aDecoder.decodeObject(forKey: "age") as? Int
-        self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String]
+        self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String: Any]
         self.pic = aDecoder.decodeObject(forKey: "pic") as? Data
         self.rate = aDecoder.decodeObject(forKey: "rate") as? Int
         self.preferences = aDecoder.decodeObject(forKey: "preferences") as? [String]
@@ -76,7 +76,7 @@ class User: NSObject, NSCoding{
         var preferenceDictionary = [String: Any]()
         if let friends = self.friendsId{
             for friend in friends{
-                friendsDictionary.updateValue(true, forKey: friend)
+                friendsDictionary.updateValue(true, forKey: friend.key)
             }
         }
         if let preferences = self.preferences{
