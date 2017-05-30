@@ -25,6 +25,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var userAgeLabel: UILabel!
     @IBOutlet weak var userGenderLabel: UILabel!
     
+    @IBOutlet weak var likeLabel: UILabel!
+    
+    @IBOutlet weak var dislikeLabel: UILabel!
+    
     var user: User!
     var currentUser: User?
     
