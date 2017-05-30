@@ -28,10 +28,16 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var user: User!
     var currentUser: User?
     
+    var tempIdLikeList = ["Teste", "Teste"]
+    var tempIdDislikeList = ["Teste", "Teste"]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.likeBtn.isHidden = false
+        self.dislikeBtn.isHidden = false
+        
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         
@@ -45,11 +51,20 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
         if currentUser == nil{
+            
             getUser()
             self.editButton.isEnabled = true
             self.editButton.tintColor = UIColor.white
-        }else{
+            
+            self.likeBtn.isHidden = true
+            self.dislikeBtn.isHidden = true
+            
+        } else {
+            
             self.user = self.currentUser
             self.editButton.isEnabled = false
             self.editButton.tintColor = UIColor.clear
@@ -59,6 +74,20 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.userAgeLabel.text = age.stringValue
             self.userGenderLabel.text = user?.gender
             self.profileImage.image = UIImage(named: "profileImage")
+            
+            self.tempIdLikeList.append(user.id)
+            
+            if self.tempIdLikeList.contains(user.id) {
+                
+                self.likeBtn.isEnabled = false
+                
+            }
+            
+            if self.tempIdDislikeList.contains(user.id) {
+                
+                self.dislikeBtn.isEnabled = false
+                
+            }
             
 //             print(currentUser?.name)
         }
@@ -131,6 +160,11 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         if currentUser?.id == "teste"{
             
+            self.tempIdLikeList.append((self.currentUser?.id)!)
+            self.tempIdDislikeList.remove(at: self.tempIdDislikeList.index(of: (self.currentUser?.id)!)!)
+            self.dislikeBtn.isEnabled = true
+            self.likeBtn.isEnabled = false
+            
         }
         
         
@@ -140,9 +174,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         if currentUser?.id == "teste"{
             
+            self.tempIdDislikeList.append((self.currentUser?.id)!)
+            self.tempIdLikeList.remove(at: self.tempIdLikeList.index(of: (self.currentUser?.id)!)!)
+            self.dislikeBtn.isEnabled = false
+            self.likeBtn.isEnabled = true
+            
         }
     }
     
+    func loadTotalOfLikeAndDislike() {
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.likeBtn.isHidden = false
+        self.dislikeBtn.isHidden = false
+    }
 
 }
 
