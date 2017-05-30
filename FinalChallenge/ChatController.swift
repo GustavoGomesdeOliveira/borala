@@ -132,7 +132,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.chatCollection.reloadData()
             
             self.messageTextField.text = nil
-            
         }
     }
     

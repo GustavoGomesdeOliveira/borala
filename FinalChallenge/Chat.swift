@@ -11,6 +11,7 @@ import Foundation
 class Chat{
     var id: String!
     var lastMessage: Message!
+    var pic: Data?
     
     init(id: String, lastMessage: Message) {
         self.id = id
