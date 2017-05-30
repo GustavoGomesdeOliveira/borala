@@ -41,6 +41,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
         self.likeBtn.isHidden = false
         self.dislikeBtn.isHidden = false
+        loadTotalOfLikeAndDislike()
+
         
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
@@ -162,31 +164,32 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
-        if currentUser?.id == "teste"{
-            
+        
             self.tempIdLikeList.append((self.currentUser?.id)!)
             self.tempIdDislikeList.remove(at: self.tempIdDislikeList.index(of: (self.currentUser?.id)!)!)
             self.dislikeBtn.isEnabled = true
             self.likeBtn.isEnabled = false
-            
-        }
+            loadTotalOfLikeAndDislike()
         
         
     }
     
     @IBAction func dislikeUser(_ sender: Any) {
         
-        if currentUser?.id == "teste"{
-            
+        
             self.tempIdDislikeList.append((self.currentUser?.id)!)
             self.tempIdLikeList.remove(at: self.tempIdLikeList.index(of: (self.currentUser?.id)!)!)
             self.dislikeBtn.isEnabled = false
             self.likeBtn.isEnabled = true
+            loadTotalOfLikeAndDislike()
             
-        }
     }
     
     func loadTotalOfLikeAndDislike() {
+        
+        self.likeLabel.text = String(self.tempIdLikeList.count)
+        self.dislikeLabel.text = String(self.tempIdDislikeList.count)
+
         
     }
     
