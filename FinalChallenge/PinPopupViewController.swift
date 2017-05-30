@@ -29,7 +29,7 @@ class PinPopupViewController: UIViewController {
         super.viewDidLoad()
         self.userNameLabel.text = event?.creatorName
         if let hora: String = event?.hora{
-            print(hora)
+//            print(hora)
             self.eventScheduleLabel.text = hora
         }
         
