@@ -1190,10 +1190,10 @@
             </objects>
             <point key="canvasLocation" x="2348" y="1099"/>
         </scene>
-        <!--Pin Popup View Controller-->
+        <!--View Controller-->
         <scene sceneID="PoY-nm-r9T">
             <objects>
-                <viewController storyboardIdentifier="pinPopup" id="2iL-nO-TOu" customClass="PinPopupViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="myPinPopup" id="2iL-nO-TOu" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ANQ-3d-A0H"/>
                         <viewControllerLayoutGuide type="bottom" id="NeF-Jg-BVB"/>
@@ -1257,9 +1257,6 @@
                                                 <state key="normal" title="Profile">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="goToProfile:" destination="2iL-nO-TOu" eventType="touchUpInside" id="jvl-7G-Ble"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Au1-YB-Szy">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="30"/>
@@ -1271,9 +1268,6 @@
                                                 <state key="normal" title="message">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="goToChat:" destination="2iL-nO-TOu" eventType="touchUpInside" id="AUd-qp-vNa"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -1308,11 +1302,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="250" height="115"/>
-                    <connections>
-                        <outlet property="eventScheduleLabel" destination="qXL-AM-iDu" id="6Cw-hZ-4iJ"/>
-                        <outlet property="userImageView" destination="PjS-Pe-iv6" id="OqU-iQ-j9O"/>
-                        <outlet property="userNameLabel" destination="qw8-OM-LFM" id="SOp-8V-fZQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gog-iX-XAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
