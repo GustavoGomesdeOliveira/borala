@@ -45,6 +45,16 @@ class User: NSObject, NSCoding{
         self.gender = gender
     }
     
+    init(dict: [String: Any]) {
+        self.id = dict["id"] as! String!
+        self.name = dict["name"] as! String!
+        self.picUrl = dict["picURL"] as! String!
+        self.socialNetworkID = dict["socialNetworkID"] as! String!
+        self.gender = dict["gender"] as! String!
+        self.age = dict["age"] as! Int!
+        self.rate = dict["rate"] as! Int!
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as? String
         self.socialNetworkID = aDecoder.decodeObject(forKey: "socialNetworkID") as? String

@@ -48,6 +48,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var pins = [CustomPin]()
     var myID: String?
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
+        if self.selectedUser != nil{
+            newViewController.currentUser = nil
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,9 +128,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
                     eventPin.event = event
-                    print("testando aqui")
-                    print(event.hora)
-                    print("---------------")
+//                    print("testando aqui")
+//                    print(event.hora)
+//                    print("---------------")
                     
                     self.pins.append(eventPin)
                 }
@@ -282,21 +290,28 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let event = annotation?.event
         popUpPinVC.event = event
         
+//        self.addChildViewController(popUpPinVC)
+//        popUpPinVC.delegate = self
+//        popUpPinVC.view.frame = self.view.frame
+//
+//        self.view.addSubview(popUpPinVC.view)
+//        popUpPinVC.didMove(toParentViewController: self)
+        
+//        var user = User()
+        
+            FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
+            userFromFirebase in
+                if userFromFirebase.name != nil{
+                    self.selectedUser = userFromFirebase
+                }
+            })
+        
         self.addChildViewController(popUpPinVC)
         popUpPinVC.delegate = self
         popUpPinVC.view.frame = self.view.frame
-
+        
         self.view.addSubview(popUpPinVC.view)
         popUpPinVC.didMove(toParentViewController: self)
-        
-        var users = [User]()
-        
-            FirebaseHelper.getUserData(completionHandler: {
-            usersFromFirebase in
-             users = usersFromFirebase
-            print("----to aqui 123---")
-            })
-
         
     }
     
