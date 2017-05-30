@@ -45,10 +45,11 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
 //        if currentUser == nil{
-            getUser()
+            //getUser()
 //        }
+        if currentUser != nil{
         print(currentUser?.name)
-        
+        }
     }
 
     override func didReceiveMemoryWarning() {
