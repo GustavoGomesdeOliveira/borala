@@ -466,9 +466,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     //MARK: - PinDelegate
     func transitionToProfile( id: String){
     
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController") as! ProfileViewController
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
+        if self.selectedUser != nil{
+            newViewController.currentUser = self.selectedUser
+        }
+                
         tabBarController?.selectedIndex = 0
     }
     
