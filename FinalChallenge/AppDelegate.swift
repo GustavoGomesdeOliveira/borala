@@ -87,8 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //self.enableRemoteNotificationFeatures()
         //send token to firebase
-        //FIRMessaging.messaging()
-        //print("registrou")
+        print("registrou \(deviceToken)")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

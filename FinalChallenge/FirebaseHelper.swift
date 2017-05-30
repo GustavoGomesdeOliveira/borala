@@ -82,7 +82,7 @@ class FirebaseHelper{
                             
                         if id == userID {
                             userFromFirebase = User(dict: dic[kk] as! [String: Any])
-                            print(userFromFirebase.name)
+//                            print(userFromFirebase.name)
                             completionHandler(userFromFirebase)
                         }else{
                             userFromFirebase = User()
@@ -110,7 +110,7 @@ class FirebaseHelper{
         
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
-        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? ""] as [String : Any]
+        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? "", "description": event.description ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
     }
     
@@ -120,7 +120,7 @@ class FirebaseHelper{
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
-                    print(dic[kk] as! [String: Any])
+//                    print(dic[kk] as! [String: Any])
                     //esse que eu quero
                     eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)
@@ -295,7 +295,7 @@ class FirebaseHelper{
             if let user = user{
                 firebaseUser = user
                 firebaseUser?.displayName
-                print(firebaseUser?.displayName)
+//                print(firebaseUser?.displayName)
             }
         })
     }
