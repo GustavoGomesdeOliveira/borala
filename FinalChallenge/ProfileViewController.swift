@@ -47,9 +47,11 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         if currentUser == nil{
             getUser()
             self.editButton.isEnabled = true
+            self.editButton.tintColor = UIColor.white
         }else{
             self.user = self.currentUser
             self.editButton.isEnabled = false
+            self.editButton.tintColor = UIColor.clear
 //            self.editButton.
             self.userNameLabel.text = user?.name
             let age = NSNumber(value: user.age!)
