@@ -125,6 +125,17 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         }
     }
     
+    
+    @IBAction func likeUser(_ sender: Any) {
+        
+        
+    }
+    
+    @IBAction func dislikeUser(_ sender: Any) {
+        
+        
+    }
+    
 
 }
 
