@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var backUserView: UIView!
     @IBOutlet weak var backGenderView: UIView!
     @IBOutlet weak var backAgeView: UIView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
 
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -45,9 +46,11 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         if currentUser == nil{
             getUser()
+            self.editButton.isEnabled = true
         }else{
             self.user = self.currentUser
-            
+            self.editButton.isEnabled = false
+//            self.editButton.
             self.userNameLabel.text = user?.name
             let age = NSNumber(value: user.age!)
             self.userAgeLabel.text = age.stringValue
