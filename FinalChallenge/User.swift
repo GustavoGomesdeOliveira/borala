@@ -15,10 +15,12 @@ class User: NSObject, NSCoding{
     var name: String!
     var gender: String!
     var age: Int?
-    var friendsId: [ String ]?
+    var friendsId: [String: Any]?
     var pic: Data?
     var picUrl: String?
     var rate: Int?
+    var dislikeIds: [String: Any]?//ids of users that dislike me.
+    var likeIds: [String: Any]?   //ids of users that like me.
     var preferences: [ String ]?
     var chatsIds:[String: Any]?
  
@@ -26,7 +28,7 @@ class User: NSObject, NSCoding{
         
     }
     
-    init(withId: String, socialNetworkID: String, name:String?, gender: String, friends:[String]?, pic: Data?, rate: Int?, preference: [String]?, location: Location?) {
+    init(withId: String, socialNetworkID: String, name:String?, gender: String, friends:[String: Any]?, pic: Data?, rate: Int?, preference: [String]?, location: Location?) {
         self.id = withId
         self.socialNetworkID = socialNetworkID
         self.name = name
@@ -61,9 +63,11 @@ class User: NSObject, NSCoding{
         self.name = aDecoder.decodeObject(forKey: "name") as? String
         self.gender = aDecoder.decodeObject(forKey: "gender") as? String
         self.age = aDecoder.decodeObject(forKey: "age") as? Int
-        self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String]
+        self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String: Any]
         self.pic = aDecoder.decodeObject(forKey: "pic") as? Data
         self.rate = aDecoder.decodeObject(forKey: "rate") as? Int
+        self.dislikeIds = aDecoder.decodeObject(forKey: "dislikeIds") as? [String: Any]
+        self.likeIds = aDecoder.decodeObject(forKey: "likeIds") as? [String: Any]
         self.preferences = aDecoder.decodeObject(forKey: "preferences") as? [String]
         self.chatsIds = aDecoder.decodeObject(forKey: "chatsIds") as? [String: Any]
     }
@@ -76,6 +80,8 @@ class User: NSObject, NSCoding{
         aCoder.encode(self.friendsId, forKey: "friendsId")
         aCoder.encode(self.pic, forKey: "pic")
         aCoder.encode(self.rate, forKey: "rate")
+        aCoder.encode(self.dislikeIds, forKey: "dislikeIds")
+        aCoder.encode(self.likeIds, forKey: "likeIds")
         aCoder.encode(self.preferences, forKey: "preference")
         aCoder.encode(self.chatsIds, forKey: "chatsIds")
     }
@@ -86,7 +92,7 @@ class User: NSObject, NSCoding{
         var preferenceDictionary = [String: Any]()
         if let friends = self.friendsId{
             for friend in friends{
-                friendsDictionary.updateValue(true, forKey: friend)
+                friendsDictionary.updateValue(true, forKey: friend.key)
             }
         }
         if let preferences = self.preferences{
@@ -100,6 +106,8 @@ class User: NSObject, NSCoding{
             }
         }
         return ["id": self.id, "socialNetworkID": socialNetworkID, "name": self.name, "gender": self.gender,
-                "age": self.age ?? -1, "friendsId": friendsDictionary,"rate": self.rate ?? -1, "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
+                "age": self.age ?? -1, "friendsId": friendsDictionary,"rate": self.rate ?? -1,
+                "dislikeIds": self.dislikeIds ?? true, "likeIds": self.likeIds ?? true,
+                "preferences": preferenceDictionary,"chatsIds": preferenceDictionary]
     }
 }
