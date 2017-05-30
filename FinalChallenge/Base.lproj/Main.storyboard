@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -335,6 +335,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhk-sh-aBr">
                                 <rect key="frame" x="295" y="526" width="60" height="60"/>
                                 <state key="normal" title="Dislike"/>
+                                <connections>
+                                    <action selector="dislikeUser:" destination="b5z-ud-nTd" eventType="touchUpInside" id="cnw-2Z-AOq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oib-zj-H1P">
                                 <rect key="frame" x="19" y="526" width="60" height="60"/>
@@ -343,6 +346,9 @@
                                     <constraint firstAttribute="width" constant="60" id="oxi-yo-s7o"/>
                                 </constraints>
                                 <state key="normal" title="Like"/>
+                                <connections>
+                                    <action selector="likeUser:" destination="b5z-ud-nTd" eventType="touchUpInside" id="X6k-SN-c7J"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.92549019607843142" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
