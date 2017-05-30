@@ -414,13 +414,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     }
     
-    func sendEvent( preference : String) {
+    func sendEvent( preference : String, description: String?) {
         
         
         let user = getUser()
         let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
-        let event = Event(id: "", name: "teste", location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: preference)
+        let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: preference, description: description)
         FirebaseHelper.saveEvent(event: event)
         
     }
