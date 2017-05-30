@@ -1190,10 +1190,10 @@
             </objects>
             <point key="canvasLocation" x="2348" y="1099"/>
         </scene>
-        <!--View Controller-->
+        <!--My Pin Popup View Controller-->
         <scene sceneID="PoY-nm-r9T">
             <objects>
-                <viewController storyboardIdentifier="myPinPopup" id="2iL-nO-TOu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="myPinPopup" id="2iL-nO-TOu" customClass="myPinPopupViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ANQ-3d-A0H"/>
                         <viewControllerLayoutGuide type="bottom" id="NeF-Jg-BVB"/>
@@ -1244,44 +1244,31 @@
                                             <constraint firstAttribute="trailing" secondItem="PjS-Pe-iv6" secondAttribute="trailing" constant="189" id="Gl8-LB-wWO"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9nW-vs-ywp">
-                                        <rect key="frame" x="45" y="63" width="150" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rk7-hZ-GnM">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
-                                                <color key="backgroundColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="9yh-13-n9F"/>
-                                                    <constraint firstAttribute="width" constant="65" id="Dzv-fe-ySM"/>
-                                                </constraints>
-                                                <state key="normal" title="Profile">
-                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Au1-YB-Szy">
-                                                <rect key="frame" x="85" y="0.0" width="65" height="30"/>
-                                                <color key="backgroundColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="G6x-Hu-yYh"/>
-                                                    <constraint firstAttribute="width" constant="65" id="Ozv-aH-Uk5"/>
-                                                </constraints>
-                                                <state key="normal" title="message">
-                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Au1-YB-Szy">
+                                        <rect key="frame" x="64" y="63" width="113" height="30"/>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="YYD-Ra-2H8"/>
+                                            <constraint firstAttribute="width" constant="113" id="oEV-dv-qZW"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelEventAction:" destination="2iL-nO-TOu" eventType="touchUpInside" id="i38-7F-dbe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99797433609999997" green="0.93578034639999996" blue="0.76385861639999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="105" id="SlZ-aG-BGk"/>
                                     <constraint firstItem="VpB-AM-YVg" firstAttribute="centerX" secondItem="qw8-OM-LFM" secondAttribute="centerX" id="WpM-Nm-5hR"/>
                                     <constraint firstItem="qw8-OM-LFM" firstAttribute="top" secondItem="iyC-6y-9KQ" secondAttribute="top" constant="5" id="XKq-ea-aO2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Au1-YB-Szy" secondAttribute="bottom" constant="12" id="XRJ-SU-VIr"/>
                                     <constraint firstAttribute="width" constant="240" id="YxN-Lg-cYU"/>
                                     <constraint firstItem="qXL-AM-iDu" firstAttribute="centerX" secondItem="qw8-OM-LFM" secondAttribute="centerX" id="Zq5-FG-xsW"/>
-                                    <constraint firstItem="9nW-vs-ywp" firstAttribute="top" secondItem="qXL-AM-iDu" secondAttribute="bottom" constant="8" id="ek3-T1-HoC"/>
+                                    <constraint firstItem="Au1-YB-Szy" firstAttribute="centerX" secondItem="qXL-AM-iDu" secondAttribute="centerX" id="guP-Wy-lT4"/>
                                     <constraint firstItem="qXL-AM-iDu" firstAttribute="top" secondItem="qw8-OM-LFM" secondAttribute="bottom" constant="8" id="uvh-o4-AJu"/>
-                                    <constraint firstItem="9nW-vs-ywp" firstAttribute="centerX" secondItem="iyC-6y-9KQ" secondAttribute="centerX" id="uzh-MI-5oE"/>
                                     <constraint firstItem="VpB-AM-YVg" firstAttribute="top" secondItem="qw8-OM-LFM" secondAttribute="bottom" id="vMX-Vu-amT"/>
                                     <constraint firstItem="qw8-OM-LFM" firstAttribute="centerX" secondItem="iyC-6y-9KQ" secondAttribute="centerX" id="wAg-VE-jby"/>
                                 </constraints>
@@ -1302,10 +1289,15 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="250" height="115"/>
+                    <connections>
+                        <outlet property="eventScheduleLabel" destination="qXL-AM-iDu" id="AQv-Hs-tok"/>
+                        <outlet property="userImageView" destination="PjS-Pe-iv6" id="0RT-Xy-3zI"/>
+                        <outlet property="userNameLabel" destination="qw8-OM-LFM" id="iMI-vJ-Lpz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gog-iX-XAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5842" y="1057"/>
+            <point key="canvasLocation" x="5842" y="1031"/>
         </scene>
     </scenes>
     <resources>

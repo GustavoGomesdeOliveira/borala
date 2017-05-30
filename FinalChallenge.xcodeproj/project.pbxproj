@@ -39,6 +39,7 @@
 		972D30721EDC9B0C00DE6E49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */; };
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
 		A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */; };
+		A74375621EDDABF7008124E1 /* myPinPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74375611EDDABF7008124E1 /* myPinPopupViewController.swift */; };
 		A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76377311ED32EE600A5F199 /* EventViewController.swift */; };
 		A775A0D21ECDDA3700E230C1 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D11ECDDA3700E230C1 /* Popup.swift */; };
 		A775A0D41ECDDA4400E230C1 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */; };
@@ -111,6 +112,7 @@
 		972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		A74375611EDDABF7008124E1 /* myPinPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myPinPopupViewController.swift; sourceTree = "<group>"; };
 		A76377311ED32EE600A5F199 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A775A0D11ECDDA3700E230C1 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */,
 				97016CA11EC4863700DA1194 /* Location.swift */,
 				A7D2D2EF1ED70BF700FCCA29 /* PinPopupViewController.swift */,
+				A74375611EDDABF7008124E1 /* myPinPopupViewController.swift */,
 				06F344801ED643E2007B78CB /* ChatConversation.swift */,
 				972D1F7B1ED601A0001895B4 /* Chat.swift */,
 				972D1F7D1ED60216001895B4 /* Message.swift */,
@@ -578,6 +581,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74375621EDDABF7008124E1 /* myPinPopupViewController.swift in Sources */,
 				06E4FBF51ED4E24B00E93061 /* ShadowView.swift in Sources */,
 				0640FBC31EC3415800C1B16A /* Event.swift in Sources */,
 				0697E16B1EAE2ABF002AF2FF /* ViewController.swift in Sources */,
