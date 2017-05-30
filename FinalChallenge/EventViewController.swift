@@ -9,13 +9,14 @@
 import UIKit
 
 protocol EventViewControllerDelegate{
-    func sendEvent( preference : String)
+    func sendEvent( preference : String, description: String?)
 }
 
 class EventViewController: UIViewController, UIPickerViewDelegate {
     
     var delegate:EventViewControllerDelegate!
     let imageNames = ["pizza","beer","food"]
+    let eventDescription = "default description"
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
@@ -26,8 +27,6 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-   
-        
         
         imagePicker.delegate = self
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
@@ -44,7 +43,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         
         let preference = self.imageNames[self.index]
         
-        delegate?.sendEvent(preference: preference)
+        delegate?.sendEvent(preference: preference, description: eventDescription)
         
         self.view.removeFromSuperview()
     }

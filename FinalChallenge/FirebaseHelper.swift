@@ -110,7 +110,7 @@ class FirebaseHelper{
         
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
-        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? ""] as [String : Any]
+        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? "", "description": event.description ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
     }
     
