@@ -45,7 +45,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell") as! CustomChatCell
         
-        cell.personImage.image = #imageLiteral(resourceName: "profileImage")
+        cell.personImage.image = UIImage.init(data: self.chats[indexPath.row].pic! )
         cell.personName.text = self.chats[indexPath.row].lastMessage.text
         
         cell.mainBackground.layer.cornerRadius = 20
