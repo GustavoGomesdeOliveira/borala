@@ -152,6 +152,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         })
       
+        //TA AQUI A PORRA DO GET FACEBOOK FRIENDS E VOU SUBMETER COM ESSE COMENT PRO CARA DA APPLE LER E FALAR WHAT A FUCK THE BRAZILION BOY WRITE HERE
         DispatchQueue.global(qos: .background).async {
             
             
