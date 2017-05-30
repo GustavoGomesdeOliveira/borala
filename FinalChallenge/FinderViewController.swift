@@ -179,21 +179,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-//    func showPopup(sender: UIButton!) {
-//        
-//        let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "Popup")
-//        popupVC?.preferredContentSize = CGSize(width: 250, height: 150)
-//        popupVC?.modalPresentationStyle = UIModalPresentationStyle.popover
-//        
-//        let rect = sender.superview?.convert(sender.frame, to: self.view)
-//        popupVC?.popoverPresentationController?.delegate = self as UIPopoverPresentationControllerDelegate
-//        popupVC?.popoverPresentationController?.sourceView = self.view
-//        popupVC?.popoverPresentationController?.sourceRect = rect!
-//        popupVC?.popoverPresentationController?.backgroundColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1)
-//        
-//        
-//        self.present(popupVC!, animated: true, completion: nil)
-//    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         // This *forces* a popover to be displayed on the iPhone
@@ -213,14 +198,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         self.mapView.setRegion(myRegion, animated: true)
        
-        
-        if let token = FBSDKAccessToken.current() {
-            
-            
-        }else{
-            //avisar o usuario que ele nao esta logado
-            //self.notLoggedView.isHidden = false
-        }
         
       }
     
@@ -285,19 +262,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
         
         let annotation = view.annotation as! CustomPin?
-//        var selectedUserID = annotation?.event?.creatorId
-        
         let event = annotation?.event
         popUpPinVC.event = event
         
-//        self.addChildViewController(popUpPinVC)
-//        popUpPinVC.delegate = self
-//        popUpPinVC.view.frame = self.view.frame
-//
-//        self.view.addSubview(popUpPinVC.view)
-//        popUpPinVC.didMove(toParentViewController: self)
-        
-//        var user = User()
+
         
             FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
             userFromFirebase in
@@ -349,11 +317,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
     }
     
-    
-//    //setar action do botao
-//    @IBAction func addEvent(_ sender: Any) {
-//    }
-//    
     
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

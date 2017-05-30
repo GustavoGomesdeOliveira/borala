@@ -16,12 +16,18 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var backUserView: UIView!
     @IBOutlet weak var backGenderView: UIView!
     @IBOutlet weak var backAgeView: UIView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
 
-    
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var dislikeBtn: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userAgeLabel: UILabel!
     @IBOutlet weak var userGenderLabel: UILabel!
+    
+    @IBOutlet weak var likeLabel: UILabel!
+    
+    @IBOutlet weak var dislikeLabel: UILabel!
     
     var user: User!
     var currentUser: User?
@@ -45,9 +51,13 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         if currentUser == nil{
             getUser()
+            self.editButton.isEnabled = true
+            self.editButton.tintColor = UIColor.white
         }else{
             self.user = self.currentUser
-            
+            self.editButton.isEnabled = false
+            self.editButton.tintColor = UIColor.clear
+//            self.editButton.
             self.userNameLabel.text = user?.name
             let age = NSNumber(value: user.age!)
             self.userAgeLabel.text = age.stringValue
@@ -117,6 +127,23 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height - 80
             }
+        }
+    }
+    
+    
+    @IBAction func likeUser(_ sender: Any) {
+        
+        if currentUser?.id == "teste"{
+            
+        }
+        
+        
+    }
+    
+    @IBAction func dislikeUser(_ sender: Any) {
+        
+        if currentUser?.id == "teste"{
+            
         }
     }
     
