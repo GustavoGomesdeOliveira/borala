@@ -56,6 +56,24 @@ class FirebaseHelper{
         }
     }
     
+    
+    static func getUserData(completionHandler:@escaping (_ users: [User]) -> ()){
+        rootRefDatabase.child("users").observe(.value,with:{
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+//                var usersFromFirebase = [User]()
+                for kk in dic.keys{
+                    print("-------testando--------")
+                    print(dic[kk] as! [String: Any])
+                    print("-------testando--------")
+                    print("-----------------------")
+//                    usersFromFirebase.append(User(dict: dic[kk] as! [String: Any] ))
+//                    completionHandler(usersFromFirebase)
+                }
+            }
+        })
+    }
+    
     static func saveString(path : String, object: String, completionHandler:((_ error: Error?) -> ())?){
         let firebaseReference = rootRefStorage.child(path)
         
