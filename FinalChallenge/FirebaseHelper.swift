@@ -57,18 +57,39 @@ class FirebaseHelper{
     }
     
     
-    static func getUserData(completionHandler:@escaping (_ users: [User]) -> ()){
+    static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
         rootRefDatabase.child("users").observe(.value,with:{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
-//                var usersFromFirebase = [User]()
+                var userFromFirebase = User()
+                var count = 0
                 for kk in dic.keys{
-                    print("-------testando--------")
-                    print(dic[kk] as! [String: Any])
-                    print("-------testando--------")
-                    print("-----------------------")
-//                    usersFromFirebase.append(User(dict: dic[kk] as! [String: Any] ))
-//                    completionHandler(usersFromFirebase)
+
+                    
+                    if let user = dic[kk] {
+                        
+                        if count == 0 {
+                            count += 1
+
+                            continue
+                            
+                            
+                        }
+                        
+                        let dict = user as! NSDictionary
+                            
+                        let id = dict["id"] as! String
+                            
+                        if id == userID {
+                            userFromFirebase = User(dict: dic[kk] as! [String: Any])
+                            print(userFromFirebase.name)
+                            completionHandler(userFromFirebase)
+                        }else{
+                            userFromFirebase = User()
+                            completionHandler(userFromFirebase)
+                        }
+                        
+                    }
                 }
             }
         })
@@ -100,6 +121,7 @@ class FirebaseHelper{
                 var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
                     print(dic[kk] as! [String: Any])
+                    //esse que eu quero
                     eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)
                 }

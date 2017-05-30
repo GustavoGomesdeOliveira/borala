@@ -120,9 +120,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
                     eventPin.event = event
-                    print("testando aqui")
-                    print(event.hora)
-                    print("---------------")
+//                    print("testando aqui")
+//                    print(event.hora)
+//                    print("---------------")
                     
                     self.pins.append(eventPin)
                 }
@@ -282,21 +282,28 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let event = annotation?.event
         popUpPinVC.event = event
         
+//        self.addChildViewController(popUpPinVC)
+//        popUpPinVC.delegate = self
+//        popUpPinVC.view.frame = self.view.frame
+//
+//        self.view.addSubview(popUpPinVC.view)
+//        popUpPinVC.didMove(toParentViewController: self)
+        
+//        var user = User()
+        
+            FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
+            userFromFirebase in
+                if userFromFirebase.name != nil{
+                    self.selectedUser = userFromFirebase
+                }
+            })
+        
         self.addChildViewController(popUpPinVC)
         popUpPinVC.delegate = self
         popUpPinVC.view.frame = self.view.frame
-
+        
         self.view.addSubview(popUpPinVC.view)
         popUpPinVC.didMove(toParentViewController: self)
-        
-        var users = [User]()
-        
-            FirebaseHelper.getUserData(completionHandler: {
-            usersFromFirebase in
-             users = usersFromFirebase
-            print("----to aqui 123---")
-            })
-
         
     }
     
@@ -454,6 +461,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController") as! ProfileViewController
+        print("selected user \(self.selectedUser)")
+        if self.selectedUser != nil{
+            newViewController.currentUser = self.selectedUser
+            print("user name seted is \(selectedUser?.name)")
+        }
+        
         //newViewController.currentUser =
         
         tabBarController?.selectedIndex = 0
