@@ -48,6 +48,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var pins = [CustomPin]()
     var myID: String?
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
+        if self.selectedUser != nil{
+            newViewController.currentUser = nil
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
