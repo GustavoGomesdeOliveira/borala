@@ -24,7 +24,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var userGenderLabel: UILabel!
     
     var user: User!
-//    var currenteUserID: String?
     var currentUser: User?
     
 
@@ -44,11 +43,18 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        if currentUser == nil{
-            //getUser()
-//        }
-        if currentUser != nil{
-        print(currentUser?.name)
+        if currentUser == nil{
+            getUser()
+        }else{
+            self.user = self.currentUser
+            
+            self.userNameLabel.text = user?.name
+            let age = NSNumber(value: user.age!)
+            self.userAgeLabel.text = age.stringValue
+            self.userGenderLabel.text = user?.gender
+            self.profileImage.image = UIImage(named: "profileImage")
+            
+//             print(currentUser?.name)
         }
     }
 
@@ -114,15 +120,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

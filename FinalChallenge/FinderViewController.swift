@@ -48,6 +48,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var pins = [CustomPin]()
     var myID: String?
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
+        if self.selectedUser != nil{
+            newViewController.currentUser = nil
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -458,17 +466,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     //MARK: - PinDelegate
     func transitionToProfile( id: String){
     
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "profileController") as! ProfileViewController
-//        print("selected user \(self.selectedUser)")
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
         if self.selectedUser != nil{
             newViewController.currentUser = self.selectedUser
-//            print("user name seted is \(selectedUser?.name)")
         }
-        
-        //newViewController.currentUser =
-        
+                
         tabBarController?.selectedIndex = 0
     }
     
