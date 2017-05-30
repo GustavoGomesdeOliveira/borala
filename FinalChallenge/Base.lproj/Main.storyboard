@@ -399,7 +399,9 @@
                         <outlet property="backGenderView" destination="2tT-PA-3JS" id="OX8-Zw-uHv"/>
                         <outlet property="backRoundView" destination="SKB-4U-UGm" id="HGP-Vv-nCj"/>
                         <outlet property="backUserView" destination="JbQ-bD-lL0" id="Rl0-aI-vTM"/>
+                        <outlet property="dislikeBtn" destination="xhk-sh-aBr" id="Dgd-Tw-ZJV"/>
                         <outlet property="editButton" destination="ArC-or-fte" id="yfN-lR-8Ah"/>
+                        <outlet property="likeBtn" destination="Oib-zj-H1P" id="sdW-JU-xNA"/>
                         <outlet property="profileImage" destination="KJJ-Ws-k6l" id="pNt-5T-aEp"/>
                         <outlet property="userAgeLabel" destination="cMd-aX-9YI" id="d4H-G8-PsV"/>
                         <outlet property="userGenderLabel" destination="3fX-gv-9ab" id="x7r-5G-KND"/>

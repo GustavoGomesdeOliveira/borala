@@ -18,7 +18,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var backAgeView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
 
-    
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var dislikeBtn: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userAgeLabel: UILabel!
@@ -128,12 +129,18 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
+        if currentUser?.id == "teste"{
+            
+        }
+        
         
     }
     
     @IBAction func dislikeUser(_ sender: Any) {
         
-        
+        if currentUser?.id == "teste"{
+            
+        }
     }
     
 
