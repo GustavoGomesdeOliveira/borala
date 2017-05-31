@@ -296,7 +296,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
                                 <rect key="frame" x="19" y="439" width="336" height="38"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.58431372550000005" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -440,6 +440,7 @@
                         <outlet property="dislikeBtn" destination="xhk-sh-aBr" id="Dgd-Tw-ZJV"/>
                         <outlet property="dislikeLabel" destination="ujJ-lS-DJZ" id="H5w-XJ-XV3"/>
                         <outlet property="editButton" destination="ArC-or-fte" id="yfN-lR-8Ah"/>
+                        <outlet property="friendListBtn" destination="sNn-mi-iqx" id="QML-Hs-dlz"/>
                         <outlet property="likeBtn" destination="Oib-zj-H1P" id="sdW-JU-xNA"/>
                         <outlet property="likeLabel" destination="npQ-tJ-5zM" id="csw-he-3qq"/>
                         <outlet property="profileImage" destination="KJJ-Ws-k6l" id="pNt-5T-aEp"/>

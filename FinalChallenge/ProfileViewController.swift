@@ -28,6 +28,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dislikeLabel: UILabel!
     
+    @IBOutlet weak var friendListBtn: UIButton!
+    
+    
     var user: User!
     var currentUser: User?
     
@@ -74,6 +77,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
         } else {
             
+            self.friendListBtn.isHidden = true
             self.user = self.currentUser
             self.editButton.isEnabled = false
             self.editButton.tintColor = UIColor.clear
@@ -201,11 +205,13 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isHidden = false
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
+        self.friendListBtn.isHidden = false
+
     }
     
     @IBAction func friendListSegue(_ sender: Any) {
         
-        
+        self.tabBarController?.selectedIndex = 4
         
     }
     
