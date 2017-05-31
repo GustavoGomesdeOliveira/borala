@@ -294,8 +294,7 @@ class FirebaseHelper{
             auth, user in
             if let user = user{
                 firebaseUser = user
-                firebaseUser?.displayName
-                print(firebaseUser?.displayName)
+                print(firebaseUser?.displayName ?? "anominos")
             }
         })
     }
