@@ -82,7 +82,7 @@ class FirebaseHelper{
                             
                         if id == userID {
                             userFromFirebase = User(dict: dic[kk] as! [String: Any])
-                            print(userFromFirebase.name)
+//                            print(userFromFirebase.name)
                             completionHandler(userFromFirebase)
                         }else{
                             userFromFirebase = User()
@@ -120,7 +120,7 @@ class FirebaseHelper{
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
                 for kk in dic.keys{
-                    print(dic[kk] as! [String: Any])
+//                    print(dic[kk] as! [String: Any])
                     //esse que eu quero
                     eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)

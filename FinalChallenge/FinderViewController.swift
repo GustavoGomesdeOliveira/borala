@@ -18,7 +18,7 @@ var parameters = ["":""]
 var facebookFriendsID = [String]()
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate {
     
     
 
@@ -128,10 +128,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     eventPin.title = "teste"
                     eventPin.pinImage = UIImage(named: imageName!)
                     eventPin.event = event
-//                    print("testando aqui")
-//                    print(event.hora)
-//                    print("---------------")
-                    
                     self.pins.append(eventPin)
                 }
                 else{
@@ -258,29 +254,38 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        
-        let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
-        
         let annotation = view.annotation as! CustomPin?
         let event = annotation?.event
-        popUpPinVC.event = event
         
-
-        
-            FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
-            userFromFirebase in
-                if userFromFirebase.name != nil{
-                    self.selectedUser = userFromFirebase
-                }
-            })
-        
-        self.addChildViewController(popUpPinVC)
-        popUpPinVC.delegate = self
-        popUpPinVC.view.frame = self.view.frame
-        
-        self.view.addSubview(popUpPinVC.view)
-        popUpPinVC.didMove(toParentViewController: self)
-        
+        if event?.creatorId == myID {
+            let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "myPinPopup") as! myPinPopupViewController
+            popUpPinVC.event = event
+            self.addChildViewController(popUpPinVC)
+            popUpPinVC.delegate = self
+            popUpPinVC.view.frame = self.view.frame
+            
+            self.view.addSubview(popUpPinVC.view)
+            popUpPinVC.didMove(toParentViewController: self)
+            
+        }else{
+            let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
+            
+            popUpPinVC.event = event
+            
+                FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
+                userFromFirebase in
+                    if userFromFirebase.name != nil{
+                        self.selectedUser = userFromFirebase
+                    }
+                })
+            
+            self.addChildViewController(popUpPinVC)
+            popUpPinVC.delegate = self
+            popUpPinVC.view.frame = self.view.frame
+            
+            self.view.addSubview(popUpPinVC.view)
+            popUpPinVC.didMove(toParentViewController: self)
+        }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -329,9 +334,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addMyPoint(press : UIGestureRecognizer) {
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            print("tem")
-        }
+//        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+//            print("tem")
+//        }
         
         if ((FBSDKAccessToken.current() == nil) && (!GIDSignIn.sharedInstance().hasAuthInKeychain())){
             
@@ -392,7 +397,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         
-        print("Dateobj: \(dateFormatter.string(from: date))")
+//        print("Dateobj: \(dateFormatter.string(from: date))")
         
         return dateFormatter.string(from: date)
         
@@ -448,6 +453,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //--------------------------------------
     
+    // mypin Delegate
+    
+    func cancelEvent( id: String){
+        print("fazer alguma coisa")
+    }
+    
+    
     @IBAction func addEventAction(_ sender: UIBarButtonItem) {
         
         self.mapView.showsUserLocation = false
@@ -462,8 +474,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
     }
     
-
 }
+
 
 extension MKMapView {
     func animatedZoom(zoomRegion:MKCoordinateRegion, duration:TimeInterval) {
