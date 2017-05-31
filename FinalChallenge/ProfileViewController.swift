@@ -211,7 +211,18 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func friendListSegue(_ sender: Any) {
         
-        self.tabBarController?.selectedIndex = 4
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![3] as! FriendListController
+        
+        newViewController.friendList = [String]()
+        
+        newViewController.friendList?.append("teste")
+        newViewController.friendList?.append("teste")
+        newViewController.friendList?.append("teste")
+        newViewController.friendList?.append("teste")
+        newViewController.friendList?.append("teste")
+        
+        self.tabBarController?.selectedIndex = 3
         
     }
     

@@ -11,6 +11,37 @@ import UIKit
 class FriendListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    var friendList: [String]?
+    
+    override func viewDidLoad() {
+        
+        checkFriendList()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        checkFriendList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        self.friendList = nil
+    }
+    
+    func checkFriendList(){
+        
+        if (friendList == nil){
+            
+            friendList = [String]()
+            
+            friendList?.append("teste")
+            friendList?.append("teste")
+            friendList?.append("teste")
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
@@ -36,7 +67,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return (friendList?.count)!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
