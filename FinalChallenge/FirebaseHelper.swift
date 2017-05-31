@@ -61,7 +61,7 @@ class FirebaseHelper{
         rootRefDatabase.child("socialnetworkIds/" + socialnetworkId).observeSingleEvent(of: .value, with: {
             snapshot in
             if let firebaseIdReceived = snapshot.value as? String{
-                rootRefDatabase.child("users/" + (firebaseUser?.uid)!).updateChildValues([firebaseIdReceived: true])
+                rootRefDatabase.child("users/" + (firebaseUser?.uid)!).updateChildValues( [firebaseIdReceived: true] )
             }
         })
     }
