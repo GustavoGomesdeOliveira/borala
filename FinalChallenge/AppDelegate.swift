@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    var facebookFriendsID = [String]()
 
 
     
@@ -181,6 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let token = FBSDKAccessToken.current(){
             
             logged = true
+            getFacebookFriends()
             
             DispatchQueue.main.async{
                 
@@ -276,7 +278,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
-        
+        getFacebookFriends()
         
         
     }
@@ -420,6 +422,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         
     }
+    
+    //AQUI WILLIAMBERG
+    func getFacebookFriends(){
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            
+            let parameters = ["fields": "name"]
+            
+            
+            FBSDKGraphRequest(graphPath: "me/friends", parameters: parameters).start { (connection, result, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                let data = result as! NSDictionary
+                
+                
+                for friends in data["data"] as! NSArray{
+                    
+
+                    self.facebookFriendsID.append((friends as! NSDictionary)["id"]! as! String)
+                }
+                
+            }
+            
+        }
+    }
 }
 
 // [START ios_10_message_handling]
@@ -460,6 +492,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
+    
+   
 }
 // [END ios_10_message_handling]
 
