@@ -12,6 +12,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     var friendList: [String]?
+    var currentUser: User?
+    
+    @IBOutlet weak var friendTableView: UITableView!
+    
     
     override func viewDidLoad() {
         
@@ -22,6 +26,8 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         
         checkFriendList()
+        self.friendTableView.reloadData()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +78,12 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![0] as! ProfileViewController
         
+        newViewController.currentUser = currentUser
+        
+        self.tabBarController?.selectedIndex = 0
     }
 
 }

@@ -228,6 +228,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         newViewController.friendList?.append("teste")
         newViewController.friendList?.append("teste")
         
+        newViewController.currentUser = self.currentUser
+        
         self.tabBarController?.selectedIndex = 3
         
     }
