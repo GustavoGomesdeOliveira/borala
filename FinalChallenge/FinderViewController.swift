@@ -15,12 +15,12 @@ import GoogleSignIn
 
 let token = FBSDKAccessToken.current()
 var parameters = ["":""]
-var facebookFriendsID = [String]()
 
 
 class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate {
     
     
+    var facebookFriendsID = [String]()
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
@@ -148,32 +148,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         })
       
-        //TA AQUI A PORRA DO GET FACEBOOK FRIENDS E VOU SUBMETER COM ESSE COMENT PRO CARA DA APPLE LER E FALAR WHAT A FUCK THE BRAZILION BOY WRITE HERE
-        DispatchQueue.global(qos: .background).async {
-            
-            
-            let parameters = ["fields": "name"]
-            
-            
-            FBSDKGraphRequest(graphPath: "me/friends", parameters: parameters).start { (connection, result, error) in
-                
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                let data = result as! NSDictionary
-                
-                
-                for friends in data["data"] as! NSArray{
-                    
-                    facebookFriendsID.append((friends as! NSDictionary)["id"]! as! String)
-                }
-                
-            }
-            
-            
-        }
+        
     }
     
     
