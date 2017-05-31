@@ -182,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let token = FBSDKAccessToken.current(){
             
             logged = true
-            getFacebookFriends()
+            saveFacebookFriends()
             
             DispatchQueue.main.async{
                 
@@ -193,9 +193,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         
                         print(error.debugDescription)
                     } else {
-                        DispatchQueue.main.async {
-                            FirebaseHelper.registerMeOnline()
-                        }
+                        FirebaseHelper.registerMeOnline()
+                        self.saveFacebookFriends()
                     }
                 })
                 
@@ -278,7 +277,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
-        getFacebookFriends()
+        saveFacebookFriends()
         
         
     }
@@ -424,7 +423,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     //AQUI WILLIAMBERG
-    func getFacebookFriends(){
+    func saveFacebookFriends(){
         
         DispatchQueue.global(qos: .background).async {
             
@@ -443,9 +442,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 
                 
                 for friends in data["data"] as! NSArray{
-                    
-
-                    self.facebookFriendsID.append((friends as! NSDictionary)["id"]! as! String)
+                    FirebaseHelper.saveFriend(socialnetworkId: (friends as! NSDictionary)["id"]! as! String)
                 }
                 
             }

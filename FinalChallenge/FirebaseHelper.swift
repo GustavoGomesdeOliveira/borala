@@ -56,6 +56,15 @@ class FirebaseHelper{
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
     }
     
+    //save the friend on my friend list
+    static func saveFriend(socialnetworkId: String){
+        rootRefDatabase.child("socialnetworkIds/" + socialnetworkId).observeSingleEvent(of: .value, with: {
+            snapshot in
+            if let firebaseIdReceived = snapshot.value as? String{
+                rootRefDatabase.child("users/" + (firebaseUser?.uid)!).updateChildValues( [firebaseIdReceived: true] )
+            }
+        })
+    }
     
     static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
         rootRefDatabase.child("users").observe(.value,with:{
@@ -294,8 +303,7 @@ class FirebaseHelper{
             auth, user in
             if let user = user{
                 firebaseUser = user
-                firebaseUser?.displayName
-//                print(firebaseUser?.displayName)
+                print(firebaseUser?.displayName ?? "anominos")
             }
         })
     }
