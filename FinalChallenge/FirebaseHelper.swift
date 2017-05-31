@@ -61,10 +61,21 @@ class FirebaseHelper{
         rootRefDatabase.child("socialnetworkIds/" + socialnetworkId).observeSingleEvent(of: .value, with: {
             snapshot in
             if let firebaseIdReceived = snapshot.value as? String{
-                rootRefDatabase.child("users/" + (firebaseUser?.uid)!).updateChildValues( [firebaseIdReceived: true] )
+                rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/friendsId").updateChildValues( [firebaseIdReceived: true] )
             }
         })
     }
+    
+    static func likeListAdd(id: String){
+        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/likeIds").updateChildValues([id: true])//adds the id to likeIds node.
+        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/dislikeIds/" + id).setValue(nil)//removes the id from dislikeIds node.
+    }
+    
+    static func dislikeListAdd(id: String){
+        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/dislikeIds").updateChildValues([id: true])//adds the id to dislikeIds node.
+        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/likeIds/" + id).setValue(nil)//removes the id from likeIds node.
+    }
+
     
     static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
         rootRefDatabase.child("users").observe(.value,with:{

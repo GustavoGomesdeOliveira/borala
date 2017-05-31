@@ -174,6 +174,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
             self.tempIdLikeList.append((self.currentUser?.id)!)
             self.tempIdDislikeList.remove(at: self.tempIdDislikeList.index(of: (self.currentUser?.id)!)!)
+        
+            FirebaseHelper.likeListAdd(id: (self.currentUser?.id)!)
+        
             self.dislikeBtn.isEnabled = true
             self.likeBtn.isEnabled = false
             loadTotalOfLikeAndDislike()
@@ -186,6 +189,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
             self.tempIdDislikeList.append((self.currentUser?.id)!)
             self.tempIdLikeList.remove(at: self.tempIdLikeList.index(of: (self.currentUser?.id)!)!)
+        
+            FirebaseHelper.dislikeListAdd(id: (self.currentUser?.id)!)
+        
             self.dislikeBtn.isEnabled = false
             self.likeBtn.isEnabled = true
             loadTotalOfLikeAndDislike()
