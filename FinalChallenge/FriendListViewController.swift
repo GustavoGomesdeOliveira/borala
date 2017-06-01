@@ -11,7 +11,7 @@ import UIKit
 class FriendListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-    var friendList: [String]?
+    var friendList = [ [String: Any] ]()
     var currentUser: User?
     
     @IBOutlet weak var friendTableView: UITableView!
@@ -20,40 +20,58 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         
         checkFriendList()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        checkFriendList()
-        self.friendTableView.reloadData()
-
+        //checkFriendList()
+        //self.friendTableView.reloadData()
+        FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
+            friend in
+            if let friend = friend{
+                self.friendList.append(friend)
+                self.friendTableView.reloadData()
+                FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
+                    picData in
+                    if let picDataReceived = picData{
+                        let friendIndex = self.friendList.index(where: {
+                            ($0["picUrl"] as! String == friend["picUrl"] as! String)})
+                        self.friendList[friendIndex!]["picData"] = picDataReceived
+                        DispatchQueue.main.async {
+                            self.friendTableView.reloadData()
+                        }
+                    }
+                })
+            }
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
-        self.friendList = nil
+        self.friendList.removeAll()
     }
     
     func checkFriendList(){
         
-        if (friendList == nil){
-            
-            friendList = [String]()
-            
-            friendList?.append("teste")
-            friendList?.append("teste")
-            friendList?.append("teste")
-            
-        }
+//        if (friendList == nil){
+//            
+//            friendList = [String]()
+//            
+//            friendList?.append("teste")
+//            friendList?.append("teste")
+//            friendList?.append("teste")
+//            
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
         
-        cell.friendImage.image = #imageLiteral(resourceName: "profileImage")
-        cell.friendName.text = "Teste"
+        if let picData = self.friendList[indexPath.row]["picData"] as? Data{
+            cell.friendImage.image = UIImage(data: picData)
+        }
+        cell.friendName.text = self.friendList[indexPath.row]["name"] as! String
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true
@@ -73,7 +91,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (friendList?.count)!
+        return self.friendList.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
