@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     var tempIdLikeList = ["Teste", "Teste"]
     var tempIdDislikeList = ["Teste", "Teste"]
+    var friendList = [[String: Any]]()
 
 
     override func viewDidLoad() {
@@ -63,8 +64,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
         
         if currentUser == nil{
             
@@ -121,6 +120,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
             loadTotalOfLikeAndDislike()
         }
+        
     }
     
  
@@ -242,14 +242,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![3] as! FriendListController
         
-        newViewController.friendList = [String]()
-        
-        newViewController.friendList?.append("teste")
-        newViewController.friendList?.append("teste")
-        newViewController.friendList?.append("teste")
-        newViewController.friendList?.append("teste")
-        newViewController.friendList?.append("teste")
-        
+        newViewController.friendList = [[String: Any]]()
         newViewController.currentUser = self.currentUser
         
         self.tabBarController?.selectedIndex = 3

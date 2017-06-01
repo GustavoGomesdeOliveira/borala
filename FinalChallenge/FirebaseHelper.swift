@@ -66,6 +66,22 @@ class FirebaseHelper{
         })
     }
     
+    static func getFriends(userId: String, completionHandler: @escaping ((_ friend: [String: Any]?) -> ())){
+        rootRefDatabase.child("users/" + userId + "/friendsId").observeSingleEvent(of: .value, with: {
+            snapshot in
+            if let friendsIdDictionary = snapshot.value as? [String: Bool]{
+                let friendsId = Array(friendsIdDictionary.keys)
+                //var friendsDic = [ [String: Any] ]()
+                for friendId in friendsId{
+                    self.getUserData(userID: friendId, completionHandler: {
+                        user in
+                        completionHandler(["name": user.name, "picUrl": user.picUrl!])
+                    })
+                }
+                
+            }
+        })
+    }
     static func likeListAdd(id: String){
         rootRefDatabase.child("users/" + (id) + "/likeIds").updateChildValues([(firebaseUser?.uid)!: true])//adds the id to likeIds node.
         rootRefDatabase.child("users/" + (id) + "/dislikeIds/" + (firebaseUser?.uid)!).setValue(nil)//removes the id from dislikeIds node.
@@ -78,39 +94,11 @@ class FirebaseHelper{
 
     
     static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
-        rootRefDatabase.child("users").observe(.value,with:{
+        rootRefDatabase.child("users/" + userID).observeSingleEvent(of: .value,with:{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
-                var userFromFirebase = User()
-                var count = 0
-                for kk in dic.keys{
-
-                    
-                    if let user = dic[kk] {
-                        
-                        if count == 0 {
-                            count += 1
-
-                            continue
-                            
-                            
-                        }
-                        
-                        let dict = user as! NSDictionary
-                            
-                        let id = dict["id"] as! String
-                            
-                        if id == userID {
-                            userFromFirebase = User(dict: dic[kk] as! [String: Any])
-//                            print(userFromFirebase.name)
-                            completionHandler(userFromFirebase)
-                        }else{
-                            userFromFirebase = User()
-                            completionHandler(userFromFirebase)
-                        }
-                        
-                    }
-                }
+                let userFromFirebase = User(dict: dic)
+                completionHandler(userFromFirebase)
             }
         })
     }
