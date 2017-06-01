@@ -67,13 +67,13 @@ class FirebaseHelper{
     }
     
     static func likeListAdd(id: String){
-        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/likeIds").updateChildValues([id: true])//adds the id to likeIds node.
-        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/dislikeIds/" + id).setValue(nil)//removes the id from dislikeIds node.
+        rootRefDatabase.child("users/" + (id) + "/likeIds").updateChildValues([(firebaseUser?.uid)!: true])//adds the id to likeIds node.
+        rootRefDatabase.child("users/" + (id) + "/dislikeIds/" + (firebaseUser?.uid)!).setValue(nil)//removes the id from dislikeIds node.
     }
     
     static func dislikeListAdd(id: String){
-        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/dislikeIds").updateChildValues([id: true])//adds the id to dislikeIds node.
-        rootRefDatabase.child("users" + (firebaseUser?.uid)! + "/likeIds/" + id).setValue(nil)//removes the id from likeIds node.
+        rootRefDatabase.child("users/" + (id) + "/dislikeIds").updateChildValues([(firebaseUser?.uid)!: true])//adds the id to dislikeIds node.
+        rootRefDatabase.child("users/" + (id) + "/likeIds/" + (firebaseUser?.uid)!).setValue(nil)//removes the id from likeIds node.
     }
 
     

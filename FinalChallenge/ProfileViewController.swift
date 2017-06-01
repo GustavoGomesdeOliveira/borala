@@ -30,6 +30,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBOutlet weak var friendListBtn: UIButton!
     
+    var likeList: [String]?
+    var dislikeList: [String]?
     
     var user: User!
     var currentUser: User?
@@ -45,8 +47,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isHidden = false
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
-        loadTotalOfLikeAndDislike()
-
+        self.likeList = [String]()
+        self.dislikeList = [String]()
         
         self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
         self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
@@ -88,23 +90,40 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.userGenderLabel.text = user?.gender
             self.profileImage.image = UIImage(named: "profileImage")
             
-            self.tempIdLikeList.append(user.id)
-            
-            if self.tempIdLikeList.contains(user.id) {
+            if (user.likeIds != nil) {
                 
-                self.likeBtn.isEnabled = false
+
+                for likes in user.likeIds!{
+                    
+                    self.likeList?.append(likes.key)
+                }
                 
+                if (likeList?.contains(self.user.id))!{
+                    
+                    self.likeLabel.isEnabled = false
+                }
             }
             
-            if self.tempIdDislikeList.contains(user.id) {
+            if (user.dislikeIds != nil) {
                 
-                self.dislikeBtn.isEnabled = false
+                
+                for dislikes in user.dislikeIds!{
+                    
+                    self.dislikeList?.append(dislikes.key)
+                }
+                
+                if (dislikeList?.contains(self.user.id))!{
+                    
+                    self.dislikeLabel.isEnabled = false
+                }
                 
             }
-            
-//             print(currentUser?.name)
+
+            loadTotalOfLikeAndDislike()
         }
     }
+    
+ 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -171,9 +190,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
-        
-            self.tempIdLikeList.append((self.currentUser?.id)!)
-            self.tempIdDislikeList.remove(at: self.tempIdDislikeList.index(of: (self.currentUser?.id)!)!)
+            self.likeList?.append(self.user.id)
+            self.dislikeList?.remove(at: (self.dislikeList?.index(of: self.user.id)!)!)
         
             FirebaseHelper.likeListAdd(id: (self.currentUser?.id)!)
         
@@ -187,8 +205,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func dislikeUser(_ sender: Any) {
         
         
-            self.tempIdDislikeList.append((self.currentUser?.id)!)
-            self.tempIdLikeList.remove(at: self.tempIdLikeList.index(of: (self.currentUser?.id)!)!)
+            self.dislikeList?.append(self.user.id)
+            self.likeList?.remove(at: (self.likeList?.index(of: self.user.id)!)!)
         
             FirebaseHelper.dislikeListAdd(id: (self.currentUser?.id)!)
         
@@ -200,8 +218,12 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     func loadTotalOfLikeAndDislike() {
         
-        self.likeLabel.text = String(self.tempIdLikeList.count)
-        self.dislikeLabel.text = String(self.tempIdDislikeList.count)
+        let like = self.likeList?.count
+        
+        let dislike =  self.dislikeList?.count
+        
+        self.likeLabel.text = String(describing: like!)
+        self.dislikeLabel.text = String(describing: dislike!)
 
         
     }
