@@ -250,6 +250,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
         self.friendListBtn.isHidden = false
+        self.likeBtn.isEnabled = true
+        self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
 
