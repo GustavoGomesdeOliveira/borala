@@ -194,10 +194,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
-                                <rect key="frame" x="20" y="379" width="280" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
+                                <rect key="frame" x="20" y="397" width="280" height="38"/>
                                 <color key="backgroundColor" red="0.65417641400000004" green="0.1421726942" blue="0.29793119429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="2b7-Kd-LAO"/>
+                                    <constraint firstAttribute="height" constant="38" id="egA-gt-ubU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Friends list">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,10 +215,13 @@
                                     <action selector="friendListSegue:" destination="b5z-ud-nTd" eventType="touchUpInside" id="RXD-7d-bAD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZh-Qd-rtL">
-                                <rect key="frame" x="20" y="332" width="280" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZh-Qd-rtL">
+                                <rect key="frame" x="20" y="357" width="280" height="39"/>
                                 <color key="backgroundColor" red="0.65417641400000004" green="0.1421726942" blue="0.29793119429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="RJh-py-smf"/>
+                                    <constraint firstAttribute="height" constant="39" id="cJO-N1-PYV"/>
+                                </constraints>
                                 <state key="normal" title="Chat">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -284,11 +290,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="npQ-tJ-5zM" firstAttribute="top" secondItem="Oib-zj-H1P" secondAttribute="bottom" constant="2" id="3yj-3O-uyK"/>
+                            <constraint firstItem="sNn-mi-iqx" firstAttribute="centerX" secondItem="87u-Df-7ck" secondAttribute="centerX" id="6zk-IF-2IL"/>
                             <constraint firstItem="Oib-zj-H1P" firstAttribute="leading" secondItem="87u-Df-7ck" secondAttribute="leadingMargin" constant="4" id="ApZ-Fa-CFf"/>
+                            <constraint firstItem="LZh-Qd-rtL" firstAttribute="centerX" secondItem="87u-Df-7ck" secondAttribute="centerX" id="B0X-Iq-f4Z"/>
                             <constraint firstItem="xhk-sh-aBr" firstAttribute="centerY" secondItem="Oib-zj-H1P" secondAttribute="centerY" id="JPm-hn-PiB"/>
                             <constraint firstItem="xhk-sh-aBr" firstAttribute="leading" secondItem="87u-Df-7ck" secondAttribute="leadingMargin" constant="240" id="SaD-tD-4Pu"/>
                             <constraint firstItem="npQ-tJ-5zM" firstAttribute="centerX" secondItem="Oib-zj-H1P" secondAttribute="centerX" id="UhO-aH-q0D"/>
+                            <constraint firstItem="Oib-zj-H1P" firstAttribute="top" secondItem="sNn-mi-iqx" secondAttribute="bottom" constant="6" id="aTA-G5-Hbw"/>
                             <constraint firstItem="rKA-cy-3iM" firstAttribute="top" secondItem="Oib-zj-H1P" secondAttribute="bottom" constant="35" id="g6z-AA-1BL"/>
+                            <constraint firstItem="sNn-mi-iqx" firstAttribute="top" secondItem="LZh-Qd-rtL" secondAttribute="bottom" constant="1" id="lWP-R4-yAO"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile1" id="qbF-Xx-KXq">
