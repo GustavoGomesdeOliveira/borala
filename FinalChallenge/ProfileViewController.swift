@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isHidden = false
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
+        self.friendListBtn.isHidden = true
         
         self.backRoundView.layer.borderColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
                 
@@ -75,7 +76,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
         } else {
             
-            self.friendListBtn.isHidden = true
+            //self.friendListBtn.isHidden = true
             self.user = self.currentUser
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
