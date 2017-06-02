@@ -204,9 +204,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func likeUser(_ sender: Any) {
         
         self.likeList.append( (FirebaseHelper.firebaseUser?.uid)! )
-        //if !self.dislikeList.isEmpty{
-            //self.dislikeList.remove(at: (self.dislikeList.index(of: (FirebaseHelper.firebaseUser?.uid)!)!))
-        //}
         self.dislikeList = self.dislikeList.filter{ $0 != FirebaseHelper.firebaseUser?.uid}
         
         FirebaseHelper.likeListAdd(id: self.user.id)
@@ -219,9 +216,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func dislikeUser(_ sender: Any) {
         
         self.dislikeList.append((FirebaseHelper.firebaseUser?.uid)!)
-        //if !self.likeList.isEmpty{
-            //self.likeList.remove(at: (self.dislikeList.index(of: (FirebaseHelper.firebaseUser?.uid)!)!))
-        //}
         self.likeList = self.likeList.filter{ $0 != FirebaseHelper.firebaseUser?.uid }
         
         FirebaseHelper.dislikeListAdd(id: self.user.id)
