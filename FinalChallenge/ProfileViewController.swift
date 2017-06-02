@@ -14,7 +14,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBOutlet weak var backRoundView: UIView!
     @IBOutlet weak var backUserView: UIView!
-    @IBOutlet weak var editButton: UIBarButtonItem!
+ 
+    @IBOutlet weak var editButton: UIButton!
 
     @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var likeBtn: UIButton!
@@ -63,10 +64,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             getUser()
             self.editButton.isEnabled = true
-            self.editButton.tintColor = UIColor.white
+            self.editButton.isHidden = false
             
             self.likeBtn.isHidden = true
-            self.dislikeBtn.isHidden = true
+            self.dislikeBtn.isHidden = false
             self.likeLabel.isHidden = true
             self.dislikeLabel.isHidden = true
             self.dislikeLabel.isEnabled = false
@@ -78,8 +79,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.friendListBtn.isHidden = true
             self.user = self.currentUser
             self.editButton.isEnabled = false
-            self.editButton.tintColor = UIColor.clear
-//            self.editButton.
+            self.editButton.isHidden = true
             self.userNameLabel.text = user?.name
             let age = NSNumber(value: user.age!)
             self.userAgeLabel.text = age.stringValue
@@ -127,18 +127,31 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func editProfile(_ sender: UIBarButtonItem) {
+    @IBAction func editProfile(_ sender: UIButton) {
         
         let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
-        
+
         self.addChildViewController(popUpOverVC)
         popUpOverVC.userToChange = self.user
         popUpOverVC.delegate = self
         popUpOverVC.view.frame = self.view.frame
         self.view.addSubview(popUpOverVC.view)
         popUpOverVC.didMove(toParentViewController: self)
-        
+
+
     }
+//    @IBAction func editProfile(_ sender: UIBarButtonItem) {
+//        
+//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
+//        
+//        self.addChildViewController(popUpOverVC)
+//        popUpOverVC.userToChange = self.user
+//        popUpOverVC.delegate = self
+//        popUpOverVC.view.frame = self.view.frame
+//        self.view.addSubview(popUpOverVC.view)
+//        popUpOverVC.didMove(toParentViewController: self)
+//
+//    }
     
     
     func getUser(){
