@@ -88,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //self.enableRemoteNotificationFeatures()
         //send token to firebase
+        //FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         print("registrou \(deviceToken)")
     }
     
@@ -449,6 +450,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
         }
     }
+    
+    func connectToFcm() {
+        FIRMessaging.messaging().connect { (error) in
+            if (error != nil) {
+                print("Unable to connect with FCM. \(error)")
+            } else {
+                print("Connected to FCM.")
+            }
+        }
+    }
 }
 
 // [START ios_10_message_handling]
@@ -498,6 +509,7 @@ extension AppDelegate: FIRMessagingDelegate{
     // [START refresh_token]
     func messaging(_ messaging: FIRMessaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
+        connectToFcm()
     }
     // [END refresh_token]
     // [START ios_10_data_message]
