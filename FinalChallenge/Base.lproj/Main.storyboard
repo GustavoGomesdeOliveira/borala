@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -132,7 +132,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="55"/>
+                                        <integer key="value" value="50"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -229,25 +229,24 @@
                                     <action selector="openChat:" destination="b5z-ud-nTd" eventType="touchUpInside" id="0BE-4Z-xtO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujJ-lS-DJZ">
-                                <rect key="frame" x="257" y="484" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-tJ-5zM">
+                                <rect key="frame" x="16" y="486" width="52" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="7Vf-KU-YMW"/>
+                                    <constraint firstAttribute="height" constant="21" id="tRP-2q-5DB"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-tJ-5zM">
-                                <rect key="frame" x="23" y="484" width="52" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhk-sh-aBr">
-                                <rect key="frame" x="254" y="448" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Dislike"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhk-sh-aBr">
+                                <rect key="frame" x="256" y="441.5" width="43" height="43"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="IA7-xi-AWD"/>
+                                    <constraint firstAttribute="width" constant="43" id="XVf-qp-png"/>
+                                </constraints>
+                                <state key="normal" image="dislike"/>
                                 <connections>
                                     <action selector="dislikeUser:" destination="b5z-ud-nTd" eventType="touchUpInside" id="cnw-2Z-AOq"/>
                                 </connections>
@@ -262,17 +261,35 @@
                                     <action selector="editProfile:" destination="b5z-ud-nTd" eventType="touchUpInside" id="dwp-Hm-tmj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oib-zj-H1P">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oib-zj-H1P">
                                 <rect key="frame" x="20" y="441" width="43" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="4CS-op-bph"/>
+                                    <constraint firstAttribute="width" constant="43" id="d0I-tX-tn2"/>
+                                </constraints>
                                 <state key="normal" image="like"/>
                                 <connections>
                                     <action selector="likeUser:" destination="b5z-ud-nTd" eventType="touchUpInside" id="X6k-SN-c7J"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujJ-lS-DJZ">
+                                <rect key="frame" x="257" y="486" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="npQ-tJ-5zM" firstAttribute="top" secondItem="Oib-zj-H1P" secondAttribute="bottom" constant="2" id="3yj-3O-uyK"/>
+                            <constraint firstItem="Oib-zj-H1P" firstAttribute="leading" secondItem="87u-Df-7ck" secondAttribute="leadingMargin" constant="4" id="ApZ-Fa-CFf"/>
+                            <constraint firstItem="xhk-sh-aBr" firstAttribute="centerY" secondItem="Oib-zj-H1P" secondAttribute="centerY" id="JPm-hn-PiB"/>
+                            <constraint firstItem="xhk-sh-aBr" firstAttribute="leading" secondItem="87u-Df-7ck" secondAttribute="leadingMargin" constant="240" id="SaD-tD-4Pu"/>
+                            <constraint firstItem="npQ-tJ-5zM" firstAttribute="centerX" secondItem="Oib-zj-H1P" secondAttribute="centerX" id="UhO-aH-q0D"/>
+                            <constraint firstItem="rKA-cy-3iM" firstAttribute="top" secondItem="Oib-zj-H1P" secondAttribute="bottom" constant="35" id="g6z-AA-1BL"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile1" id="qbF-Xx-KXq">
                         <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
@@ -1201,6 +1218,7 @@
         <image name="BackButton" width="24" height="40"/>
         <image name="Background" width="375" height="667"/>
         <image name="Logo" width="375" height="40"/>
+        <image name="dislike" width="50" height="50"/>
         <image name="like" width="43" height="43"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="50" height="47"/>
