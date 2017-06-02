@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var backUserView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
 
+    @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var dislikeBtn: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
