@@ -68,6 +68,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.dislikeBtn.isHidden = true
             self.likeLabel.isHidden = true
             self.dislikeLabel.isHidden = true
+            self.dislikeLabel.isEnabled = false
+            self.likeLabel.isEnabled = false
+
             
         } else {
             
@@ -90,9 +93,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                     self.likeList?.append(likes.key)
                 }
                 
-                if (likeList?.contains(self.user.id))!{
+                if (likeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
                     
-                    self.likeLabel.isEnabled = false
+                    self.likeBtn.isEnabled = false
                 }
             }
             
@@ -104,9 +107,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                     self.dislikeList?.append(dislikes.key)
                 }
                 
-                if (dislikeList?.contains(self.user.id))!{
+                if (dislikeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
                     
-                    self.dislikeLabel.isEnabled = false
+                    self.dislikeBtn.isEnabled = false
                 }
                 
             }
@@ -183,10 +186,15 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
-            self.likeList?.append(self.user.id)
-            self.dislikeList?.remove(at: (self.dislikeList?.index(of: self.user.id)!)!)
+        self.likeList?.append((FirebaseHelper.firebaseUser?.uid)!)
         
-            FirebaseHelper.likeListAdd(id: (self.currentUser?.id)!)
+        if (self.dislikeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
+            self.dislikeList?.remove(at: (self.dislikeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        }
+        
+        
+        
+            FirebaseHelper.likeListAdd(id: self.user.id)
         
             self.dislikeBtn.isEnabled = true
             self.likeBtn.isEnabled = false
@@ -198,10 +206,19 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func dislikeUser(_ sender: Any) {
         
         
-            self.dislikeList?.append(self.user.id)
-            self.likeList?.remove(at: (self.likeList?.index(of: self.user.id)!)!)
+        self.dislikeList?.append((FirebaseHelper.firebaseUser?.uid)!)
         
-            FirebaseHelper.dislikeListAdd(id: (self.currentUser?.id)!)
+        if (self.likeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
+            
+
+            
+            
+            self.likeList?.remove(at: (self.likeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        }
+        
+        
+        
+            FirebaseHelper.dislikeListAdd(id: self.user.id)
         
             self.dislikeBtn.isEnabled = false
             self.likeBtn.isEnabled = true
@@ -227,6 +244,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
         self.friendListBtn.isHidden = false
+        self.likeList = []
+        self.dislikeList = []
 
     }
     

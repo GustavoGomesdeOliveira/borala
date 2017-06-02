@@ -38,7 +38,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.chatCollection.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
         self.chatCollection.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        //self.chatCollection.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

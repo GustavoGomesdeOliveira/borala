@@ -62,7 +62,9 @@ class PinPopupViewController: UIViewController {
     @IBAction func goToChat(_ sender: UIButton) {
         FirebaseHelper.createChat(event: self.event, completionHandler: {
             chatId in
-            self.delegate.transitionToChat(id: chatId)
+            if let chatIdCreated = chatId{
+                self.delegate.transitionToChat(id: chatIdCreated)
+            }
         })
     }
 
