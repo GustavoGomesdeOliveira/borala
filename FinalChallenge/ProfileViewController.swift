@@ -61,6 +61,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         if currentUser == nil{
             
+            self.chatButton.isHidden = true
             getUser()
             self.editButton.isEnabled = true
             self.editButton.tintColor = UIColor.white
