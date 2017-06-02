@@ -48,7 +48,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    @IBAction func closeUp(_ sender: Any) {
+    @IBAction func done(_ sender: Any) {
         
         userToChange.name = self.nameTextField.text
         userToChange.gender = self.genderTextField.text
