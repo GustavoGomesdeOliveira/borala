@@ -36,8 +36,8 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
-        self.popUpView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        self.popUpView.layer.borderWidth = 3
+//        self.popUpView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
+//        self.popUpView.layer.borderWidth = 3
         
         self.nameTextField.delegate = self
         self.nameTextField.text = userToChange.name

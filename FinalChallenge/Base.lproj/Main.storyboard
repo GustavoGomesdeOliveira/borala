@@ -366,42 +366,59 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ak-Dc-Giz">
                                 <rect key="frame" x="0.0" y="9" width="251" height="235"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkd-VW-mHP">
-                                        <rect key="frame" x="107" y="197" width="37" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Done">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkd-VW-mHP">
+                                        <rect key="frame" x="55" y="180" width="140" height="39"/>
+                                        <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="gdF-fg-HEU"/>
+                                            <constraint firstAttribute="height" constant="39" id="nPz-DL-RiB"/>
+                                        </constraints>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="done:" destination="IPz-yj-EKi" eventType="touchUpInside" id="tkz-xq-7rG"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PgJ-Fb-JNt">
-                                        <rect key="frame" x="8" y="33" width="235" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NAME:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PgJ-Fb-JNt">
+                                        <rect key="frame" x="8" y="16" width="235" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="235" id="AyL-jS-m5y"/>
+                                            <constraint firstAttribute="height" constant="30" id="WjK-L1-4uM"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w7q-M6-DZb">
-                                        <rect key="frame" x="8" y="92" width="235" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="AGE:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w7q-M6-DZb">
+                                        <rect key="frame" x="8" y="75" width="235" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="WIG-gx-KqH"/>
+                                            <constraint firstAttribute="width" constant="235" id="dJM-Ma-aDl"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gender" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-Tb-0BM">
-                                        <rect key="frame" x="8" y="146" width="235" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GENDER:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-Tb-0BM">
+                                        <rect key="frame" x="8" y="129" width="235" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="235" id="Q9q-SP-Y5d"/>
+                                            <constraint firstAttribute="height" constant="30" id="nA2-CJ-Pvy"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.99215686270000003" green="0.92549019610000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Dkd-VW-mHP" firstAttribute="top" secondItem="kIF-Tb-0BM" secondAttribute="bottom" constant="21" id="52d-HV-azQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dkd-VW-mHP" secondAttribute="bottom" constant="16" id="6D8-11-saJ"/>
                                     <constraint firstAttribute="width" constant="251" id="LP7-RI-KMn"/>
                                     <constraint firstAttribute="height" constant="235" id="Vvh-B9-Dtw"/>
+                                    <constraint firstItem="w7q-M6-DZb" firstAttribute="top" secondItem="PgJ-Fb-JNt" secondAttribute="bottom" constant="29" id="XiQ-if-Uy6"/>
+                                    <constraint firstItem="kIF-Tb-0BM" firstAttribute="top" secondItem="w7q-M6-DZb" secondAttribute="bottom" constant="24" id="xjs-MR-hJA"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -413,8 +430,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PgJ-Fb-JNt" firstAttribute="centerX" secondItem="0Pl-du-SYI" secondAttribute="centerX" id="CDb-oK-VbP"/>
                             <constraint firstItem="2ak-Dc-Giz" firstAttribute="centerY" secondItem="0Pl-du-SYI" secondAttribute="centerY" id="CRs-Gk-afl"/>
                             <constraint firstItem="2ak-Dc-Giz" firstAttribute="centerX" secondItem="0Pl-du-SYI" secondAttribute="centerX" id="cYa-Qe-fzY"/>
+                            <constraint firstItem="kIF-Tb-0BM" firstAttribute="centerX" secondItem="0Pl-du-SYI" secondAttribute="centerX" id="fYp-Dr-Epr"/>
+                            <constraint firstItem="w7q-M6-DZb" firstAttribute="centerX" secondItem="0Pl-du-SYI" secondAttribute="centerX" id="gGm-aP-DRR"/>
+                            <constraint firstItem="Dkd-VW-mHP" firstAttribute="centerX" secondItem="0Pl-du-SYI" secondAttribute="centerX" id="sTh-cp-m1V"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -430,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpX-T4-uEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5308" y="923"/>
+            <point key="canvasLocation" x="5294.0625" y="942.78169014084506"/>
         </scene>
         <!--Friends-->
         <scene sceneID="fuy-dy-ktG">
