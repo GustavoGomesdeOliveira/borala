@@ -30,8 +30,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBOutlet weak var friendListBtn: UIButton!
     
-    var likeList: [String]?
-    var dislikeList: [String]?
+    var likeList = [String]()
+    var dislikeList = [String]()
     
     var user: User!
     var currentUser: User?
@@ -48,8 +48,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isHidden = false
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
-        self.likeList = [String]()
-        self.dislikeList = [String]()
         
         self.backRoundView.layer.borderColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
                 
@@ -91,10 +89,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
                 for likes in user.likeIds!{
                     
-                    self.likeList?.append(likes.key)
+                    self.likeList.append(likes.key)
                 }
                 
-                if (likeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
+                if (likeList.contains((FirebaseHelper.firebaseUser?.uid)!)){
                     
                     self.likeBtn.isEnabled = false
                 }
@@ -105,10 +103,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 
                 for dislikes in user.dislikeIds!{
                     
-                    self.dislikeList?.append(dislikes.key)
+                    self.dislikeList.append(dislikes.key)
                 }
                 
-                if (dislikeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
+                if (dislikeList.contains((FirebaseHelper.firebaseUser?.uid)!)){
                     
                     self.dislikeBtn.isEnabled = false
                 }
@@ -200,54 +198,41 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
-        self.likeList?.append((FirebaseHelper.firebaseUser?.uid)!)
-        
-        if (self.dislikeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
-            self.dislikeList?.remove(at: (self.dislikeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        self.likeList.append( (FirebaseHelper.firebaseUser?.uid)! )
+        if !self.dislikeList.isEmpty{
+            self.dislikeList.remove(at: (self.dislikeList.index(of: (FirebaseHelper.firebaseUser?.uid)!)!))
         }
         
+        FirebaseHelper.likeListAdd(id: self.user.id)
         
-        
-            FirebaseHelper.likeListAdd(id: self.user.id)
-        
-            self.dislikeBtn.isEnabled = true
-            self.likeBtn.isEnabled = false
-            loadTotalOfLikeAndDislike()
-        
-        
+        self.dislikeBtn.isEnabled = true
+        self.likeBtn.isEnabled = false
+        loadTotalOfLikeAndDislike()
     }
     
     @IBAction func dislikeUser(_ sender: Any) {
         
-        
-        self.dislikeList?.append((FirebaseHelper.firebaseUser?.uid)!)
-        
-        if (self.likeList?.contains((FirebaseHelper.firebaseUser?.uid)!))!{
-            
-
-            
-            
-            self.likeList?.remove(at: (self.likeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        self.dislikeList.append((FirebaseHelper.firebaseUser?.uid)!)
+        if !self.likeList.isEmpty{
+            self.likeList.remove(at: (self.dislikeList.index(of: (FirebaseHelper.firebaseUser?.uid)!)!))
         }
         
+        FirebaseHelper.dislikeListAdd(id: self.user.id)
         
-        
-            FirebaseHelper.dislikeListAdd(id: self.user.id)
-        
-            self.dislikeBtn.isEnabled = false
-            self.likeBtn.isEnabled = true
-            loadTotalOfLikeAndDislike()
+        self.dislikeBtn.isEnabled = false
+        self.likeBtn.isEnabled = true
+        loadTotalOfLikeAndDislike()
             
     }
     
     func loadTotalOfLikeAndDislike() {
         
-        let like = self.likeList?.count
+        let like = self.likeList.count
         
-        let dislike =  self.dislikeList?.count
+        let dislike =  self.dislikeList.count
         
-        self.likeLabel.text = String(describing: like!)
-        self.dislikeLabel.text = String(describing: dislike!)
+        self.likeLabel.text = String(describing: like)
+        self.dislikeLabel.text = String(describing: dislike)
 
         
     }
