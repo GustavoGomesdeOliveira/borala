@@ -56,6 +56,10 @@ class FirebaseHelper{
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
     }
     
+    static func updateUser(userId: String, userInfo: [String: Any]){
+        rootRefDatabase.child("users/" + userId).updateChildValues(userInfo)
+    }
+    
     //save the friend on my friend list
     static func saveFriend(socialnetworkId: String){
         rootRefDatabase.child("socialnetworkIds/" + socialnetworkId).observeSingleEvent(of: .value, with: {
