@@ -14,8 +14,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBOutlet weak var backRoundView: UIView!
     @IBOutlet weak var backUserView: UIView!
-    @IBOutlet weak var backGenderView: UIView!
-    @IBOutlet weak var backAgeView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
 
     @IBOutlet weak var likeBtn: UIButton!
@@ -51,13 +49,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.likeList = [String]()
         self.dislikeList = [String]()
         
-        self.backRoundView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        self.backUserView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        
-        self.backAgeView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        
-        self.backGenderView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
-        
+        self.backRoundView.layer.borderColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
+                
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
