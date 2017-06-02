@@ -145,6 +145,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             
         })
+        
 
         DispatchQueue.main.async {
             

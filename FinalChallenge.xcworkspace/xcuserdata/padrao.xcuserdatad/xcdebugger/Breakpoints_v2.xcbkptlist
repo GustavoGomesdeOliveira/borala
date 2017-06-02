@@ -89,29 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/FirebaseHelper.swift"
-            timestampString = "518097932.234051"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "likeListAdd(id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FinalChallenge/ProfileViewController.swift"
-            timestampString = "518100051.68967"
+            timestampString = "518101779.883795"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "likeUser(_:)"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "dislikeUser(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
