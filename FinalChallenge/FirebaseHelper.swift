@@ -57,7 +57,7 @@ class FirebaseHelper{
     }
     
     static func updateUser(userId: String, userInfo: [String: Any]){
-        rootRefDatabase.child("users/" + userId).updateChildValues(userInfo)
+        rootRefDatabase.child("users/" + userId + "/").updateChildValues(userInfo)
     }
     
     //save the friend on my friend list

@@ -53,23 +53,27 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         var userInfo = [String: Any]()
         
         if let newName = self.nameTextField.text,  !self.nameTextField.text!.isEmpty{
-            userToChange.name = newName
-            userInfo.updateValue(newName, forKey: "name")
+            if userToChange.name != newName{
+                userToChange.name = newName
+                userInfo.updateValue(newName, forKey: "name")
+            }
         }
         if let newGender = self.genderTextField.text, !self.genderTextField.text!.isEmpty{
-            userToChange.gender = newGender
-            userInfo.updateValue(newGender, forKey: "gender")
+            if userToChange.gender != newGender{
+                userToChange.gender = newGender
+                userInfo.updateValue(newGender, forKey: "gender")
+            }
         }
-        if let newAgeString = self.nameTextField.text,  !self.nameTextField.text!.isEmpty,
-            let newAge = Int.init(newAgeString){
-    
-            userToChange.age = newAge
-            userInfo.updateValue(newAge, forKey: "age")
+        if let newAgeString = self.ageTextField.text,  !self.ageTextField.text!.isEmpty{
+            if let newAge = Int.init(newAgeString){
+                userToChange.age = newAge
+                userInfo.updateValue(newAge, forKey: "age")
+            }
         }
         
-        changeUser()
         if !userInfo.isEmpty{
             FirebaseHelper.updateUser(userId: userToChange.id, userInfo: userInfo)
+            changeUser()
         }
         delegate?.didUpdateUser()
 
