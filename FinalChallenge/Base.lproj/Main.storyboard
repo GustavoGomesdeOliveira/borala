@@ -223,7 +223,7 @@
                                     <constraint firstAttribute="width" constant="277" id="SfL-XK-hJb"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
                                 <rect key="frame" x="20" y="379" width="280" height="38"/>
                                 <color key="backgroundColor" red="0.65417641400000004" green="0.1421726942" blue="0.29793119429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1282,6 +1282,6 @@
         <image name="Background" width="375" height="667"/>
         <image name="Logo" width="375" height="40"/>
         <image name="profile1" width="40" height="40"/>
-        <image name="profileImage" width="186" height="186"/>
+        <image name="profileImage" width="50" height="47"/>
     </resources>
 </document>

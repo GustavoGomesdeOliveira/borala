@@ -64,7 +64,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             getUser()
             self.editButton.isEnabled = true
             self.editButton.isHidden = false
-            
             self.likeBtn.isHidden = true
             self.likeLabel.isHidden = true
             self.likeLabel.isHidden = true
@@ -80,8 +79,12 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
             self.userNameLabel.text = user?.name
-            let age = NSNumber(value: user.age!)
-            self.userAgeLabel.text = age.stringValue
+            if user.age! >= 0 {
+                let age = NSNumber(value: user.age!)
+                self.userAgeLabel.text = age.stringValue
+            }else{
+                self.userAgeLabel.text = "Empty"
+            }
             self.userGenderLabel.text = user?.gender
             self.profileImage.image = UIImage(named: "profileImage")
             
