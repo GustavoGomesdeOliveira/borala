@@ -66,10 +66,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.editButton.isHidden = false
             
             self.likeBtn.isHidden = true
-            self.dislikeBtn.isHidden = false
             self.likeLabel.isHidden = true
+            self.likeLabel.isHidden = true
+            self.dislikeBtn.isHidden = true
             self.dislikeLabel.isHidden = true
-            self.dislikeLabel.isEnabled = false
             self.likeLabel.isEnabled = false
 
             
