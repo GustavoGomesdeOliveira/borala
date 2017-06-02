@@ -70,7 +70,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.mapView.addGestureRecognizer(longGesture)
         
         
-        
         self.locationManager.delegate = self
         self.mapView.delegate = self
 
@@ -144,11 +143,35 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
             self.mapView.addAnnotations(self.pins)
             
+            
         })
-      
+
+        DispatchQueue.main.async {
+            
+            self.loadChat()
+            self.loadFriends()
+            
+        }
+        
         
     }
     
+    
+    func loadChat(){
+        
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![2] as! ChatViewController
+        
+        newViewController.loadChats()
+    }
+    
+    func loadFriends(){
+        let barViewControllers = self.tabBarController?.viewControllers
+        let newViewController = barViewControllers![3] as! FriendListController
+        
+        newViewController.getfriends()
+        
+    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         // This *forces* a popover to be displayed on the iPhone

@@ -12,26 +12,29 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     var friendList = [ [String: Any] ]()
+    var flagToReload = false
     var currentUser: User?
     
     @IBOutlet weak var friendTableView: UITableView!
     
     
     override func viewDidLoad() {
-        
+        flagToReload = true
         checkFriendList()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    
+    
+    func getfriends(){
         
-        //checkFriendList()
-        //self.friendTableView.reloadData()
+        print("teste")
+        
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
             if let friend = friend{
                 self.friendList.append(friend)
-                self.friendTableView.reloadData()
+                
                 FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
                     picData in
                     if let picDataReceived = picData{
@@ -39,11 +42,16 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
                             ($0["picUrl"] as! String == friend["picUrl"] as! String)})
                         self.friendList[friendIndex!]["picData"] = picDataReceived
                         DispatchQueue.main.async {
-                            self.friendTableView.reloadData()
+                            if self.flagToReload {
+                                
+                                self.friendTableView.reloadData()
+                            }
+                            
                         }
                     }
                 })
             }
+            
         })
     }
     
