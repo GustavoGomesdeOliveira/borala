@@ -193,29 +193,34 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func likeUser(_ sender: Any) {
         
-            self.likeList?.append((FirebaseHelper.firebaseUser?.uid)!)
+        if let _ = self.likeList{
+            self.likeList?.append( (FirebaseHelper.firebaseUser?.uid)! )
+        }
+        if let _ = self.dislikeList{
             self.dislikeList?.remove(at: (self.dislikeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        }
         
-            FirebaseHelper.likeListAdd(id: self.user.id)
+        FirebaseHelper.likeListAdd(id: self.user.id)
         
-            self.dislikeBtn.isEnabled = true
-            self.likeBtn.isEnabled = false
-            loadTotalOfLikeAndDislike()
-        
-        
+        self.dislikeBtn.isEnabled = true
+        self.likeBtn.isEnabled = false
+        loadTotalOfLikeAndDislike()
     }
     
     @IBAction func dislikeUser(_ sender: Any) {
         
+        if let _ = self.dislikeList{
+            self.dislikeList!.append((FirebaseHelper.firebaseUser?.uid)!)
+        }
+        if let _ = self.likeList{
+            self.likeList!.remove(at: (self.dislikeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        }
         
-            self.dislikeList?.append((FirebaseHelper.firebaseUser?.uid)!)
-            self.likeList?.remove(at: (self.dislikeList?.index(of: (FirebaseHelper.firebaseUser?.uid)!)!)!)
+        FirebaseHelper.dislikeListAdd(id: self.user.id)
         
-            FirebaseHelper.dislikeListAdd(id: self.user.id)
-        
-            self.dislikeBtn.isEnabled = false
-            self.likeBtn.isEnabled = true
-            loadTotalOfLikeAndDislike()
+        self.dislikeBtn.isEnabled = false
+        self.likeBtn.isEnabled = true
+        loadTotalOfLikeAndDislike()
             
     }
     
