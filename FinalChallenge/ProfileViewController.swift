@@ -143,18 +143,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
 
     }
-//    @IBAction func editProfile(_ sender: UIBarButtonItem) {
-//        
-//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
-//        
-//        self.addChildViewController(popUpOverVC)
-//        popUpOverVC.userToChange = self.user
-//        popUpOverVC.delegate = self
-//        popUpOverVC.view.frame = self.view.frame
-//        self.view.addSubview(popUpOverVC.view)
-//        popUpOverVC.didMove(toParentViewController: self)
-//
-//    }
     
     
     func getUser(){
