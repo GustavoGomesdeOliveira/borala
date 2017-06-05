@@ -165,7 +165,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             self.userNameLabel.text = user?.name
             self.userGenderLabel.text = user?.gender
-            
+            let ageString = String(describing: user.age!)
+
+            self.userAgeLabel.text = ageString
+
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
 
