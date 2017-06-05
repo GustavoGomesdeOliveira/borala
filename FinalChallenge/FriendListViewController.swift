@@ -14,6 +14,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendList = [ [String: Any] ]()
     var flagToReload = false
     var currentUser: User?
+
     
     @IBOutlet weak var friendTableView: UITableView!
     
@@ -34,7 +35,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             friend in
             if let friend = friend{
                 self.friendList.append(friend)
-                
+                print(friend["id"] as! String)
                 FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
                     picData in
                     if let picDataReceived = picData{
@@ -103,6 +104,16 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let friendId = friendList[indexPath.row]["id"] as! String
+        
+        FirebaseHelper.getUserData(userID: (friendId), completionHandler: {
+            userFromFirebase in
+            if userFromFirebase.name != nil{
+                
+                self.currentUser = userFromFirebase
+            }
+        })
         
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController

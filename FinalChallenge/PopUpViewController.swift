@@ -89,6 +89,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
             
             user?.name = self.nameTextField.text
             user?.gender = self.genderTextField.text
+            user?.age = Int(self.ageTextField.text!)
             
             user?.pic = user?.pic
             let userData = NSKeyedArchiver.archivedData(withRootObject: user!)
