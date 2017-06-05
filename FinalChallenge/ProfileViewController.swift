@@ -160,18 +160,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
 
     }
-//    @IBAction func editProfile(_ sender: UIBarButtonItem) {
-//        
-//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
-//        
-//        self.addChildViewController(popUpOverVC)
-//        popUpOverVC.userToChange = self.user
-//        popUpOverVC.delegate = self
-//        popUpOverVC.view.frame = self.view.frame
-//        self.view.addSubview(popUpOverVC.view)
-//        popUpOverVC.didMove(toParentViewController: self)
-//
-//    }
     
     
     func getUser(){
@@ -182,7 +170,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             self.userNameLabel.text = user?.name
             self.userGenderLabel.text = user?.gender
-            
+            let ageString = String(describing: user.age!)
+
+            self.userAgeLabel.text = ageString
+
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
 
@@ -267,6 +258,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeList = []
 
     }
+    //teste
     
     @IBAction func friendListSegue(_ sender: Any) {
         
