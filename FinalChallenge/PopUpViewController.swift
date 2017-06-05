@@ -44,6 +44,7 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         self.genderTextField.delegate = self
         self.genderTextField.text = userToChange.gender
         self.ageTextField.delegate = self
+        //self.genderTextField.text = String(stringInterpolationSegment: userToChange.age)//userToChange.age
         
     }
     
