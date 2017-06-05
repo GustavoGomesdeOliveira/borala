@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var likeList = [String]()
     var dislikeList = [String]()
     
+    var friendImage: UIImage!
+    
     var user: User!
     var currentUser: User?
     
@@ -87,7 +89,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.userAgeLabel.text = "Empty"
             }
             self.userGenderLabel.text = user?.gender
-            self.profileImage.image = UIImage(named: "profileImage")
+            
+            FirebaseHelper.getPictureProfile(picAddress: user.picUrl!, completitionHandler: {
+                
+                picData in
+                
+                if let picDataReceived = picData {
+                    
+                    self.profileImage.image = UIImage(data: picDataReceived)
+                    
+                } else {
+                    
+                    self.profileImage.image = UIImage(named: "profileImage")
+
+                }
+            })
+            
             
             if (user.likeIds != nil) {
                 
