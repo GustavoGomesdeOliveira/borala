@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     var user: User!
     var currentUser: User?
+    var event: Event?
     
     var tempIdLikeList = ["Teste", "Teste"]
     var tempIdDislikeList = ["Teste", "Teste"]
@@ -188,8 +189,16 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func openChat(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
-        self.present(newViewController, animated: true, completion: nil)
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
+        FirebaseHelper.createChat(event: self.event!, completionHandler: {
+            chatId in
+            if let chatIdCreated = chatId{
+                newViewController.chatId = chatIdCreated
+                DispatchQueue.main.async {
+                    self.present(newViewController, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
     func keyboardWillShow(notification: NSNotification) {

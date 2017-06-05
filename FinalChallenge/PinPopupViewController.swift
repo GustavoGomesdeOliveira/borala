@@ -10,7 +10,7 @@ import UIKit
 
 protocol PinPopupViewControllerDelegate{
     
-    func transitionToProfile( id: String)
+    func transitionToProfile( id: String, event: Event?)
     func transitionToChat( id: String)
     
 }
@@ -56,7 +56,7 @@ class PinPopupViewController: UIViewController {
     
 
     @IBAction func goToProfile(_ sender: UIButton) {
-        delegate.transitionToProfile(id: (self.event?.creatorId)!)
+        delegate.transitionToProfile(id: (self.event?.creatorId)!, event: self.event)
     }
     
     @IBAction func goToChat(_ sender: UIButton) {
