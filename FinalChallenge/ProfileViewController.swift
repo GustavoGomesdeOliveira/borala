@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var likeList = [String]()
     var dislikeList = [String]()
     
+    var friendImage: UIImage!
+    
     var user: User!
     var currentUser: User?
     
@@ -87,7 +89,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.userAgeLabel.text = "Empty"
             }
             self.userGenderLabel.text = user?.gender
-            self.profileImage.image = UIImage(named: "profileImage")
+            
+            FirebaseHelper.getPictureProfile(picAddress: user.picUrl!, completitionHandler: {
+                
+                picData in
+                
+                if let picDataReceived = picData {
+                    
+                    self.profileImage.image = UIImage(data: picDataReceived)
+                    
+                } else {
+                    
+                    self.profileImage.image = UIImage(named: "profileImage")
+
+                }
+            })
+            
             
             if (user.likeIds != nil) {
                 
@@ -143,18 +160,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
 
 
     }
-//    @IBAction func editProfile(_ sender: UIBarButtonItem) {
-//        
-//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editProfilePopUp") as! PopUpViewController
-//        
-//        self.addChildViewController(popUpOverVC)
-//        popUpOverVC.userToChange = self.user
-//        popUpOverVC.delegate = self
-//        popUpOverVC.view.frame = self.view.frame
-//        self.view.addSubview(popUpOverVC.view)
-//        popUpOverVC.didMove(toParentViewController: self)
-//
-//    }
     
     
     func getUser(){
@@ -165,7 +170,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             self.userNameLabel.text = user?.name
             self.userGenderLabel.text = user?.gender
-            
+            let ageString = String(describing: user.age!)
+
+            self.userAgeLabel.text = ageString
+
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
 
@@ -250,6 +258,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeList = []
 
     }
+    //teste
     
     @IBAction func friendListSegue(_ sender: Any) {
         
