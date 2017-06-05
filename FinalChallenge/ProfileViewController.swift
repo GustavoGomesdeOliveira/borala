@@ -183,7 +183,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        FirebaseHelper.createChat(event: self.event!, completionHandler: {
+        FirebaseHelper.createChat(partnerId: (self.event?.creatorId!)!, completionHandler: {
             chatId in
             if let chatIdCreated = chatId{
                 newViewController.chatId = chatIdCreated
