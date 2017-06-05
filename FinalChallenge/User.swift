@@ -68,6 +68,7 @@ class User: NSObject, NSCoding{
         self.age = aDecoder.decodeObject(forKey: "age") as? Int
         self.friendsId = aDecoder.decodeObject(forKey: "friendsId") as? [String: Any]
         self.pic = aDecoder.decodeObject(forKey: "pic") as? Data
+        self.picUrl = aDecoder.decodeObject(forKey: "picURL") as? String
         self.rate = aDecoder.decodeObject(forKey: "rate") as? Int
         
         self.preferences = aDecoder.decodeObject(forKey: "preferences") as? [String]
@@ -81,6 +82,7 @@ class User: NSObject, NSCoding{
         aCoder.encode(self.age, forKey: "age")
         aCoder.encode(self.friendsId, forKey: "friendsId")
         aCoder.encode(self.pic, forKey: "pic")
+        aCoder.encode(self.picUrl, forKey: "picURL")
         aCoder.encode(self.rate, forKey: "rate")
         aCoder.encode(self.preferences, forKey: "preference")
         aCoder.encode(self.chatsIds, forKey: "chatsIds")

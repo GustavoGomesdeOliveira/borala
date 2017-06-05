@@ -420,7 +420,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func sendEvent( preference : String, description: String?) {
         
-        
         let user = getUser()
         let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
@@ -431,12 +430,15 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     //MARK: - PinDelegate
-    func transitionToProfile( id: String){
+    func transitionToProfile( id: String, event: Event? ){
     
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController
-        if self.selectedUser != nil{
+        if let _ = self.selectedUser{
             newViewController.currentUser = self.selectedUser
+        }
+        if let _ = event{
+            newViewController.event = event
         }
                 
         tabBarController?.selectedIndex = 0

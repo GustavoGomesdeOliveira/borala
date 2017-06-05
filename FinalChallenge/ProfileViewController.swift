@@ -33,8 +33,11 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var likeList = [String]()
     var dislikeList = [String]()
     
+    var friendImage: UIImage!
+    
     var user: User!
     var currentUser: User?
+    var event: Event?
     
     var tempIdLikeList = ["Teste", "Teste"]
     var tempIdDislikeList = ["Teste", "Teste"]
@@ -87,7 +90,15 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.userAgeLabel.text = "Empty"
             }
             self.userGenderLabel.text = user?.gender
-            self.profileImage.image = UIImage(named: "profileImage")
+            
+            if friendImage == nil {
+                
+                self.profileImage.image = UIImage(named: "profileImage")
+            } else {
+                
+                self.profileImage.image = friendImage
+            }
+            
             
             if (user.likeIds != nil) {
                 
@@ -171,8 +182,16 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBAction func openChat(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController")
-        self.present(newViewController, animated: true, completion: nil)
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
+        FirebaseHelper.createChat(partnerId: (self.event?.creatorId!)!, completionHandler: {
+            chatId in
+            if let chatIdCreated = chatId{
+                newViewController.chatId = chatIdCreated
+                DispatchQueue.main.async {
+                    self.present(newViewController, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -239,6 +258,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
+        //self.friendImage = nil
+        
 
     }
     //teste

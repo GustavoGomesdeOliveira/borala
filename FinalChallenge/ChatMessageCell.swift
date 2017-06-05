@@ -10,6 +10,7 @@ import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
     
+    
     let textView: UITextView = {
         
         let tv = UITextView()
@@ -20,12 +21,13 @@ class ChatMessageCell: UICollectionViewCell {
         return tv
     }()
     
-    static let blueColor = UIColor(red: 0, green: 137, blue: 249, alpha: 1)
+    
+    static let blueColor = UIColor(red: (178/255), green: (66/255), blue: (100/255), alpha: 1)
     
     let bubbleView: UIView = {
         
         let view = UIView()
-        view.backgroundColor = blueColor
+        view.backgroundColor = UIColor(red: 178, green: 66, blue: 100, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
@@ -42,6 +44,8 @@ class ChatMessageCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor(red: (178/255), green: (66/255), blue: (100/255), alpha: 1).cgColor
         
         return imageView
         

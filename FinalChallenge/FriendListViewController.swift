@@ -12,7 +12,9 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     var friendList = [ [String: Any] ]()
+    var friendImageList = [UIImage]()
     var flagToReload = false
+    var flagToRemove = true
     var currentUser: User?
 
     
@@ -56,8 +58,20 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        flagToRemove = false
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        self.friendList.removeAll()
+        if flagToRemove {
+            
+            self.friendList.removeAll()
+            self.friendImageList.removeAll()
+
+            
+        }
+        
     }
     
     func checkFriendList(){
@@ -79,6 +93,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if let picData = self.friendList[indexPath.row]["picData"] as? Data{
             cell.friendImage.image = UIImage(data: picData)
+            self.friendImageList.append(UIImage(data: picData)!)
         }
         cell.friendName.text = self.friendList[indexPath.row]["name"] as! String
         
@@ -105,6 +120,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        flagToRemove = false
         let friendId = friendList[indexPath.row]["id"] as! String
         
         FirebaseHelper.getUserData(userID: (friendId), completionHandler: {
@@ -113,14 +129,20 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 self.currentUser = userFromFirebase
             }
+            
+            
+            let barViewControllers = self.tabBarController?.viewControllers
+            let newViewController = barViewControllers![0] as! ProfileViewController
+            
+            newViewController.currentUser = self.currentUser
+            newViewController.friendImage = self.friendImageList[indexPath.row]
+            //newViewController. = self.friendImageList[indexPath.row]
+            
+            self.tabBarController?.selectedIndex = 0
         })
         
-        let barViewControllers = self.tabBarController?.viewControllers
-        let newViewController = barViewControllers![0] as! ProfileViewController
         
-        newViewController.currentUser = currentUser
         
-        self.tabBarController?.selectedIndex = 0
     }
 
 }
