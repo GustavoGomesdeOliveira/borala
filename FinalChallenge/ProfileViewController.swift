@@ -90,20 +90,13 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             }
             self.userGenderLabel.text = user?.gender
             
-            FirebaseHelper.getPictureProfile(picAddress: user.picUrl!, completitionHandler: {
+            if friendImage == nil {
                 
-                picData in
+                self.profileImage.image = UIImage(named: "profileImage")
+            } else {
                 
-                if let picDataReceived = picData {
-                    
-                    self.profileImage.image = UIImage(data: picDataReceived)
-                    
-                } else {
-                    
-                    self.profileImage.image = UIImage(named: "profileImage")
-
-                }
-            })
+                self.profileImage.image = friendImage
+            }
             
             
             if (user.likeIds != nil) {
@@ -256,6 +249,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
+        //self.friendImage = nil
+        
 
     }
     //teste
