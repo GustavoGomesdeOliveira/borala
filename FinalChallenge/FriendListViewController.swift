@@ -136,6 +136,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             
             newViewController.currentUser = self.currentUser
             newViewController.friendImage = self.friendImageList[indexPath.row]
+            //newViewController. = self.friendImageList[indexPath.row]
             
             self.tabBarController?.selectedIndex = 0
         })
