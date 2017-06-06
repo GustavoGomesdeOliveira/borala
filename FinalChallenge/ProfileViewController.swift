@@ -183,15 +183,28 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        FirebaseHelper.createChat(partnerId: (self.event?.creatorId!)!, completionHandler: {
-            chatId in
-            if let chatIdCreated = chatId{
-                newViewController.chatId = chatIdCreated
-                DispatchQueue.main.async {
-                    self.present(newViewController, animated: true, completion: nil)
+        if let creatorId = self.event?.creatorId{
+            FirebaseHelper.createChat(partnerId: creatorId, completionHandler: {
+                chatId in
+                if let chatIdCreated = chatId{
+                    newViewController.chatId = chatIdCreated
+                    DispatchQueue.main.async {
+                        self.present(newViewController, animated: true, completion: nil)
+                    }
                 }
-            }
-        })
+            })
+        }
+        else{
+            FirebaseHelper.createChat(partnerId: user.id, completionHandler: {
+                chatId in
+                if let chatIdCreated = chatId{
+                    newViewController.chatId = chatIdCreated
+                    DispatchQueue.main.async {
+                        self.present(newViewController, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
     }
     
     func keyboardWillShow(notification: NSNotification) {
