@@ -1217,7 +1217,7 @@
                                         </constraints>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00:00" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="JYO-ZV-YRk">
                                         <rect key="frame" x="121" y="152" width="55" height="30"/>
@@ -1228,7 +1228,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Description:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTl-C6-BHa">
                                         <rect key="frame" x="61" y="198" width="131" height="21"/>
@@ -1324,7 +1324,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="beginHourTextField" destination="JYO-ZV-YRk" id="piV-yA-fNQ"/>
+                        <outlet property="endHourTextField" destination="DOM-mW-6Yq" id="jF6-aS-79O"/>
                         <outlet property="imagePicker" destination="X4G-fc-X6S" id="JqK-bx-Syx"/>
+                        <outlet property="textView" destination="mRG-Ft-KXz" id="7e3-88-yHb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Etk-Xe-gNI" userLabel="First Responder" sceneMemberID="firstResponder"/>

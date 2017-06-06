@@ -12,7 +12,7 @@ protocol EventViewControllerDelegate{
     func sendEvent( preference : String, description: String?)
 }
 
-class EventViewController: UIViewController, UIPickerViewDelegate {
+class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
     
     var delegate:EventViewControllerDelegate!
     let imageNames = ["pizza","beer","food"]
@@ -22,17 +22,28 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
     var index = 0
     
+    //outlets
+    
     @IBOutlet weak var imagePicker: UIPickerView!
+    
+    @IBOutlet weak var beginHourTextField: UITextField!
+    
+    @IBOutlet weak var endHourTextField: UITextField!
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    //--------------
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        self.beginHourTextField.delegate = self
+        self.endHourTextField.delegate = self
+        self.addDoneButtonOnKeyboard()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        
-       // imagePicker.dataSource = self
-        // Do any additional setup after loading the view.
+
     }
     
     @IBAction func Cancel(_ sender: Any) {
@@ -46,6 +57,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         
         self.view.removeFromSuperview()
     }
+    
 
     // MARK: UIPickerViewDataSource
     
@@ -78,5 +90,54 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         self.index = row
     }
  
+    
+     // MARK: textFields Delegate
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+        
+    }
+    
+    
+    // MARK: functions
+    func addDoneButtonOnKeyboard()
+    {
+        
+        
+        var doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.blackTranslucent
+        
+        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        var done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(EventViewController.doneButtonAction))
+        
+        var items = NSMutableArray()
+        items.add(flexSpace)
+        items.add(done)
+        
+        doneToolbar.items = items as! [UIBarButtonItem]
+        doneToolbar.sizeToFit()
+        
+//        self.textView.inputAccessoryView = doneToolbar
+        self.endHourTextField.inputAccessoryView = doneToolbar
+        self.beginHourTextField.inputAccessoryView = doneToolbar
+//        self.textField.inputAccessoryView = doneToolbar
+        
+    }
+    
+    func doneButtonAction()
+    {
+        self.endHourTextField.resignFirstResponder()
+        self.beginHourTextField.resignFirstResponder()
+    }
 
 }
