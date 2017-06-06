@@ -447,17 +447,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     //MARK: - PinDelegate
-    func transitionToProfile( id: String, event: Event? ){
+    func transitionToProfile( userId: String ){
     
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController
         if let _ = self.selectedUser{
             newViewController.currentUser = self.selectedUser
         }
-        if let _ = event{
-            newViewController.event = event
-        }
-                
         tabBarController?.selectedIndex = 0
     }
     
