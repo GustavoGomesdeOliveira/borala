@@ -33,8 +33,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var likeList = [String]()
     var dislikeList = [String]()
     
-    var friendImage: UIImage!
-    
     var user: User!
     var currentUser: User?
     var event: Event?
@@ -92,14 +90,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.userAgeLabel.text = "Empty"
             }
             self.userGenderLabel.text = user?.gender
-            
-            if friendImage == nil {
-                
-                self.profileImage.image = UIImage(named: "profileImage")
-            } else {
-                
-                self.profileImage.image = friendImage
-            }
             
             
             if (user.likeIds != nil) {
@@ -188,9 +178,14 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.userAgeLabel.text = "Empty"
         }
         
+        if self.user.pic == nil {
+            
+            self.profileImage.image = UIImage(named: "profileImage")
+        } else {
+            
+            self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
+        }
         
-        
-        self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
     }
     
     func didUpdateUser() {
@@ -292,7 +287,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
-        //self.friendImage = nil
         
 
     }
