@@ -186,7 +186,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         self.myLocation = locations.first?.coordinate
         
-        let distanceSpan: CLLocationDegrees = 2000
+        let distanceSpan: CLLocationDegrees = 1000
+
         
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         

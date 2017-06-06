@@ -28,13 +28,12 @@ class PinPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.userNameLabel.text = event?.creatorName
+        self.userImageView.image = UIImage(named: (event?.preference)!)
         if let hora: String = event?.hora{
-//            print(hora)
+
             self.eventScheduleLabel.text = hora
         }
         
-        
-        // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,13 +44,6 @@ class PinPopupViewController: UIViewController {
             self.view.removeFromSuperview()
 
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-       // self.event.
-        // Dispose of any resources that can be recreated.
     }
     
 

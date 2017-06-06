@@ -65,7 +65,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         if currentUser == nil{
             
             self.chatButton.isHidden = true
-            getUser()
+            self.user = getUser()
+            setUserInterface()
             self.editButton.isEnabled = true
             self.editButton.isHidden = false
             self.likeBtn.isHidden = true
@@ -80,6 +81,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             //self.friendListBtn.isHidden = true
             self.user = self.currentUser
+            setUserInterface()
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
             self.userNameLabel.text = user?.name
@@ -156,26 +158,36 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     }
     
     
-    func getUser(){
+    func getUser() -> User{
+        
+        var userToReturn: User!
         
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
-            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            userToReturn = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
             
-            self.userNameLabel.text = user?.name
-            self.userGenderLabel.text = user?.gender
-            let ageString = String(describing: user.age!)
-
-            self.userAgeLabel.text = ageString
-
-            self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
+            
         }
+        
+        return userToReturn
 
+    }
+    
+    func setUserInterface(){
+        
+        self.userNameLabel.text = user?.name
+        self.userGenderLabel.text = user?.gender
+        let ageString = String(describing: user.age!)
+        
+        self.userAgeLabel.text = ageString
+        
+        self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
     }
     
     func didUpdateUser() {
         
-        self.getUser()
+        self.user = self.getUser()
+        setUserInterface()
     }
 
     
