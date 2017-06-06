@@ -425,7 +425,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
     
-    //AQUI WILLIAMBERG
     func saveFacebookFriends(){
         
         DispatchQueue.global(qos: .background).async {
