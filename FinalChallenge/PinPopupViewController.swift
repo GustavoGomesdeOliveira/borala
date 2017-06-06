@@ -20,6 +20,7 @@ class PinPopupViewController: UIViewController {
     var delegate: PinPopupViewControllerDelegate!
     var event: Event!
     
+    @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
@@ -27,6 +28,16 @@ class PinPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.popupView.layer.masksToBounds = false
+        self.popupView.layer.shadowColor = UIColor.black.cgColor
+        self.popupView.layer.shadowOpacity = 0.8
+        self.popupView.layer.shadowOffset = CGSize(width: 1, height: 15)
+        self.popupView.layer.shadowRadius = 15
+        
+        self.popupView.layer.shadowPath = UIBezierPath(rect: self.popupView.bounds).cgPath
+        self.popupView.layer.shouldRasterize = true
+        
         self.userNameLabel.text = event?.creatorName
         self.userImageView.image = UIImage(named: (event?.preference)!)
         if let hora: String = event?.hora{
