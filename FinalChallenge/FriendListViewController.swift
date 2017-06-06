@@ -135,7 +135,8 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             let newViewController = barViewControllers![0] as! ProfileViewController
             
             newViewController.currentUser = self.currentUser
-            newViewController.friendImage = self.friendImageList[indexPath.row]
+            self.currentUser?.pic = UIImagePNGRepresentation(self.friendImageList[indexPath.row])
+
             //newViewController. = self.friendImageList[indexPath.row]
             
             self.tabBarController?.selectedIndex = 0
