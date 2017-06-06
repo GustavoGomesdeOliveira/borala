@@ -37,6 +37,7 @@ class User: NSObject, NSCoding{
         self.pic = pic
         self.rate = rate
         self.preferences = preference
+        
     }
     
     init(withId: String, name:String!, pic: Data!, socialNetworkID: String, gender: String) {

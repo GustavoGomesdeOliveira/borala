@@ -33,11 +33,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var likeList = [String]()
     var dislikeList = [String]()
     
-    var friendImage: UIImage!
-    
     var user: User!
     var currentUser: User?
-    var event: Event?
     
     var tempIdLikeList = ["Teste", "Teste"]
     var tempIdDislikeList = ["Teste", "Teste"]
@@ -65,7 +62,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         if currentUser == nil{
             
             self.chatButton.isHidden = true
-            getUser()
+            self.user = getUser()
+            setUserInterface()
             self.editButton.isEnabled = true
             self.editButton.isHidden = false
             self.likeBtn.isHidden = true
@@ -80,6 +78,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             
             //self.friendListBtn.isHidden = true
             self.user = self.currentUser
+            setUserInterface()
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
             self.userNameLabel.text = user?.name
@@ -90,14 +89,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.userAgeLabel.text = "Empty"
             }
             self.userGenderLabel.text = user?.gender
-            
-            if friendImage == nil {
-                
-                self.profileImage.image = UIImage(named: "profileImage")
-            } else {
-                
-                self.profileImage.image = friendImage
-            }
             
             
             if (user.likeIds != nil) {
@@ -156,26 +147,50 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     }
     
     
-    func getUser(){
+    func getUser() -> User{
+        
+        var userToReturn: User!
         
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
-            user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
+            userToReturn = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
             
-            self.userNameLabel.text = user?.name
-            self.userGenderLabel.text = user?.gender
+            
+        }
+        
+        return userToReturn
+
+    }
+    
+    func setUserInterface(){
+        
+        self.userNameLabel.text = user?.name
+        self.userGenderLabel.text = user?.gender
+        
+        if self.user.age != nil {
+            
             let ageString = String(describing: user.age!)
-
+            
             self.userAgeLabel.text = ageString
-
+        } else {
+            
+            self.userAgeLabel.text = "Empty"
+        }
+        
+        if self.user.pic == nil {
+            
+            self.profileImage.image = UIImage(named: "profileImage")
+        } else {
+            
             self.profileImage.image = UIImage(data:(user?.pic)!,scale:1.0)
         }
-
+        
     }
     
     func didUpdateUser() {
         
-        self.getUser()
+        self.user = self.getUser()
+        setUserInterface()
     }
 
     
@@ -183,15 +198,28 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        FirebaseHelper.createChat(partnerId: (self.event?.creatorId!)!, completionHandler: {
-            chatId in
-            if let chatIdCreated = chatId{
-                newViewController.chatId = chatIdCreated
-                DispatchQueue.main.async {
-                    self.present(newViewController, animated: true, completion: nil)
+        if let creatorId = self.currentUser?.id{
+            FirebaseHelper.createChat(partnerId: creatorId, completionHandler: {
+                chatId in
+                if let chatIdCreated = chatId{
+                    newViewController.chatId = chatIdCreated
+                    DispatchQueue.main.async {
+                        self.present(newViewController, animated: true, completion: nil)
+                    }
                 }
-            }
-        })
+            })
+        }
+        else{
+            FirebaseHelper.createChat(partnerId: user.id, completionHandler: {
+                chatId in
+                if let chatIdCreated = chatId{
+                    newViewController.chatId = chatIdCreated
+                    DispatchQueue.main.async {
+                        self.present(newViewController, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -258,7 +286,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
-        //self.friendImage = nil
         
 
     }

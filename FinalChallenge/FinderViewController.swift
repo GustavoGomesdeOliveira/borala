@@ -271,13 +271,30 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             popUpPinVC.event = event
             
+            DispatchQueue.main.async {
+                
                 FirebaseHelper.getUserData(userID: (annotation?.event?.creatorId)!, completionHandler: {
-                userFromFirebase in
+                    userFromFirebase in
                     if userFromFirebase.name != nil{
                         self.selectedUser = userFromFirebase
                     }
+                    
+                    FirebaseHelper.getPictureProfile(picAddress: (self.selectedUser?.picUrl)!, completitionHandler: {
+                        
+                        imageFromFirebase in
+                        
+                        if let imageReceived = imageFromFirebase{
+                            
+                            self.selectedUser?.pic = imageReceived
+
+                        }
+                        
+                    })
                 })
+                
+            }
             
+
             self.addChildViewController(popUpPinVC)
             popUpPinVC.delegate = self
             popUpPinVC.view.frame = self.view.frame
@@ -430,17 +447,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     //MARK: - PinDelegate
-    func transitionToProfile( id: String, event: Event? ){
+    func transitionToProfile( userId: String ){
     
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController
         if let _ = self.selectedUser{
             newViewController.currentUser = self.selectedUser
         }
-        if let _ = event{
-            newViewController.event = event
-        }
-                
         tabBarController?.selectedIndex = 0
     }
     
