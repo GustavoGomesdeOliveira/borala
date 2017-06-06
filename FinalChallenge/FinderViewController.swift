@@ -219,11 +219,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
             
             annotationView?.annotation = myAnnotation
+            
             if let annotationView = annotationView {
                 annotationView.canShowCallout = true
                 annotationView.image = UIImage(named: "mypin1")
 
             }
+            annotationView?.isEnabled = false
             
             return annotationView
         }
@@ -301,12 +303,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             self.view.addSubview(popUpPinVC.view)
             popUpPinVC.didMove(toParentViewController: self)
-        }
+            }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let placemark = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
-        // The map item is the restaurant location
         let mapItem = MKMapItem(placemark: placemark)
         
         let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
