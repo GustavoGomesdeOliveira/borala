@@ -30,6 +30,20 @@ class FirebaseHelper{
         }
     }
     
+    static func saveThumbnail(userId : String, thumbnail: Data, completionHandler:((_ error: Error?) -> ())? ){
+        let profilePicRef = rootRefStorage.child("/users/\(userId)/profileThumbnail.jpg")
+        let _ = profilePicRef.put(thumbnail, metadata: nil) {
+            metadata, error in
+            
+            if let downloadUrl = metadata!.downloadURL()?.absoluteString{
+                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["thumbnailURL": downloadUrl])
+            }
+            if let errorOnPutData = completionHandler{
+                errorOnPutData(error)
+            }
+        }
+    }
+    
     static func saveUser(user: User){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
         let picRef  = idRef.child("pic/profilePic.jpg")
