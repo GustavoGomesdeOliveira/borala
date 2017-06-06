@@ -37,7 +37,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     var user: User!
     var currentUser: User?
-    var event: Event?
     
     var tempIdLikeList = ["Teste", "Teste"]
     var tempIdDislikeList = ["Teste", "Teste"]
@@ -204,7 +203,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let newViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        if let creatorId = self.event?.creatorId{
+        if let creatorId = self.currentUser?.id{
             FirebaseHelper.createChat(partnerId: creatorId, completionHandler: {
                 chatId in
                 if let chatIdCreated = chatId{
