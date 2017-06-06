@@ -216,15 +216,6 @@ class FirebaseHelper{
                         rootRefDatabase.child("users/" + partnerId + "/partnersIds").updateChildValues([userId: chatId.key])
                         rootRefDatabase.child("users/" + userId + "/chatsId").updateChildValues([chatId.key: true])
                         rootRefDatabase.child("users/" + partnerId + "/chatsId").updateChildValues([chatId.key: true])
-
-
-//                        let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                        rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                        rootRefDatabase.child("users/" + userId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + userId + "/chatsId").updateChildValues([chatId.key: true])
-                        
-//                        rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
                         
                         self.addChatsMembers(chatId: chatId.key, userId: partnerId)
                         self.addChatsMembers(chatId: chatId.key, userId: userId)
@@ -236,17 +227,6 @@ class FirebaseHelper{
                     }
                 }
                 else{
-//                    let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                    rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    self.addChatsMembers(chatId: chatId.key, userId: event.creatorId)
-//                    self.addChatsMembers(chatId: chatId.key, userId: userId)
-                    
                     let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
                     rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
                     
