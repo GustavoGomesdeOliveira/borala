@@ -39,15 +39,13 @@ class EventViewController: UIViewController, UIPickerViewDelegate {
         self.view.removeFromSuperview()
     }
     
-    @IBAction func Done(_ sender: UIBarButtonItem) {
-        
+    @IBAction func createEvent(_ sender: UIButton) {
         let preference = self.imageNames[self.index]
         
         delegate?.sendEvent(preference: preference, description: eventDescription)
         
         self.view.removeFromSuperview()
     }
-    
 
     // MARK: UIPickerViewDataSource
     
