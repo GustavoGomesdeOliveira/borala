@@ -20,7 +20,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
-    let invitation: [String] = ["Hello, wanna share a meal?", "Hi, lets go dinner?", "Hello, do you want to eat pizza?"]
+    let invitation: [String] = ["Hello, wanna share a meal?", "Hi, lets go dinner?", "Hello, do you want to eat pizza?", "Hi, are you up to go lunch?"]
     
     var index = 0
     
@@ -32,7 +32,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     @IBOutlet weak var endHourTextField: UITextField!
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var invitationPickerView: UIPickerView!
     
     //--------------
 //    let button = UIButton()
@@ -41,17 +41,12 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        invitationPickerView.delegate = self
         self.beginHourTextField.delegate = self
         self.endHourTextField.delegate = self
 //        self.addDoneButtonOnKeyboard()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-//        
-//        button.setTitle("Return", for: UIControlState())
-//        button.setTitleColor(UIColor.black, for: UIControlState())
-//        button.frame = CGRect(x: 0, y: 163, width: 106, height: 53)
-//        button.adjustsImageWhenHighlighted = false
-//        button.addTarget(self, action: #selector(EventViewController.done), for: UIControlEvents.touchUpInside)
-        
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tap)
 
@@ -77,7 +72,13 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        if pickerView == self.imagePicker {
+            //pickerView1
+            return self.pickerData.count
+        } else {
+            //pickerView2
+            return self.invitation.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
