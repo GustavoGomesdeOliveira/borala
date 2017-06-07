@@ -28,13 +28,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         FirebaseHelper.getChats(completionHandler: {
             chatsFromFirebase in
             self.chat = chatsFromFirebase
-            DispatchQueue.main.async {
-                if self.flagToReload {
-                    
-                    self.chatTableView.reloadData()
-
-                }
-            }
+            
         })
     }
     
