@@ -28,7 +28,8 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         super.viewDidLoad()
         
-        self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton.png"), style: .plain, target: self, action: #selector(self.backAction))
+        
+        self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back",style: .plain, target:self, action: #selector(self.backAction))
     
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

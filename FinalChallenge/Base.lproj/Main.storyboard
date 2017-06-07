@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -621,6 +621,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6yw-PS-qdU">
+                                <rect key="frame" x="0.0" y="24" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6yw-PS-qdU" secondAttribute="height" multiplier="8:1" id="aIn-D6-IaK"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-pN-fed">
                                 <rect key="frame" x="256" y="510" width="64" height="58"/>
                                 <constraints>
@@ -632,10 +638,14 @@
                                     <action selector="send:" destination="bf8-Be-Bcy" eventType="touchUpInside" id="q2T-ew-Mv3"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" backIndicatorImage="BackButton" translatesAutoresizingMaskIntoConstraints="NO" id="mhU-JZ-IVd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <navigationBar opaque="NO" contentMode="scaleToFill" translucent="NO" backIndicatorImage="BackButton" translatesAutoresizingMaskIntoConstraints="NO" id="mhU-JZ-IVd">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="A3s-zA-KT7"/>
+                                </constraints>
                                 <items>
-                                    <navigationItem title="Chat" id="dHW-CX-2Ul"/>
+                                    <navigationItem id="dHW-CX-2Ul"/>
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="REQ-56-nB5">
@@ -666,18 +676,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="QJC-6A-0Vf" secondAttribute="trailing" constant="37" id="3A3-Ht-s1T"/>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="C3A-17-Vyv"/>
+                            <constraint firstAttribute="trailing" secondItem="6yw-PS-qdU" secondAttribute="trailing" id="E7S-4D-Tg7"/>
                             <constraint firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" id="GYx-Ce-zNv"/>
                             <constraint firstItem="QJC-6A-0Vf" firstAttribute="top" secondItem="3ci-pN-fed" secondAttribute="top" id="Gke-ue-sR2"/>
+                            <constraint firstItem="6yw-PS-qdU" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="HEA-0f-CUP"/>
                             <constraint firstItem="QJC-6A-0Vf" firstAttribute="leading" secondItem="REQ-56-nB5" secondAttribute="leading" id="OlV-TO-h2p"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="trailing" secondItem="REQ-56-nB5" secondAttribute="trailing" constant="4" id="PNa-0Y-2ix"/>
                             <constraint firstItem="QJC-6A-0Vf" firstAttribute="bottom" secondItem="QMi-FU-o9W" secondAttribute="top" id="PyN-B5-y3r"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="bottom" secondItem="REQ-56-nB5" secondAttribute="top" constant="-51" id="cEI-Sp-OVe"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="leading" secondItem="REQ-56-nB5" secondAttribute="leading" id="dYY-f5-NmX"/>
                             <constraint firstItem="QJC-6A-0Vf" firstAttribute="top" secondItem="REQ-56-nB5" secondAttribute="bottom" constant="8" symbolic="YES" id="dkO-K1-4Pl"/>
+                            <constraint firstAttribute="trailing" secondItem="mhU-JZ-IVd" secondAttribute="trailing" id="giS-aq-Pjf"/>
                             <constraint firstItem="QMi-FU-o9W" firstAttribute="top" secondItem="3ci-pN-fed" secondAttribute="bottom" id="imw-sH-eag"/>
+                            <constraint firstItem="6yw-PS-qdU" firstAttribute="top" secondItem="gUW-f4-WcG" secondAttribute="bottom" constant="4" id="koj-LF-itm"/>
+                            <constraint firstItem="REQ-56-nB5" firstAttribute="top" secondItem="mhU-JZ-IVd" secondAttribute="bottom" constant="31" id="kyB-lL-b7A"/>
                             <constraint firstItem="REQ-56-nB5" firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" constant="-4" id="nLf-Uc-pxi"/>
                             <constraint firstItem="QJC-6A-0Vf" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="qK8-7T-4h1"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="top" secondItem="Zqy-KX-fIQ" secondAttribute="top" id="rH1-vJ-HDv"/>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="top" secondItem="gUW-f4-WcG" secondAttribute="bottom" id="wtp-RG-Myb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chat" image="profile1" id="hXw-6S-EY1"/>
