@@ -20,6 +20,8 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
+    let invitation: [String] = ["Hello, wanna share a meal?", "Hi, lets go dinner?", "Hello, do you want to eat pizza?"]
+    
     var index = 0
     
     //outlets
@@ -33,7 +35,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     @IBOutlet weak var textView: UITextView!
     
     //--------------
-    
+//    let button = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +43,17 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
         imagePicker.delegate = self
         self.beginHourTextField.delegate = self
         self.endHourTextField.delegate = self
-        self.addDoneButtonOnKeyboard()
+//        self.addDoneButtonOnKeyboard()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+//        
+//        button.setTitle("Return", for: UIControlState())
+//        button.setTitleColor(UIColor.black, for: UIControlState())
+//        button.frame = CGRect(x: 0, y: 163, width: 106, height: 53)
+//        button.adjustsImageWhenHighlighted = false
+//        button.addTarget(self, action: #selector(EventViewController.done), for: UIControlEvents.touchUpInside)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        self.view.addGestureRecognizer(tap)
 
     }
     
@@ -92,6 +103,10 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
  
     
      // MARK: textFields Delegate
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        NotificationCenter.default.addObserver(self, selector: #selector(EventViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
@@ -110,34 +125,59 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     
     // MARK: functions
-    func addDoneButtonOnKeyboard()
-    {
-        
-        
-        var doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        doneToolbar.barStyle = UIBarStyle.blackTranslucent
-        
-        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        var done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(EventViewController.doneButtonAction))
-        
-        var items = NSMutableArray()
-        items.add(flexSpace)
-        items.add(done)
-        
-        doneToolbar.items = items as! [UIBarButtonItem]
-        doneToolbar.sizeToFit()
-        
-//        self.textView.inputAccessoryView = doneToolbar
-        self.endHourTextField.inputAccessoryView = doneToolbar
-        self.beginHourTextField.inputAccessoryView = doneToolbar
-//        self.textField.inputAccessoryView = doneToolbar
-        
+//    func addDoneButtonOnKeyboard()
+//    {
+//        
+//        
+//        var doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+//        doneToolbar.barStyle = UIBarStyle.blackTranslucent
+//        
+//        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+//        var done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(EventViewController.doneButtonAction))
+//        
+//        var items = NSMutableArray()
+//        items.add(flexSpace)
+//        items.add(done)
+//        
+//        doneToolbar.items = items as! [UIBarButtonItem]
+//        doneToolbar.sizeToFit()
+//        
+////        self.textView.inputAccessoryView = doneToolbar
+//        self.endHourTextField.inputAccessoryView = doneToolbar
+//        self.beginHourTextField.inputAccessoryView = doneToolbar
+////        self.textField.inputAccessoryView = doneToolbar
+//        
+//    }
+//    
+//    func doneButtonAction()
+//    {
+//        self.endHourTextField.resignFirstResponder()
+//        self.beginHourTextField.resignFirstResponder()
+//    }
+
+//    func done(){
+//        self.endHourTextField.resignFirstResponder()
+//        self.beginHourTextField.resignFirstResponder()
+//    }
+//    
+//    func keyboardWillShow(_ note : Notification) -> Void{
+//        DispatchQueue.main.async { () -> Void in
+//            self.button.isHidden = false
+//            let keyBoardWindow = UIApplication.shared.windows.last
+//            self.button.frame = CGRect(x: 0, y: (keyBoardWindow?.frame.size.height)!-53, width: 106, height: 53)
+//            keyBoardWindow?.addSubview(self.button)
+//            keyBoardWindow?.bringSubview(toFront: self.button)
+//            UIView.animate(withDuration: (((note.userInfo! as NSDictionary).object(forKey: UIKeyboardAnimationCurveUserInfoKey) as AnyObject).doubleValue)!, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+//                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: 0)
+//            }, completion: { (complete) -> Void in
+////                print("Complete")
+//            })
+//        }
+//    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
-    func doneButtonAction()
-    {
-        self.endHourTextField.resignFirstResponder()
-        self.beginHourTextField.resignFirstResponder()
-    }
-
 }
