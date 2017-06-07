@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //self.enableRemoteNotificationFeatures()
         //send token to firebase
-        //FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         print("registrou \(deviceToken)")
     }
     
@@ -200,7 +200,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         self.saveFacebookFriends()
                     }
                 })
-                
                 
             }
             

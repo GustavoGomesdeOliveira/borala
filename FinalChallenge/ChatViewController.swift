@@ -12,34 +12,41 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBOutlet weak var chatTableView: UITableView!
+    
     var flagToReload = false
-    var chat: [Chat]?
+    var chats = [Chat](){
+        willSet{
+            if !newValue.isEmpty{
+                FirebaseHelper.getPicToChat(chatId: (newValue.last?.id)!, completionHandler: {
+                    picData in
+                    if let picData = picData{
+                        newValue.last?.pic = picData
+                        DispatchQueue.main.async {
+                            self.chatTableView.reloadData()
+                        }
+                    }
+                })
+            }
+        }
+    }
     
     override func viewDidLoad() {
         self.chatTableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.flagToReload = true
     }
     
-    
-    func loadChats(){
-        
-        self.chat = [Chat]()
-        
+    override func viewWillAppear(_ animated: Bool) {
         FirebaseHelper.getChats(completionHandler: {
-            chatsFromFirebase in
-            self.chat = chatsFromFirebase
+            chatFromFirebase in
+                self.chats.append( chatFromFirebase )
             DispatchQueue.main.async {
-                if self.flagToReload {
-                    
-                    self.chatTableView.reloadData()
-
-                }
+                self.chatTableView.reloadData()
             }
         })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         FirebaseHelper.removeChatObserver()
+        self.chats.removeAll()
     }
     
     
@@ -48,15 +55,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chat!.count
+        return self.chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell") as! CustomChatCell
-        
-        cell.personImage.image = UIImage.init(data: (self.chat?[indexPath.row].pic!)! )
-        cell.personName.text = self.chat?[indexPath.row].lastMessage.text
+        if let picData = self.chats[indexPath.row].pic{
+            cell.personImage.image = UIImage.init(data: picData )
+        }
+        cell.personName.text = self.chats[indexPath.row].lastMessage.text
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true
@@ -78,11 +86,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        chatViewController.chatId = self.chat?[indexPath.row].id
+        chatViewController.chatId = self.chats[indexPath.row].id
         self.present(chatViewController, animated: true, completion: nil)
-        
-        
-        
         
     }
 }
