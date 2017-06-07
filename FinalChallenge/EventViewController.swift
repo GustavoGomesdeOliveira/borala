@@ -16,13 +16,14 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     var delegate:EventViewControllerDelegate!
     let imageNames = ["pizza","beer","food"]
-    let eventDescription = "default description"
+    var eventDescription = "default description"
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
     let invitation: [String] = ["Hello, wanna share a meal?", "Hi, lets go dinner?", "Hello, do you want to eat pizza?", "Hi, are you up to go lunch?"]
     
-    var index = 0
+    var imageIndex = 0
+    var invitationIndex = 0
     
     //outlets
     
@@ -35,7 +36,6 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     @IBOutlet weak var invitationPickerView: UIPickerView!
     
     //--------------
-//    let button = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,8 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     }
     
     @IBAction func createEvent(_ sender: UIButton) {
-        let preference = self.imageNames[self.index]
+        let preference = self.imageNames[self.imageIndex]
+        self.eventDescription = self.invitation[invitationIndex]
         
         delegate?.sendEvent(preference: preference, description: eventDescription)
         
@@ -82,24 +83,50 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return CGFloat(70)
+        
+        if pickerView == self.imagePicker {
+            //pickerView1
+            return CGFloat(70)
+        } else {
+            //pickerView2
+            return CGFloat(20)
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
    
+        if pickerView == self.imagePicker {
+
+            let myView = UIView(frame: CGRect(x: 0 , y: 0, width: pickerView.bounds.width, height: 60))
+            
+            let myImageView = UIImageView(frame: CGRect(x: (pickerView.bounds.width/2)-20, y: 0, width: 50, height: 50))
+            
+            myImageView.image = pickerData[row]
+            myView.addSubview(myImageView)
+            return myView
+            
+        } else {
+            
+            let pickerLabel = UILabel()
+            pickerLabel.textColor = UIColor.black
+            pickerLabel.text = invitation[row]
+            pickerLabel.font = UIFont(name: "Arial-BoldMT", size: 14)
+            pickerLabel.textAlignment = NSTextAlignment.center
+            return pickerLabel
+        }
         
-        let myView = UIView(frame: CGRect(x: 0 , y: 0, width: pickerView.bounds.width, height: 60))
         
-        let myImageView = UIImageView(frame: CGRect(x: (pickerView.bounds.width/2)-20, y: 0, width: 50, height: 50))
-        
-        myImageView.image = pickerData[row]
-        myView.addSubview(myImageView)
-        return myView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        self.index = row
+        
+        if pickerView == self.imagePicker {
+            self.imageIndex = row
+        }else {
+            self.invitationIndex = row
+        }
     }
  
     
