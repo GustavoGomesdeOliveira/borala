@@ -37,7 +37,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         FirebaseHelper.getChats(completionHandler: {
             chatFromFirebase in
-                self.chats.append( chatFromFirebase )
+            let newChat = self.chats.filter{ $0.id == chatFromFirebase.id}
+            if newChat.isEmpty{ self.chats.append(chatFromFirebase)}
+            else{
+                self.chats = self.chats.filter{$0.id != chatFromFirebase.id}
+                self.chats.append(chatFromFirebase)
+            }
             DispatchQueue.main.async {
                 self.chatTableView.reloadData()
             }

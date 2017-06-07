@@ -8,15 +8,22 @@
 
 import Foundation
 
-class Chat{
+class Chat: Hashable{
     var id: String!
     var lastMessage: Message!
     var pic: Data?
+    var hashValue: Int{
+        return Int(id)!
+    }
     
     init(id: String, pic: Data?, lastMessage: Message) {
         self.id = id
         self.pic = pic
         self.lastMessage = lastMessage
+    }
+    
+    static func == (lhs: Chat, rhs: Chat) -> Bool {
+        return lhs.id == rhs.id
     }
     
 }

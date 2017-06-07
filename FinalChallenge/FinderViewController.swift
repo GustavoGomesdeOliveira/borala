@@ -148,23 +148,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
 
         DispatchQueue.main.async {
-            
-            //self.loadChat()
             self.loadFriends()
             
         }
         
-        
     }
-    
-    
-//    func loadChat(){
-//        
-//        let barViewControllers = self.tabBarController?.viewControllers
-//        let newViewController = barViewControllers![2] as! ChatViewController
-//        
-//        newViewController.loadChats()
-//    }
     
     func loadFriends(){
         let barViewControllers = self.tabBarController?.viewControllers
