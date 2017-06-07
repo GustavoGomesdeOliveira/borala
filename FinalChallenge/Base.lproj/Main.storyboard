@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -616,17 +616,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QJC-6A-0Vf">
-                                <rect key="frame" x="0.0" y="510" width="316" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="5Rn-pv-Zyh"/>
-                                    <constraint firstAttribute="width" constant="316" id="Hy0-Ku-rkf"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="510" width="267" height="58"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-pN-fed">
-                                <rect key="frame" x="311" y="510" width="64" height="58"/>
+                                <rect key="frame" x="256" y="510" width="64" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="CAR-X1-VbD"/>
                                     <constraint firstAttribute="width" constant="64" id="iiJ-yW-0o6"/>
@@ -637,13 +633,13 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" backIndicatorImage="BackButton" translatesAutoresizingMaskIntoConstraints="NO" id="mhU-JZ-IVd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Chat" id="dHW-CX-2Ul"/>
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="REQ-56-nB5">
-                                <rect key="frame" x="0.0" y="44" width="375" height="458"/>
+                                <rect key="frame" x="0.0" y="95" width="316" height="407"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S3T-fl-ceH">
                                     <size key="itemSize" width="50" height="50"/>
@@ -669,18 +665,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="REQ-56-nB5" firstAttribute="leading" secondItem="QJC-6A-0Vf" secondAttribute="leading" id="1KG-VW-o8N"/>
-                            <constraint firstItem="QMi-FU-o9W" firstAttribute="top" secondItem="QJC-6A-0Vf" secondAttribute="bottom" id="91O-TW-yIo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QJC-6A-0Vf" secondAttribute="trailing" constant="37" id="3A3-Ht-s1T"/>
                             <constraint firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" id="GYx-Ce-zNv"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="trailing" secondItem="REQ-56-nB5" secondAttribute="trailing" id="PNa-0Y-2ix"/>
-                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="bottom" secondItem="REQ-56-nB5" secondAttribute="top" id="cEI-Sp-OVe"/>
-                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="cYt-NY-F1y"/>
+                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="top" secondItem="3ci-pN-fed" secondAttribute="top" id="Gke-ue-sR2"/>
+                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="leading" secondItem="REQ-56-nB5" secondAttribute="leading" id="OlV-TO-h2p"/>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="trailing" secondItem="REQ-56-nB5" secondAttribute="trailing" constant="4" id="PNa-0Y-2ix"/>
+                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="bottom" secondItem="QMi-FU-o9W" secondAttribute="top" id="PyN-B5-y3r"/>
+                            <constraint firstItem="mhU-JZ-IVd" firstAttribute="bottom" secondItem="REQ-56-nB5" secondAttribute="top" constant="-51" id="cEI-Sp-OVe"/>
                             <constraint firstItem="mhU-JZ-IVd" firstAttribute="leading" secondItem="REQ-56-nB5" secondAttribute="leading" id="dYY-f5-NmX"/>
+                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="top" secondItem="REQ-56-nB5" secondAttribute="bottom" constant="8" symbolic="YES" id="dkO-K1-4Pl"/>
                             <constraint firstItem="QMi-FU-o9W" firstAttribute="top" secondItem="3ci-pN-fed" secondAttribute="bottom" id="imw-sH-eag"/>
-                            <constraint firstItem="3ci-pN-fed" firstAttribute="leading" secondItem="QJC-6A-0Vf" secondAttribute="trailing" constant="-5" id="jc7-YN-16O"/>
-                            <constraint firstItem="REQ-56-nB5" firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" id="nLf-Uc-pxi"/>
+                            <constraint firstItem="REQ-56-nB5" firstAttribute="trailing" secondItem="3ci-pN-fed" secondAttribute="trailing" constant="-4" id="nLf-Uc-pxi"/>
+                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="leading" secondItem="Zqy-KX-fIQ" secondAttribute="leading" id="qK8-7T-4h1"/>
                             <constraint firstItem="mhU-JZ-IVd" firstAttribute="top" secondItem="Zqy-KX-fIQ" secondAttribute="top" id="rH1-vJ-HDv"/>
-                            <constraint firstItem="QJC-6A-0Vf" firstAttribute="top" secondItem="REQ-56-nB5" secondAttribute="bottom" constant="8" symbolic="YES" id="y6h-Dc-wFE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chat" image="profile1" id="hXw-6S-EY1"/>
@@ -693,7 +690,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knw-yK-IhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5136.8000000000002" y="286.50674662668666"/>
+            <point key="canvasLocation" x="5135.625" y="286.26760563380282"/>
         </scene>
         <!--Finder-->
         <scene sceneID="TiS-EX-3UO">
