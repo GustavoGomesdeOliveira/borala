@@ -24,6 +24,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     var imageIndex = 0
     var invitationIndex = 0
+    var textFieldToChange = 0
     
     //outlets
     
@@ -39,6 +40,8 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        
+//        self.dateFormatter.dateFormat = "HH:mm"
         
         imagePicker.delegate = self
         invitationPickerView.delegate = self
@@ -59,6 +62,11 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     @IBAction func createEvent(_ sender: UIButton) {
         let preference = self.imageNames[self.imageIndex]
         self.eventDescription = self.invitation[invitationIndex]
+//        if self.beginHourTextField.text == "" {
+//            let beginHour = self.beginHourTextField.placeholder
+//            print(beginHour)
+//        }else{
+//        }
         
         delegate?.sendEvent(preference: preference, description: eventDescription)
         
@@ -132,9 +140,27 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
      // MARK: textFields Delegate
 //    
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        NotificationCenter.default.addObserver(self, selector: #selector(EventViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+       
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePickerMode.time
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        
+        if textField == self.beginHourTextField {
+            beginHourTextField.inputView = datePickerView
+            self.beginHourTextField.text = dateFormatter.string(from: datePickerView.date)
+            self.textFieldToChange = 0
+        }else{
+            endHourTextField.inputView = datePickerView
+            self.endHourTextField.text = dateFormatter.string(from: datePickerView.date)
+
+            self.textFieldToChange = 1
+        }
+        
+        datePickerView.addTarget(self, action: #selector(EventViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
+        
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
@@ -202,6 +228,19 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
 //            })
 //        }
 //    }
+    
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+ 
+        dateFormatter.timeStyle = .short
+        if self.textFieldToChange == 0{
+            self.beginHourTextField.text = dateFormatter.string(from: sender.date)
+        }else {
+            self.endHourTextField.text = dateFormatter.string(from: sender.date)
+        }
+        
+    }
     
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
