@@ -19,6 +19,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var chatId: String!
     var messages = [Message]()
+    var keyBoardHeight: CGFloat!
     
     let containerView =  UIView()
     
@@ -37,7 +38,12 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.chatCollection.alwaysBounceVertical = true
         self.chatCollection.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
         self.chatCollection.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-
+        self.keyBoardHeight = CGFloat()
+        self.keyBoardHeight = 0.0
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatController.handleTap))
+        tap.numberOfTapsRequired = 1
+        self.chatCollection.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,6 +171,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
                 self.view.frame.origin.y -= keyboardSize.height
+                self.keyBoardHeight = keyboardSize.height
             }
         }
     }
@@ -173,9 +180,20 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
+                self.keyBoardHeight = 0.0
             }
         }
     }
 
+    func handleTap(){
+        
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y += self.keyBoardHeight
+            self.keyBoardHeight = 0.0
+            self.view.endEditing(true)
+        }
+
+        
+    }
     
 }

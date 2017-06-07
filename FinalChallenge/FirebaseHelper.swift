@@ -216,15 +216,6 @@ class FirebaseHelper{
                         rootRefDatabase.child("users/" + partnerId + "/partnersIds").updateChildValues([userId: chatId.key])
                         rootRefDatabase.child("users/" + userId + "/chatsId").updateChildValues([chatId.key: true])
                         rootRefDatabase.child("users/" + partnerId + "/chatsId").updateChildValues([chatId.key: true])
-
-
-//                        let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                        rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                        rootRefDatabase.child("users/" + userId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + userId + "/chatsId").updateChildValues([chatId.key: true])
-                        
-//                        rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
                         
                         self.addChatsMembers(chatId: chatId.key, userId: partnerId)
                         self.addChatsMembers(chatId: chatId.key, userId: userId)
@@ -236,17 +227,6 @@ class FirebaseHelper{
                     }
                 }
                 else{
-//                    let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                    rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    self.addChatsMembers(chatId: chatId.key, userId: event.creatorId)
-//                    self.addChatsMembers(chatId: chatId.key, userId: userId)
-                    
                     let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
                     rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
                     
@@ -264,38 +244,77 @@ class FirebaseHelper{
     }
 
     
-    static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .value, with: {
+//    static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
+//        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .childAdded, with:{
+//            snapshot in
+//            var chatsFromFirebase = [Chat]()
+//            if let dict = snapshot.value as? [String: Bool]{
+//                let chatIds = Array(dict.keys)
+//                for chatId in chatIds{
+//                    rootRefDatabase.child("chats/").child(chatId).observeSingleEvent(of: .value, with: {
+//                        snapshotChat in
+//                        if let chatDict = snapshotChat.value as? [String: Any]{
+//                            rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
+//                                chatMembersSnapshot in
+//                                if let chatMembersDictionary = chatMembersSnapshot.value as? [String: String]{
+//                                    let chatMembersKeys = Array(chatMembersDictionary.keys)
+//                                    for chatMembersKey in chatMembersKeys{
+//                                        if chatMembersKey != self.firebaseUser?.uid{
+//                                            //get pic..
+//                                            self.getPictureProfile(picAddress: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
+//                                                pictureData in
+//                                                chatsFromFirebase.append(Chat.init(id: chatId, pic: pictureData,
+//                                                                lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
+//                                                                    text: chatDict["text"] as! String,
+//                                                                    timeStamp:chatDict["timeStamp"] as! Float)))
+//                                                completionHandler(chatsFromFirebase)
+//                                                
+//                                            })
+//                                        }
+//                                    }
+//                                }
+//                            })
+//                        }
+//                    })
+//                }
+//            }
+//        })
+//    }
+    
+    static func getChats(completionHandler: @escaping (_ chat: Chat) -> () ){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/partnersIds").observe( .value, with: {
             snapshot in
-            var chatsFromFirebase = [Chat]()
-            if let dict = snapshot.value as? [String: Bool]{
-                let chatIds = Array(dict.keys)
-                for chatId in chatIds{
-                    rootRefDatabase.child("chats/").child(chatId).observeSingleEvent(of: .value, with: {
-                        snapshotChat in
-                        if let chatDict = snapshotChat.value as? [String: Any]{
-                            rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
-                                chatMembersSnapshot in
-                                if let chatMembersDictionary = chatMembersSnapshot.value as? [String: String]{
-                                    let chatMembersKeys = Array(chatMembersDictionary.keys)
-                                    for chatMembersKey in chatMembersKeys{
-                                        if chatMembersKey != self.firebaseUser?.uid{
-                                            //get pic..
-                                            self.getPictureProfile(picAddress: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
-                                                pictureData in
-                                                chatsFromFirebase.append(Chat.init(id: chatId, pic: pictureData,
-                                                                                   lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
-                                                                                                        text: chatDict["text"] as! String,
-                                                                                                        timeStamp:chatDict["timeStamp"] as! Float)))
-                                                completionHandler(chatsFromFirebase)
-                                                
-                                            })
-                                        }
-                                    }
-                                }
-                            })
+            if let partnersDictionary = snapshot.value as? [String: String]{
+                for (key, value) in partnersDictionary{
+                    rootRefDatabase.child("chats/" + value).observe( .value, with: {
+                        snapshotChats in
+                        if let chatsDictionary = snapshotChats.value as? [String: Any]{
+                            let chat = Chat(id: value, pic: nil,
+                                            lastMessage: Message(id: chatsDictionary["id"] as! String, senderId: chatsDictionary["senderId"] as! String, senderName: chatsDictionary["senderName"] as! String,
+                                                text: chatsDictionary["text"] as! String,
+                                                timeStamp: chatsDictionary["timeStamp"] as! Float))
+                            completionHandler(chat)
                         }
                     })
+                }
+            }
+        })
+    }
+    
+    static func getPicToChat(chatId: String, completionHandler: @escaping (_ picChat: Data?) -> ()){
+        rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
+            chatMembersSnapshot in
+            if let chatMembersDictionary = chatMembersSnapshot.value as? [String: String]{
+                let chatMembersKeys = Array(chatMembersDictionary.keys)
+                for chatMembersKey in chatMembersKeys{
+                    if chatMembersKey != self.firebaseUser?.uid{
+                        //get pic..
+                        self.getPictureProfile(picAddress: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
+                            pictureData in
+                            completionHandler(pictureData)
+                                                            
+                        })
+                    }
                 }
             }
         })
@@ -309,6 +328,7 @@ class FirebaseHelper{
             }
         })
     }
+    
     static func deleteChat(completionHandler: @escaping (_ chatsId: String) -> ()){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe(.childRemoved, with: {
             snapshot in
@@ -335,7 +355,7 @@ class FirebaseHelper{
     }
 
     static func messageWasAdded(chatId: String, completionHandler: @escaping(_ message: Message) -> () ){
-        rootRefDatabase.child("messages/" + chatId).observe(.childAdded, with: {
+        rootRefDatabase.child("messages/" + chatId).observe( .childAdded, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any]{
                 let msg = Message(id: "", senderId: dict["senderId"] as! String, senderName: dict["senderName"] as! String,

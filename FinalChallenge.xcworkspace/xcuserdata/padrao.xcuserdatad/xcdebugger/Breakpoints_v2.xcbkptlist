@@ -41,13 +41,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "518020358.289812"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "518443791.811108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
-            landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "createChat(partnerId:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.createChat (partnerId : Swift.String, completionHandler : (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "518530762.696541"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "206"
+                  endingLineNumber = "206"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.createChat (partnerId : Swift.String, completionHandler : (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "518530762.699243"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "206"
+                  endingLineNumber = "206"
+                  offsetFromSymbolStart = "272">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "518443805.786882"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "createChat(partnerId:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "518444142.77878"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "createChat(partnerId:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "518020358.289812"
+            timestampString = "518447697.862285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
             landmarkName = "messaging(_:didReceive:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,13 +138,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "518020358.289812"
+            timestampString = "518447713.169974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "applicationReceivedRemoteMessage(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/AppDelegate.swift"
+            timestampString = "518447792.584584"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
+            landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/AppDelegate.swift"
+            timestampString = "518447802.626682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
+            landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "518528719.07543"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "getChats(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getChats (completionHandler : (FinalChallenge.Chat) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "518530762.719475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "287"
+                  endingLineNumber = "287"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getChats (completionHandler : (FinalChallenge.Chat) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "518530762.720863"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "287"
+                  endingLineNumber = "287"
+                  offsetFromSymbolStart = "484">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
