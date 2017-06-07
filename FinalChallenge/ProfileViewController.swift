@@ -286,7 +286,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.dislikeBtn.isEnabled = true
         self.likeList = []
         self.dislikeList = []
-        
+        self.currentUser = nil
 
     }
     //teste
