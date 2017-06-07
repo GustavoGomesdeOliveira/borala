@@ -28,7 +28,6 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    
     func getfriends(){
         
         print("teste")
