@@ -285,7 +285,7 @@ class FirebaseHelper{
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/partnersIds").observe( .value, with: {
             snapshot in
             if let partnersDictionary = snapshot.value as? [String: String]{
-                for (key, value) in partnersDictionary{
+                for (_, value) in partnersDictionary{
                     rootRefDatabase.child("chats/" + value).observe( .value, with: {
                         snapshotChats in
                         if let chatsDictionary = snapshotChats.value as? [String: Any]{
