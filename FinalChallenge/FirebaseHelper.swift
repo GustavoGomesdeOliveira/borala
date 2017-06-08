@@ -448,7 +448,8 @@ class FirebaseHelper{
     }
     
     static func getThumbnail(url: String, completitionHandler: @escaping(_ thumbnailData: Data?) -> ()){
-        let httpReference = FIRStorage.storage().reference(forURL: url)
+        let range = url.startIndex..<url.endIndex
+        let httpReference = FIRStorage.storage().reference(forURL: url.substring(with: range))
         httpReference.data(withMaxSize: 1 * 1024 * 1024, completion: {
             data, error in
             if error != nil || data == nil{
