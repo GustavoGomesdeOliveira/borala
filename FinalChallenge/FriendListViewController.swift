@@ -23,14 +23,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         flagToReload = true
-        checkFriendList()
-        
     }
     
     
     func getfriends(){
-        
-        print("teste")
         
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
@@ -67,24 +63,11 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             
             self.friendList.removeAll()
             self.friendImageList.removeAll()
-
             
         }
         
     }
     
-    func checkFriendList(){
-        
-//        if (friendList == nil){
-//            
-//            friendList = [String]()
-//            
-//            friendList?.append("teste")
-//            friendList?.append("teste")
-//            friendList?.append("teste")
-//            
-//        }
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -94,7 +77,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.friendImage.image = UIImage(data: picData)
             self.friendImageList.append(UIImage(data: picData)!)
         }
-        cell.friendName.text = self.friendList[indexPath.row]["name"] as! String
+        cell.friendName.text = self.friendList[indexPath.row]["name"] as? String
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true

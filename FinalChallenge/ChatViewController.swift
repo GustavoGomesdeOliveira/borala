@@ -92,6 +92,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
         chatViewController.chatId = self.chats[indexPath.row].id
+        chatViewController.personImage = self.chats[indexPath.row].pic!
         self.present(chatViewController, animated: true, completion: nil)
         
     }

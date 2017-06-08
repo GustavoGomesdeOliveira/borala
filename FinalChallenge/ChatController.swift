@@ -22,13 +22,14 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var keyBoardHeight: CGFloat!
     
     let containerView =  UIView()
-    
+    var personImage = Data()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton.png"), style: .plain, target: self, action: #selector(self.backAction))
+        
+        self.navigation.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back",style: .plain, target:self, action: #selector(self.backAction))
     
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -69,7 +70,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let currentMessage = self.messages[indexPath.row]
         cell.textView.text = currentMessage.text
-        
+        cell.profileImageChat.image = UIImage(data: self.personImage)
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20

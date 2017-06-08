@@ -94,7 +94,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
         
         if pickerView == self.imagePicker {
             //pickerView1
-            return CGFloat(70)
+            return CGFloat(100)
         } else {
             //pickerView2
             return CGFloat(20)
@@ -106,9 +106,9 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
    
         if pickerView == self.imagePicker {
 
-            let myView = UIView(frame: CGRect(x: 0 , y: 0, width: pickerView.bounds.width, height: 60))
+            let myView = UIView(frame: CGRect(x: 0 , y: 0, width: pickerView.bounds.width, height: 75))
             
-            let myImageView = UIImageView(frame: CGRect(x: (pickerView.bounds.width/2)-20, y: 0, width: 50, height: 50))
+            let myImageView = UIImageView(frame: CGRect(x: (pickerView.bounds.width/2)-30, y: 3, width: 65, height: 65))
             
             myImageView.image = pickerData[row]
             myView.addSubview(myImageView)
