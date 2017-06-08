@@ -20,7 +20,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var chatId: String!
     var messages = [Message]()
     var keyBoardHeight: CGFloat!
-    
+    var personImage = Data()
     let containerView =  UIView()
     
     
@@ -70,7 +70,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let currentMessage = self.messages[indexPath.row]
         cell.textView.text = currentMessage.text
-        
+        cell.profileImageChat.image = UIImage(data: self.personImage)
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20
