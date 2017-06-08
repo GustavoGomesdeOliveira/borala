@@ -307,6 +307,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             if (imageData != user.pic){
                                 //save on firebase
                                 FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
+                                FirebaseHelper.saveThumbnail(userId: id,
+                                                             thumbnail: UIImageJPEGRepresentation(UIImage(data: imageData )!, 0.2)! , completionHandler: nil)
                             }
                         }
                         else{
@@ -314,6 +316,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: user)
+                            let rawImage = UIImage(data: imageData)
+                            let thumbnailData = UIImageJPEGRepresentation((rawImage?.resizeToBoundingSquare(boundingSquareSideLength: 32.0))!, 0.7)
+                            FirebaseHelper.saveThumbnail(userId: id,
+                                                         thumbnail: thumbnailData!, completionHandler: nil)
                         }
                     } else {
                         print("Couldn't get image: Image is nil")
