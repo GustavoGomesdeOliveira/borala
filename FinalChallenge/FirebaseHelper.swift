@@ -155,6 +155,10 @@ class FirebaseHelper{
         })
     }
     
+    static func deleteEvent(eventId: String){
+        rootRefDatabase.child("events/" + eventId).setValue(nil)
+    }
+    
     //*** Chat related methods *******************************************************************************************************
     
 //    //it creates a chat for the given event. If a chat already exists return nil.
