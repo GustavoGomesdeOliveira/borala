@@ -138,8 +138,8 @@ class FirebaseHelper{
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
         let eventDict = ["id": key, "name": event.name, "location": eventLocation,
                          "creatorId": event.creatorId, "creatorName": event.creatorName,
-                         "beginHour": event.beginHour.timeIntervalSince1970,
-                         "endHour":   event.endHour.timeIntervalSince1970,
+                         "beginHour": Float( event.beginHour.timeIntervalSince1970) ,
+                         "endHour":   Float( event.endHour.timeIntervalSince1970),
                          "preference": event.preference ?? "",
                          "description": event.description ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
