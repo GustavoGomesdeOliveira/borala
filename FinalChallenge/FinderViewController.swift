@@ -31,6 +31,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var myAnnotation: CustomPin?
     var selectedUserID: String?
     var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
+    var selectedAnnotation: CustomPin?
     
     var selectedUser: User?
     
@@ -242,6 +243,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        self.selectedAnnotation = view.annotation as! CustomPin?
         
         let annotation = view.annotation as! CustomPin?
         let event = annotation?.event
@@ -459,6 +462,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // mypin Delegate
     
     func cancelEvent( id: String){
+        self.mapView.deselectAnnotation(self.selectedAnnotation, animated: false)
         print("fazer alguma coisa")
     }
     
