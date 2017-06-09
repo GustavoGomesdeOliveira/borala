@@ -395,18 +395,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
     }
     
-    func getHour() -> String{
-        
-        let date = Date()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        
-//        print("Dateobj: \(dateFormatter.string(from: date))")
-        
-        return dateFormatter.string(from: date)
-        
-    }
+//    func getHour() -> String{
+//        
+//        let date = Date()
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "hh:mm"
+//        
+////        print("Dateobj: \(dateFormatter.string(from: date))")
+//        
+//        return dateFormatter.string(from: date)
+//        
+//    }
     
     
     func getUser() -> User{
@@ -424,12 +424,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     }
     
-    func sendEvent( preference : String, description: String?) {
+    func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
         let user = getUser()
         let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
-        let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, hora: getHour(), preference: preference, description: description)
+        let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
         FirebaseHelper.saveEvent(event: event)
         
     }

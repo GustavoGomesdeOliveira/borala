@@ -136,7 +136,12 @@ class FirebaseHelper{
         
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
-        let eventDict = ["id": key, "name": event.name, "location": eventLocation, "creatorId": event.creatorId, "creatorName": event.creatorName, "hour": event.hora, "preference": event.preference ?? "", "description": event.description ?? ""] as [String : Any]
+        let eventDict = ["id": key, "name": event.name, "location": eventLocation,
+                         "creatorId": event.creatorId, "creatorName": event.creatorName,
+                         "beginHour": event.beginHour.timeIntervalSince1970,
+                         "endHour":   event.endHour.timeIntervalSince1970,
+                         "preference": event.preference ?? "",
+                         "description": event.description ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.
     }
     
@@ -153,6 +158,10 @@ class FirebaseHelper{
                 }
             }
         })
+    }
+    
+    static func deleteEvent(eventId: String){
+        rootRefDatabase.child("events/" + eventId).setValue(nil)
     }
     
     //*** Chat related methods *******************************************************************************************************

@@ -15,18 +15,20 @@ class Event {
     var location: Location!
     var creatorId: String!
     var creatorName: String!
-    var hora: String!
+    var beginHour: Date!
+    var endHour: Date!
     var preference: String?
     var description: String?
     var chatId: String?
     
-    init(name: String, location: Location, creatorId: String, creatorName: String, hora: String, preference: String, description: String?) {
+    init(name: String, location: Location, creatorId: String, creatorName: String, beginHour: Date, endHour: Date, preference: String, description: String?) {
         
         self.name = name
         self.location = location
         self.creatorId = creatorId
         self.creatorName = creatorName
-        self.hora = hora
+        self.beginHour = beginHour
+        self.endHour   = endHour
         self.preference = preference
         self.description = description
     }
@@ -38,7 +40,8 @@ class Event {
         self.location = Location( latitude: locationDict["latitude"]!, longitude: locationDict["longitude"]!)
         self.creatorId = dict["creatorId"] as! String?
         self.creatorName = dict["creatorName"] as! String?
-        self.hora = dict["hour"] as! String?
+        self.beginHour = Date.init(timeIntervalSince1970: TimeInterval(dict["beginHour"] as! Float) )
+        self.endHour   = Date.init(timeIntervalSince1970: TimeInterval(dict["endHour"] as! Float) )
         self.preference = dict["preference"] as! String?
         self.description = dict["description"] as! String?
         self.chatId = dict["chatId"] as! String!
