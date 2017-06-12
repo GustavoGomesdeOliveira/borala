@@ -25,6 +25,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
     
+    @IBOutlet weak var newEvent: UIBarButtonItem!
+    
+    
 //    var eventVC: EventViewController?
     
     var pin: CustomPin?
@@ -32,6 +35,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var selectedUserID: String?
     var mapItem: (map: MKMapItem, pin: CustomPin)? = nil
     var selectedAnnotation: CustomPin?
+    var findEvent: Bool = false
     
     var selectedUser: User?
     
@@ -101,18 +105,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
         self.myID = user.id
 
-        
+ //getting events
         FirebaseHelper.getEvents(completionHandler: {
             eventsFromFirebase in
             self.events = eventsFromFirebase
             self.pins.removeAll()
             
-            var eventExist = false
-            
             
             for event in self.events{
 
                 if (event.creatorId != self.myID){
+                   
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
                     
                     var imageName = event.preference
@@ -129,8 +132,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     self.pins.append(eventPin)
                 }
                 else{
-                    eventExist = true
-                    self.mapView.showsUserLocation = false
+                    //this is my event
+//                    eventExist = true
+                    self.findEvent = true
+//                    self.mapView.showsUserLocation = false
                     let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
                     let myPin = CustomPin(coordinate: coordinate)
                     myPin.title = "teste"
@@ -139,14 +144,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     self.pins.append(myPin)
                 }
             }
-            if eventExist{
-                self.mapView.showsUserLocation = false
+            
+            if self.findEvent == true {
+                //ele achou o evento
+                self.newEvent.isEnabled = false
+                self.newEvent.tintColor = UIColor.white
+                self.findEvent = false
+//                self.mapView.showsUserLocation = false
+            }else{
+                //n existe evento
+                self.newEvent.isEnabled = true
+                self.newEvent.tintColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1)
+//                UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
             }
+            
             self.mapView.addAnnotations(self.pins)
-            
-            
         })
-        
+        //-----------------------------------------
 
         DispatchQueue.main.async {
             self.loadFriends()
@@ -433,6 +447,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
         let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
+        self.myID = event.creatorId
         FirebaseHelper.saveEvent(event: event)
         
     }

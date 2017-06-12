@@ -808,6 +808,7 @@
                     <connections>
                         <outlet property="facebookLoginBTN" destination="vyB-Wd-R9h" id="woz-qL-mgF"/>
                         <outlet property="mapView" destination="bdJ-re-CCk" id="wtG-Yc-EoJ"/>
+                        <outlet property="newEvent" destination="Rph-d8-Gqf" id="uiU-iq-550"/>
                         <outlet property="notLoggedView" destination="D3W-Bc-B7s" id="giH-k1-fbg"/>
                     </connections>
                 </viewController>
