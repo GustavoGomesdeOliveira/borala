@@ -359,13 +359,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     
                     self.getImageFromGoogle(catPictureURL: url , name: user.profile.name, id: "", facebookID: user.userID, gender: "")
                 }
+                let storyboard = UIStoryboard(name: "Main", bundle: nil);
+                let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+                
+                self.window?.rootViewController = viewController
             })
             
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil);
-            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
             
-            self.window?.rootViewController = viewController
             
         }
      
