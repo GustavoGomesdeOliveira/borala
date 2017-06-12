@@ -87,6 +87,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destination = segue.destination as! TabBarViewController
+        
+        destination.userNotLogged = self.userNotLogged
+    }
 
 }
 

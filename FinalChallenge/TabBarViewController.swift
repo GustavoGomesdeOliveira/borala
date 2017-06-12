@@ -15,6 +15,9 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.hideTabBar()
+
         self.selectedIndex = 1
 
         // Do any additional setup after loading the view.
@@ -22,13 +25,18 @@ class TabBarViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if UserDefaults.standard.data(forKey: "user") == nil{
-            
-            self.tabBar.isHidden = true
-
-        }
+        self.hideTabBar()
         
 
+    }
+    
+    func hideTabBar(){
+        
+        if ((UserDefaults.standard.data(forKey: "user") == nil) && (userNotLogged)){
+            
+            self.tabBar.isHidden = true
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
