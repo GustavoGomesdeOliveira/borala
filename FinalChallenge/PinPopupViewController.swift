@@ -28,12 +28,17 @@ class PinPopupViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var eventScheduleLabel: UILabel!
 
+    @IBOutlet weak var profileBtn: UIButton!
+    @IBOutlet weak var MessageBtn: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if userNotLogged {
             
-            
+            self.profileBtn.isHidden = true
+            self.MessageBtn.isHidden = true
         }
         
         self.popupView.layer.masksToBounds = false

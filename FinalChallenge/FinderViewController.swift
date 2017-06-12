@@ -55,10 +55,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController
+        
         if self.selectedUser != nil{
             newViewController.currentUser = nil
+        }
+
+        if UserDefaults.standard.data(forKey: "user") != nil{
+            
+            self.tabBarController?.tabBar.isHidden = false
+            
         }
     }
 
@@ -327,6 +335,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.notLoggedView.isHidden = true
         if let token = result.token{
 
+            self.tabBarController?.tabBar.isHidden = false
+
+            
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
             FIRAuth.auth()?.signIn(with: credential, completion: {
                 user, error in
@@ -356,6 +367,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return true
     }
     
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+    
+    
     func addMyPoint(press : UIGestureRecognizer) {
         
 //        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
@@ -371,21 +389,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             if press.state == .began{
 
                 if event == false{
-                    
-                    
-//                    let customY = press.location(in: self.mapView).y
-//                    
-//                    var locationOnView = press.location(in: self.mapView)
-//
-//                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
-//
-//                    let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
-//                    
-//                    let northWest = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-//                    
-//                    let southEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: mapView.bounds.height), toCoordinateFrom: mapView)
-//                    
-//                    let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
+
                     
                     let pin = CustomPin(coordinate: self.myLocation!)
 
