@@ -125,7 +125,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func send(_ sender: UIButton) {
         
         handleMessage()
-        self.viewScroll()
+        //self.viewScroll()
         
     }
     
@@ -197,13 +197,13 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-    func viewScroll() {
-        let lastItem = self.chatCollection.numberOfItems(inSection: 0)-1
-            //collectionView(self.chatCollection!, numberOfItemsInSection: 0)-1
-//        (self.chatCollection!, numberOfRowsInSection: 0) - 1
-        let indexPath: NSIndexPath = NSIndexPath.init(item: lastItem, section: 0)
-        self.chatCollection.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: false)
-//        scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: false)
-    }
+//    func viewScroll() {
+//        let lastItem = self.chatCollection.numberOfItems(inSection: 0)-1
+//            //collectionView(self.chatCollection!, numberOfItemsInSection: 0)-1
+////        (self.chatCollection!, numberOfRowsInSection: 0) - 1
+//        let indexPath: NSIndexPath = NSIndexPath.init(item: lastItem, section: 0)
+//        self.chatCollection.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: false)
+////        scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: false)
+//    }
     
 }

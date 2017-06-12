@@ -59,7 +59,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
@@ -262,6 +263,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }else{
             let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
             
+            popUpPinVC.userNotLogged = (self.tabBarController?.tabBar.isHidden)!
             popUpPinVC.event = event
             
             DispatchQueue.main.async {

@@ -10,12 +10,14 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 //    
-    
+    var userNotLogged = false
 
     override func viewDidLoad() {
-        super.viewDidLoad()        
-        self.selectedIndex = 1
+        super.viewDidLoad()
 
+        self.tabBar.isHidden = userNotLogged
+
+        self.selectedIndex = 1
 
         // Do any additional setup after loading the view.
     }

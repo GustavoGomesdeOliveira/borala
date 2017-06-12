@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             if !checkFacebookLogin(){
                 
+                
                 GIDSignIn.sharedInstance().signInSilently()
                 
                 
@@ -194,7 +195,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     user, error in
                     if let _ = error{
                         
-                        print(error.debugDescription)
                     } else {
                         FirebaseHelper.registerMeOnline()
                         self.saveFacebookFriends()

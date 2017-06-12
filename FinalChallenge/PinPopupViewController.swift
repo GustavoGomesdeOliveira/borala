@@ -20,6 +20,8 @@ class PinPopupViewController: UIViewController {
     var delegate: PinPopupViewControllerDelegate!
     var event: Event!
     
+    var userNotLogged = false
+    
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -28,6 +30,11 @@ class PinPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if userNotLogged {
+            
+            
+        }
         
         self.popupView.layer.masksToBounds = false
         self.popupView.layer.shadowColor = UIColor.black.cgColor

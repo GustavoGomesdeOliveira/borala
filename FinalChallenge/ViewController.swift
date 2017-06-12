@@ -14,6 +14,8 @@ import GoogleSignIn
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
+    var userNotLogged = false
+    
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
@@ -79,10 +81,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
 
 
     @IBAction func start(_ sender: UIButton) {
+        self.userNotLogged = true
         performSegue(withIdentifier: "segue", sender: nil)
         
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destination = segue.destination as! TabBarViewController
+        
+        destination.userNotLogged = self.userNotLogged
+    }
 
 }
 
