@@ -484,6 +484,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func cancelEvent( id: String){
         self.mapView.deselectAnnotation(self.selectedAnnotation, animated: false)
+        FirebaseHelper.deleteEvent(eventId: id)
         print("fazer alguma coisa")
     }
     
