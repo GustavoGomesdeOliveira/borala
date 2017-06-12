@@ -40,10 +40,10 @@ class PinPopupViewController: UIViewController {
         
         self.userNameLabel.text = event?.creatorName
         self.userImageView.image = UIImage(named: (event?.preference)!)
-        if let hora: String = event?.hora{
-
-            self.eventScheduleLabel.text = hora
-        }
+//        if let hora: String = event?.hora{
+//
+//            self.eventScheduleLabel.text = hora
+//        }
         
     }
     

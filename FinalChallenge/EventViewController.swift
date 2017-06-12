@@ -9,14 +9,13 @@
 import UIKit
 
 protocol EventViewControllerDelegate{
-    func sendEvent( preference : String, description: String?)
+    func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String? )
 }
 
 class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
     
     var delegate:EventViewControllerDelegate!
     let imageNames = ["pizza","beer","food"]
-    var eventDescription = "default description"
     
     let pickerData:[UIImage] = [UIImage(named: "pizza.jpg")!,
                                 UIImage(named: "beer.jpg")!, UIImage(named: "food.jpg")!]
@@ -25,6 +24,10 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     var imageIndex = 0
     var invitationIndex = 0
     var textFieldToChange = 0
+    
+    var defaultBeginDate = Date()
+    var defaultEndDate   = Date(timeIntervalSinceNow: 1800)
+    var dateFormatter = DateFormatter()
     
     //outlets
     
@@ -37,11 +40,22 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     @IBOutlet weak var invitationPickerView: UIPickerView!
     
     //--------------
+    
+    //    func getHour() -> String{
+    //
+    //        let date = Date()
+    //
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = "hh:mm"
+    //
+    ////        print("Dateobj: \(dateFormatter.string(from: date))")
+    //
+    //        return dateFormatter.string(from: date)
+    //        
+    //    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        
-//        self.dateFormatter.dateFormat = "HH:mm"
         
         imagePicker.delegate = self
         invitationPickerView.delegate = self
@@ -52,7 +66,15 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tap)
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        defaultBeginDate = Date()
+        defaultEndDate   = Date(timeIntervalSinceNow: 1800)
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        beginHourTextField.placeholder = dateFormatter.string(from: defaultBeginDate)
+        endHourTextField.placeholder   = dateFormatter.string(from: defaultEndDate)
     }
     
     @IBAction func Cancel(_ sender: Any) {
@@ -61,14 +83,18 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
     
     @IBAction func createEvent(_ sender: UIButton) {
         let preference = self.imageNames[self.imageIndex]
-        self.eventDescription = self.invitation[invitationIndex]
-//        if self.beginHourTextField.text == "" {
-//            let beginHour = self.beginHourTextField.placeholder
-//            print(beginHour)
-//        }else{
-//        }
+        let eventDescription = self.invitation[invitationIndex]
+        var beginDate = self.defaultBeginDate
+        var endDate   = self.defaultEndDate
         
-        delegate?.sendEvent(preference: preference, description: eventDescription)
+        if let beginDateFromTextField = DateFormatter().date(from: self.beginHourTextField.text!){
+            beginDate = beginDateFromTextField
+        }
+        if let endDateFromTextField = DateFormatter().date(from: self.endHourTextField.text!){
+            endDate = endDateFromTextField
+        }
+        
+        delegate?.sendEvent(beginHour: beginDate, endHour: endDate, preference: preference, description:eventDescription)
         
         self.view.removeFromSuperview()
     }

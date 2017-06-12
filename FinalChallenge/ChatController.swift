@@ -20,9 +20,8 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var chatId: String!
     var messages = [Message]()
     var keyBoardHeight: CGFloat!
-    
-    let containerView =  UIView()
     var personImage = Data()
+    let containerView =  UIView()
     
     override func viewDidLoad() {
         
@@ -125,6 +124,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func send(_ sender: UIButton) {
         
         handleMessage()
+        self.viewScroll()
         
     }
     
@@ -193,8 +193,16 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.keyBoardHeight = 0.0
             self.view.endEditing(true)
         }
-
         
+    }
+    
+    func viewScroll() {
+        let lastItem = self.chatCollection.numberOfItems(inSection: 0)-1
+            //collectionView(self.chatCollection!, numberOfItemsInSection: 0)-1
+//        (self.chatCollection!, numberOfRowsInSection: 0) - 1
+        let indexPath: NSIndexPath = NSIndexPath.init(item: lastItem, section: 0)
+        self.chatCollection.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: false)
+//        scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: false)
     }
     
 }

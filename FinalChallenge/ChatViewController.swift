@@ -66,6 +66,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell") as! CustomChatCell
+        
         if let picData = self.chats[indexPath.row].pic{
             cell.personImage.image = UIImage.init(data: picData )
         }
@@ -92,7 +93,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
         chatViewController.chatId = self.chats[indexPath.row].id
-        chatViewController.personImage = self.chats[indexPath.row].pic!
+
+        if self.chats[indexPath.row].pic != nil {
+            
+            chatViewController.personImage = self.chats[indexPath.row].pic!
+
+        } else {
+            
+            chatViewController.personImage = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImage"))!
+        }
+        
         self.present(chatViewController, animated: true, completion: nil)
         
     }

@@ -44,10 +44,10 @@ class myPinPopupViewController: UIViewController {
         
         
         self.userNameLabel.text = event?.creatorName
-        if let hora: String = event?.hora{
-            //            print(hora)
-            self.eventScheduleLabel.text = hora
-        }
+//        if let hora: String = event?.hora{
+//            //            print(hora)
+//            self.eventScheduleLabel.text = hora
+//        }
 
     }
     
@@ -61,6 +61,7 @@ class myPinPopupViewController: UIViewController {
     }
     
     @IBAction func cancelEventAction(_ sender: UIButton) {
+        self.view.removeFromSuperview()
         self.delegate.cancelEvent(id: self.event.id)
     }
     

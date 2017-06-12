@@ -359,7 +359,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile1" id="qbF-Xx-KXq">
-                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="backRoundView" destination="SKB-4U-UGm" id="HGP-Vv-nCj"/>
@@ -594,7 +594,9 @@
                             <constraint firstItem="dmg-Hx-OxQ" firstAttribute="top" secondItem="MN9-zy-v2V" secondAttribute="bottom" id="Yzz-cJ-GEj"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Friends" image="profile1" id="IhJ-d0-aQ8"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="people" id="IhJ-d0-aQ8">
+                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="friendTableView" destination="MN9-zy-v2V" id="anW-Oj-tKU"/>
                     </connections>
@@ -800,8 +802,8 @@
                             <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="wvK-wu-Tpn"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Finder" image="profile1" id="YRu-aS-pPO">
-                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Finder" image="finder" id="YRu-aS-pPO">
+                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="facebookLoginBTN" destination="vyB-Wd-R9h" id="woz-qL-mgF"/>
@@ -944,7 +946,9 @@
                             <constraint firstItem="h0W-WQ-ZMm" firstAttribute="top" secondItem="COl-Kv-Ngo" secondAttribute="bottom" id="sRE-tn-WA5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="profile1" selectedImage="profile1" id="Jx8-uK-tke"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="chat" id="Jx8-uK-tke">
+                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="chatTableView" destination="COl-Kv-Ngo" id="Bz2-rh-qFE"/>
                     </connections>
@@ -1373,7 +1377,7 @@
                                             <constraint firstAttribute="height" constant="40" id="b1m-zu-KeB"/>
                                             <constraint firstAttribute="width" constant="95" id="fTd-KN-h2L"/>
                                         </constraints>
-                                        <state key="normal" title="Cancel">
+                                        <state key="normal" title="Delete">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -1480,11 +1484,14 @@
         <image name="BackButton" width="24" height="40"/>
         <image name="Background" width="375" height="667"/>
         <image name="Logo" width="375" height="40"/>
+        <image name="chat" width="42" height="42"/>
         <image name="dislike" width="50" height="50"/>
+        <image name="finder" width="40" height="40"/>
         <image name="grid" width="190" height="100"/>
         <image name="grid2" width="190" height="64"/>
         <image name="like" width="43" height="43"/>
         <image name="myIcon" width="72" height="72"/>
+        <image name="people" width="40" height="40"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="50" height="47"/>
     </resources>
