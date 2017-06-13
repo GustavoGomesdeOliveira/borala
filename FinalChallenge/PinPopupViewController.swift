@@ -35,7 +35,7 @@ class PinPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if userNotLogged {
+        if !userNotLogged {
             
             self.profileBtn.isHidden = true
             self.MessageBtn.isHidden = true

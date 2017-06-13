@@ -81,6 +81,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             setUserInterface()
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
+            self.chatButton.isHidden = false
+
             self.userNameLabel.text = user?.name
             if user.age! >= 0 {
                 let age = NSNumber(value: user.age!)

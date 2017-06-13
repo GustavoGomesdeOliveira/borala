@@ -63,11 +63,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             newViewController.currentUser = nil
         }
 
-        if UserDefaults.standard.data(forKey: "user") != nil{
+        DispatchQueue.main.async {
             
-            self.tabBarController?.tabBar.isHidden = false
-            
+            self.loadFriends()
+
         }
+        
+        
     }
 
     override func viewDidLoad() {
@@ -76,7 +78,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-        self.notLoggedView.isHidden = true
 
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
@@ -170,11 +171,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.addAnnotations(self.pins)
         })
         //-----------------------------------------
-
-        DispatchQueue.main.async {
-            self.loadFriends()
-            
-        }
         
     }
     
@@ -285,7 +281,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }else{
             let popUpPinVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pinPopup") as! PinPopupViewController
             
-            popUpPinVC.userNotLogged = (self.tabBarController?.tabBar.isHidden)!
+            let hide = self.tabBarController?.tabBar.isUserInteractionEnabled
+            
+            
+            popUpPinVC.userNotLogged = hide!
             popUpPinVC.event = event
             
             DispatchQueue.main.async {
@@ -335,7 +334,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.notLoggedView.isHidden = true
         if let token = result.token{
 
-            self.tabBarController?.tabBar.isHidden = false
+            self.tabBarController?.tabBar.isUserInteractionEnabled = true
+
 
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
@@ -369,7 +369,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
         
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isUserInteractionEnabled = true
+
 
     }
     

@@ -23,18 +23,12 @@ class TabBarViewController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        self.hideTabBar()
-        
-
-    }
     
     func hideTabBar(){
         
         if ((UserDefaults.standard.data(forKey: "user") == nil) && (userNotLogged)){
             
-            self.tabBar.isHidden = true
+            self.tabBar.isUserInteractionEnabled = false
             
         }
     }
