@@ -72,11 +72,13 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if flagToRemove {
-            
-            self.friendList.removeAll()
-            self.friendImageList.removeAll()
+        
+        self.friendList.removeAll()
+        self.friendImageList.removeAll()
+        
+        DispatchQueue.main.async {
 
+            self.friendTableView.reloadData()
             
         }
         
