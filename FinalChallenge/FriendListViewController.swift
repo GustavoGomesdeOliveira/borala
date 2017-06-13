@@ -15,7 +15,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendImageList = [UIImage]()
     var flagToReload = false
     var flagToRemove = true
-    var flagToAppear = true
+    var flagToAppear = false
     var currentUser: User?
 
     
@@ -29,7 +29,8 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func getfriends(){
-        
+        self.friendList.removeAll()
+
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
             if let friend = friend{
@@ -43,8 +44,12 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.friendList[friendIndex!]["picData"] = picDataReceived
                         DispatchQueue.main.async {
                             if self.flagToReload {
-                                sleep(1)
 
+                                if self.flagToAppear {
+                                    
+                                    sleep(1)
+                                }
+                                
                                 self.friendTableView.reloadData()
                             }
                             
@@ -60,10 +65,17 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         
         flagToRemove = false
 
+        if friendList.isEmpty {
+            
+            flagToAppear = true
+            getfriends()
+            
+
+        }
+        
 //        if flagToAppear {
 //            
-//            getfriends()
-//            
+//
 //            flagToAppear = !flagToAppear
 //        }
         
