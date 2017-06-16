@@ -44,7 +44,7 @@ class FirebaseHelper{
         }
     }
     
-    static func saveUser(user: User){
+    static func saveUser(user: User, completionHandler:((_ error: Error?) -> ())?){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
         let picRef  = idRef.child("pic/profilePic.jpg")
         var userDictionary = user.toDictionary()
@@ -56,8 +56,9 @@ class FirebaseHelper{
                 metadata, error in
                 
                 userDictionary.updateValue(picdownloadUrl, forKey: "picURL")
-                if let error = error{
+                if let error = error, let completionHandler = completionHandler{
                     print("An error ocurred to send pic to firebase. \(error)")
+                    completionHandler(error)
                 }
                 else{
                     if let downloadUrl = metadata!.downloadURL()?.absoluteString{
@@ -65,6 +66,7 @@ class FirebaseHelper{
                     }
                 }
                 rootRefDatabase.child("users").updateChildValues([user.id: userDictionary])
+                if let completionHandler = completionHandler{ completionHandler(nil) }
             })
         }
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
@@ -516,3 +518,8 @@ extension UIImage
     }
     
 }
+
+//let rawImage = UIImage(data: imageData)
+//let thumbnailData = UIImageJPEGRepresentation((rawImage?.resizeToBoundingSquare(boundingSquareSideLength: 32.0))!, 0.7)
+//FirebaseHelper.saveThumbnail(userId: id,
+//                             thumbnail: thumbnailData!, completionHandler: nil)

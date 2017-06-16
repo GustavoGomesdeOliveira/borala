@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     let gcmMessageIDKey = "gcm.message_id"
     var facebookFriendsID = [String]()
     var badgeCount = 0
+    var FMCToken: String?
 
 
     
@@ -33,6 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UINavigationBar.appearance().isTranslucent = true
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
+        
+        FIRApp.configure()
+        FIRMessaging.messaging().remoteMessageDelegate = self
+        
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
         // [START register_for_notifications]
@@ -41,22 +48,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
-                completionHandler: {_, _ in
-                    application.registerForRemoteNotifications()
-            })
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
         }
         
-        //application.registerForRemoteNotifications()
-        // [END register_for_notifications]
+        application.registerForRemoteNotifications()
         
-        FIRApp.configure()
-        FIRMessaging.messaging().remoteMessageDelegate = self
+        // [END register_for_notifications]
         FirebaseHelper.observerUser()
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
@@ -91,9 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //send token to firebase
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
         //print("registrou \(deviceToken)")
-        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": token])
-        print(token)
+        //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        //let token = deviceToken.base64EncodedData(options: Data.Base64EncodingOptions.endLineWithLineFeed)
+        //FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": token])
+        //print(token)
+        //FIRMessaging.messaging()= deviceToken
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -253,82 +258,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
     
-    func fetchProfile(id: String){
+    /// Fetch profile fields from facebook.
+    ///
+    /// - Parameter completionHandler: returns a dictionary with facebook fields.
+    func fetchProfileFromFacebook( completionHandler:@escaping (_ userDictionary: NSDictionary ) -> () ){
         
-        let parameters = ["fields" : "email, first_name, last_name, picture.type(large), gender, id"]
+        let parameters = ["fields" : "picture.type(large), gender, id"]
         
-        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start {
+            (connection, result, error) in
             
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            let userDictionary = result! as! NSDictionary
-            
-            let picture = userDictionary["picture"] as! NSDictionary
-            
-            let data = picture["data"] as! NSDictionary
-            
-            
-            let name = (userDictionary["first_name"] as! String).appending(" ").appending(userDictionary["last_name"] as! String)
-            
-            let gender = userDictionary["gender"] as! String
-            
-            let facebookID = userDictionary["id"] as! String
-            
-            DispatchQueue.main.async {
-                self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
-            }
+                if error != nil {
+                    print(error!)
+                    return
+                }
+            completionHandler( result as! NSDictionary )
         }
-        saveFacebookFriends()
+        //saveFacebookFriends()
         
         
     }
     
-    func getImageFromURL(url: String, name: String, id: String, facebookID: String, gender: String){
+    func getImageFromURL(url: String, completionHandler:@escaping (_ imageData: Data?) -> () ){
         
         let catPictureURL = URL(string: url)!
-        
         
         let session = URLSession(configuration: .default)
         
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+        let downloadPicTask = session.dataTask(with: catPictureURL) {
+            (data, response, error) in
             // The download has finished.
             if let e = error {
                 print("Error downloading cat picture: \(e)")
+                completionHandler(nil)
             } else {
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
-                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
-                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
-                            if (imageData != user.pic){
-                                //save on firebase
-                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-                                FirebaseHelper.saveThumbnail(userId: id,
-                                                             thumbnail: UIImageJPEGRepresentation(UIImage(data: imageData )!, 0.2)! , completionHandler: nil)
-                            }
-                        }
-                        else{
-                            let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
-                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                            UserDefaults.standard.set(userData, forKey: "user")
-                            FirebaseHelper.saveUser(user: user)
-                            let rawImage = UIImage(data: imageData)
-                            let thumbnailData = UIImageJPEGRepresentation((rawImage?.resizeToBoundingSquare(boundingSquareSideLength: 32.0))!, 0.7)
-                            FirebaseHelper.saveThumbnail(userId: id,
-                                                         thumbnail: thumbnailData!, completionHandler: nil)
-                        }
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
+                completionHandler(data)
             }
         }
         
@@ -411,10 +376,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             }
                             
                         } else{
-                            let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
-                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                            UserDefaults.standard.set(userData, forKey: "user")
-                            FirebaseHelper.saveUser(user: user)
+                            //implente this
+                            //let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
+                            //let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                            //UserDefaults.standard.set(userData, forKey: "user")
+                            //FirebaseHelper.saveUser(user: user)
                         }
                         
                     } else {
@@ -468,9 +434,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
         }
     }
+    
+    func refreshToken(_ notification: Notification){
+        if let newToken = FIRInstanceID.instanceID().token(){
+            self.FMCToken = newToken
+//            FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": newToken])
+        }
+    }
 }
 
-// [START ios_10_message_handling]
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
@@ -508,30 +480,30 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
-    
-   
 }
 // [END ios_10_message_handling]
 
-extension AppDelegate: FIRMessagingDelegate{
+
+extension AppDelegate : FIRMessagingDelegate {
+    
+    /// The callback to handle data message received via FCM for devices running iOS 10 or above.
+    public func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage){
+        print(remoteMessage)
+    }
+    
     // [START refresh_token]
     func messaging(_ messaging: FIRMessaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
-        //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": fcmToken])
-        connectToFcm()
     }
+    
     // [END refresh_token]
+    
     // [START ios_10_data_message]
     // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
     // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-    func messaging(_ messaging: FIRMessaging, didReceive remoteMessage: FIRMessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
-    
-    //The callback to handle data message received via FCM for devices running iOS 10 or above.
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
-        print(remoteMessage.appData)
-    }
+    //func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        //print("Received data message: \(remoteMessage.appData)")
+    //}
     // [END ios_10_data_message]
 }
+
