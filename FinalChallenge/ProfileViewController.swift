@@ -171,16 +171,26 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     func getFriendList(){
         
         let defaults = UserDefaults.standard
-        self.friendListUserDefaults = defaults.object(forKey: "friendList") as! [String]        
-        if friendListUserDefaults.isEmpty {
+        
+        let friendDefaults = defaults.object(forKey: "friendList")
+        
+        if friendDefaults != nil {
             
-            if !friendListUserDefaults.contains(user.socialNetworkID) {
-               
-                self.addFriendBtn.isHidden = false
+            for friend in (friendDefaults as! [String]) {
                 
-            }
+                self.friendListUserDefaults.append(friend)
 
+            }
+            
+ 
         }
+        
+        if !friendListUserDefaults.contains(user.socialNetworkID) {
+            
+            self.addFriendBtn.isHidden = false
+            
+        }
+        
         
     }
     
@@ -309,6 +319,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.likeList = []
         self.dislikeList = []
         self.currentUser = nil
+        self.addFriendBtn.isHidden = true
+
 
     }
     //teste
@@ -327,12 +339,12 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     
     @IBAction func addFriend(_ sender: Any) {
         
-        for friends in friendListUserDefaults {
-            
-            FirebaseHelper.saveFriend(socialnetworkId: friends)
+        self.addFriendBtn.isHidden = true
 
-        }
+        FirebaseHelper.saveFriend(socialnetworkId: user.socialNetworkID)
 
+        self.friendListUserDefaults.append(user.socialNetworkID)
+        
         UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
         
     }
