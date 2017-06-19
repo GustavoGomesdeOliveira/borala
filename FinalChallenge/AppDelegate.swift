@@ -451,11 +451,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     friendList.append((friends as! NSDictionary)["id"]! as! String)
                     FirebaseHelper.saveFriend(socialnetworkId: (friends as! NSDictionary)["id"]! as! String)
                 }
-                
-                let friendListData = NSKeyedArchiver.archivedData(withRootObject: friendList)
+   
                 UserDefaults.standard.set(friendList, forKey: "friendList")
-
-                
+     
             }
             
         }

@@ -181,8 +181,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 self.friendListUserDefaults.append(friend)
 
             }
-            
- 
+
         }
         
         if !friendListUserDefaults.contains(user.socialNetworkID) {

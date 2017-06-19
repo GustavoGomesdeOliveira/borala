@@ -51,6 +51,10 @@ class FirebaseHelper{
         userDictionary["eventsId"] = true
         let picdownloadUrl = ""
         
+        let defaults = UserDefaults.standard
+        
+        let friendDefaults = defaults.object(forKey: "friendList")
+        
         if let userPic = user.pic{
             picRef.put(userPic, metadata: nil, completion: {
                 metadata, error in
@@ -65,9 +69,22 @@ class FirebaseHelper{
                     }
                 }
                 rootRefDatabase.child("users").updateChildValues([user.id: userDictionary])
+                
+                if friendDefaults != nil {
+                    
+                    for friend in (friendDefaults as! [String]) {
+                        
+                        self.saveFriend(socialnetworkId: friend)
+                        
+                    }
+                    
+                }
             })
         }
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
+        
+        
+        
     }
     
     static func updateUser(userId: String, userInfo: [String: Any]){
