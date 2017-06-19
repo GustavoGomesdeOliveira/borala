@@ -24,11 +24,14 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userAgeLabel: UILabel!
     @IBOutlet weak var userGenderLabel: UILabel!
+    @IBOutlet weak var addFriendBtn: UIButton!
     
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dislikeLabel: UILabel!
     
     @IBOutlet weak var friendListBtn: UIButton!
+    
+    var friendListUserDefaults = [String]()
     
     var likeList = [String]()
     var dislikeList = [String]()
@@ -40,10 +43,10 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var tempIdDislikeList = ["Teste", "Teste"]
     var friendList = [[String: Any]]()
 
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.likeBtn.isHidden = false
         self.dislikeBtn.isHidden = false
         self.likeLabel.isHidden = false
@@ -123,6 +126,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             }
 
             loadTotalOfLikeAndDislike()
+            getFriendList()
         }
         
     }
@@ -162,6 +166,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
         return userToReturn
 
+    }
+
+    func getFriendList(){
+        
+        let defaults = UserDefaults.standard
+        self.friendListUserDefaults = defaults.object(forKey: "friendList") as! [String]        
+        if friendListUserDefaults.isEmpty {
+            
+            if !friendListUserDefaults.contains(user.socialNetworkID) {
+               
+                self.addFriendBtn.isHidden = false
+                
+            }
+
+        }
+        
     }
     
     func setUserInterface(){
@@ -305,6 +325,18 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         
     }
     
+    @IBAction func addFriend(_ sender: Any) {
+        
+        for friends in friendListUserDefaults {
+            
+            FirebaseHelper.saveFriend(socialnetworkId: friends)
 
+        }
+
+        UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
+        
+    }
+    
+    
 }
 

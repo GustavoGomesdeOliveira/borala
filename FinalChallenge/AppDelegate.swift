@@ -279,7 +279,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
-        //saveFacebookFriends()
+        saveFacebookFriends()
         
         
     }
@@ -314,12 +314,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: user)
-                            
-                            DispatchQueue.global(qos: .background).async{
-                                
-                                self.saveFacebookFriends()
-
-                            }
+        
 
                         }
                     } else {
@@ -434,6 +429,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func saveFacebookFriends(){
         
+        var friendList = [String]()
+        
         DispatchQueue.global(qos: .background).async {
             
             
@@ -451,8 +448,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 
                 
                 for friends in data["data"] as! NSArray{
+                    friendList.append((friends as! NSDictionary)["id"]! as! String)
                     FirebaseHelper.saveFriend(socialnetworkId: (friends as! NSDictionary)["id"]! as! String)
                 }
+                
+                let friendListData = NSKeyedArchiver.archivedData(withRootObject: friendList)
+                UserDefaults.standard.set(friendList, forKey: "friendList")
+
                 
             }
             
