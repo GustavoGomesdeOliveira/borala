@@ -279,7 +279,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.getImageFromURL(url: data["url"] as! String, name: name, id: id, facebookID: facebookID, gender: gender)
             }
         }
-        saveFacebookFriends()
+        //saveFacebookFriends()
         
         
     }
@@ -314,6 +314,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                             UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: user)
+                            
+                            DispatchQueue.global(qos: .background).async{
+                                
+                                self.saveFacebookFriends()
+
+                            }
+
                         }
                     } else {
                         print("Couldn't get image: Image is nil")
