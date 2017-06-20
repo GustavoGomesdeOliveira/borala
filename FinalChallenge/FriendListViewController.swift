@@ -97,6 +97,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell

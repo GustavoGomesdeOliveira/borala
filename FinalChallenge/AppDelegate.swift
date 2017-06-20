@@ -293,32 +293,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("Error downloading cat picture: \(e)")
                 completionHandler(nil)
             } else {
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
-                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
-                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
-                            if (imageData != user.pic){
-                                //save on firebase
-                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-                            }
-                        }
-                        else{
-                            let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
-                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                            UserDefaults.standard.set(userData, forKey: "user")
-                            FirebaseHelper.saveUser(user: user)
-        
-
-                        }
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
+                completionHandler(data)
             }
         }
         

@@ -80,6 +80,7 @@ class FirebaseHelper{
                     }
                     
                 }
+                if let completionHandler = completionHandler{ completionHandler(nil) }
             })
         }
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
@@ -230,7 +231,7 @@ class FirebaseHelper{
     //it creates a chat for the given event. If a chat already exists return nil.
     static func createChat(partnerId: String, completionHandler: @escaping (_ _chatId: String?) -> ()){
         
-        if let userId = firebaseUser?.uid{
+        if let userId = firebaseUser?.uid{//partnersIds, ids of people that the user has chat with.
             rootRefDatabase.child("users/" + userId + "/partnersIds").observeSingleEvent(of: .value, with: {
                 snapshot in
                 if let partnersIdDictionary = snapshot.value as? [String: Any]{
@@ -490,7 +491,7 @@ class FirebaseHelper{
         
     }
     static func addChatsMembers(chatId: String, userId: String){
-        rootRefDatabase.child("users/" + userId + "/thumbnailURL").observeSingleEvent(of: .value, with: {
+        rootRefDatabase.child("users/" + userId + "/picURL").observeSingleEvent(of: .value, with: {
             thumbnailURLsnapshot in
             let thumbnailURL = thumbnailURLsnapshot.value as! String
             rootRefDatabase.child("chatsMembers").child(chatId).updateChildValues(
