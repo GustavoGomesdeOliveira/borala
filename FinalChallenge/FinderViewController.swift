@@ -167,6 +167,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 //                UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
             }
             
+            
             self.mapView.addAnnotations(self.pins)
         })
         //-----------------------------------------
