@@ -68,6 +68,7 @@ class FirebaseHelper{
                         userDictionary.updateValue(downloadUrl, forKey: "picURL")
                     }
                 }
+                
                 rootRefDatabase.child("users").updateChildValues([user.id: userDictionary])
                 
                 if friendDefaults != nil {
