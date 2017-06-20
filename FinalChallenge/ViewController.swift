@@ -32,8 +32,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         facebookLoginBtn.delegate = self
         facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
-        
-        
     }
 
     
@@ -62,8 +60,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                         appDelegate.getImageFromURL(url: picURL, completionHandler: {
                             picData in
                             let newUser = User(withId: (user?.uid)!, name: user?.displayName, pic: picData, socialNetworkID: facebookID, gender: gender, notificationToken: appDelegate.FMCToken!)
-                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                            UserDefaults.standard.set(userData, forKey: "user")
                             FirebaseHelper.saveUser(user: newUser, completionHandler: {
                                 error in
                                 if error == nil{
@@ -72,6 +68,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                                     }
                                 }
                             })
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: newUser)
+                            UserDefaults.standard.set(userData, forKey: "user")
                         })
                     })
                 }

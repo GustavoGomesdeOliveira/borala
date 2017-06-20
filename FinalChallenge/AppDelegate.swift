@@ -115,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
+        application.applicationIconBadgeNumber = 0
     }
 
  
@@ -183,7 +184,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
         }
     }
-    
     
     
     func checkFacebookLogin() -> Bool{
@@ -274,9 +274,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 }
             completionHandler( result as! NSDictionary )
         }
-        //saveFacebookFriends()
-        
-        
     }
     
     func getImageFromURL(url: String, completionHandler:@escaping (_ imageData: Data?) -> () ){
