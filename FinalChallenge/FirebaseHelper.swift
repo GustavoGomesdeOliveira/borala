@@ -36,7 +36,7 @@ class FirebaseHelper{
             metadata, error in
             
             if let downloadUrl = metadata!.downloadURL()?.absoluteString{
-                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["thumbnailURL": downloadUrl])
+                rootRefDatabase.child("users/" + ( firebaseUser?.uid)!).updateChildValues(["thumbnailURL": downloadUrl])
             }
             if let errorOnPutData = completionHandler{
                 errorOnPutData(error)
@@ -44,7 +44,7 @@ class FirebaseHelper{
         }
     }
     
-    static func saveUser(user: User){
+    static func saveUser(user: User, completionHandler:((_ error: Error?) -> ())?){
         let idRef   = rootRefStorage.child("users/" + user.id + "/")
         let picRef  = idRef.child("pic/profilePic.jpg")
         var userDictionary = user.toDictionary()
@@ -60,8 +60,9 @@ class FirebaseHelper{
                 metadata, error in
                 
                 userDictionary.updateValue(picdownloadUrl, forKey: "picURL")
-                if let error = error{
+                if let error = error, let completionHandler = completionHandler{
                     print("An error ocurred to send pic to firebase. \(error)")
+                    completionHandler(error)
                 }
                 else{
                     if let downloadUrl = metadata!.downloadURL()?.absoluteString{
@@ -80,6 +81,7 @@ class FirebaseHelper{
                     }
                     
                 }
+                if let completionHandler = completionHandler{ completionHandler(nil) }
             })
         }
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
@@ -230,7 +232,7 @@ class FirebaseHelper{
     //it creates a chat for the given event. If a chat already exists return nil.
     static func createChat(partnerId: String, completionHandler: @escaping (_ _chatId: String?) -> ()){
         
-        if let userId = firebaseUser?.uid{
+        if let userId = firebaseUser?.uid{//partnersIds, ids of people that the user has chat with.
             rootRefDatabase.child("users/" + userId + "/partnersIds").observeSingleEvent(of: .value, with: {
                 snapshot in
                 if let partnersIdDictionary = snapshot.value as? [String: Any]{
@@ -336,7 +338,7 @@ class FirebaseHelper{
                 for chatMembersKey in chatMembersKeys{
                     if chatMembersKey != self.firebaseUser?.uid{
                         //get pic..
-                        self.getPictureProfile(picAddress: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
+                        self.getThumbnail(url: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
                             pictureData in
                             completionHandler(pictureData)
                                                             
@@ -450,7 +452,6 @@ class FirebaseHelper{
     
     
     static func getPictureProfile(picAddress: String, completitionHandler: @escaping (_ picture: Data?) -> ()){
-        //let picAddress = rootRefDatabase.child("users/").child(userId).value(forKey: "picURL") as! String
         let picUrl = URL(string: picAddress)!
         let session = URLSession(configuration: .default)
         let downloadPicTask = session.dataTask(with: picUrl) {
@@ -475,12 +476,27 @@ class FirebaseHelper{
         downloadPicTask.resume()
     }
     
+    static func getThumbnail(url: String, completitionHandler: @escaping(_ thumbnailData: Data?) -> ()){
+        let range = url.startIndex..<url.endIndex
+        let httpReference = FIRStorage.storage().reference(forURL: url.substring(with: range))
+        httpReference.data(withMaxSize: 1 * 1024 * 1024, completion: {
+            data, error in
+            if error != nil || data == nil{
+                print(error!.localizedDescription)
+                completitionHandler(nil)
+            }
+            else{
+                completitionHandler(data)
+            }
+        })
+        
+    }
     static func addChatsMembers(chatId: String, userId: String){
         rootRefDatabase.child("users/" + userId + "/picURL").observeSingleEvent(of: .value, with: {
-            picURLsnapshot in
-            let picURL = picURLsnapshot.value as! String
+            thumbnailURLsnapshot in
+            let thumbnailURL = thumbnailURLsnapshot.value as! String
             rootRefDatabase.child("chatsMembers").child(chatId).updateChildValues(
-                [userId: picURL])
+                [userId: thumbnailURL])
         })
     }
 }
@@ -498,3 +514,30 @@ class FirebaseHelper{
 //        let downloadURL = metadata!.downloadURL
 //    }
 //}
+
+extension UIImage
+{
+    func resizeToBoundingSquare(boundingSquareSideLength : CGFloat) -> UIImage
+    {
+        let imgScale = self.size.width > self.size.height ? boundingSquareSideLength / self.size.width : boundingSquareSideLength / self.size.height
+        let newWidth = self.size.width * imgScale
+        let newHeight = self.size.height * imgScale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        
+        UIGraphicsBeginImageContext(newSize)
+        
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext();
+        
+        return resizedImage!
+    }
+    
+}
+
+//let rawImage = UIImage(data: imageData)
+//let thumbnailData = UIImageJPEGRepresentation((rawImage?.resizeToBoundingSquare(boundingSquareSideLength: 32.0))!, 0.7)
+//FirebaseHelper.saveThumbnail(userId: id,
+//                             thumbnail: thumbnailData!, completionHandler: nil)

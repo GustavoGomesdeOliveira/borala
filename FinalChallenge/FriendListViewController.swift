@@ -97,6 +97,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
@@ -105,7 +106,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.friendImage.image = UIImage(data: picData)
             self.friendImageList.insert(UIImage(data: picData)!, at: indexPath.row)
         }
-        cell.friendName.text = self.friendList[indexPath.row]["name"] as! String
+        cell.friendName.text = self.friendList[indexPath.row]["name"] as? String
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true

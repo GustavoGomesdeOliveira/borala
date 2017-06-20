@@ -149,7 +149,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         self.view.addSubview(popUpOverVC.view)
         popUpOverVC.didMove(toParentViewController: self)
 
-
     }
     
     
