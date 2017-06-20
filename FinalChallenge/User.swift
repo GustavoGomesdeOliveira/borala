@@ -10,7 +10,7 @@ import UIKit
 
 class User: NSObject, NSCoding{
     
-    var id: String!
+    var id: String!//firebase Id
     var socialNetworkID: String!
     var name: String!
     var gender: String!

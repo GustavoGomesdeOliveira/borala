@@ -40,9 +40,6 @@ exports.sendMessageNotification = functions.database.ref('/chats/{chatsUid}').on
   //if ( snapshot.previous.val() ){
     //return console.log('same previous snapshot');
   //}
-  console.log('We have a new message');
-  console.log('chat..',chatUid);
-  console.log('senderId', senderId);
 
   // Notification details.
   const text = snapshot.val().text;
@@ -66,7 +63,6 @@ exports.sendMessageNotification = functions.database.ref('/chats/{chatsUid}').on
     for (i = 0; i < chatMembersId.length; i++){
         const tokenPromise = admin.database().ref('/users/' + chatMembersId[i] + '/notificationToken').once('value');
         return Promise.all([tokenPromise]).then( result => {
-          console.log('token ', result[0].val());
           return admin.messaging().sendToDevice(result[0].val(), payload).then(response => {});
         });
     }

@@ -39,8 +39,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     var user: User!
     var currentUser: User?
     
-    var tempIdLikeList = ["Teste", "Teste"]
-    var tempIdDislikeList = ["Teste", "Teste"]
     var friendList = [[String: Any]]()
 
     
@@ -159,7 +157,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
             userToReturn = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User
-            
             
         }
         
