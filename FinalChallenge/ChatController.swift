@@ -23,7 +23,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var personImage = Data()
     let containerView =  UIView()
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()

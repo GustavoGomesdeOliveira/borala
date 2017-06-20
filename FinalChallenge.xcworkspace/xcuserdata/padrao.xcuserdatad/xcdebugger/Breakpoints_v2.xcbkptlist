@@ -36,6 +36,102 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "519134691.715002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "getFriends(userId:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.getFriends (userId : Swift.String, completionHandler : (Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "519056404.369256"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getFriends (userId : Swift.String, completionHandler : (Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "519056404.371174"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "519134691.715002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "saveFriend(socialnetworkId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.saveFriend (socialnetworkId : Swift.String) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "519056404.374719"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(saveFriend (socialnetworkId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "519056404.376179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"

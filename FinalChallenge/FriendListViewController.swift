@@ -105,7 +105,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.friendImage.image = UIImage(data: picData)
             self.friendImageList.insert(UIImage(data: picData)!, at: indexPath.row)
         }
-        cell.friendName.text = self.friendList[indexPath.row]["name"] as! String
+        cell.friendName.text = self.friendList[indexPath.row]["name"] as? String
         
         cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true

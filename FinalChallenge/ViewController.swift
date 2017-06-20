@@ -30,7 +30,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        
         facebookLoginBtn.delegate = self
         facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
         
@@ -52,17 +51,31 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                     print(error.debugDescription)
                     
                 } else {
-                    
-                    DispatchQueue.main.async {
-                        
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
-                        appDelegate.fetchProfile(id: (user?.uid)!)
-                    }
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.fetchProfileFromFacebook(completionHandler: {
+                        userDictionary in
+                        let picture = userDictionary["picture"] as! NSDictionary
+                        let data = picture["data"] as! NSDictionary
+                        let picURL = data["url"] as! String
+                        let gender = userDictionary["gender"] as! String
+                        let facebookID = userDictionary["id"] as! String
+                        appDelegate.getImageFromURL(url: picURL, completionHandler: {
+                            picData in
+                            let newUser = User(withId: (user?.uid)!, name: user?.displayName, pic: picData, socialNetworkID: facebookID, gender: gender, notificationToken: appDelegate.FMCToken!)
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                            UserDefaults.standard.set(userData, forKey: "user")
+                            FirebaseHelper.saveUser(user: newUser, completionHandler: {
+                                error in
+                                if error == nil{
+                                    DispatchQueue.main.async {
+                                        self.performSegue(withIdentifier: "segue", sender: nil)
+                                    }
+                                }
+                            })
+                        })
+                    })
                 }
             })
-            self.performSegue(withIdentifier: "segue", sender: nil)
-
         }
         
     }

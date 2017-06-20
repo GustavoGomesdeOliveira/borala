@@ -111,9 +111,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
         
         
-        let user = getUser()
-                    
-        self.myID = user.id
+        //let user = getUser()
+        //self.myID = user.id
 
  //getting events
         FirebaseHelper.getEvents(completionHandler: {
@@ -349,7 +348,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     DispatchQueue.main.async {
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.fetchProfile(id: (user?.uid)!)
+                        //appDelegate.fetchProfile(id: (user?.uid)!)
                     }
                 }
             })
@@ -433,25 +432,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 //    }
     
     
-    func getUser() -> User{
+    func getUser() -> User?{
         
-        var user = User()
-        
-        if let userData = UserDefaults.standard.data(forKey: "user") {
-            
-            user = (NSKeyedUnarchiver.unarchiveObject(with: userData) as? User)!
-            
-            
+        guard let userData = UserDefaults.standard.data(forKey: "user") else{
+            return nil
         }
-        
-        return user
-
+        return (NSKeyedUnarchiver.unarchiveObject(with: userData) as? User)!
     }
     
     func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
-        let user = getUser()
-        let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
+        if let user = getUser(){
+            let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
         let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
         self.myID = event.creatorId
