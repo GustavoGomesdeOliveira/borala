@@ -21,6 +21,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     var facebookFriendsID = [String]()
+    let settingsLauncher = SettingsLauncher()
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
@@ -483,6 +484,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("fazer alguma coisa")
     }
     
+    @IBAction func menuAction(_ sender: Any) {
+        
+        settingsLauncher.showSettings()
+        
+    }
 
     
     @IBAction func addEventAction(_ sender: UIButton) {

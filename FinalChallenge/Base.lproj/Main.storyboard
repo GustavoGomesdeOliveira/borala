@@ -819,6 +819,9 @@
                                     <constraint firstAttribute="height" constant="22" id="kUZ-Ps-E7B"/>
                                 </constraints>
                                 <state key="normal" image="menu"/>
+                                <connections>
+                                    <action selector="menuAction:" destination="v2N-1W-59M" eventType="touchUpInside" id="hjm-AB-CIT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjD-Eg-8Kp">
                                 <rect key="frame" x="282" y="31" width="22" height="22"/>
