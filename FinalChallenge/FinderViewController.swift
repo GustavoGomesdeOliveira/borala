@@ -108,7 +108,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.notLoggedView.isHidden = true
 
         }
-        
+        NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
         
         //let user = getUser()
         //self.myID = user.id
@@ -207,6 +207,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
      print("ERRO: --- \(error)")
      }
+    
+    func refreshToken(_ notification: Notification){
+        if let newToken = FIRInstanceID.instanceID().token(){
+            FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": newToken])
+        }
+    }
     
     // MARK: - Mapkit
     
