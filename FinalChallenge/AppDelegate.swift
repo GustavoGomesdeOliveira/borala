@@ -228,7 +228,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             let token = GIDSignIn.sharedInstance().currentUser.authentication.accessToken
             
-            
             DispatchQueue.main.async{
                 
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: token!)
@@ -254,8 +253,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
         }
         
-        
-        
     }
     
     /// Fetch profile fields from facebook.
@@ -276,14 +273,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
-    func getImageFromURL(url: String, completionHandler:@escaping (_ imageData: Data?) -> () ){
+    /// Asynchronous method to get the data representation of the image from url.
+    ///
+    /// - Parameters:
+    ///   - url: url of image. This can be an URL, NSURL or String.
+    ///   - completionHandler: returns the data image representation if exists. If don't returns nil.
+    func getImageFromURL( url: Any, completionHandler:@escaping (_ imageData: Data?) -> () ){
+        var _url: URL!
         
-        let catPictureURL = URL(string: url)!
+        if let urlValue = url as? URL{ _url = urlValue}
+        if let urlString = url as? String{ _url = URL(string: urlString ) }
         
         let session = URLSession(configuration: .default)
         
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: catPictureURL) {
+        let downloadPicTask = session.dataTask(with: _url) {
             (data, response, error) in
             // The download has finished.
             if let e = error {
@@ -298,6 +302,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
     
+    
+    /// Action to Google Sign in button.
+    ///
+    /// - Parameters:
+    ///   - signIn: <#signIn description#>
+    ///   - user: <#user description#>
+    ///   - error: <#error description#>
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if let err = error{
@@ -305,7 +316,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             return
         }
         
-        if UserDefaults.standard.data(forKey: "user") != nil{
+        if let _ = UserDefaults.standard.data(forKey: "user"){
             
             checkGoogleLogin()
 
@@ -319,82 +330,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     print("error to authentice with google \(String(describing: error))")
                     return
                 }
-                if user.profile.hasImage {
-                    
-                    self.getImageFromGoogle(catPictureURL: user.profile.imageURL(withDimension: 1), name: user.profile.name, id: (firebaseUser?.uid)!, facebookID: user.userID, gender: "")
-                    
-                } else {
-                    
-                    let url = URL(fileURLWithPath: "")
-                    
-                    self.getImageFromGoogle(catPictureURL: url , name: user.profile.name, id: "", facebookID: user.userID, gender: "")
-                }
+                self.getImageFromURL(url: user.profile.imageURL(withDimension: 100), completionHandler: {
+                    data in
+                    var imageData: Data
+                    if let _ = data{ imageData = data! }
+                    else{ imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "profileImage"), 0.8)! }
+                    let user = User(withId: (firebaseUser?.uid)!, name: user.profile.name, pic: imageData, socialNetworkID: user.userID, gender: "", notificationToken: self.FMCToken!)
+                    FirebaseHelper.saveUser(user: user, completionHandler: {
+                        error in
+                        if let error = error{
+                            print("error in save user on firebase. \(error)")
+                            return
+                        }
+                    })
+                    let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+                    UserDefaults.standard.set(userData, forKey: "user")//saves user on userDefaults.
+                })
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil);
                 let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
                 
                 self.window?.rootViewController = viewController
             })
-            
-            
-            
-            
         }
-     
-        
     }
     
-    func getImageFromGoogle(catPictureURL: URL, name: String, id: String, facebookID: String, gender: String){
-        
-        let session = URLSession(configuration: .default)
-        
-        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
-            
-            // The download has finished.
-            if let e = error {
-                
-                print("Error downloading cat picture: \(e)")
-                
-            } else {
-                
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
-                        
-                        if let userData = UserDefaults.standard.object(forKey: "user") as? Data{
-                            
-                            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as! User
-                            
-                            if (imageData != user.pic){
-                                //save on firebase
-                                FirebaseHelper.saveProfilePic(userId: id, pic: imageData, completionHandler: nil)
-                            }
-                            
-                        } else{
-                            //implente this
-                            //let user = User(withId: id, name: name, pic: imageData, socialNetworkID: facebookID, gender: gender)
-                            //let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-                            //UserDefaults.standard.set(userData, forKey: "user")
-                            //FirebaseHelper.saveUser(user: user)
-                        }
-                        
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                    
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
-            }
-        }
-        
-        downloadPicTask.resume()
-
-        
-    }
     
     func saveFacebookFriends(){
         
