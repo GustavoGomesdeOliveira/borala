@@ -18,9 +18,9 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var chatConversation: ChatConversation!
     
     var chatId: String!
+    var personImage = Data()
     var messages = [Message]()
     var keyBoardHeight: CGFloat!
-    var personImage = Data()
     let containerView =  UIView()
     
     override func viewDidLoad() {
@@ -44,6 +44,17 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatController.handleTap))
         tap.numberOfTapsRequired = 1
         self.chatCollection.addGestureRecognizer(tap)
+        if personImage == UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImage")){
+            FirebaseHelper.getPicToChat(chatId: chatId, completionHandler: {
+                data in
+                if let imageData = data{
+                    self.personImage = imageData
+                    DispatchQueue.main.async {
+                        self.chatCollection.reloadData()
+                    }
+                }
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

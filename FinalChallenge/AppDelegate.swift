@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var badgeCount = 0
     var FMCToken: String?
 
-
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -35,10 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
-        
         FIRApp.configure()
         FIRMessaging.messaging().remoteMessageDelegate = self
+        NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
@@ -302,7 +300,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
     
-    
     /// Action to Google Sign in button.
     ///
     /// - Parameters:
@@ -335,7 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     var imageData: Data
                     if let _ = data{ imageData = data! }
                     else{ imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "profileImage"), 0.8)! }
-                    let user = User(withId: (firebaseUser?.uid)!, name: user.profile.name, pic: imageData, socialNetworkID: user.userID, gender: "", notificationToken: self.FMCToken!)
+                    let user = User(withId: (firebaseUser?.uid)!, name: user.profile.name, pic: imageData, socialNetworkID: user.userID, gender: "", notificationToken: self.FMCToken ?? "")
                     FirebaseHelper.saveUser(user: user, completionHandler: {
                         error in
                         if let error = error{
@@ -401,7 +398,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func refreshToken(_ notification: Notification){
         if let newToken = FIRInstanceID.instanceID().token(){
             self.FMCToken = newToken
-//            FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": newToken])
         }
     }
 }

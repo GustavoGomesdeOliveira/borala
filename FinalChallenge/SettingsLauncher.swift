@@ -48,6 +48,8 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             }
             
         }) { (completed: Bool) in
+            
+            
             if setting.name != "" && setting.name != "Cancel" {
                 //é aqui que acontece a magica de chamar a outra modal
                 if setting.name == "Filter by persons" {

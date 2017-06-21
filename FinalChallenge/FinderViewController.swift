@@ -50,6 +50,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var events = [Event]()
     var pins = [CustomPin]()
+    var searchPins = [CustomPin]()
     var myID: String?
     
     
@@ -108,7 +109,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.notLoggedView.isHidden = true
 
         }
-        
+        NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
         
         //let user = getUser()
         //self.myID = user.id
@@ -150,6 +151,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     myPin.pinImage = UIImage(named: "mypin2")
                     myPin.event = event
                     self.pins.append(myPin)
+                    self.searchPins.append(myPin)
+
                 }
             }
             
@@ -166,8 +169,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 //                UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
             }
             
+         
+           
+                self.searchPins = []
             
-            self.mapView.addAnnotations(self.pins)
+            
+                self.mapView.addAnnotations(self.pins)
         })
         //-----------------------------------------
         
@@ -207,6 +214,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
      print("ERRO: --- \(error)")
      }
+    
+    func refreshToken(_ notification: Notification){
+        if let newToken = FIRInstanceID.instanceID().token(){
+            FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": newToken])
+        }
+    }
     
     // MARK: - Mapkit
     
