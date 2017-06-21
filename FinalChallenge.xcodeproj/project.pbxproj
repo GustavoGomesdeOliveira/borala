@@ -45,6 +45,7 @@
 		A775A0D41ECDDA4400E230C1 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */; };
 		A7A897611EF96A3100356035 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8975F1EF96A3100356035 /* SettingsLauncher.swift */; };
 		A7A897621EF96A3100356035 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A897601EF96A3100356035 /* SettingCell.swift */; };
+		A7A897641EFA9EC400356035 /* ChooseFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A897631EFA9EC400356035 /* ChooseFilterController.swift */; };
 		A7D2D2F01ED70BF700FCCA29 /* PinPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D2D2EF1ED70BF700FCCA29 /* PinPopupViewController.swift */; };
 		A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED261EAE36B8004264CF /* ProfileViewController.swift */; };
 		A7FBED291EAE36C5004264CF /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FBED281EAE36C5004264CF /* FinderViewController.swift */; };
@@ -120,6 +121,7 @@
 		A775A0D31ECDDA4400E230C1 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		A7A8975F1EF96A3100356035 /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		A7A897601EF96A3100356035 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		A7A897631EFA9EC400356035 /* ChooseFilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFilterController.swift; sourceTree = "<group>"; };
 		A7D2D2EF1ED70BF700FCCA29 /* PinPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPopupViewController.swift; sourceTree = "<group>"; };
 		A7FBED261EAE36B8004264CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A7FBED281EAE36C5004264CF /* FinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
 				972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */,
 				06376C9B1EC5FCBD00020470 /* CustomPin.swift */,
+				A7A897631EFA9EC400356035 /* ChooseFilterController.swift */,
 				062C78841ED30C1E001F9022 /* CustomChatCell.swift */,
 				061B75821ED4664E00CF2C2D /* PopUpViewController.swift */,
 				06E4FBF41ED4E24B00E93061 /* ShadowView.swift */,
@@ -592,6 +595,7 @@
 			files = (
 				A74375621EDDABF7008124E1 /* myPinPopupViewController.swift in Sources */,
 				06E4FBF51ED4E24B00E93061 /* ShadowView.swift in Sources */,
+				A7A897641EFA9EC400356035 /* ChooseFilterController.swift in Sources */,
 				0640FBC31EC3415800C1B16A /* Event.swift in Sources */,
 				0697E16B1EAE2ABF002AF2FF /* ViewController.swift in Sources */,
 				97016CA21EC4863700DA1194 /* Location.swift in Sources */,

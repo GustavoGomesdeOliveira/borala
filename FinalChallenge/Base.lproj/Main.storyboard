@@ -1551,7 +1551,135 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gog-iX-XAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6476.25" y="1098.5915492957747"/>
+            <point key="canvasLocation" x="6489" y="1109"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lcI-SH-jUf">
+            <objects>
+                <viewController id="9At-K0-heW" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ngp-dU-HRP"/>
+                        <viewControllerLayoutGuide type="bottom" id="ReK-i0-9ib"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PhD-pD-wVy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pv-23-sOA">
+                                <rect key="frame" x="16" y="28" width="288" height="510"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Hl-zF-l7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7164" y="1099"/>
+        </scene>
+        <!--Choose Filter Controller-->
+        <scene sceneID="lrV-rX-exg">
+            <objects>
+                <viewController storyboardIdentifier="Chosse" id="Ddd-Ib-G9d" customClass="ChooseFilterController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5fY-kZ-lKm"/>
+                        <viewControllerLayoutGuide type="bottom" id="vbJ-1n-nzj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tsr-Ae-hSc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJa-O6-K2y">
+                                <rect key="frame" x="25" y="197" width="270" height="174"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O71-p7-3Fh">
+                                        <rect key="frame" x="27" y="17" width="216" height="140"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-Lp-4Ej">
+                                                <rect key="frame" x="0.0" y="0.0" width="216" height="40"/>
+                                                <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="4rQ-EY-emN"/>
+                                                    <constraint firstAttribute="width" constant="216" id="tXg-rP-lJ0"/>
+                                                </constraints>
+                                                <state key="normal" title="Just friends">
+                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="filterByFriends:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="ngp-tk-T2v"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcq-iN-onh">
+                                                <rect key="frame" x="0.0" y="50" width="216" height="40"/>
+                                                <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="216" id="CK7-tM-urD"/>
+                                                    <constraint firstAttribute="height" constant="40" id="Vw8-4G-OSI"/>
+                                                </constraints>
+                                                <state key="normal" title="New people">
+                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="filterByNew:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="wgL-1d-HQe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMs-fb-774">
+                                                <rect key="frame" x="0.0" y="100" width="216" height="40"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="JqG-hG-8pn"/>
+                                                    <constraint firstAttribute="width" constant="216" id="yDm-NY-fg9"/>
+                                                </constraints>
+                                                <state key="normal" title="Everyone">
+                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="filterByEveryone:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="MKD-T7-hs7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="O71-p7-3Fh" firstAttribute="centerY" secondItem="KJa-O6-K2y" secondAttribute="centerY" id="BP3-o3-5me"/>
+                                    <constraint firstAttribute="width" constant="270" id="CWV-GI-79h"/>
+                                    <constraint firstAttribute="height" constant="174" id="RLu-QG-010"/>
+                                    <constraint firstItem="O71-p7-3Fh" firstAttribute="centerX" secondItem="KJa-O6-K2y" secondAttribute="centerX" id="Yyg-r4-bGh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerY" secondItem="tsr-Ae-hSc" secondAttribute="centerY" id="Bhe-Py-k8q"/>
+                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerX" secondItem="tsr-Ae-hSc" secondAttribute="centerX" id="UXc-iP-gVr"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="everyone" destination="uMs-fb-774" id="DOI-og-e3l"/>
+                        <outlet property="friends" destination="HUA-Lp-4Ej" id="TPE-Ck-t3G"/>
+                        <outlet property="myView" destination="KJa-O6-K2y" id="32T-WQ-WDg"/>
+                        <outlet property="newPeople" destination="Zcq-iN-onh" id="vLh-Js-1kE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jcf-zk-Vb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5839" y="1790"/>
         </scene>
     </scenes>
     <resources>
