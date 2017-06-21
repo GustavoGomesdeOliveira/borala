@@ -21,11 +21,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     var facebookFriendsID = [String]()
+    let settingsLauncher = SettingsLauncher()
 
     @IBOutlet weak var notLoggedView: UIView!
     @IBOutlet weak var facebookLoginBTN: FBSDKLoginButton!
     
-    @IBOutlet weak var newEvent: UIBarButtonItem!
+    @IBOutlet weak var newEvent: UIButton!
+   
     
     var pin: CustomPin?
     var myAnnotation: CustomPin?
@@ -479,20 +481,27 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("fazer alguma coisa")
     }
     
-    
-    @IBAction func addEventAction(_ sender: UIBarButtonItem) {
+    @IBAction func menuAction(_ sender: Any) {
         
-        self.mapView.showsUserLocation = false
-        
-        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "eventPopUp") as! EventViewController
-        
-        self.addChildViewController(popUpOverVC)
-        popUpOverVC.delegate = self
-        popUpOverVC.view.frame = self.view.frame
-        self.view.addSubview(popUpOverVC.view)
-        popUpOverVC.didMove(toParentViewController: self)
+        settingsLauncher.showSettings()
         
     }
+
+    
+    @IBAction func addEventAction(_ sender: UIButton) {
+        
+                self.mapView.showsUserLocation = false
+        
+                let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "eventPopUp") as! EventViewController
+        
+                self.addChildViewController(popUpOverVC)
+                popUpOverVC.delegate = self
+                popUpOverVC.view.frame = self.view.frame
+                self.view.addSubview(popUpOverVC.view)
+                popUpOverVC.didMove(toParentViewController: self)
+        
+    }
+    
     
 }
 
