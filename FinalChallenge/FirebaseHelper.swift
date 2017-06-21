@@ -85,9 +85,6 @@ class FirebaseHelper{
             })
         }
         rootRefDatabase.child("socialnetworkIds").updateChildValues([user.socialNetworkID: user.id])
-        
-        
-        
     }
     
     static func updateUser(userId: String, userInfo: [String: Any]){
