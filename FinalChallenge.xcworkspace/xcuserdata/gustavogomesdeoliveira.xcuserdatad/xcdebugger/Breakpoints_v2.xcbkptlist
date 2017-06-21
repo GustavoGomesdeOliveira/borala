@@ -27,13 +27,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/SettingsLauncher.swift"
-            timestampString = "519742563.797249"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "519747228.546905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "handleDismiss(_:)"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
