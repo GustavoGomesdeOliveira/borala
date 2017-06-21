@@ -170,25 +170,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
             
          
-                let defaults = UserDefaults.standard
-                    
-                let friendDefaults = defaults.object(forKey: "friendList")
-                    
-                for pins in self.pins {
-                
-                
-                    if (friendDefaults as! [String]).contains((pins.event?.creatorId)!) {
-                    
-                     self.searchPins.append(pins)
-                    }
-                
-                }
+           
+                self.searchPins = []
             
-                //self.searchPins = []
             
-                self.mapView.addAnnotations(self.searchPins)
-            
-                //self.mapView.addAnnotations(self.pins)
+                self.mapView.addAnnotations(self.pins)
         })
         //-----------------------------------------
         
