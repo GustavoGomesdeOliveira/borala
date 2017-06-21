@@ -49,6 +49,9 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 data in
                 if let imageData = data{
                     self.personImage = imageData
+                    DispatchQueue.main.async {
+                        self.chatCollection.reloadData()
+                    }
                 }
             })
         }
