@@ -29,9 +29,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var newEvent: UIButton!
    
     
-    
-//    var eventVC: EventViewController?
-    
     var pin: CustomPin?
     var myAnnotation: CustomPin?
     var selectedUserID: String?
