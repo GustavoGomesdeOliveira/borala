@@ -47,8 +47,14 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         }) { (completed: Bool) in
             if setting.name != "" && setting.name != "Cancel" {
                 //é aqui que acontece a magica de chamar a outra modal
-                //self.homeController?.showControllerForSetting(setting)
-                print("boraaaa")
+                if setting.name == "Filter by persons" {
+                    //filter by friends
+                
+                }else {
+                    //filter by distance
+                
+                
+                }
             }
         }
     }
