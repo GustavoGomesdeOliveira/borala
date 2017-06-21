@@ -1585,7 +1585,7 @@
         <!--Choose Filter Controller-->
         <scene sceneID="lrV-rX-exg">
             <objects>
-                <viewController storyboardIdentifier="Chosse" id="Ddd-Ib-G9d" customClass="ChooseFilterController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chooseFilter" id="Ddd-Ib-G9d" customClass="ChooseFilterController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5fY-kZ-lKm"/>
                         <viewControllerLayoutGuide type="bottom" id="vbJ-1n-nzj"/>
@@ -1595,12 +1595,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJa-O6-K2y">
-                                <rect key="frame" x="25" y="197" width="270" height="174"/>
+                                <rect key="frame" x="16" y="178" width="288" height="212"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O71-p7-3Fh">
-                                        <rect key="frame" x="27" y="17" width="216" height="140"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O71-p7-3Fh">
+                                        <rect key="frame" x="36" y="36" width="216" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-Lp-4Ej">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-Lp-4Ej">
                                                 <rect key="frame" x="0.0" y="0.0" width="216" height="40"/>
                                                 <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1610,11 +1611,17 @@
                                                 <state key="normal" title="Just friends">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="filterByFriends:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="ngp-tk-T2v"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcq-iN-onh">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcq-iN-onh">
                                                 <rect key="frame" x="0.0" y="50" width="216" height="40"/>
                                                 <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1624,11 +1631,17 @@
                                                 <state key="normal" title="New people">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="filterByNew:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="wgL-1d-HQe"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMs-fb-774">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMs-fb-774">
                                                 <rect key="frame" x="0.0" y="100" width="216" height="40"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1638,23 +1651,33 @@
                                                 <state key="normal" title="Everyone">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="filterByEveryone:" destination="Ddd-Ib-G9d" eventType="touchUpInside" id="MKD-T7-hs7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="O71-p7-3Fh" firstAttribute="centerY" secondItem="KJa-O6-K2y" secondAttribute="centerY" id="BP3-o3-5me"/>
-                                    <constraint firstAttribute="width" constant="270" id="CWV-GI-79h"/>
-                                    <constraint firstAttribute="height" constant="174" id="RLu-QG-010"/>
-                                    <constraint firstItem="O71-p7-3Fh" firstAttribute="centerX" secondItem="KJa-O6-K2y" secondAttribute="centerX" id="Yyg-r4-bGh"/>
+                                    <constraint firstAttribute="width" constant="288" id="GAi-cP-LCw"/>
+                                    <constraint firstAttribute="height" constant="212" id="gH5-Dm-VHF"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -1662,8 +1685,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerY" secondItem="tsr-Ae-hSc" secondAttribute="centerY" id="Bhe-Py-k8q"/>
-                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerX" secondItem="tsr-Ae-hSc" secondAttribute="centerX" id="UXc-iP-gVr"/>
+                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerY" secondItem="tsr-Ae-hSc" secondAttribute="centerY" id="OQa-8i-6hy"/>
+                            <constraint firstItem="KJa-O6-K2y" firstAttribute="centerX" secondItem="tsr-Ae-hSc" secondAttribute="centerX" id="yEn-Pw-0Zi"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1673,13 +1696,12 @@
                     <connections>
                         <outlet property="everyone" destination="uMs-fb-774" id="DOI-og-e3l"/>
                         <outlet property="friends" destination="HUA-Lp-4Ej" id="TPE-Ck-t3G"/>
-                        <outlet property="myView" destination="KJa-O6-K2y" id="32T-WQ-WDg"/>
                         <outlet property="newPeople" destination="Zcq-iN-onh" id="vLh-Js-1kE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcf-zk-Vb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5839" y="1790"/>
+            <point key="canvasLocation" x="5838.75" y="1789.4366197183099"/>
         </scene>
     </scenes>
     <resources>

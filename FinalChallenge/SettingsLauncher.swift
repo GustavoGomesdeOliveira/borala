@@ -19,7 +19,7 @@ class Setting: NSObject {
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
-    
+    var parentview : UIView?
     let blackview = UIView()
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +28,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
+    var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
     
@@ -35,12 +36,14 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Filter by distance", imageName: "distance"), Setting(name: "Cancel", imageName: "cancel")]
     }()
     
+    //var homeController: FinderViewController?
+    
     func handleDismiss(_ setting: Setting) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
             self.blackview.alpha = 0
             
-            if let window = UIApplication.shared.keyWindow {
+            if let window = UIApplication.shared.keyWindow{
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
             
@@ -49,7 +52,11 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 //é aqui que acontece a magica de chamar a outra modal
                 if setting.name == "Filter by persons" {
                     //filter by friends
-                
+                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+                    let mycontroller = parent.selectedViewController as! FinderViewController
+                    mycontroller.showControllerForSetting(setting)
+//                    print(self.homeController?.myID)
+                 
                 }else {
                     //filter by distance
                 
@@ -72,7 +79,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             window.addSubview(collectionView)
             
             let height: CGFloat = CGFloat(settings.count) * cellHeight
-            let y = window.frame.height - height
+            let y = window.frame.height - height //- tabBarheight
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
             self.blackview.frame = window.frame

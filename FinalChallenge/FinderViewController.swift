@@ -481,8 +481,24 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("fazer alguma coisa")
     }
     
-    @IBAction func menuAction(_ sender: Any) {
+    func showControllerForSetting(_ setting: Setting) {
+        //chamar a popup
+        print("deu certo")
         
+        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+        
+        self.addChildViewController(popUpOverVC)
+       // popUpOverVC.delegate = self
+        popUpOverVC.view.frame = self.view.frame
+        self.view.addSubview(popUpOverVC.view)
+        popUpOverVC.didMove(toParentViewController: self)
+        
+        
+    }
+    
+    @IBAction func menuAction(_ sender: Any) {
+        settingsLauncher.parentview = self.view
+        settingsLauncher.tabBarheight = (self.tabBarController?.tabBar.frame.height)!
         settingsLauncher.showSettings()
         
     }

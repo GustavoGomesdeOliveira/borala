@@ -21,14 +21,27 @@ class ChooseFilterController: UIViewController {
 
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let touch: UITouch? = touches.first
+        if touch?.view == self.view {
+            self.view.removeFromSuperview()
+        }
+        
+    }
+    
     @IBAction func filterByFriends(_ sender: Any) {
+        
     }
     
     @IBAction func filterByNew(_ sender: Any) {
+        
     }
     
     
     @IBAction func filterByEveryone(_ sender: Any) {
+        
     }
     
     
