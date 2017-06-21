@@ -13,7 +13,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var chatTableView: UITableView!
     
-    var flagToReload = false
     var chats = [Chat](){
         willSet{
             if !newValue.isEmpty{
@@ -91,19 +90,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let chatViewController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
-        chatViewController.chatId = self.chats[indexPath.row].id
+        let chatController = storyboard.instantiateViewController(withIdentifier: "chatController") as! ChatController
+        chatController.chatId = self.chats[indexPath.row].id
 
         if self.chats[indexPath.row].pic != nil {
             
-            chatViewController.personImage = self.chats[indexPath.row].pic!
+            chatController.personImage = self.chats[indexPath.row].pic!
 
         } else {
             
-            chatViewController.personImage = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImage"))!
+            chatController.personImage = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImage"))!
         }
         
-        self.present(chatViewController, animated: true, completion: nil)
+        self.present(chatController, animated: true, completion: nil)
         
     }
 }

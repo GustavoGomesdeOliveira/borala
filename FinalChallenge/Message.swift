@@ -30,7 +30,7 @@ class Message{
     }
     
     func toDictionary() -> [String: Any]{
-        return ["id": self.id, "senderId": self.senderId, "senderName": self.senderName,
-                "text": self.text, "timeStamp": self.timeStamp]
+        return ["id": self.id ?? "", "senderId": self.senderId, "senderName": self.senderName,
+                "text": self.text, "timeStamp": self.timeStamp ?? 0.0]
     }
 }
