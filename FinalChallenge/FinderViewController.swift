@@ -53,6 +53,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var events = [Event]()
     var pins = [CustomPin]()
+    var searchPins = [CustomPin]()
     var myID: String?
     
     
@@ -153,6 +154,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     myPin.pinImage = UIImage(named: "mypin2")
                     myPin.event = event
                     self.pins.append(myPin)
+                    self.searchPins.append(myPin)
+
                 }
             }
             

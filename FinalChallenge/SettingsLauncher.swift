@@ -45,10 +45,39 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             }
             
         }) { (completed: Bool) in
+            
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil);
+            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+            
+            let tabBar = viewController.viewControllers?[1] as! FinderViewController
+            
+            
             if setting.name != "" && setting.name != "Cancel" {
                 //é aqui que acontece a magica de chamar a outra modal
                 if setting.name == "Filter by persons" {
                     //filter by friends
+                    
+                    let defaults = UserDefaults.standard
+                    
+                    let friendDefaults = defaults.object(forKey: "friendList")
+                    
+                    if friendDefaults != nil {
+                        
+                        
+                        for pins in tabBar.pins {
+                            
+                            
+                            if (friendDefaults as! [String]).contains((pins.event?.creatorId)!) {
+                                
+                                tabBar.searchPins.append(pins)
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
                 
                 }else {
                     //filter by distance
