@@ -39,6 +39,9 @@
 		972D30721EDC9B0C00DE6E49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */; };
 		A71FBEFC1EC1E2EE0013A018 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */; };
 		A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */; };
+		A726FEBA1EFBED34000E93B9 /* TablePinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A726FEB91EFBED34000E93B9 /* TablePinsViewController.swift */; };
+		A726FEBD1EFBEE37000E93B9 /* PinsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A726FEBB1EFBEE37000E93B9 /* PinsTableViewCell.swift */; };
+		A726FEBE1EFBEE37000E93B9 /* PinsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A726FEBC1EFBEE37000E93B9 /* PinsTableViewCell.xib */; };
 		A74375621EDDABF7008124E1 /* myPinPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74375611EDDABF7008124E1 /* myPinPopupViewController.swift */; };
 		A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76377311ED32EE600A5F199 /* EventViewController.swift */; };
 		A775A0D21ECDDA3700E230C1 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775A0D11ECDDA3700E230C1 /* Popup.swift */; };
@@ -115,6 +118,9 @@
 		972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A71FBEFB1EC1E2EE0013A018 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A71FBEFF1EC1EC040013A018 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		A726FEB91EFBED34000E93B9 /* TablePinsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TablePinsViewController.swift; sourceTree = "<group>"; };
+		A726FEBB1EFBEE37000E93B9 /* PinsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsTableViewCell.swift; sourceTree = "<group>"; };
+		A726FEBC1EFBEE37000E93B9 /* PinsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinsTableViewCell.xib; sourceTree = "<group>"; };
 		A74375611EDDABF7008124E1 /* myPinPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myPinPopupViewController.swift; sourceTree = "<group>"; };
 		A76377311ED32EE600A5F199 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A775A0D11ECDDA3700E230C1 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
@@ -204,7 +210,9 @@
 				0697E16F1EAE2ABF002AF2FF /* FinalChallenge.xcdatamodeld */,
 				972D30711EDC9B0C00DE6E49 /* GoogleService-Info.plist */,
 				06376C9B1EC5FCBD00020470 /* CustomPin.swift */,
+				A726FEBF1EFBEE3D000E93B9 /* TableCell */,
 				A7A897631EFA9EC400356035 /* ChooseFilterController.swift */,
+				A726FEB91EFBED34000E93B9 /* TablePinsViewController.swift */,
 				062C78841ED30C1E001F9022 /* CustomChatCell.swift */,
 				061B75821ED4664E00CF2C2D /* PopUpViewController.swift */,
 				06E4FBF41ED4E24B00E93061 /* ShadowView.swift */,
@@ -281,6 +289,15 @@
 				A7A897601EF96A3100356035 /* SettingCell.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		A726FEBF1EFBEE3D000E93B9 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				A726FEBB1EFBEE37000E93B9 /* PinsTableViewCell.swift */,
+				A726FEBC1EFBEE37000E93B9 /* PinsTableViewCell.xib */,
+			);
+			name = TableCell;
 			sourceTree = "<group>";
 		};
 		A7FBED2A1EAE36CC004264CF /* TabBarViewControllers */ = {
@@ -427,6 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A726FEBE1EFBEE37000E93B9 /* PinsTableViewCell.xib in Resources */,
 				0697E1761EAE2ABF002AF2FF /* LaunchScreen.storyboard in Resources */,
 				972D30721EDC9B0C00DE6E49 /* GoogleService-Info.plist in Resources */,
 				0697E1731EAE2ABF002AF2FF /* Assets.xcassets in Resources */,
@@ -608,6 +626,7 @@
 				972D1F7E1ED60216001895B4 /* Message.swift in Sources */,
 				A76377321ED32EE600A5F199 /* EventViewController.swift in Sources */,
 				06376C9C1EC5FCBD00020470 /* CustomPin.swift in Sources */,
+				A726FEBD1EFBEE37000E93B9 /* PinsTableViewCell.swift in Sources */,
 				A7A897621EF96A3100356035 /* SettingCell.swift in Sources */,
 				061B75831ED4664E00CF2C2D /* PopUpViewController.swift in Sources */,
 				A7FBED271EAE36B8004264CF /* ProfileViewController.swift in Sources */,
@@ -618,6 +637,7 @@
 				972D1F7C1ED601A0001895B4 /* Chat.swift in Sources */,
 				06E4FBF71ED4F66B00E93061 /* ChatController.swift in Sources */,
 				97016CA01EC4814100DA1194 /* FirebaseHelper.swift in Sources */,
+				A726FEBA1EFBED34000E93B9 /* TablePinsViewController.swift in Sources */,
 				A7FBED291EAE36C5004264CF /* FinderViewController.swift in Sources */,
 				A7A897611EF96A3100356035 /* SettingsLauncher.swift in Sources */,
 				A71FBF001EC1EC040013A018 /* TabBarViewController.swift in Sources */,

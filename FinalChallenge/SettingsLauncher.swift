@@ -55,6 +55,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 if setting.name == "Filter by persons" {
                     //filter by friends
                     let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+                    
                     let mycontroller = parent.selectedViewController as! FinderViewController
                     mycontroller.showControllerForSetting(setting)
 //                    print(self.homeController?.myID)
