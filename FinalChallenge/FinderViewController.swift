@@ -111,8 +111,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
         NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
         
-        //let user = getUser()
-        //self.myID = user.id
+        let user = getUser()
+        self.myID = user?.id
 
  //getting events
         FirebaseHelper.getEvents(completionHandler: {
