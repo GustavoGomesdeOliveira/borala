@@ -1553,10 +1553,10 @@
             </objects>
             <point key="canvasLocation" x="6489" y="1109"/>
         </scene>
-        <!--View Controller-->
+        <!--Table Pins View Controller-->
         <scene sceneID="lcI-SH-jUf">
             <objects>
-                <viewController id="9At-K0-heW" sceneMemberID="viewController">
+                <viewController id="9At-K0-heW" customClass="TablePinsViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngp-dU-HRP"/>
                         <viewControllerLayoutGuide type="bottom" id="ReK-i0-9ib"/>
@@ -1565,22 +1565,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pv-23-sOA">
-                                <rect key="frame" x="16" y="28" width="288" height="510"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rNT-ks-WP5">
+                                <rect key="frame" x="16" y="95" width="288" height="379"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="AQe-Cs-vJK"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="blm-by-xsv">
+                                        <rect key="frame" x="0.0" y="28" width="288" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="blm-by-xsv" id="Pf1-jn-dqD">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rNT-ks-WP5" firstAttribute="centerY" secondItem="PhD-pD-wVy" secondAttribute="centerY" id="CyT-du-2oW"/>
+                            <constraint firstItem="ReK-i0-9ib" firstAttribute="top" secondItem="rNT-ks-WP5" secondAttribute="bottom" constant="94" id="GO8-nE-JyH"/>
+                            <constraint firstItem="rNT-ks-WP5" firstAttribute="top" secondItem="ngp-dU-HRP" secondAttribute="bottom" constant="95" id="QNU-pm-PPH"/>
+                            <constraint firstItem="rNT-ks-WP5" firstAttribute="centerX" secondItem="PhD-pD-wVy" secondAttribute="centerX" id="SFC-1u-Rco"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="tableView" destination="rNT-ks-WP5" id="ac4-xO-A8a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hl-zF-l7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7164" y="1099"/>
+            <point key="canvasLocation" x="4706.25" y="1852.8169014084508"/>
         </scene>
         <!--Choose Filter Controller-->
         <scene sceneID="lrV-rX-exg">
@@ -1701,7 +1723,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcf-zk-Vb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5838.75" y="1789.4366197183099"/>
+            <point key="canvasLocation" x="3971" y="1853"/>
         </scene>
     </scenes>
     <resources>
