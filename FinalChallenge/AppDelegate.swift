@@ -405,7 +405,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // Receive displayed notifications for iOS 10 devices.
+    // Receive displayed notifications for iOS 10 devices. On foreground.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

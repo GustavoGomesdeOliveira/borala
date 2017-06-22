@@ -75,7 +75,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        //FirebaseHelper.getEvents(ofType: "7EzIl04CiNfZqnV3xBQY9kh4fK23", completionHandler:
+            //{data in
+        //})
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
 
