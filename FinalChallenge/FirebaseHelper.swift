@@ -97,6 +97,7 @@ class FirebaseHelper{
             snapshot in
             if let firebaseIdReceived = snapshot.value as? String{
                 rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/friendsId").updateChildValues( [firebaseIdReceived: true] )
+                rootRefDatabase.child("users/" + firebaseIdReceived + "/friendsId").updateChildValues( [(firebaseUser?.uid)!: true] )
             }
         })
     }
