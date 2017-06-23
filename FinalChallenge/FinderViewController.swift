@@ -17,7 +17,7 @@ let token = FBSDKAccessToken.current()
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate, FilterDelegate {
     
     
     var facebookFriendsID = [String]()
@@ -69,7 +69,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         }
         
-        
     }
 
     override func viewDidLoad() {
@@ -117,71 +116,148 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.myID = user?.id
 
  //getting events
-        FirebaseHelper.getEvents(completionHandler: {
-            eventsFromFirebase in
-            self.events = eventsFromFirebase
-            self.pins.removeAll()
+        let searchMode = UserDefaults.standard.integer(forKey: "search")
+        
+        switch searchMode {
             
-            
-            for event in self.events{
-
-                if (event.creatorId != self.myID){
-                   
-                    let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
-                    
-                    var imageName = event.preference
-                    if imageName == nil {
-                        imageName = "pizza"
-                    }else{
-                        imageName?.append("pin")
+        case Search.Friends.hashValue:
+            FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
+                friendsIdsSnaphot in
+                if let friendIdsDictionary = friendsIdsSnaphot{
+                    self.events.removeAll()
+                    self.pins.removeAll()
+                    for key in friendIdsDictionary.keys{
+                        FirebaseHelper.getEvents(creatorId: key, completionHandler: {
+                            eventsFromFirebase in
+                            
+                            self.events.append(contentsOf: eventsFromFirebase)
+                            for event in self.events{ self.addPin(event: event) }
+                            self.newEventButtonState(enable: !self.findEvent)
+                            if self.findEvent { self.findEvent = false }
+                            
+                            self.searchPins = []
+                            
+                            self.mapView.addAnnotations(self.pins)
+                        })
                     }
-                    
-                    let eventPin = CustomPin(coordinate: coordinate)
-                    eventPin.title = "teste"
-                    eventPin.pinImage = UIImage(named: imageName!)
-                    eventPin.event = event
-                    self.pins.append(eventPin)
                 }
-                else{
-                    //this is my event
-//                    eventExist = true
-                    self.findEvent = true
-//                    self.mapView.showsUserLocation = false
-                    let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
-                    let myPin = CustomPin(coordinate: coordinate)
-                    myPin.title = "teste"
-                    myPin.pinImage = UIImage(named: "mypin2")
-                    myPin.event = event
-                    self.pins.append(myPin)
-                    self.searchPins.append(myPin)
-
-                }
-            }
+            })
             
-            if self.findEvent == true {
-                //ele achou o evento
-                self.newEvent.isEnabled = false
-                self.newEvent.tintColor = UIColor.white
-                self.findEvent = false
-//                self.mapView.showsUserLocation = false
-            }else{
-                //n existe evento
-                self.newEvent.isEnabled = true
-                self.newEvent.tintColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1)
-//                UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
-            }
-            
-         
-           
+            break
+        case Search.NotFriend.hashValue:
+            //setBtnColors(firstBtn: self.newPeople, secondBtn: self.friends, thirdBtn: self.everyone)
+            break
+        case Search.Everyone.hashValue:
+            //setBtnColors(firstBtn: self.everyone, secondBtn: self.newPeople, thirdBtn: self.friends)
+            FirebaseHelper.getEvents(completionHandler: {
+                eventsFromFirebase in
+                self.events = eventsFromFirebase
+                self.pins.removeAll()
+                
+                for event in self.events{ self.addPin(event: event) }
+                self.newEventButtonState(enable: !self.findEvent)
+                if self.findEvent { self.findEvent = false }
+                
                 self.searchPins = []
-            
-            
+                
+                
                 self.mapView.addAnnotations(self.pins)
-        })
+            })
+            break
+        default:
+            break
+        }
+        
         //-----------------------------------------
         
     }
     
+    /// it adds an proper pin on mapView for the given event.
+    ///
+    /// - Parameter event: An event which you wish adds a pin on mapView.
+    func addPin(event: Event){
+        
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(event.location.latitude), longitude: CLLocationDegrees(event.location.longitude))
+        let pin = CustomPin(coordinate: coordinate)
+        var imageName = event.preference
+
+        if (event.creatorId != self.myID){
+            
+            var imageName = event.preference
+            if imageName == nil {
+                imageName = "pizza"
+            }else{
+                imageName?.append("pin")
+            }
+        }
+        else{//this event was created by me.
+            self.findEvent = true
+            imageName = "mypin2"
+        }
+        pin.title = "teste"
+        pin.pinImage = UIImage(named: imageName!)
+        pin.event = event
+        self.pins.append(pin)
+        self.searchPins.append(pin)
+    }
+    
+    /// it enables or disables the new event button.
+    ///
+    /// - Parameter enable: true for enable and false for disable.
+    func newEventButtonState(enable: Bool){
+        self.newEvent.isEnabled = enable
+        if enable{
+            self.newEvent.tintColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1)//precisa disso?
+        }else{
+            self.newEvent.tintColor = UIColor.white//precisa disso?
+        }
+    }
+    
+    func changeFilter(filter: Search) {
+        
+        switch filter {
+            case Search.Friends:
+                FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
+                    friendsIdsSnaphot in
+                    if let friendIdsDictionary = friendsIdsSnaphot{
+                        self.events.removeAll()
+                        self.pins.removeAll()
+                        for key in friendIdsDictionary.keys{
+                            FirebaseHelper.getEvents(creatorId: key, completionHandler: {
+                                eventsFromFirebase in
+        
+                                self.events.append(contentsOf: eventsFromFirebase)
+                                for event in self.events{ self.addPin(event: event) }
+                                self.newEventButtonState(enable: !self.findEvent)
+                                if self.findEvent { self.findEvent = false }
+                                self.searchPins = []
+        
+                                self.mapView.addAnnotations(self.pins)
+                            })
+                        }
+                    }
+                })
+            break
+            
+            case Search.NotFriend: break
+            
+            case Search.Everyone:
+                FirebaseHelper.getEvents(completionHandler: {
+                    eventsFromFirebase in
+                    self.events = eventsFromFirebase
+                    self.pins.removeAll()
+        
+                    for event in self.events{ self.addPin(event: event) }
+                    self.newEventButtonState(enable: !self.findEvent)
+                    if self.findEvent { self.findEvent = false }
+        
+                    self.searchPins = []
+                    self.mapView.addAnnotations(self.pins)
+                })
+            break
+        }
+    }
+
     func loadFriends(){
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![3] as! FriendListController
@@ -189,12 +265,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         newViewController.getfriends()
         
     }
-    
+
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         // This *forces* a popover to be displayed on the iPhone
         return .none
     }
-    
+
     // MARK: - CoreLocation
 
      //Updating user location on the mapView
