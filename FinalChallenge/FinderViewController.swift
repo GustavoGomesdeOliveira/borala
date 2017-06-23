@@ -77,6 +77,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         //FirebaseHelper.getEvents(ofType: "7EzIl04CiNfZqnV3xBQY9kh4fK23", completionHandler:
             //{data in
         //})
+        
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
 
@@ -117,59 +118,54 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
  //getting events
         let searchMode = UserDefaults.standard.integer(forKey: "search")
-        
+        let friendDefaults = UserDefaults.standard.object(forKey: "friendList")
+        var friendList = [String]()
+        if let _ = friendDefaults{
+            for friend in (friendDefaults as! [String]) {
+                friendList.append(friend)
+            }
+        }
         switch searchMode {
-            
-        case Search.Friends.hashValue:
-            FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
-                friendsIdsSnaphot in
-                if let friendIdsDictionary = friendsIdsSnaphot{
-                    self.events.removeAll()
-                    self.pins.removeAll()
-                    for key in friendIdsDictionary.keys{
-                        FirebaseHelper.getEvents(creatorId: key, completionHandler: {
-                            eventsFromFirebase in
-                            
-                            self.events.append(contentsOf: eventsFromFirebase)
-                            for event in self.events{ self.addPin(event: event) }
-                            self.newEventButtonState(enable: !self.findEvent)
-                            if self.findEvent { self.findEvent = false }
-                            
-                            self.searchPins = []
-                            
-                            self.mapView.addAnnotations(self.pins)
-                        })
-                    }
-                }
-            })
-            
-            break
-        case Search.NotFriend.hashValue:
-            //setBtnColors(firstBtn: self.newPeople, secondBtn: self.friends, thirdBtn: self.everyone)
-            break
-        case Search.Everyone.hashValue:
-            //setBtnColors(firstBtn: self.everyone, secondBtn: self.newPeople, thirdBtn: self.friends)
-            FirebaseHelper.getEvents(completionHandler: {
-                eventsFromFirebase in
-                self.events = eventsFromFirebase
+        
+            case Search.Friends.hashValue:
+                self.events.removeAll()
                 self.pins.removeAll()
+                for friend in friendList{
+                    FirebaseHelper.getEvents(creatorId: friend, completionHandler: {
+                        eventsFromFirebase in
+                            
+                        self.events.append(contentsOf: eventsFromFirebase)
+                        for event in self.events{ self.addPin(event: event) }
+                        self.newEventButtonState(enable: !self.findEvent)
+                        if self.findEvent { self.findEvent = false }
+                            
+                        self.searchPins = []
+                            
+                        self.mapView.addAnnotations(self.pins)
+                    })
+                }
+            
+            break
+            case Search.NotFriend.hashValue: break
+            
+            case Search.Everyone.hashValue:
+                FirebaseHelper.getEvents(completionHandler: {
+                    eventsFromFirebase in
+                    self.events = eventsFromFirebase
+                    self.pins.removeAll()
                 
-                for event in self.events{ self.addPin(event: event) }
-                self.newEventButtonState(enable: !self.findEvent)
-                if self.findEvent { self.findEvent = false }
+                    for event in self.events{ self.addPin(event: event) }
+                    self.newEventButtonState(enable: !self.findEvent)
+                    if self.findEvent { self.findEvent = false }
                 
-                self.searchPins = []
+                    self.searchPins = []
                 
-                
-                self.mapView.addAnnotations(self.pins)
-            })
+                    self.mapView.addAnnotations(self.pins)
+                })
             break
         default:
             break
         }
-        
-        //-----------------------------------------
-        
     }
     
     /// it adds an proper pin on mapView for the given event.
@@ -217,26 +213,29 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         switch filter {
             case Search.Friends:
-                FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
-                    friendsIdsSnaphot in
-                    if let friendIdsDictionary = friendsIdsSnaphot{
-                        self.events.removeAll()
-                        self.pins.removeAll()
-                        for key in friendIdsDictionary.keys{
-                            FirebaseHelper.getEvents(creatorId: key, completionHandler: {
-                                eventsFromFirebase in
-        
-                                self.events.append(contentsOf: eventsFromFirebase)
-                                for event in self.events{ self.addPin(event: event) }
-                                self.newEventButtonState(enable: !self.findEvent)
-                                if self.findEvent { self.findEvent = false }
-                                self.searchPins = []
-        
-                                self.mapView.addAnnotations(self.pins)
-                            })
-                        }
+                self.events.removeAll()
+                self.pins.removeAll()
+                let friendDefaults = UserDefaults.standard.object(forKey: "friendList")
+                var friendList = [String]()
+                if let _ = friendDefaults{
+                    for friend in (friendDefaults as! [String]) {
+                        friendList.append(friend)
                     }
-                })
+                }
+                for friend in friendList{
+                    FirebaseHelper.getEvents(creatorId: friend, completionHandler: {
+                        eventsFromFirebase in
+                        
+                        self.events.append(contentsOf: eventsFromFirebase)
+                        for event in self.events{ self.addPin(event: event) }
+                        self.newEventButtonState(enable: !self.findEvent)
+                        if self.findEvent { self.findEvent = false }
+                        
+                        self.searchPins = []
+                        
+                        self.mapView.addAnnotations(self.pins)
+                    })
+                }
             break
             
             case Search.NotFriend: break
