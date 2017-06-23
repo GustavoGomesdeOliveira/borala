@@ -341,7 +341,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     })
                     let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                     UserDefaults.standard.set(userData, forKey: "user")//saves user on userDefaults.
-                    UserDefaults.standard.set(Search.Everyone, forKey: "search")
+                    UserDefaults.standard.set(Search.Everyone.rawValue, forKey: "search")
                 })
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil);
