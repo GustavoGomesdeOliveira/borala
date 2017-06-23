@@ -498,14 +498,34 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func showControllerForSetting(_ setting: Setting) {
         //chamar a popup
         print("deu certo")
+        if setting.name == "Filter by persons" {
+            
+            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+            
+            self.addChildViewController(popUpOverVC)
+            // popUpOverVC.delegate = self
+            popUpOverVC.view.frame = self.view.frame
+            self.view.addSubview(popUpOverVC.view)
+            popUpOverVC.didMove(toParentViewController: self)
+            
+        } else {
+            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TablePins") as! TablePinsViewController
+            
+            self.addChildViewController(popUpOverVC)
+            popUpOverVC.view.frame = self.view.frame
+            self.view.addSubview(popUpOverVC.view)
+            //popUpOverVC.eventsArray = self.events
+            popUpOverVC.didMove(toParentViewController: self)
         
-        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+        }
         
-        self.addChildViewController(popUpOverVC)
-       // popUpOverVC.delegate = self
-        popUpOverVC.view.frame = self.view.frame
-        self.view.addSubview(popUpOverVC.view)
-        popUpOverVC.didMove(toParentViewController: self)
+//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+//        
+//        self.addChildViewController(popUpOverVC)
+//       // popUpOverVC.delegate = self
+//        popUpOverVC.view.frame = self.view.frame
+//        self.view.addSubview(popUpOverVC.view)
+//        popUpOverVC.didMove(toParentViewController: self)
         
         
     }

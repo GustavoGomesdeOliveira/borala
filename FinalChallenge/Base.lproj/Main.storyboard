@@ -1556,7 +1556,7 @@
         <!--Table Pins View Controller-->
         <scene sceneID="lcI-SH-jUf">
             <objects>
-                <viewController id="9At-K0-heW" customClass="TablePinsViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TablePins" id="9At-K0-heW" customClass="TablePinsViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngp-dU-HRP"/>
                         <viewControllerLayoutGuide type="bottom" id="ReK-i0-9ib"/>
@@ -1571,17 +1571,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="AQe-Cs-vJK"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="blm-by-xsv">
-                                        <rect key="frame" x="0.0" y="28" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="blm-by-xsv" id="Pf1-jn-dqD">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
