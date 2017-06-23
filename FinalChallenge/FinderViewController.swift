@@ -81,6 +81,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
 
+    
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
         longGesture.minimumPressDuration = 1.0
@@ -577,7 +578,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("deu certo")
         
         let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
-        
+        popUpOverVC.filterDelegate = self
         self.addChildViewController(popUpOverVC)
        // popUpOverVC.delegate = self
         popUpOverVC.view.frame = self.view.frame
