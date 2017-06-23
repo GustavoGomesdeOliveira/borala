@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Search {
+enum Search:Int {
     case Friends
     case NotFriend
     case Everyone
@@ -20,6 +20,7 @@ class ChooseFilterController: UIViewController {
     @IBOutlet weak var friends: UIButton!
     @IBOutlet weak var newPeople: UIButton!
     @IBOutlet weak var everyone: UIButton!
+    var filterDelegate: FilterDelegate?
     
     
     override func viewDidLoad() {
@@ -27,9 +28,12 @@ class ChooseFilterController: UIViewController {
         
         let searchMode = UserDefaults.standard.integer(forKey: "search")
         
+        filterDelegate?.changeFilter(filter: Search(rawValue: searchMode)!)
+        
             switch searchMode {
-                
+            
             case Search.Friends.hashValue:
+                
                 setBtnColors(firstBtn: self.friends, secondBtn: self.newPeople, thirdBtn: self.everyone)
                 break
             case Search.NotFriend.hashValue:
@@ -41,8 +45,6 @@ class ChooseFilterController: UIViewController {
             default:
                 break
             }
-            
-        
     }
     
     func setBtnColors(firstBtn: UIButton, secondBtn: UIButton, thirdBtn: UIButton){
@@ -64,17 +66,20 @@ class ChooseFilterController: UIViewController {
     
     @IBAction func filterByFriends(_ sender: Any) {
         setBtnColors(firstBtn: self.friends, secondBtn: self.newPeople, thirdBtn: self.everyone)
+        filterDelegate?.changeFilter(filter: Search.Friends)
         updateSearchMode(searchValue: Search.Friends.hashValue)
     }
     
     @IBAction func filterByNew(_ sender: Any) {
         setBtnColors(firstBtn: self.newPeople, secondBtn: self.friends, thirdBtn: self.everyone)
+        filterDelegate?.changeFilter(filter: Search.NotFriend)
         updateSearchMode(searchValue: Search.NotFriend.hashValue)
     }
     
     
     @IBAction func filterByEveryone(_ sender: Any) {
         setBtnColors(firstBtn: self.everyone, secondBtn: self.newPeople, thirdBtn: self.friends)
+        filterDelegate?.changeFilter(filter: Search.Everyone)
         updateSearchMode(searchValue: Search.Everyone.hashValue)
     }
     
@@ -84,5 +89,10 @@ class ChooseFilterController: UIViewController {
         UserDefaults.standard.set(searchValue, forKey: "search")
         UserDefaults.standard.synchronize()
     }
-
+    
 }
+
+protocol FilterDelegate {
+    func changeFilter(filter: Search)
+}
+
