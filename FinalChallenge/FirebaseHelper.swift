@@ -114,7 +114,6 @@ class FirebaseHelper{
                         completionHandler(["id": user.id, "name": user.name, "picUrl": user.picUrl!])
                     })
                 }
-                
             }
         })
     }
@@ -177,8 +176,8 @@ class FirebaseHelper{
         })
     }
     
-    static func getEvents(ofType: String, completionHandler:@escaping (_ events: [Event]) -> ()){
-        rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: ofType).observe(.value, with: {
+    static func getEvents(creatorId: String, completionHandler:@escaping (_ events: [Event] ) -> ()){
+        rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: creatorId).observeSingleEvent(of: .value, with:{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
@@ -188,15 +187,22 @@ class FirebaseHelper{
                 }
             }
         })
-    
     }
     
     static func deleteEvent(eventId: String){
         rootRefDatabase.child("events/" + eventId).setValue(nil)
     }
     
+    static func removeEventObservers(){
+        rootRefDatabase.child("events").removeAllObservers()
+    }
+    
     //MARK: Events related methods.
-    //it creates a chat for the given event. If a chat already exists return nil.
+    /// it creates a chat between this user and a partner.
+    ///
+    /// - Parameters:
+    ///   - partnerId: the firebase uid of the person you wish create a chat.
+    ///   - completionHandler: Return the chat id just created. If the chat already exists between those people return nil.
     static func createChat(partnerId: String, completionHandler: @escaping (_ _chatId: String?) -> ()){
         
         if let userId = firebaseUser?.uid{//partnersIds, ids of people that the user has chat with.
