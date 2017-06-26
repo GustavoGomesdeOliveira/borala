@@ -202,15 +202,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     } else {
                         FirebaseHelper.registerMeOnline()
                         self.saveFacebookFriends()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+                        let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+                        
+                        self.window?.rootViewController = viewController
                     }
                 })
                 
             }
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil);
-            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
             
-            self.window?.rootViewController = viewController
             
         }
         

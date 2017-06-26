@@ -105,6 +105,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         let destination = segue.destination as! TabBarViewController
         
         destination.userNotLogged = self.userNotLogged
+        
     }
 
 }

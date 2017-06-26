@@ -107,7 +107,6 @@ class FirebaseHelper{
             snapshot in
             if let friendsIdDictionary = snapshot.value as? [String: Bool]{
                 let friendsId = Array(friendsIdDictionary.keys)
-                //var friendsDic = [ [String: Any] ]()
                 for friendId in friendsId{
                     self.getUserData(userID: friendId, completionHandler: {
                         user in
@@ -177,15 +176,24 @@ class FirebaseHelper{
     }
     
     static func getEvents(creatorId: String, completionHandler:@escaping (_ events: [Event] ) -> ()){
-        rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: creatorId).observeSingleEvent(of: .value, with:{
-            snapshot in
-            if let dic = snapshot.value as? [String: Any]{
-                var eventsFromFirebase = [Event]()
-                for key in dic.keys{
-                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                    completionHandler(eventsFromFirebase)
+        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe(.childAdded, with:{  friendsSnapshot in
+                if let friendsDictionary = friendsSnapshot.value as? [String: Bool]{
+                    friendsDictionary.keys.forEach{
+                        friendId in
+                        let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendId)
+                        query.observe(.value, with:{
+                            snapshot in
+                            if let dic = snapshot.value as? [String: Any]{
+                                var eventsFromFirebase = [Event]()
+                                dic.keys.forEach{
+                                    key in
+                                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                                    completionHandler(eventsFromFirebase)
+                                }
+                            }
+                        })
+                    }
                 }
-            }
         })
     }
     
