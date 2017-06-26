@@ -142,7 +142,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             
                         self.searchPins = []
                             
-                        self.mapView.addAnnotations(self.pins)
+                        //self.mapView.addAnnotations(self.pins)
                     })
                 }
             
@@ -161,7 +161,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 
                     self.searchPins = []
                 
-                    self.mapView.addAnnotations(self.pins)
+                    //self.mapView.addAnnotations(self.pins)
                 })
             break
         default:
@@ -196,6 +196,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         pin.event = event
         self.pins.append(pin)
         self.searchPins.append(pin)
+        self.mapView.addAnnotations(self.pins)
     }
     
     /// it enables or disables the new event button.
@@ -234,7 +235,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         
                         self.searchPins = []
                         
-                        self.mapView.addAnnotations(self.pins)
+                        //self.mapView.addAnnotations(self.pins)
                     })
                 }
             break
@@ -252,7 +253,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     if self.findEvent { self.findEvent = false }
         
                     self.searchPins = []
-                    self.mapView.addAnnotations(self.pins)
+                    //self.mapView.addAnnotations(self.pins)
                 })
             break
         }
@@ -538,6 +539,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
             let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
             self.myID = event.creatorId
+            addPin(event: event)
+
             FirebaseHelper.saveEvent(event: event)
         }
         
