@@ -180,9 +180,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             var imageName = event.preference
             if imageName == nil {
                 imageName = "pizza"
-            }else{
-                imageName?.append("pin")
             }
+            imageName?.append("pin")
         }
         else{//this event was created by me.
             self.findEvent = true
