@@ -9,9 +9,9 @@
 import UIKit
 
 enum Search:Int {
+    case Everyone
     case Friends
     case NotFriend
-    case Everyone
 }
 
 
@@ -33,7 +33,6 @@ class ChooseFilterController: UIViewController {
             switch searchMode {
             
             case Search.Friends.hashValue:
-                
                 setBtnColors(firstBtn: self.friends, secondBtn: self.newPeople, thirdBtn: self.everyone)
                 break
             case Search.NotFriend.hashValue:

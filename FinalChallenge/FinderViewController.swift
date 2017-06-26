@@ -141,8 +141,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         if self.findEvent { self.findEvent = false }
                             
                         self.searchPins = []
-                            
-                        //self.mapView.addAnnotations(self.pins)
                     })
                 }
             
@@ -161,7 +159,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 
                     self.searchPins = []
                 
-                    //self.mapView.addAnnotations(self.pins)
                 })
             break
         default:
