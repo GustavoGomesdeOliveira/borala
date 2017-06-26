@@ -124,6 +124,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             case Search.Friends.hashValue:
                 self.events.removeAll()
                 self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getFriendsEvents(completionHandler: {
                     eventsFromFirebase in
                             
@@ -138,6 +139,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             case Search.NotFriend.hashValue: break
             
             case Search.Everyone.hashValue:
+                self.events.removeAll()
+                self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
@@ -203,6 +207,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             case Search.Friends:
                 self.events.removeAll()
                 self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getFriendsEvents( completionHandler: {
                         eventsFromFirebase in
                         
@@ -219,6 +224,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             case Search.NotFriend: break
             
             case Search.Everyone:
+                self.events.removeAll()
+                self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
