@@ -119,30 +119,20 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
  //getting events
         let searchMode = UserDefaults.standard.integer(forKey: "search")
-        let friendDefaults = UserDefaults.standard.object(forKey: "friendList")
-        var friendList = [String]()
-        if let _ = friendDefaults{
-            for friend in (friendDefaults as! [String]) {
-                friendList.append(friend)
-            }
-        }
         switch searchMode {
         
             case Search.Friends.hashValue:
                 self.events.removeAll()
                 self.pins.removeAll()
-                for friend in friendList{
-                    FirebaseHelper.getEvents(creatorId: friend, completionHandler: {
-                        eventsFromFirebase in
+                FirebaseHelper.getFriendsEvents(completionHandler: {
+                    eventsFromFirebase in
                             
-                        self.events.append(contentsOf: eventsFromFirebase)
-                        for event in self.events{ self.addPin(event: event) }
-                        self.newEventButtonState(enable: !self.findEvent)
-                        if self.findEvent { self.findEvent = false }
-                            
-                        self.searchPins = []
-                    })
-                }
+                    self.events.append(contentsOf: eventsFromFirebase)
+                    for event in self.events{ self.addPin(event: event) }
+                    self.newEventButtonState(enable: !self.findEvent)
+                    if self.findEvent { self.findEvent = false }
+                    self.searchPins = []
+                })
             
             break
             case Search.NotFriend.hashValue: break
@@ -213,15 +203,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             case Search.Friends:
                 self.events.removeAll()
                 self.pins.removeAll()
-                let friendDefaults = UserDefaults.standard.object(forKey: "friendList")
-                var friendList = [String]()
-                if let _ = friendDefaults{
-                    for friend in (friendDefaults as! [String]) {
-                        friendList.append(friend)
-                    }
-                }
-                for friend in friendList{
-                    FirebaseHelper.getEvents(creatorId: friend, completionHandler: {
+                FirebaseHelper.getFriendsEvents( completionHandler: {
                         eventsFromFirebase in
                         
                         self.events.append(contentsOf: eventsFromFirebase)
@@ -231,9 +213,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         
                         self.searchPins = []
                         
-                        //self.mapView.addAnnotations(self.pins)
-                    })
-                }
+                })
             break
             
             case Search.NotFriend: break

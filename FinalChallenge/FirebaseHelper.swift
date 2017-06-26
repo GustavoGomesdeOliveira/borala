@@ -175,25 +175,21 @@ class FirebaseHelper{
         })
     }
     
-    static func getEvents(creatorId: String, completionHandler:@escaping (_ events: [Event] ) -> ()){
-        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe(.childAdded, with:{  friendsSnapshot in
-                if let friendsDictionary = friendsSnapshot.value as? [String: Bool]{
-                    friendsDictionary.keys.forEach{
-                        friendId in
-                        let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendId)
-                        query.observe(.value, with:{
-                            snapshot in
-                            if let dic = snapshot.value as? [String: Any]{
-                                var eventsFromFirebase = [Event]()
-                                dic.keys.forEach{
-                                    key in
-                                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                                    completionHandler(eventsFromFirebase)
-                                }
-                            }
-                        })
+    static func getFriendsEvents(completionHandler:@escaping (_ events: [Event] ) -> ()){
+        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe( .childAdded, with:{  friendsSnapshot in
+            
+                let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendsSnapshot.key)
+                query.observe(.value, with:{
+                    snapshot in
+                    if let dic = snapshot.value as? [String: Any]{
+                        var eventsFromFirebase = [Event]()
+                        dic.keys.forEach{
+                            key in
+                                eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                                completionHandler(eventsFromFirebase)
+                        }
                     }
-                }
+                })
         })
     }
     
