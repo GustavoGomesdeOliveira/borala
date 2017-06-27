@@ -175,10 +175,23 @@ class FirebaseHelper{
         })
     }
     
+    static func getNotFriendsEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
+        rootRefDatabase.child("events").observe(.value,with:{
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+                var eventsFromFirebase = [Event]()
+                for key in dic.keys{
+                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                    completionHandler(eventsFromFirebase)
+                }
+            }
+        })
+    }
+    
     static func getFriendsEvents(completionHandler:@escaping (_ events: [Event] ) -> ()){
         rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe( .childAdded, with:{  friendsSnapshot in
             
-                let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendsSnapshot.key)
+            let query = rootRefDatabase.child("events/").queryEqual(toValue: friendsSnapshot.key, childKey: "creatorId")
                 query.observe(.value, with:{
                     snapshot in
                     if let dic = snapshot.value as? [String: Any]{
@@ -192,6 +205,8 @@ class FirebaseHelper{
                 })
         })
     }
+    
+    
     
     static func deleteEvent(eventId: String){
         rootRefDatabase.child("events/" + eventId).setValue(nil)
