@@ -107,14 +107,12 @@ class FirebaseHelper{
             snapshot in
             if let friendsIdDictionary = snapshot.value as? [String: Bool]{
                 let friendsId = Array(friendsIdDictionary.keys)
-                //var friendsDic = [ [String: Any] ]()
                 for friendId in friendsId{
                     self.getUserData(userID: friendId, completionHandler: {
                         user in
                         completionHandler(["id": user.id, "name": user.name, "picUrl": user.picUrl!])
                     })
                 }
-                
             }
         })
     }
@@ -150,6 +148,7 @@ class FirebaseHelper{
         }
     }
     
+    //MARK: Events related methods.
     static func saveEvent(event: Event){
         
         let key = rootRefDatabase.child("events").childByAutoId().key
@@ -168,13 +167,29 @@ class FirebaseHelper{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
                 var eventsFromFirebase = [Event]()
-                for kk in dic.keys{
-//                    print(dic[kk] as! [String: Any])
-                    //esse que eu quero
-                    eventsFromFirebase.append(Event(dict: dic[kk] as! [String: Any] ))
+                for key in dic.keys{
+                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
                     completionHandler(eventsFromFirebase)
                 }
             }
+        })
+    }
+    
+    static func getFriendsEvents(completionHandler:@escaping (_ events: [Event] ) -> ()){
+        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe( .childAdded, with:{  friendsSnapshot in
+            
+                let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendsSnapshot.key)
+                query.observe(.value, with:{
+                    snapshot in
+                    if let dic = snapshot.value as? [String: Any]{
+                        var eventsFromFirebase = [Event]()
+                        dic.keys.forEach{
+                            key in
+                                eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                                completionHandler(eventsFromFirebase)
+                        }
+                    }
+                })
         })
     }
     
@@ -182,52 +197,16 @@ class FirebaseHelper{
         rootRefDatabase.child("events/" + eventId).setValue(nil)
     }
     
-    //*** Chat related methods *******************************************************************************************************
+    static func removeEventObservers(){
+        rootRefDatabase.child("events").removeAllObservers()
+    }
     
-//    //it creates a chat for the given event. If a chat already exists return nil.
-//    static func createChat(event: Event, completionHandler: @escaping (_ _chatId: String?) -> ()){
-//        
-//        if let userId = firebaseUser?.uid{
-//            rootRefDatabase.child("users/" + userId + "/eventsWithChatsIds").observeSingleEvent(of: .value, with: {
-//                snapshot in
-//                if let eventsIdDictionary = snapshot.value as? [String: Any]{
-//                    if !eventsIdDictionary.keys.contains(event.id){
-//                        let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                        rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                        rootRefDatabase.child("users/" + userId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + userId + "/chatsId").updateChildValues([chatId.key: true])
-//                        
-//                        rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                        rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
-//                        
-//                        self.addChatsMembers(chatId: chatId.key, userId: event.creatorId)
-//                        self.addChatsMembers(chatId: chatId.key, userId: userId)
-//                        
-//                        completionHandler(chatId.key)
-//                    }
-//                    else{
-//                        completionHandler( eventsIdDictionary[event.id] as? String)
-//                    }
-//                }
-//                else{
-//                    let chatId = rootRefDatabase.child("chats").childByAutoId()//it adds a unique id.
-//                    rootRefDatabase.child("chats").child(chatId.key).setValue(true)//it adds true as value of chats/chatId
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/eventsWithChatsIds").updateChildValues([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + (FirebaseHelper.firebaseUser?.uid)! + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    rootRefDatabase.child("users/" + event.creatorId + "/eventsWithChatsIds").setValue([event.id: chatId.key])
-//                    rootRefDatabase.child("users/" + event.creatorId + "/chatsId").updateChildValues([chatId.key: true])
-//                    
-//                    self.addChatsMembers(chatId: chatId.key, userId: event.creatorId)
-//                    self.addChatsMembers(chatId: chatId.key, userId: userId)
-//                    
-//                    completionHandler(chatId.key)
-//                }
-//            })
-//        }
-//    }
-    
-    //it creates a chat for the given event. If a chat already exists return nil.
+    //MARK: Events related methods.
+    /// it creates a chat between this user and a partner.
+    ///
+    /// - Parameters:
+    ///   - partnerId: the firebase uid of the person you wish create a chat.
+    ///   - completionHandler: Return the chat id just created. If the chat already exists between those people return nil.
     static func createChat(partnerId: String, completionHandler: @escaping (_ _chatId: String?) -> ()){
         
         if let userId = firebaseUser?.uid{//partnersIds, ids of people that the user has chat with.

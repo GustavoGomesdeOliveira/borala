@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "519743162.009681"
+            timestampString = "520173894.622816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "AppDelegate"
             landmarkType = "4">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "519743162.009681"
+            timestampString = "520173894.622816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "AppDelegate"
             landmarkType = "4">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "519740051.680633"
+            timestampString = "519921327.924663"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "519740051.680633"
+            timestampString = "519921327.924663"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "519743162.009681"
+            timestampString = "520173894.622816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,45 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "519743162.009681"
+            timestampString = "520173894.622816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/AppDelegate.swift"
-            timestampString = "519743162.009681"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "462"
+            endingLineNumber = "462"
             landmarkName = "AppDelegate"
             landmarkType = "4">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "519740051.680633"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -153,13 +121,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/ViewController.swift"
-            timestampString = "519655075.758131"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520181311.489087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "changeFilter(filter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520180439.730899"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,14 +154,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/ViewController.swift"
-            timestampString = "519655075.758131"
+            timestampString = "520173749.557437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "loginButton(_:didCompleteWith:error:)"
             landmarkType = "7">
             <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
+                  timestampString = "520181311.699774"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "460">
+               </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
@@ -186,27 +185,12 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "519823305.369133"
+                  timestampString = "520181311.702259"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "2568">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "519823305.370576"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "64">
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -217,142 +201,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/ViewController.swift"
-            timestampString = "519659120.596044"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520181311.489087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "changeFilter(filter:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "519823305.374072"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "856">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "519823305.37656"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/ProfileViewController.swift"
-            timestampString = "519746274.383548"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "openChat(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ProfileViewController.openChat (Any) -&gt; ()"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ProfileViewController.swift"
-                  timestampString = "519823305.379919"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "229"
-                  endingLineNumber = "229"
-                  offsetFromSymbolStart = "584">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ProfileViewController.(openChat (Any) -&gt; ()).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ProfileViewController.swift"
-                  timestampString = "519823305.381313"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/ProfileViewController.swift"
-            timestampString = "519746276.727606"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "openChat(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ProfileViewController.openChat (Any) -&gt; ()"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ProfileViewController.swift"
-                  timestampString = "519823305.384563"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "240"
-                  endingLineNumber = "240"
-                  offsetFromSymbolStart = "800">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ProfileViewController.(openChat (Any) -&gt; ()).(closure #2)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ProfileViewController.swift"
-                  timestampString = "519823305.385949"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

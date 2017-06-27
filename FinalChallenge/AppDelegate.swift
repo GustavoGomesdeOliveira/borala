@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
@@ -203,15 +202,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     } else {
                         FirebaseHelper.registerMeOnline()
                         self.saveFacebookFriends()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+                        let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
+                        
+                        self.window?.rootViewController = viewController
                     }
                 })
                 
             }
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil);
-            let viewController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController;
             
-            self.window?.rootViewController = viewController
             
         }
         
@@ -342,6 +342,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     })
                     let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                     UserDefaults.standard.set(userData, forKey: "user")//saves user on userDefaults.
+                    UserDefaults.standard.set(Search.Everyone.rawValue, forKey: "search")
                 })
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil);
@@ -405,7 +406,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // Receive displayed notifications for iOS 10 devices.
+    // Receive displayed notifications for iOS 10 devices. On foreground.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -422,7 +423,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print(userInfo)
         
         // Change this to your preferred presentation option
-        completionHandler([])
+        completionHandler([.alert, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,

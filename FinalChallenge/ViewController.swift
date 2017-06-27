@@ -71,6 +71,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                             })
                             let userData = NSKeyedArchiver.archivedData(withRootObject: newUser)
                             UserDefaults.standard.set(userData, forKey: "user")
+                            UserDefaults.standard.set(Search.Everyone.rawValue, forKey: "search")
                         })
                     })
                 }
@@ -104,6 +105,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         let destination = segue.destination as! TabBarViewController
         
         destination.userNotLogged = self.userNotLogged
+        
     }
 
 }
