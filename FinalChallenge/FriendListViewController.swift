@@ -97,14 +97,37 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     
+    //    if let data = picData  {
+    //
+    //        cell.friendImage.image = UIImage(data: data)
+    //        self.friendImageList.insert(UIImage(data: data)!, at: indexPath.row)
+    //
+    //    } else {
+    //
+    //    cell.friendImage.image = #imageLiteral(resourceName: "profileImage")
+    //    self.friendImageList.insert(#imageLiteral(resourceName: "profileImage"), at: indexPath.row)
+    //    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
         
         if let picData = self.friendList[indexPath.row]["picData"] as? Data{
-            cell.friendImage.image = UIImage(data: picData)
-            self.friendImageList.insert(UIImage(data: picData)!, at: indexPath.row)
+            
+            let image = UIImage(data: picData)
+            
+            if image != nil {
+                
+                cell.friendImage.image = image
+                self.friendImageList.insert(cell.friendImage.image!, at: indexPath.row)
+            } else {
+                
+                cell.friendImage.image = #imageLiteral(resourceName: "profileImage")
+                self.friendImageList.insert(#imageLiteral(resourceName: "profileImage"), at: indexPath.row)
+            }
+            
+            
+            
         }
         cell.friendName.text = self.friendList[indexPath.row]["name"] as? String
         
