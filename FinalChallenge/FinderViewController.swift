@@ -627,8 +627,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     @IBAction func addEventAction(_ sender: UIButton) {
         
-                self.mapView.showsUserLocation = false
-        
                 let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "eventPopUp") as! EventViewController
         
                 self.addChildViewController(popUpOverVC)
@@ -636,7 +634,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 popUpOverVC.view.frame = self.view.frame
                 self.view.addSubview(popUpOverVC.view)
                 popUpOverVC.didMove(toParentViewController: self)
-        
+                self.mapView.showsUserLocation = true
+
     }
     
     
