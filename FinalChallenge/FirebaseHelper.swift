@@ -176,15 +176,20 @@ class FirebaseHelper{
     }
     
     static func getNotFriendsEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
-        rootRefDatabase.child("events").observe(.value,with:{
-            snapshot in
-            if let dic = snapshot.value as? [String: Any]{
-                var eventsFromFirebase = [Event]()
-                for key in dic.keys{
-                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                    completionHandler(eventsFromFirebase)
+        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe(.value, with:{friendsSnapshot in
+            if let friendsIdDictionary = friendsSnapshot.value as? [String: Bool]{
+                rootRefDatabase.child("events").observe(.value,with:{
+                    snapshot in
+                    if let dic = snapshot.value as? [String: Any]{
+                        var eventsFromFirebase = [Event]()
+                        let notFriendsArray = dic.keys.filter{!friendsIdDictionary.keys.contains($0)}
+                        for key in notFriendsArray{
+                            eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                            completionHandler(eventsFromFirebase)
+                    }
                 }
-            }
+            })
+        }
         })
     }
     
