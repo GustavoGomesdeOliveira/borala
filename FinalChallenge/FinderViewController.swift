@@ -487,7 +487,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     self.view.addSubview(popUpOverVC.view)
                     popUpOverVC.didMove(toParentViewController: self)
                     self.mapView.showsUserLocation = true
-
+                    
 
                 }
                 
