@@ -106,8 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Message ID: \(userInfo["gcm_message_id"])")
-        print(userInfo)
+        //print("Message ID: \(userInfo["gcm_message_id"])")
+        //print(userInfo)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -295,9 +295,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 completionHandler(data)
             }
         }
-        
         downloadPicTask.resume()
-        
     }
     
     /// Action to Google Sign in button.
@@ -388,8 +386,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func connectToFcm() {
         FIRMessaging.messaging().connect { (error) in
-            if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
+            if let _error = error {
+                print("Unable to connect with FCM. \(_error)")
             } else {
                 print("Connected to FCM.")
             }
@@ -434,9 +432,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
-        
         // Print full message.
         print(userInfo)
+        
         
         completionHandler()
     }

@@ -14,9 +14,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "468"
-            endingLineNumber = "468"
-            landmarkName = "AppDelegate"
-            landmarkType = "4">
+            endingLineNumber = "468">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -121,38 +119,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "520257934.599241"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "changeFilter(filter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "520180439.730899"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FinalChallenge/ViewController.swift"
             timestampString = "520173749.557437"
             startingColumnNumber = "9223372036854775807"
@@ -170,7 +136,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "520181311.699774"
+                  timestampString = "520266454.466614"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -185,7 +151,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "520181311.702259"
+                  timestampString = "520266454.472588"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"
@@ -201,13 +167,109 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "520257934.599241"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "520262686.590557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "getFriendsEvents(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "520263784.283645"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "getFriendsEvents(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getFriendsEvents (completionHandler : (Swift.Array&lt;FinalChallenge.Event&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "520266454.486166"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getFriendsEvents (completionHandler : (Swift.Array&lt;FinalChallenge.Event&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "520266454.490707"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "492">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520266314.836475"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "changeFilter(filter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520265451.95581"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "520266439.132759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
