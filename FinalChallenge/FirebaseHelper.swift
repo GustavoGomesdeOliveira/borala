@@ -196,10 +196,9 @@ class FirebaseHelper{
                     snapshot in
                     if let dic = snapshot.value as? [String: Any]{
                         var eventsFromFirebase = [Event]()
-                        dic.keys.forEach{
-                            key in
-                                eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                                completionHandler(eventsFromFirebase)
+                        dic.keys.forEach{ key in
+                            eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                            completionHandler(eventsFromFirebase)
                         }
                     }
                 })
