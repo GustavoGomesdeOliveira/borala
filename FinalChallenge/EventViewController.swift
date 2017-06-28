@@ -87,10 +87,11 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
         var beginDate = self.defaultBeginDate
         var endDate   = self.defaultEndDate
         
-        if let beginDateFromTextField = DateFormatter().date(from: self.beginHourTextField.text!){
+        
+        if let beginDateFromTextField = dateFormatter.date(from: self.beginHourTextField.text!){
             beginDate = beginDateFromTextField
         }
-        if let endDateFromTextField = DateFormatter().date(from: self.endHourTextField.text!){
+        if let endDateFromTextField = dateFormatter.date(from: self.endHourTextField.text!){
             endDate = endDateFromTextField
         }
         
