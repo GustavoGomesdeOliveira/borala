@@ -35,19 +35,29 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             friend in
             if let friend = friend{
                 self.friendList.append(friend)
-                print(friend["id"] as! String)
                 FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
                     picData in
                     if let picDataReceived = picData{
                         let friendIndex = self.friendList.index(where: {
                             ($0["picUrl"] as! String == friend["picUrl"] as! String)})
                         self.friendList[friendIndex!]["picData"] = picDataReceived
+                        var friendListUserDefaults = [String]()
+
+                        for friend in self.friendList {
+                            
+                            friendListUserDefaults.append(friend["socialNetworkID"] as! String)
+                            
+                        }
+                        
+                        UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
+
+                        
                         DispatchQueue.main.async {
                             if self.flagToReload {
 
                                 if self.flagToAppear {
                                     
-                                    sleep(1)
+                                    sleep(1 )
                                 }
                                 
                                 self.friendTableView.reloadData()
@@ -72,13 +82,6 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             
 
         }
-        
-//        if flagToAppear {
-//            
-//
-//            flagToAppear = !flagToAppear
-//        }
-        
 
 
     }
