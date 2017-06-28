@@ -59,7 +59,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![0] as! ProfileViewController
-        
+
         if self.selectedUser != nil{
             newViewController.currentUser = nil
         }
@@ -486,7 +486,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     popUpOverVC.view.frame = self.view.frame
                     self.view.addSubview(popUpOverVC.view)
                     popUpOverVC.didMove(toParentViewController: self)
-                    
+                    self.mapView.showsUserLocation = true
+
 
                 }
                 
