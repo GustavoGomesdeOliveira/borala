@@ -150,13 +150,13 @@ class FirebaseHelper{
     
     //MARK: Events related methods.
     static func saveEvent(event: Event){
-        
+        print(event.beginHour.timeIntervalSince1970)
         let key = rootRefDatabase.child("events").childByAutoId().key
         let eventLocation = ["latitude": event.location.latitude, "longitude": event.location.longitude]
         let eventDict = ["id": key, "name": event.name, "location": eventLocation,
                          "creatorId": event.creatorId, "creatorName": event.creatorName,
-                         "beginHour": Float( event.beginHour.timeIntervalSince1970) ,
-                         "endHour":   Float( event.endHour.timeIntervalSince1970),
+                         "beginHour": Double( event.beginHour.timeIntervalSince1970) ,
+                         "endHour":   Double( event.endHour.timeIntervalSince1970),
                          "preference": event.preference ?? "",
                          "description": event.description ?? ""] as [String : Any]
         rootRefDatabase.child("events").child(key).setValue(eventDict)//it saves the new event on firebase.

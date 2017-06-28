@@ -556,6 +556,23 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func cancelEvent( id: String){
         self.mapView.deselectAnnotation(self.selectedAnnotation, animated: false)
         FirebaseHelper.deleteEvent(eventId: id)
+        self.mapView.showsUserLocation = true
+        self.events.removeAll()
+        self.pins.removeAll()
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        FirebaseHelper.getEvents(completionHandler: {
+            eventsFromFirebase in
+            self.events = eventsFromFirebase
+            self.pins.removeAll()
+            
+            for event in self.events{ self.addPin(event: event) }
+            self.newEventButtonState(enable: !self.findEvent)
+            if self.findEvent { self.findEvent = false }
+            
+            self.searchPins = []
+            
+        })
+        
         print("fazer alguma coisa")
     }
     
