@@ -28,6 +28,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     @IBOutlet weak var newEvent: UIButton!
    
+    @IBOutlet weak var menuButton: UIButton!
     
     var pin: CustomPin?
     var myAnnotation: CustomPin?
@@ -77,6 +78,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         //FirebaseHelper.getEvents(ofType: "7EzIl04CiNfZqnV3xBQY9kh4fK23", completionHandler:
             //{data in
         //})
+        
+        //self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
+        //self.menuButton.imageView?.contentMode = .center
+        //self.menuButton.imageEdgeInsets = UIEdgeInsetsMake(-10, -10, -10, -10)
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
@@ -579,14 +584,34 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func showControllerForSetting(_ setting: Setting) {
         //chamar a popup
         print("deu certo")
+        if setting.name == "Filter by persons" {
+            
+            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+            
+            self.addChildViewController(popUpOverVC)
+            // popUpOverVC.delegate = self
+            popUpOverVC.view.frame = self.view.frame
+            self.view.addSubview(popUpOverVC.view)
+            popUpOverVC.didMove(toParentViewController: self)
+            
+        } else {
+            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TablePins") as! TablePinsViewController
+            
+            self.addChildViewController(popUpOverVC)
+            popUpOverVC.view.frame = self.view.frame
+            self.view.addSubview(popUpOverVC.view)
+            //popUpOverVC.eventsArray = self.events
+            popUpOverVC.didMove(toParentViewController: self)
         
-        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
-        popUpOverVC.filterDelegate = self
-        self.addChildViewController(popUpOverVC)
-       // popUpOverVC.delegate = self
-        popUpOverVC.view.frame = self.view.frame
-        self.view.addSubview(popUpOverVC.view)
-        popUpOverVC.didMove(toParentViewController: self)
+        }
+        
+//        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+//        
+//        self.addChildViewController(popUpOverVC)
+//       // popUpOverVC.delegate = self
+//        popUpOverVC.view.frame = self.view.frame
+//        self.view.addSubview(popUpOverVC.view)
+//        popUpOverVC.didMove(toParentViewController: self)
         
         
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -812,10 +812,10 @@
                                     <navigationItem id="x2k-9Z-Oo6"/>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCM-EG-1Pw">
-                                <rect key="frame" x="16" y="31" width="40" height="22"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCM-EG-1Pw">
+                                <rect key="frame" x="16" y="31" width="35" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="0aR-PG-gym"/>
+                                    <constraint firstAttribute="width" constant="35" id="0aR-PG-gym"/>
                                     <constraint firstAttribute="height" constant="22" id="kUZ-Ps-E7B"/>
                                 </constraints>
                                 <state key="normal" image="menu"/>
@@ -823,14 +823,13 @@
                                     <action selector="menuAction:" destination="v2N-1W-59M" eventType="touchUpInside" id="hjm-AB-CIT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjD-Eg-8Kp">
-                                <rect key="frame" x="282" y="31" width="22" height="22"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjD-Eg-8Kp">
+                                <rect key="frame" x="269" y="24.5" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="8rY-q0-TpP"/>
-                                    <constraint firstAttribute="width" constant="22" id="lOz-oc-CiW"/>
+                                    <constraint firstAttribute="height" constant="35" id="8rY-q0-TpP"/>
+                                    <constraint firstAttribute="width" constant="35" id="lOz-oc-CiW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <state key="normal" title="+">
+                                <state key="normal" image="plus">
                                     <color key="titleColor" red="0.63851952550000002" green="0.091354452069999995" blue="0.25743180510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -863,6 +862,7 @@
                     <connections>
                         <outlet property="facebookLoginBTN" destination="vyB-Wd-R9h" id="woz-qL-mgF"/>
                         <outlet property="mapView" destination="bdJ-re-CCk" id="wtG-Yc-EoJ"/>
+                        <outlet property="menuButton" destination="mCM-EG-1Pw" id="gZX-lQ-WCF"/>
                         <outlet property="newEvent" destination="RjD-Eg-8Kp" id="kBL-1n-teo"/>
                         <outlet property="notLoggedView" destination="D3W-Bc-B7s" id="giH-k1-fbg"/>
                     </connections>
@@ -1556,7 +1556,7 @@
         <!--Table Pins View Controller-->
         <scene sceneID="lcI-SH-jUf">
             <objects>
-                <viewController id="9At-K0-heW" customClass="TablePinsViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TablePins" id="9At-K0-heW" customClass="TablePinsViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngp-dU-HRP"/>
                         <viewControllerLayoutGuide type="bottom" id="ReK-i0-9ib"/>
@@ -1571,17 +1571,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="AQe-Cs-vJK"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="blm-by-xsv">
-                                        <rect key="frame" x="0.0" y="28" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="blm-by-xsv" id="Pf1-jn-dqD">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1739,6 +1728,7 @@
         <image name="menu" width="51" height="50"/>
         <image name="myIcon" width="72" height="72"/>
         <image name="people" width="40" height="40"/>
+        <image name="plus" width="157" height="157"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="50" height="47"/>
     </resources>
