@@ -79,7 +79,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             //{data in
         //})
         
-        self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
+        //self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
         //self.menuButton.imageView?.contentMode = .center
         //self.menuButton.imageEdgeInsets = UIEdgeInsetsMake(-10, -10, -10, -10)
         

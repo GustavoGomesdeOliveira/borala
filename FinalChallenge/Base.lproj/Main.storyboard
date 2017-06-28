@@ -813,9 +813,9 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCM-EG-1Pw">
-                                <rect key="frame" x="16" y="31" width="22" height="22"/>
+                                <rect key="frame" x="16" y="31" width="35" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="0aR-PG-gym"/>
+                                    <constraint firstAttribute="width" constant="35" id="0aR-PG-gym"/>
                                     <constraint firstAttribute="height" constant="22" id="kUZ-Ps-E7B"/>
                                 </constraints>
                                 <state key="normal" image="menu"/>
@@ -823,14 +823,13 @@
                                     <action selector="menuAction:" destination="v2N-1W-59M" eventType="touchUpInside" id="hjm-AB-CIT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjD-Eg-8Kp">
-                                <rect key="frame" x="282" y="31" width="22" height="22"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjD-Eg-8Kp">
+                                <rect key="frame" x="269" y="24.5" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="8rY-q0-TpP"/>
-                                    <constraint firstAttribute="width" constant="22" id="lOz-oc-CiW"/>
+                                    <constraint firstAttribute="height" constant="35" id="8rY-q0-TpP"/>
+                                    <constraint firstAttribute="width" constant="35" id="lOz-oc-CiW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <state key="normal" title="+">
+                                <state key="normal" image="plus">
                                     <color key="titleColor" red="0.63851952550000002" green="0.091354452069999995" blue="0.25743180510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1729,6 +1728,7 @@
         <image name="menu" width="51" height="50"/>
         <image name="myIcon" width="72" height="72"/>
         <image name="people" width="40" height="40"/>
+        <image name="plus" width="157" height="157"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="50" height="47"/>
     </resources>
