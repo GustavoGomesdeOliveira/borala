@@ -52,11 +52,28 @@ class PinPopupViewController: UIViewController {
         
         self.userNameLabel.text = event?.creatorName
         self.userImageView.image = UIImage(named: (event?.preference)!)
-//        if let hora: String = event?.hora{
+        
+        self.makeTimeLabel(eventBegin: (event?.beginHour)!, eventEnd: (event?.endHour)!)
+        
+//        if let hora: String = event?.endHour{
 //
 //            self.eventScheduleLabel.text = hora
 //        }
         
+    }
+    
+    func makeTimeLabel(eventBegin: Date, eventEnd: Date){
+        
+        let date = Date(timeIntervalSince1970: 1498651384.56429)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        print(dateFormatter.string(from: date))
+        
+        self.eventScheduleLabel.text = dateFormatter.string(from: eventBegin) + " - " + dateFormatter.string(from: eventEnd)
+            
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
