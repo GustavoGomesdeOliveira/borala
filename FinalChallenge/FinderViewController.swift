@@ -201,7 +201,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func changeFilter(filter: Search) {
-        
+        FirebaseHelper.removeEventLister()
         switch filter {
             case Search.Friends:
                 self.events.removeAll()

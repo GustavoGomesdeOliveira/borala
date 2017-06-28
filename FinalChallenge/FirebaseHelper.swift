@@ -16,19 +16,19 @@ class FirebaseHelper{
     static let rootRefDatabase = FIRDatabase.database().reference()
     static var firebaseUser: FIRUser? = nil
     
-    static func saveProfilePic(userId : String, pic: Data, completionHandler:((_ error: Error?) -> ())? ){
-        let profilePicRef = rootRefStorage.child("/users/\(userId)/profilePic.jpg")
-        let _ = profilePicRef.put(pic, metadata: nil) {
-            metadata, error in
-            
-            if let downloadUrl = metadata!.downloadURL()?.absoluteString{
-                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["picURL": downloadUrl])
-            }
-            if let errorOnPutData = completionHandler{
-                errorOnPutData(error)
-            }
-        }
-    }
+//    static func saveProfilePic(userId : String, pic: Data, completionHandler:((_ error: Error?) -> ())? ){
+//        let profilePicRef = rootRefStorage.child("/users/\(userId)/profilePic.jpg")
+//        let _ = profilePicRef.put(pic, metadata: nil) {
+//            metadata, error in
+//            
+//            if let downloadUrl = metadata!.downloadURL()?.absoluteString{
+//                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["picURL": downloadUrl])
+//            }
+//            if let errorOnPutData = completionHandler{
+//                errorOnPutData(error)
+//            }
+//        }
+//    }
     
     static func saveThumbnail(userId : String, thumbnail: Data, completionHandler:((_ error: Error?) -> ())? ){
         let profilePicRef = rootRefStorage.child("/users/\(userId)/profileThumbnail.jpg")
@@ -191,7 +191,7 @@ class FirebaseHelper{
     static func getFriendsEvents(completionHandler:@escaping (_ events: [Event] ) -> ()){
         rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId").observe( .childAdded, with:{  friendsSnapshot in
             
-            let query = rootRefDatabase.child("events/").queryEqual(toValue: friendsSnapshot.key, childKey: "creatorId")
+            let query = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: friendsSnapshot.key)
                 query.observe(.value, with:{
                     snapshot in
                     if let dic = snapshot.value as? [String: Any]{
@@ -203,6 +203,17 @@ class FirebaseHelper{
                         }
                     }
                 })
+        })
+        let myEventsQuery = rootRefDatabase.child("events/").queryOrdered(byChild: "creatorId").queryEqual(toValue: (self.firebaseUser?.uid)!)
+        myEventsQuery.observe(.value, with: {
+            snapshot in
+            if let dic = snapshot.value as? [String: Any]{
+                var eventsFromFirebase = [Event]()
+                dic.keys.forEach{ key in
+                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                    completionHandler(eventsFromFirebase)
+                }
+            }
         })
     }
     
@@ -263,44 +274,6 @@ class FirebaseHelper{
             })
         }
     }
-
-    
-//    static func getChats( completionHandler: @escaping (_ chats: [Chat]) -> () ){
-//        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").observe( .childAdded, with:{
-//            snapshot in
-//            var chatsFromFirebase = [Chat]()
-//            if let dict = snapshot.value as? [String: Bool]{
-//                let chatIds = Array(dict.keys)
-//                for chatId in chatIds{
-//                    rootRefDatabase.child("chats/").child(chatId).observeSingleEvent(of: .value, with: {
-//                        snapshotChat in
-//                        if let chatDict = snapshotChat.value as? [String: Any]{
-//                            rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
-//                                chatMembersSnapshot in
-//                                if let chatMembersDictionary = chatMembersSnapshot.value as? [String: String]{
-//                                    let chatMembersKeys = Array(chatMembersDictionary.keys)
-//                                    for chatMembersKey in chatMembersKeys{
-//                                        if chatMembersKey != self.firebaseUser?.uid{
-//                                            //get pic..
-//                                            self.getPictureProfile(picAddress: chatMembersDictionary[chatMembersKey]!, completitionHandler: {
-//                                                pictureData in
-//                                                chatsFromFirebase.append(Chat.init(id: chatId, pic: pictureData,
-//                                                                lastMessage: Message(id: chatDict["id"] as! String, senderId: chatDict["senderId"] as! String, senderName: chatDict["senderName"] as! String,
-//                                                                    text: chatDict["text"] as! String,
-//                                                                    timeStamp:chatDict["timeStamp"] as! Float)))
-//                                                completionHandler(chatsFromFirebase)
-//                                                
-//                                            })
-//                                        }
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    })
-//                }
-//            }
-//        })
-//    }
     
     static func getChats(completionHandler: @escaping (_ chat: Chat) -> () ){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/partnersIds").observe( .value, with: {
@@ -453,7 +426,7 @@ class FirebaseHelper{
                 completitionHandler(nil)
             } else {
                 // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
+                if let _ = response as? HTTPURLResponse {
                     if let picData = data {
                         completitionHandler(picData)
                     } else {
