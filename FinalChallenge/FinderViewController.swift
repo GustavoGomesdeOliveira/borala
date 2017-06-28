@@ -488,6 +488,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     popUpOverVC.didMove(toParentViewController: self)
                     self.mapView.showsUserLocation = true
                     
+                    
+                    
 
                 }
                 
