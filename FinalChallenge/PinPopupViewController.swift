@@ -66,11 +66,16 @@ class PinPopupViewController: UIViewController {
         
         let date = Date(timeIntervalSince1970: 1498651384.56429)
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        print(dateFormatter.string(from: date))
+        var localTimeZoneAbbreviation: String { return TimeZone.current.abbreviation() ?? "" }
+        
+        
+        dateFormatter.timeZone = TimeZone(abbreviation: localTimeZoneAbbreviation) //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "HH:mm"
+        
+        print(eventBegin)
+        print(dateFormatter.string(from: eventBegin))
         
         self.eventScheduleLabel.text = dateFormatter.string(from: eventBegin) + " - " + dateFormatter.string(from: eventEnd)
             
