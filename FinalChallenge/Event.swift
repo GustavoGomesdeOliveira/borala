@@ -40,8 +40,8 @@ class Event {
         self.location = Location( latitude: locationDict["latitude"]!, longitude: locationDict["longitude"]!)
         self.creatorId = dict["creatorId"] as! String?
         self.creatorName = dict["creatorName"] as! String?
-        self.beginHour = Date.init(timeIntervalSince1970: TimeInterval(dict["beginHour"] as! Float) )
-        self.endHour   = Date.init(timeIntervalSince1970: TimeInterval(dict["endHour"] as! Float) )
+        self.beginHour = Date.init(timeIntervalSince1970: TimeInterval(dict["beginHour"] as! Double) )
+        self.endHour   = Date.init(timeIntervalSince1970: TimeInterval(dict["endHour"] as! Double) )
         self.preference = dict["preference"] as! String?
         self.description = dict["description"] as! String?
         self.chatId = dict["chatId"] as! String!
