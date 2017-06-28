@@ -28,6 +28,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     @IBOutlet weak var newEvent: UIButton!
    
+    @IBOutlet weak var menuButton: UIButton!
     
     var pin: CustomPin?
     var myAnnotation: CustomPin?
@@ -77,6 +78,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         //FirebaseHelper.getEvents(ofType: "7EzIl04CiNfZqnV3xBQY9kh4fK23", completionHandler:
             //{data in
         //})
+        
+        self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
+        //self.menuButton.imageView?.contentMode = .center
+        //self.menuButton.imageEdgeInsets = UIEdgeInsetsMake(-10, -10, -10, -10)
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]

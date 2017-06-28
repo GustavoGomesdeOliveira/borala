@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -812,7 +812,7 @@
                                     <navigationItem id="x2k-9Z-Oo6"/>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCM-EG-1Pw">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCM-EG-1Pw">
                                 <rect key="frame" x="16" y="31" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="0aR-PG-gym"/>
@@ -863,6 +863,7 @@
                     <connections>
                         <outlet property="facebookLoginBTN" destination="vyB-Wd-R9h" id="woz-qL-mgF"/>
                         <outlet property="mapView" destination="bdJ-re-CCk" id="wtG-Yc-EoJ"/>
+                        <outlet property="menuButton" destination="mCM-EG-1Pw" id="gZX-lQ-WCF"/>
                         <outlet property="newEvent" destination="RjD-Eg-8Kp" id="kBL-1n-teo"/>
                         <outlet property="notLoggedView" destination="D3W-Bc-B7s" id="giH-k1-fbg"/>
                     </connections>
