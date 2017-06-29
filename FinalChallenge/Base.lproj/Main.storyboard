@@ -1135,7 +1135,7 @@
                                                             <constraint firstAttribute="width" constant="88" id="g9B-Vl-mJu"/>
                                                             <constraint firstAttribute="height" constant="21" id="wbP-gX-7aX"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -1521,7 +1521,7 @@
                                             <constraint firstAttribute="width" constant="88" id="bcL-yo-sYZ"/>
                                             <constraint firstAttribute="height" constant="21" id="wwG-pM-37X"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1728,7 +1728,7 @@
         <image name="menu" width="51" height="50"/>
         <image name="myIcon" width="72" height="72"/>
         <image name="people" width="40" height="40"/>
-        <image name="plus" width="157" height="157"/>
+        <image name="plus" width="20" height="20"/>
         <image name="profile1" width="40" height="40"/>
         <image name="profileImage" width="50" height="47"/>
     </resources>
