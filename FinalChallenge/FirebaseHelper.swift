@@ -110,7 +110,7 @@ class FirebaseHelper{
                 for friendId in friendsId{
                     self.getUserData(userID: friendId, completionHandler: {
                         user in
-                        completionHandler(["id": user.id, "name": user.name, "picUrl": user.picUrl!])
+                        completionHandler(["id": user.id, "name": user.name, "picUrl": user.picUrl!, "socialNetworkID": user.socialNetworkID])
                     })
                 }
             }

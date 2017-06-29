@@ -13,73 +13,72 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var friendList = [ [String: Any] ]()
     var friendImageList = [UIImage]()
-    var flagToReload = false
-    var flagToRemove = true
-    var flagToAppear = false
     var currentUser: User?
 
     
     @IBOutlet weak var friendTableView: UITableView!
     
     
-    override func viewDidLoad() {
-        flagToReload = true
-
-    }
-    
-    
     func getfriends(){
         self.friendList.removeAll()
+        self.friendImageList.removeAll()
 
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
             if let friend = friend{
                 self.friendList.append(friend)
-                print(friend["id"] as! String)
+
+                DispatchQueue.main.async {
+                    
+                    self.friendTableView.reloadData()
+                }
+                
                 FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
                     picData in
                     if let picDataReceived = picData{
                         let friendIndex = self.friendList.index(where: {
                             ($0["picUrl"] as! String == friend["picUrl"] as! String)})
                         self.friendList[friendIndex!]["picData"] = picDataReceived
-                        DispatchQueue.main.async {
-                            if self.flagToReload {
+                        var friendListUserDefaults = [String]()
 
-                                if self.flagToAppear {
-                                    
-                                    sleep(1)
-                                }
-                                
-                                self.friendTableView.reloadData()
-                            }
+                        for friend in self.friendList {
+                            
+                            friendListUserDefaults.append(friend["socialNetworkID"] as! String)
                             
                         }
+                        
+                        UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.friendTableView.reloadData()
+                        }
                     }
+                    
+                    
                 })
-            }
             
+            }
+ 
         })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        flagToRemove = false
-
-        if friendList.isEmpty {
+        self.friendList.removeAll()
+        self.friendImageList.removeAll()
+        
+        DispatchQueue.main.async {
             
-            flagToAppear = true
-            getfriends()
-            
+            self.friendTableView.reloadData()
 
         }
         
-//        if flagToAppear {
-//            
-//
-//            flagToAppear = !flagToAppear
-//        }
+        DispatchQueue.global(qos: .background).async{
+            
+            self.getfriends()
+        }
         
-
 
     }
     
@@ -87,9 +86,9 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.friendList.removeAll()
         self.friendImageList.removeAll()
-        
+   
         DispatchQueue.main.async {
-
+            
             self.friendTableView.reloadData()
             
         }
@@ -97,6 +96,9 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        print("QUANTIDADE DE AMIGOS =  \(self.friendList.count)")
+        print("QUANTIDADE DE IMAGENS =  \(self.friendImageList.count)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
         
@@ -107,11 +109,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             if image != nil {
                 
                 cell.friendImage.image = image
-                self.friendImageList.insert(cell.friendImage.image!, at: indexPath.row)
+                
             } else {
                 
                 cell.friendImage.image = #imageLiteral(resourceName: "profileImage")
-                self.friendImageList.insert(#imageLiteral(resourceName: "profileImage"), at: indexPath.row)
             }
             
             
@@ -143,7 +144,6 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        flagToRemove = false
         let friendId = friendList[indexPath.row]["id"] as! String
         
         FirebaseHelper.getUserData(userID: (friendId), completionHandler: {
