@@ -31,9 +31,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
+    // changed
     
     let settings: [Setting] = {
-        return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Filter by distance", imageName: "distance"), Setting(name: "Cancel", imageName: "cancel")]
+        return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
     }()
     
     //var homeController: FinderViewController?
