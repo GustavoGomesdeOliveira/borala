@@ -33,7 +33,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellHeight: CGFloat = 55
     
     let settings: [Setting] = {
-        return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Filter by distance", imageName: "distance"), Setting(name: "Cancel", imageName: "cancel")]
+        return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
     }()
     
     //var homeController: FinderViewController?
