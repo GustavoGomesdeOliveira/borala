@@ -53,7 +53,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         willSet{
             self.mapView.removeAnnotations(self.pins)
             self.pins.removeAll()
-            newValue.forEach{self.addPin(event:$0)}
+            newValue.forEach{ self.addPin(event:$0) }
         }
     }
     var pins = [CustomPin]()
@@ -81,10 +81,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //FirebaseHelper.getEvents(ofType: "7EzIl04CiNfZqnV3xBQY9kh4fK23", completionHandler:
-            //{data in
-        //})
-        
         //self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
         //self.menuButton.imageView?.contentMode = .center
         //self.menuButton.imageEdgeInsets = UIEdgeInsetsMake(-10, -10, -10, -10)
@@ -134,13 +130,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
             case Search.Friends.hashValue:
                 self.events.removeAll()
-                self.pins.removeAll()
-                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getFriendsEvents(completionHandler: {
                     eventsFromFirebase in
                             
                     self.events.append(contentsOf: eventsFromFirebase)
-                    for event in self.events{ self.addPin(event: event) }
                     self.newEventButtonState(enable: !self.findEvent)
                     if self.findEvent { self.findEvent = false }
                     self.searchPins = []
@@ -151,14 +144,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             case Search.Everyone.hashValue:
                 self.events.removeAll()
-                //self.pins.removeAll()
-                //self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
-                    //self.pins.removeAll()
                 
-                    //for event in self.events{ self.addPin(event: event) }
                     self.newEventButtonState(enable: !self.findEvent)
                     if self.findEvent { self.findEvent = false }
                 
@@ -216,13 +205,10 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         switch filter {
             case Search.Friends:
                 self.events.removeAll()
-                self.pins.removeAll()
-                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getFriendsEvents( completionHandler: {
                         eventsFromFirebase in
                         
                         self.events.append(contentsOf: eventsFromFirebase)
-                        for event in self.events{ self.addPin(event: event) }
                         self.newEventButtonState(enable: !self.findEvent)
                         if self.findEvent { self.findEvent = false }
                         
@@ -235,19 +221,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             case Search.Everyone:
                 self.events.removeAll()
-                //self.pins.removeAll()
-                //self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
-                    //self.pins.removeAll()
         
-                    //for event in self.events{ self.addPin(event: event) }
                     self.newEventButtonState(enable: !self.findEvent)
                     if self.findEvent { self.findEvent = false }
         
                     self.searchPins = []
-                    //self.mapView.addAnnotations(self.pins)
                 })
             break
         }
@@ -598,7 +579,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
             
             self.addChildViewController(popUpOverVC)
-            // popUpOverVC.delegate = self
+            popUpOverVC.filterDelegate = self
             popUpOverVC.view.frame = self.view.frame
             self.view.addSubview(popUpOverVC.view)
             popUpOverVC.didMove(toParentViewController: self)
