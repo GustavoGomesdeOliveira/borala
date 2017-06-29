@@ -49,13 +49,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var coordenate: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     
-    var events = [Event](){
-        willSet{
-            self.mapView.removeAnnotations(self.pins)
-            self.pins.removeAll()
-            newValue.forEach{self.addPin(event:$0)}
-        }
-    }
+    var events = [Event]()
     var pins = [CustomPin]()
     var searchPins = [CustomPin]()
     var myID: String?
@@ -151,14 +145,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             case Search.Everyone.hashValue:
                 self.events.removeAll()
-                //self.pins.removeAll()
-                //self.mapView.removeAnnotations(self.mapView.annotations)
+                self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
-                    //self.pins.removeAll()
+                    self.pins.removeAll()
                 
-                    //for event in self.events{ self.addPin(event: event) }
+                    for event in self.events{ self.addPin(event: event) }
                     self.newEventButtonState(enable: !self.findEvent)
                     if self.findEvent { self.findEvent = false }
                 
@@ -235,14 +229,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             case Search.Everyone:
                 self.events.removeAll()
-                //self.pins.removeAll()
-                //self.mapView.removeAnnotations(self.mapView.annotations)
+                self.pins.removeAll()
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 FirebaseHelper.getEvents(completionHandler: {
                     eventsFromFirebase in
                     self.events = eventsFromFirebase
-                    //self.pins.removeAll()
+                    self.pins.removeAll()
         
-                    //for event in self.events{ self.addPin(event: event) }
+                    for event in self.events{ self.addPin(event: event) }
                     self.newEventButtonState(enable: !self.findEvent)
                     if self.findEvent { self.findEvent = false }
         
