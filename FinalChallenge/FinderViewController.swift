@@ -64,11 +64,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             newViewController.currentUser = nil
         }
 
-//        DispatchQueue.main.async {
-//            
-//            self.loadFriends()
-//
-//        }
         
     }
 
@@ -85,7 +80,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-
     
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
@@ -109,12 +103,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.delegate = self
         
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-        self.notLoggedView.isHidden = true
+        self.notLoggedView.isHidden = false
         GIDSignIn.sharedInstance().uiDelegate = self
 
+        if (FBSDKAccessToken.current() != nil){
+            
+            self.notLoggedView.isHidden = true
+
+        }
+        
         if GIDSignIn.sharedInstance().hasAuthInKeychain(){
             
             self.notLoggedView.isHidden = true
+            newEvent.isEnabled = true
 
         }
         NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
@@ -197,7 +198,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     ///
     /// - Parameter enable: true for enable and false for disable.
     func newEventButtonState(enable: Bool){
-        self.newEvent.isEnabled = enable
+        
+        if self.notLoggedView.isHidden {
+            
+            self.newEvent.isEnabled = enable
+
+        } else {
+            
+            self.newEvent.isEnabled = !enable
+            
+        }
+        
         if enable{
             self.newEvent.tintColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1)//precisa disso?
         }else{
@@ -409,8 +420,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
-            
         self.notLoggedView.isHidden = true
+        newEvent.isEnabled = true
         if let token = result.token{
 
             self.tabBarController?.tabBar.isUserInteractionEnabled = true
@@ -424,13 +435,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     print(error.debugDescription)
                     
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        //appDelegate.fetchProfile(id: (user?.uid)!)
-                    }
-                }
+                } 
             })
         }
         
