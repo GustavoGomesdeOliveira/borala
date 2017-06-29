@@ -158,7 +158,27 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
             let newViewController = barViewControllers![0] as! ProfileViewController
             
             newViewController.currentUser = self.currentUser
-            self.currentUser?.pic = UIImagePNGRepresentation(self.friendImageList[indexPath.row])
+            
+            if let picData = self.friendList[indexPath.row]["picData"] as? Data{
+                
+                
+                let image = UIImage(data: picData)
+                
+
+                
+                if image != nil {
+                    
+                    self.currentUser?.pic = UIImagePNGRepresentation(image!)
+                    
+                } else {
+                    
+                    self.currentUser?.pic = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImage"))
+                }
+                
+                
+                
+            }
+            
 
             //newViewController. = self.friendImageList[indexPath.row]
             
