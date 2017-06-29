@@ -592,7 +592,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
             
             self.addChildViewController(popUpOverVC)
-            // popUpOverVC.delegate = self
+            popUpOverVC.filterDelegate = self
             popUpOverVC.view.frame = self.view.frame
             self.view.addSubview(popUpOverVC.view)
             popUpOverVC.didMove(toParentViewController: self)
