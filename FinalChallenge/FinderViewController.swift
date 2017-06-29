@@ -64,11 +64,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             newViewController.currentUser = nil
         }
 
-        DispatchQueue.main.async {
-            
-            self.loadFriends()
-
-        }
+//        DispatchQueue.main.async {
+//            
+//            self.loadFriends()
+//
+//        }
         
     }
 
