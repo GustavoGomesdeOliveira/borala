@@ -164,13 +164,13 @@ class FirebaseHelper{
     static func getEvents(completionHandler:@escaping (_ events: [Event]) -> ()){
         rootRefDatabase.child("events").observe(.value,with:{
             snapshot in
+            var eventsFromFirebase = [Event]()
             if let dic = snapshot.value as? [String: Any]{
-                var eventsFromFirebase = [Event]()
                 for key in dic.keys{
                     eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                    completionHandler(eventsFromFirebase)
                 }
             }
+            completionHandler(eventsFromFirebase)
         })
     }
     
