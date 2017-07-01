@@ -1426,7 +1426,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyC-6y-9KQ">
-                                <rect key="frame" x="25" y="163.5" width="270" height="241"/>
+                                <rect key="frame" x="25" y="164" width="270" height="241"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid2" translatesAutoresizingMaskIntoConstraints="NO" id="FUz-7o-u6S">
                                         <rect key="frame" x="20" y="89" width="230" height="80"/>
@@ -1445,7 +1445,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Au1-YB-Szy">
-                                        <rect key="frame" x="87.5" y="187" width="95" height="40"/>
+                                        <rect key="frame" x="88" y="187" width="95" height="40"/>
                                         <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="b1m-zu-KeB"/>
@@ -1458,7 +1458,7 @@
                                             <action selector="cancelEventAction:" destination="2iL-nO-TOu" eventType="touchUpInside" id="i38-7F-dbe"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This is my event!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USC-ho-i5X">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is my event!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USC-ho-i5X">
                                         <rect key="frame" x="71" y="51" width="129" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Wrw-i4-3Iq"/>
@@ -1478,6 +1478,7 @@
                                     <constraint firstAttribute="height" constant="241" id="XDD-T7-oeR"/>
                                     <constraint firstItem="Au1-YB-Szy" firstAttribute="top" secondItem="FUz-7o-u6S" secondAttribute="bottom" constant="18" id="XRl-EF-cxZ"/>
                                     <constraint firstItem="USC-ho-i5X" firstAttribute="width" secondItem="iyC-6y-9KQ" secondAttribute="height" multiplier="129:241" id="be2-LH-2Ei"/>
+                                    <constraint firstItem="FUz-7o-u6S" firstAttribute="top" secondItem="USC-ho-i5X" secondAttribute="bottom" constant="17" id="g6l-ct-trO"/>
                                     <constraint firstItem="FUz-7o-u6S" firstAttribute="top" secondItem="qw8-OM-LFM" secondAttribute="bottom" constant="-33" id="iYx-Ft-HdI"/>
                                     <constraint firstAttribute="width" constant="270" id="rFS-jr-hF6"/>
                                 </constraints>
@@ -1489,7 +1490,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PjS-Pe-iv6">
-                                <rect key="frame" x="125" y="128.5" width="70" height="70"/>
+                                <rect key="frame" x="125" y="129" width="70" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="41q-5H-t9o"/>

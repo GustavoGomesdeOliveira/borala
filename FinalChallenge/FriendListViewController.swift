@@ -17,6 +17,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     @IBOutlet weak var friendTableView: UITableView!
+    @IBOutlet weak var noChatView: UIView!
     
     
     func getfriends(){

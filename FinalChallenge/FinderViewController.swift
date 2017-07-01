@@ -30,6 +30,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
    
     @IBOutlet weak var menuButton: UIButton!
     
+    var pressLocation: Location?
+    
     var pin: CustomPin?
     var myAnnotation: CustomPin?
     var selectedUserID: String?
@@ -475,9 +477,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
                 if event == false{
 
-                    
-                    let pin = CustomPin(coordinate: self.myLocation!)
+                    let locationOnView = press.location(in: self.mapView)
 
+                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+                    
+                    let pin = CustomPin(coordinate: coordinate)
+
+                    self.pressLocation = Location(latitude: Float(coordinate.latitude), longitude: Float(coordinate.longitude))
+                    
                     pin.pinImage = UIImage(named: "mypin2")
                     
                     self.pins.append(pin)
@@ -492,9 +499,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     self.view.addSubview(popUpOverVC.view)
                     popUpOverVC.didMove(toParentViewController: self)
                     self.mapView.showsUserLocation = true
-                    
-                    
-                    
+        
 
                 }
                 
@@ -531,9 +536,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
         if let user = getUser(){
-            let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
-            let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
+            let event = Event(name: "teste", location: self.pressLocation!, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
             self.myID = event.creatorId
             addPin(event: event)
 

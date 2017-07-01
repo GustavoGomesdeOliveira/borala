@@ -13,6 +13,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var chatTableView: UITableView!
     
+    
+    
     var chats = [Chat](){
         willSet{
             if !newValue.isEmpty{
@@ -59,6 +61,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.chats.count
     }
     
