@@ -1006,12 +1006,24 @@
                                     <outlet property="delegate" destination="xrc-ae-nFD" id="CrO-rh-Z1g"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no messages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hie-HO-AKv">
+                                <rect key="frame" x="32" y="273" width="257" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5Tr-gm-hFl"/>
+                                    <constraint firstAttribute="width" constant="257" id="Hjr-a8-5YJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="COl-Kv-Ngo" firstAttribute="top" secondItem="PRM-uu-iAW" secondAttribute="top" constant="20" id="8Y9-aF-cyv"/>
                             <constraint firstItem="COl-Kv-Ngo" firstAttribute="leading" secondItem="PRM-uu-iAW" secondAttribute="leading" id="AK7-pL-hKK"/>
+                            <constraint firstItem="Hie-HO-AKv" firstAttribute="centerX" secondItem="PRM-uu-iAW" secondAttribute="centerX" id="Dyc-Dr-f2A"/>
                             <constraint firstAttribute="trailing" secondItem="COl-Kv-Ngo" secondAttribute="trailing" id="WXq-NB-9Wt"/>
+                            <constraint firstItem="Hie-HO-AKv" firstAttribute="centerY" secondItem="PRM-uu-iAW" secondAttribute="centerY" id="dnh-lI-9lA"/>
                             <constraint firstItem="h0W-WQ-ZMm" firstAttribute="top" secondItem="COl-Kv-Ngo" secondAttribute="bottom" id="sRE-tn-WA5"/>
                         </constraints>
                     </view>
@@ -1020,11 +1032,12 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="chatTableView" destination="COl-Kv-Ngo" id="Bz2-rh-qFE"/>
+                        <outlet property="messageLabel" destination="Hie-HO-AKv" id="2kA-cZ-0EM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7E-nq-sme" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4290" y="287"/>
+            <point key="canvasLocation" x="4290" y="286.26760563380282"/>
         </scene>
         <!--Pin Popup View Controller-->
         <scene sceneID="7xp-2c-y4P">

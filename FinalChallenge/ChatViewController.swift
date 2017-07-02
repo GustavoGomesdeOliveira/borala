@@ -13,6 +13,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var chatTableView: UITableView!
     
+    @IBOutlet weak var messageLabel: UILabel!
     
     
     var chats = [Chat](){
@@ -45,6 +46,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.chats.append(chatFromFirebase)
             }
             DispatchQueue.main.async {
+                if self.chats.count != 0 {
+                    self.messageLabel.isHidden = true
+                }
                 self.chatTableView.reloadData()
             }
         })
