@@ -346,7 +346,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let annotationView = annotationView {
             annotationView.canShowCallout = false
             annotationView.image = pinAnnotation.pinImage
-            
+            annotationView.frame = CGRect(x: 0, y: 0, width: (pinAnnotation.pinImage?.size.width)! * 1.2, height: (pinAnnotation.pinImage?.size.height)! * 1.2)
         }
         
         return annotationView
@@ -566,6 +566,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(newViewController, animated: true, completion: nil)
     }
     
+    func returtToSuperView() {
+        let current = self.mapView.selectedAnnotations
+        if current.count != 0 {
+            self.mapView.deselectAnnotation(current.first, animated: false)
+        }
+    }
     //--------------------------------------
     
     // mypin Delegate

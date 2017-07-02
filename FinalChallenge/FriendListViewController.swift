@@ -28,12 +28,16 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
             if let friend = friend{
+                
+
                 self.friendList.append(friend)
 
                 DispatchQueue.main.async {
                     
                     if self.friendList.count != 0 {
                         self.messageLabel.isHidden = true
+                    }else {
+                        self.messageLabel.isHidden = false
                     }
                     
                     self.friendTableView.reloadData()

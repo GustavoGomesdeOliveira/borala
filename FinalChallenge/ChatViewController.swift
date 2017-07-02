@@ -48,7 +48,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             DispatchQueue.main.async {
                 if self.chats.count != 0 {
                     self.messageLabel.isHidden = true
+                }else {
+                    self.messageLabel.isHidden = false
                 }
+                
+                
                 self.chatTableView.reloadData()
             }
         })
