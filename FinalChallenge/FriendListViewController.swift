@@ -15,6 +15,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendImageList = [UIImage]()
     var currentUser: User?
 
+    @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var friendTableView: UITableView!
     @IBOutlet weak var noChatView: UIView!
@@ -30,6 +31,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.friendList.append(friend)
 
                 DispatchQueue.main.async {
+                    
+                    if self.friendList.count != 0 {
+                        self.messageLabel.isHidden = true
+                    }
                     
                     self.friendTableView.reloadData()
                 }
