@@ -523,8 +523,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
         if let user = getUser(){
-        
-            let event = Event(name: "teste", location: self.pressLocation!, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
+            var location = Location(latitude: 0, longitude: 0)
+            if let _location = self.pressLocation{
+                location = _location
+            }
+            else{
+                location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
+            }
+            let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
             self.myID = event.creatorId
             addPin(event: event)
 
