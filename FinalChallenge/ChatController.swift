@@ -20,7 +20,6 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var chatId: String!
     var personImage = Data()
     var messages = [Message]()
-    var indexScroll = [IndexPath]()
     var keyBoardHeight: CGFloat!
     let containerView =  UIView()
     
@@ -75,7 +74,12 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let path = IndexPath(row: self.messages.count - 1, section: 0)
         
-        self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.top, animated: true)
+        if path.row != -1 {
+            
+            self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.top, animated: true)
+
+        }
+        
    
     }
     
@@ -96,9 +100,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20
-        
-        indexScroll.append(indexPath)
-        
+                
         return cell
     }
     
@@ -149,9 +151,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func send(_ sender: UIButton) {
         
         handleMessage()
-        
-        
-        
+    
     }
     
     func handleMessage(){
