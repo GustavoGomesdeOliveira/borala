@@ -71,10 +71,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
 
                 }else {
                     //filter by distance9
-                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
-
-                    let mycontroller = parent.selectedViewController as! FinderViewController
-                    mycontroller.showControllerForSetting(setting)
+//                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+//
+//                    let mycontroller = parent.selectedViewController as! FinderViewController
+//                    mycontroller.showControllerForSetting(setting)
                 
                 
                 }
