@@ -523,7 +523,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
         if let user = getUser(){
-            var location = Location(latitude: 0, longitude: 0)
+            var location: Location
             if let _location = self.pressLocation{
                 location = _location
             }
