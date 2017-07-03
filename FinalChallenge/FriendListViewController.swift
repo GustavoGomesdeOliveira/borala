@@ -128,18 +128,18 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         cell.friendName.text = self.friendList[indexPath.row]["name"] as? String
         
-        cell.mainBackground.layer.cornerRadius = 20
+        cell.mainBackground.layer.cornerRadius = 25
         cell.mainBackground.layer.masksToBounds = true
         
-        cell.shadownLayer.layer.masksToBounds = false
-        cell.shadownLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
-        cell.shadownLayer.layer.shadowColor = UIColor.black.cgColor
-        cell.shadownLayer.layer.shadowOpacity = 0.23
-        cell.shadownLayer.layer.shadowRadius = 4
-        
-        cell.shadownLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadownLayer.bounds, byRoundingCorners: [UIRectCorner.allCorners], cornerRadii: CGSize(width: 8, height: 8)).cgPath
-        cell.shadownLayer.layer.shouldRasterize = true
-        cell.shadownLayer.layer.rasterizationScale = UIScreen.main.scale
+//        cell.shadownLayer.layer.masksToBounds = false
+//        cell.shadownLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        cell.shadownLayer.layer.shadowColor = UIColor.black.cgColor
+//        cell.shadownLayer.layer.shadowOpacity = 0.23
+//        cell.shadownLayer.layer.shadowRadius = 4
+//        
+//        cell.shadownLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadownLayer.bounds, byRoundingCorners: [UIRectCorner.allCorners], cornerRadii: CGSize(width: 8, height: 8)).cgPath
+//        cell.shadownLayer.layer.shouldRasterize = true
+//        cell.shadownLayer.layer.rasterizationScale = UIScreen.main.scale
         
         return cell
     }
