@@ -13,6 +13,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var chatTableView: UITableView!
     
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    
     var chats = [Chat](){
         willSet{
             if !newValue.isEmpty{
@@ -43,6 +46,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.chats.append(chatFromFirebase)
             }
             DispatchQueue.main.async {
+                if self.chats.count != 0 {
+                    self.messageLabel.isHidden = true
+                }else {
+                    self.messageLabel.isHidden = false
+                }
+                
+                
                 self.chatTableView.reloadData()
             }
         })
@@ -59,6 +69,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.chats.count
     }
     

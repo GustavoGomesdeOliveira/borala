@@ -30,6 +30,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
    
     @IBOutlet weak var menuButton: UIButton!
     
+    var pressLocation: Location?
+    
     var pin: CustomPin?
     var myAnnotation: CustomPin?
     var selectedUserID: String?
@@ -64,11 +66,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             newViewController.currentUser = nil
         }
 
-//        DispatchQueue.main.async {
-//            
-//            self.loadFriends()
-//
-//        }
         
     }
 
@@ -85,7 +82,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         facebookLoginBTN.delegate = self
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-
     
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(FinderViewController.addMyPoint))
         
@@ -109,12 +105,19 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         facebookLoginBTN.delegate = self
         
         facebookLoginBTN.readPermissions = ["public_profile", "email", "user_friends"]
-        self.notLoggedView.isHidden = true
+        self.notLoggedView.isHidden = false
         GIDSignIn.sharedInstance().uiDelegate = self
 
+        if (FBSDKAccessToken.current() != nil){
+            
+            self.notLoggedView.isHidden = true
+
+        }
+        
         if GIDSignIn.sharedInstance().hasAuthInKeychain(){
             
             self.notLoggedView.isHidden = true
+            newEvent.isEnabled = true
 
         }
         NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
@@ -197,7 +200,17 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     ///
     /// - Parameter enable: true for enable and false for disable.
     func newEventButtonState(enable: Bool){
-        self.newEvent.isEnabled = enable
+        
+        if self.notLoggedView.isHidden {
+            
+            self.newEvent.isEnabled = enable
+
+        } else {
+            
+            self.newEvent.isEnabled = !enable
+            
+        }
+        
         if enable{
             self.newEvent.tintColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1)//precisa disso?
         }else{
@@ -333,7 +346,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let annotationView = annotationView {
             annotationView.canShowCallout = false
             annotationView.image = pinAnnotation.pinImage
-            
+            annotationView.frame = CGRect(x: 0, y: 0, width: (pinAnnotation.pinImage?.size.width)! * 1.2, height: (pinAnnotation.pinImage?.size.height)! * 1.2)
         }
         
         return annotationView
@@ -409,8 +422,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
-            
         self.notLoggedView.isHidden = true
+        newEvent.isEnabled = true
         if let token = result.token{
 
             self.tabBarController?.tabBar.isUserInteractionEnabled = true
@@ -424,13 +437,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     print(error.debugDescription)
                     
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        //appDelegate.fetchProfile(id: (user?.uid)!)
-                    }
-                }
+                } 
             })
         }
         
@@ -470,9 +477,14 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
                 if event == false{
 
-                    
-                    let pin = CustomPin(coordinate: self.myLocation!)
+                    let locationOnView = press.location(in: self.mapView)
 
+                    let coordinate = self.mapView.convert(locationOnView, toCoordinateFrom: self.mapView)
+                    
+                    let pin = CustomPin(coordinate: coordinate)
+
+                    self.pressLocation = Location(latitude: Float(coordinate.latitude), longitude: Float(coordinate.longitude))
+                    
                     pin.pinImage = UIImage(named: "mypin2")
                     
                     self.pins.append(pin)
@@ -487,9 +499,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     self.view.addSubview(popUpOverVC.view)
                     popUpOverVC.didMove(toParentViewController: self)
                     self.mapView.showsUserLocation = true
-                    
-                    
-                    
+        
 
                 }
                 
@@ -526,9 +536,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func sendEvent( beginHour: Date, endHour: Date, preference : String, description: String?) {
         
         if let user = getUser(){
-            let location = Location(latitude: Float((self.myLocation?.latitude)!), longitude: Float((self.myLocation?.longitude)!))
         
-            let event = Event(name: "teste", location: location, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
+            let event = Event(name: "teste", location: self.pressLocation!, creatorId: user.id, creatorName: user.name, beginHour: beginHour, endHour: endHour, preference: preference, description: description)
             self.myID = event.creatorId
             addPin(event: event)
 
@@ -557,6 +566,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(newViewController, animated: true, completion: nil)
     }
     
+    func returtToSuperView() {
+        let current = self.mapView.selectedAnnotations
+        if current.count != 0 {
+            self.mapView.deselectAnnotation(current.first, animated: false)
+        }
+    }
     //--------------------------------------
     
     // mypin Delegate

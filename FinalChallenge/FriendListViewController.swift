@@ -15,8 +15,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendImageList = [UIImage]()
     var currentUser: User?
 
+    @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var friendTableView: UITableView!
+    @IBOutlet weak var noChatView: UIView!
     
     
     func getfriends(){
@@ -26,9 +28,17 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
             friend in
             if let friend = friend{
+                
+
                 self.friendList.append(friend)
 
                 DispatchQueue.main.async {
+                    
+                    if self.friendList.count != 0 {
+                        self.messageLabel.isHidden = true
+                    }else {
+                        self.messageLabel.isHidden = false
+                    }
                     
                     self.friendTableView.reloadData()
                 }
@@ -36,23 +46,30 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
                 FirebaseHelper.getPictureProfile(picAddress: friend["picUrl"] as! String, completitionHandler: {
                     picData in
                     if let picDataReceived = picData{
-                        let friendIndex = self.friendList.index(where: {
-                            ($0["picUrl"] as! String == friend["picUrl"] as! String)})
-                        self.friendList[friendIndex!]["picData"] = picDataReceived
-                        var friendListUserDefaults = [String]()
-
-                        for friend in self.friendList {
-                            
-                            friendListUserDefaults.append(friend["socialNetworkID"] as! String)
-                            
-                        }
                         
-                        UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
-                        
-                        DispatchQueue.main.async {
+                        if let friendIndex = self.friendList.index(where: {
+                            ($0["picUrl"] as! String == friend["picUrl"] as! String)}) {
                             
-                            self.friendTableView.reloadData()
+                            self.friendList[friendIndex]["picData"] = picDataReceived
+                            
+                            
+                            var friendListUserDefaults = [String]()
+                            
+                            
+                            for friend in self.friendList {
+                                
+                                friendListUserDefaults.append(friend["socialNetworkID"] as! String)
+                                
+                            }
+                            
+                            UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
+                            
+                            DispatchQueue.main.async {
+                                
+                                self.friendTableView.reloadData()
+                            }
                         }
+   
                     }
                     
                     
@@ -65,15 +82,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.friendList.removeAll()
-        self.friendImageList.removeAll()
-        
-        DispatchQueue.main.async {
-            
-            self.friendTableView.reloadData()
 
-        }
-        
         DispatchQueue.global(qos: .background).async{
             
             self.getfriends()
@@ -83,6 +92,8 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+        
         
         self.friendList.removeAll()
         self.friendImageList.removeAll()
@@ -96,9 +107,6 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        print("QUANTIDADE DE AMIGOS =  \(self.friendList.count)")
-        print("QUANTIDADE DE IMAGENS =  \(self.friendImageList.count)")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as! FriendCell
         
@@ -137,8 +145,7 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        print(self.friendList.count)
+    
         return self.friendList.count
     }
     
