@@ -205,7 +205,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"
             endingLineNumber = "209"
-            landmarkName = "changeFilter(filter:)"
+            landmarkName = "newEventButtonState(enable:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
