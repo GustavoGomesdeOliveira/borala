@@ -80,20 +80,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let picData = self.chats[indexPath.row].pic{
             cell.personImage.image = UIImage.init(data: picData )
         }
-        cell.personName.text = self.chats[indexPath.row].lastMessage.text
+        cell.lastMessage.text = self.chats[indexPath.row].lastMessage.text
+        cell.personName.text = self.chats[indexPath.row].lastMessage.senderName
         
-        cell.mainBackground.layer.cornerRadius = 20
+        cell.mainBackground.layer.cornerRadius = 25
         cell.mainBackground.layer.masksToBounds = true
         
-        cell.shadownLayer.layer.masksToBounds = false
-        cell.shadownLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
-        cell.shadownLayer.layer.shadowColor = UIColor.black.cgColor
-        cell.shadownLayer.layer.shadowOpacity = 0.23
-        cell.shadownLayer.layer.shadowRadius = 4
-        
-        cell.shadownLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadownLayer.bounds, byRoundingCorners: [UIRectCorner.allCorners], cornerRadii: CGSize(width: 8, height: 8)).cgPath
-        cell.shadownLayer.layer.shouldRasterize = true
-        cell.shadownLayer.layer.rasterizationScale = UIScreen.main.scale
+//        cell.shadownLayer.layer.masksToBounds = false
+//        cell.shadownLayer.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        cell.shadownLayer.layer.shadowColor = UIColor.black.cgColor
+//        cell.shadownLayer.layer.shadowOpacity = 0.23
+//        cell.shadownLayer.layer.shadowRadius = 4
+//        
+//        cell.shadownLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadownLayer.bounds, byRoundingCorners: [UIRectCorner.allCorners], cornerRadii: CGSize(width: 8, height: 8)).cgPath
+//        cell.shadownLayer.layer.shouldRasterize = true
+//        cell.shadownLayer.layer.rasterizationScale = UIScreen.main.scale
         
         return cell
     }
