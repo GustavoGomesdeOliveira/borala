@@ -89,7 +89,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
                 let age = NSNumber(value: user.age!)
                 self.userAgeLabel.text = age.stringValue
             }else{
-                self.userAgeLabel.text = "Empty"
+                self.userAgeLabel.text = ""
             }
             self.userGenderLabel.text = user?.gender
             
@@ -201,7 +201,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
             self.userAgeLabel.text = ageString
         } else {
             
-            self.userAgeLabel.text = "Empty"
+            self.userAgeLabel.text = ""
         }
         
         if self.user.pic == nil {

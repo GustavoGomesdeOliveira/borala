@@ -22,9 +22,20 @@ class ChooseFilterController: UIViewController {
     @IBOutlet weak var everyone: UIButton!
     var filterDelegate: FilterDelegate?
     
+    @IBOutlet weak var poupupView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.poupupView.layer.masksToBounds = false
+        self.poupupView.layer.shadowColor = UIColor.black.cgColor
+        self.poupupView.layer.shadowOpacity = 0.8
+        self.poupupView.layer.shadowOffset = CGSize(width: 1, height: 15)
+        self.poupupView.layer.shadowRadius = 15
+        
+        self.poupupView.layer.shadowPath = UIBezierPath(rect: self.poupupView.bounds).cgPath
+        self.poupupView.layer.shouldRasterize = true
+
         
         let searchMode = UserDefaults.standard.integer(forKey: "search")
         

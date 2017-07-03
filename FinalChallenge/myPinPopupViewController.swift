@@ -12,6 +12,7 @@ import UIKit
 protocol myPinPopupViewControllerDelegate{
     
     func cancelEvent( id: String)
+    func returtToSuperViewFromMyPin()
     
 }
 
@@ -56,6 +57,7 @@ class myPinPopupViewController: UIViewController {
         let touch: UITouch? = touches.first
         if touch?.view == self.view {
             self.view.removeFromSuperview()
+            self.delegate.returtToSuperViewFromMyPin()
         }
         
     }
