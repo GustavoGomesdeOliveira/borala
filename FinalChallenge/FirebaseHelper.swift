@@ -179,16 +179,19 @@ class FirebaseHelper{
             if let friendsIdDictionary = friendsSnapshot.value as? [String: Bool]{
                 rootRefDatabase.child("events").observe(.value,with:{
                     snapshot in
-                    if let dic = snapshot.value as? [String: Any]{
+                    if let eventsDictionary = snapshot.value as? [String: Any]{
                         var eventsFromFirebase = [Event]()
-                        let notFriendsArray = dic.keys.filter{!friendsIdDictionary.keys.contains($0)}
-                        for key in notFriendsArray{
-                            eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-                            completionHandler(eventsFromFirebase)
+                        eventsDictionary.forEach{
+                            key, value in
+                            let eventDictionary = value as! [String: Any]
+                            if !friendsIdDictionary.keys.contains( eventDictionary["creatorId"] as! String ){
+                                eventsFromFirebase.append(Event(dict: eventDictionary ))
+                                completionHandler(eventsFromFirebase)
+                            }
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
         })
     }
     

@@ -62,7 +62,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
 //                    print(self.homeController?.myID)
                  
                 }else {
-                    //filter by distance
+                    //filter by distance9
                     let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
 
                     let mycontroller = parent.selectedViewController as! FinderViewController

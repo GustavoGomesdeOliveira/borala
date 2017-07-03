@@ -143,7 +143,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 })
             
             break
-            case Search.NotFriend.hashValue: break
+            case Search.NotFriend.hashValue:
+                self.events.removeAll()
+                FirebaseHelper.getNotFriendsEvents(completionHandler: {
+                    eventsFromFirebase in
+                    self.events = eventsFromFirebase
+            
+                    self.newEventButtonState(enable: !self.findEvent)
+                    if self.findEvent { self.findEvent = false }
+            
+                    self.searchPins = []
+                })
+            break
             
             case Search.Everyone.hashValue:
                 self.events.removeAll()
@@ -230,7 +241,18 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 })
             break
             
-            case Search.NotFriend: break
+            case Search.NotFriend:
+                self.events.removeAll()
+                FirebaseHelper.getNotFriendsEvents(completionHandler: {
+                    eventsFromFirebase in
+                    self.events = eventsFromFirebase
+                    
+                    self.newEventButtonState(enable: !self.findEvent)
+                    if self.findEvent { self.findEvent = false }
+                    
+                    self.searchPins = []
+                })
+            break
             
             case Search.Everyone:
                 self.events.removeAll()
