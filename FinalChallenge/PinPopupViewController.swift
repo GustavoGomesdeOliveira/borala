@@ -12,7 +12,7 @@ protocol PinPopupViewControllerDelegate{
     
     func transitionToProfile( userId: String)
     func transitionToChat( id: String)
-    func returtToSuperView()
+    func returnToSuperView()
     
 }
 
@@ -88,7 +88,7 @@ class PinPopupViewController: UIViewController {
         if touch?.view == self.view {
             
             self.view.removeFromSuperview()
-            self.delegate.returtToSuperView()
+            self.delegate.returnToSuperView()
 
         }
     }

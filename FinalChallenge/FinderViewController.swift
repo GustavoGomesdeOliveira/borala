@@ -587,7 +587,13 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(newViewController, animated: true, completion: nil)
     }
     
-    func returtToSuperView() {
+    func returnToSuperView() {
+        let current = self.mapView.selectedAnnotations
+        if current.count != 0 {
+            self.mapView.deselectAnnotation(current.first, animated: false)
+        }
+    }
+    func returtToSuperViewFromMyPin(){
         let current = self.mapView.selectedAnnotations
         if current.count != 0 {
             self.mapView.deselectAnnotation(current.first, animated: false)
