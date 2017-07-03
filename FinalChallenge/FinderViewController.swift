@@ -17,7 +17,7 @@ let token = FBSDKAccessToken.current()
 var parameters = ["":""]
 
 
-class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate, FilterDelegate {
+class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate,UIPopoverPresentationControllerDelegate,EventViewControllerDelegate, PinPopupViewControllerDelegate, myPinPopupViewControllerDelegate, FilterDelegate,SettingsLauncherDelegate {
     
     
     var facebookFriendsID = [String]()
@@ -540,6 +540,34 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     
+    func showControllerForSetting(setting: Setting){
+    
+            //chamar a popup
+            print("deu certo")
+            if setting.name == "Filter by persons" {
+                
+                let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+                
+                self.addChildViewController(popUpOverVC)
+                popUpOverVC.filterDelegate = self
+                popUpOverVC.view.frame = self.view.frame
+                self.view.addSubview(popUpOverVC.view)
+                popUpOverVC.didMove(toParentViewController: self)
+                
+            } else {
+                let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TablePins") as! TablePinsViewController
+                
+                self.addChildViewController(popUpOverVC)
+                popUpOverVC.view.frame = self.view.frame
+                self.view.addSubview(popUpOverVC.view)
+                //popUpOverVC.eventsArray = self.events
+                popUpOverVC.didMove(toParentViewController: self)
+                
+            }
+        
+    }
+    
+    
     //MARK: - PinDelegate
     func transitionToProfile( userId: String ){
     
@@ -592,30 +620,30 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         print("fazer alguma coisa")
     }
     
-    func showControllerForSetting(_ setting: Setting) {
-        //chamar a popup
-        print("deu certo")
-        if setting.name == "Filter by persons" {
-            
-            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
-            
-            self.addChildViewController(popUpOverVC)
-            popUpOverVC.filterDelegate = self
-            popUpOverVC.view.frame = self.view.frame
-            self.view.addSubview(popUpOverVC.view)
-            popUpOverVC.didMove(toParentViewController: self)
-            
-        } else {
-            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TablePins") as! TablePinsViewController
-            
-            self.addChildViewController(popUpOverVC)
-            popUpOverVC.view.frame = self.view.frame
-            self.view.addSubview(popUpOverVC.view)
-            //popUpOverVC.eventsArray = self.events
-            popUpOverVC.didMove(toParentViewController: self)
-        
-        }
-        
+//    func showControllerForSetting(_ setting: Setting) {
+//        //chamar a popup
+//        print("deu certo")
+//        if setting.name == "Filter by persons" {
+//            
+//            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
+//            
+//            self.addChildViewController(popUpOverVC)
+//            popUpOverVC.filterDelegate = self
+//            popUpOverVC.view.frame = self.view.frame
+//            self.view.addSubview(popUpOverVC.view)
+//            popUpOverVC.didMove(toParentViewController: self)
+//            
+//        } else {
+//            let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TablePins") as! TablePinsViewController
+//            
+//            self.addChildViewController(popUpOverVC)
+//            popUpOverVC.view.frame = self.view.frame
+//            self.view.addSubview(popUpOverVC.view)
+//            //popUpOverVC.eventsArray = self.events
+//            popUpOverVC.didMove(toParentViewController: self)
+//        
+//        }
+    
 //        let popUpOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseFilter") as! ChooseFilterController
 //        
 //        self.addChildViewController(popUpOverVC)
@@ -625,10 +653,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 //        popUpOverVC.didMove(toParentViewController: self)
         
         
-    }
+//    }
     
     @IBAction func menuAction(_ sender: Any) {
         settingsLauncher.parentview = self.view
+        settingsLauncher.delegate = self
         settingsLauncher.tabBarheight = (self.tabBarController?.tabBar.frame.height)!
         settingsLauncher.showSettings()
         

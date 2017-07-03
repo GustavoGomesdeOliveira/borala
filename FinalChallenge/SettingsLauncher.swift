@@ -18,7 +18,14 @@ class Setting: NSObject {
     }
 }
 
+protocol SettingsLauncherDelegate{
+
+    func showControllerForSetting(setting: Setting)
+    
+}
+
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    var delegate: SettingsLauncherDelegate!
     var parentview : UIView?
     let blackview = UIView()
     let collectionView : UICollectionView = {
@@ -55,18 +62,19 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 //é aqui que acontece a magica de chamar a outra modal
                 if setting.name == "Filter by persons" {
                     //filter by friends
-                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+//                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+//                    
+//                    let mycontroller = parent.selectedViewController as! FinderViewController
+//                    mycontroller.showControllerForSetting(setting)
                     
-                    let mycontroller = parent.selectedViewController as! FinderViewController
-                    mycontroller.showControllerForSetting(setting)
-//                    print(self.homeController?.myID)
-                 
+                    self.delegate.showControllerForSetting(setting: setting)
+
                 }else {
                     //filter by distance
-                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
-
-                    let mycontroller = parent.selectedViewController as! FinderViewController
-                    mycontroller.showControllerForSetting(setting)
+//                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
+//
+//                    let mycontroller = parent.selectedViewController as! FinderViewController
+//                    mycontroller.showControllerForSetting(setting)
                 
                 
                 }
