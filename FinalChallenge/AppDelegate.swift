@@ -419,7 +419,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         // Print full message.
         print(userInfo)
-        
+        if let window = UIApplication.shared.keyWindow{
+            if let _ = window.rootViewController as? ChatController{
+                completionHandler([])
+            }
+        }
         // Change this to your preferred presentation option
         completionHandler([.alert, .sound])
     }
