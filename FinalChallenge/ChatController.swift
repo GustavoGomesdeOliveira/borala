@@ -20,6 +20,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var chatId: String!
     var personImage = Data()
     var messages = [Message]()
+    var indexScroll = [IndexPath]()
     var keyBoardHeight: CGFloat!
     let containerView =  UIView()
     
@@ -64,7 +65,18 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             DispatchQueue.main.async {
                 self.chatCollection.reloadData()
             }
+            
         })
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let path = IndexPath(row: self.messages.count - 1, section: 0)
+        
+        self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.top, animated: true)
+   
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,6 +96,8 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20
+        
+        indexScroll.append(indexPath)
         
         return cell
     }
@@ -135,7 +149,8 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func send(_ sender: UIButton) {
         
         handleMessage()
-        //self.viewScroll()
+        
+        
         
     }
     
@@ -146,7 +161,17 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let textMessage = self.messageTextField.text
             let newMessage = Message(senderId: (FirebaseHelper.firebaseUser?.uid)!, senderName: (FirebaseHelper.firebaseUser?.displayName)!, text: textMessage!)
             FirebaseHelper.saveMessage(chatId: self.chatId, message: newMessage)
-            self.chatCollection.reloadData()
+            
+            DispatchQueue.main.async {
+                
+                self.chatCollection.reloadData()
+                
+                let path = IndexPath(row: self.messages.count - 1, section: 0)
+                
+                self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.bottom, animated: true)
+
+            }
+            
             
             self.messageTextField.text = nil
         }
