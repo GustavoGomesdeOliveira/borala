@@ -100,7 +100,7 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setupCell(cell: cell, senderId: currentMessage.senderId)
         
         cell.bubbleViewWidthAnchor?.constant = estimatedFrameForText(text: self.messages[indexPath.row].text).width + 20
-                
+        
         return cell
     }
     
