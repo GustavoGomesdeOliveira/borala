@@ -28,6 +28,8 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var genderTextField: UITextField!
     
+    var keyBoardHeight: CGFloat!
+
     
     var userToChange: User!
     
@@ -36,14 +38,29 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
 //        self.popUpView.layer.borderColor = UIColor(red: 254/255, green: 148/255, blue: 40/255, alpha: 1).cgColor
 //        self.popUpView.layer.borderWidth = 3
+        
+        self.keyBoardHeight = CGFloat()
+        self.keyBoardHeight = 0.0
         
         self.nameTextField.delegate = self
         self.nameTextField.text = userToChange.name
         self.genderTextField.delegate = self
         self.genderTextField.text = userToChange.gender
         self.ageTextField.delegate = self
+        
+        if let age = userToChange.age {
+            
+            self.ageTextField.text = String(age)
+            
+
+        }
+        
         //self.genderTextField.text = String(stringInterpolationSegment: userToChange.age)//userToChange.age
         
     }
@@ -117,6 +134,24 @@ class PopUpViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
         
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.superview?.frame.origin.y  == 0{
+                self.view.superview?.frame.origin.y -= keyboardSize.height
+                self.keyBoardHeight = keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.superview?.frame.origin.y  != 0{
+                self.view.superview?.frame.origin.y  += keyboardSize.height
+                self.keyBoardHeight = 0.0
+            }
+        }
     }
     
     
