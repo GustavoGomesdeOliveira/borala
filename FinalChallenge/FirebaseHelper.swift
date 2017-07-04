@@ -128,13 +128,24 @@ class FirebaseHelper{
 
     
     static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
-        rootRefDatabase.child("users/" + userID).observeSingleEvent(of: .value,with:{
+        rootRefDatabase.child("users/" + userID).observeSingleEvent(of: .value, with:{
             snapshot in
             if let dic = snapshot.value as? [String: Any]{
                 let userFromFirebase = User(dict: dic)
                 completionHandler(userFromFirebase)
             }
         })
+    }
+    
+    static func getUserName(userID: String,completionHandler:@escaping (_ name: String?) -> ()){
+        rootRefDatabase.child("users/" + userID + "/name").observeSingleEvent(of: .value, with: {
+            snapshot in
+            if let userName = snapshot.value as? String{
+                completionHandler(userName)
+            }
+            completionHandler(nil)
+        })
+
     }
     
     static func saveString(path : String, object: String, completionHandler:((_ error: Error?) -> ())?){
@@ -320,6 +331,21 @@ class FirebaseHelper{
         })
     }
     
+    static func getPartnerData(chatId: String, completionHandler: @escaping (_ partnerData:[String: String]? ) -> ()){
+        rootRefDatabase.child("chatsMembers/").child(chatId).observeSingleEvent(of: .value, with: {
+            chatMembersSnapshot in
+            if let chatMembersDictionary = chatMembersSnapshot.value as? [String: String]{
+                chatMembersDictionary.forEach{
+                    userId , pictureUrl in
+                    if userId != self.firebaseUser?.uid{
+                        completionHandler( [userId: pictureUrl] )
+                    }
+                }
+            }
+            completionHandler(nil)
+        })
+    }
+    
     static func getChatId(eventCreatorId: String,completionHandler: @escaping (_ chatId: String) -> ()){
         rootRefDatabase.child("chatsMembers").observeSingleEvent(of: .value, with: {
             snapshot in
@@ -462,6 +488,7 @@ class FirebaseHelper{
         })
         
     }
+    
     static func addChatsMembers(chatId: String, userId: String){
         rootRefDatabase.child("users/" + userId + "/picURL").observeSingleEvent(of: .value, with: {
             thumbnailURLsnapshot in

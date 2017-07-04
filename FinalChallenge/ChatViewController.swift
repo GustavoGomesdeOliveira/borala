@@ -19,15 +19,34 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var chats = [Chat](){
         willSet{
             if !newValue.isEmpty{
-                FirebaseHelper.getPicToChat(chatId: (newValue.last?.id)!, completionHandler: {
-                    picData in
-                    if let picData = picData{
-                        newValue.last?.pic = picData
-                        DispatchQueue.main.async {
-                            self.chatTableView.reloadData()
-                        }
+                FirebaseHelper.getPartnerData(chatId: (newValue.last?.id)!, completionHandler: {
+                    partnerDictionary in
+                    if partnerDictionary != nil{
+                        FirebaseHelper.getUserName(userID: (partnerDictionary?.keys.first)!, completionHandler: {
+                            userName in
+                            if userName != nil {
+                                newValue.last?.partnerName = userName
+                                DispatchQueue.main.async { self.chatTableView.reloadData() }
+                            }
+                        })
+                        FirebaseHelper.getThumbnail(url: (partnerDictionary?.values.first)!, completitionHandler:{picData in
+                            if let picData = picData{
+                                newValue.last?.pic = picData
+                                DispatchQueue.main.async { self.chatTableView.reloadData() }
+                            }
+                        })
                     }
                 })
+//                FirebaseHelper.getPicToChat(chatId: (newValue.last?.id)!, completionHandler: {
+//                    picData in
+//                    if let picData = picData{
+//                        newValue.last?.pic = picData
+//                        DispatchQueue.main.async {
+//                            self.chatTableView.reloadData()
+//                        }
+//                    }
+//                })
+                
             }
         }
     }
@@ -40,7 +59,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         FirebaseHelper.getChats(completionHandler: {
             chatFromFirebase in
             let newChat = self.chats.filter{ $0.id == chatFromFirebase.id}
-            if newChat.isEmpty{ self.chats.append(chatFromFirebase)}
+            if newChat.isEmpty{ self.chats.append(chatFromFirebase) }
             else{
                 self.chats = self.chats.filter{$0.id != chatFromFirebase.id}
                 self.chats.append(chatFromFirebase)
@@ -81,7 +100,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.personImage.image = UIImage.init(data: picData )
         }
         cell.lastMessage.text = self.chats[indexPath.row].lastMessage.text
-        cell.personName.text = self.chats[indexPath.row].lastMessage.senderName
+        cell.personName.text = self.chats[indexPath.row].partnerName ?? ""
         
         cell.mainBackground.layer.cornerRadius = 25
         cell.mainBackground.layer.masksToBounds = true

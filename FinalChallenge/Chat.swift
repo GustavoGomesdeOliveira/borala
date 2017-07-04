@@ -11,6 +11,7 @@ import Foundation
 class Chat: Hashable{
     var id: String!
     var lastMessage: Message!
+    var partnerName: String?
     var pic: Data?
     var hashValue: Int{
         return Int(id)!
