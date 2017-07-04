@@ -425,7 +425,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             }
         }
         // Change this to your preferred presentation option
-        completionHandler([.alert, .sound])
+        completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
