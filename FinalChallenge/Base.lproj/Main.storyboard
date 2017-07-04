@@ -608,7 +608,7 @@
                                     <constraint firstAttribute="width" constant="212" id="k0T-IH-A6w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.58681815859999997" green="0.1279690564" blue="0.26288083200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -999,7 +999,7 @@
                                     <constraint firstAttribute="width" constant="257" id="Hjr-a8-5YJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.58681815859999997" green="0.1279690564" blue="0.26288083200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
