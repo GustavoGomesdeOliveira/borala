@@ -168,7 +168,13 @@ class ChatController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
                 let path = IndexPath(row: self.messages.count - 1, section: 0)
                 
-                self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.bottom, animated: true)
+                if path.row != -1 {
+                    
+                    self.chatCollection.scrollToItem(at: path,  at: UICollectionViewScrollPosition.bottom, animated: true)
+                    
+                }
+                
+                
 
             }
             
