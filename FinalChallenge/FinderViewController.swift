@@ -320,20 +320,20 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
             if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
                 annotationView = dequeuedAnnotationView
-                annotationView?.annotation = myAnnotation
+//                annotationView?.annotation = myAnnotation
             }
-            else {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
+//            else {
+//                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+//                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//            }
             
-            annotationView?.annotation = myAnnotation
+//            annotationView?.annotation = myAnnotation
             
-            if let annotationView = annotationView {
-                annotationView.canShowCallout = true
-                annotationView.image = UIImage(named: "mypin1")
-
-            }
+//            if let annotationView = annotationView {
+//                annotationView.canShowCallout = true
+//                annotationView.image = UIImage(named: "mypin1")
+//
+//            }
             annotationView?.isEnabled = false
             
             return annotationView
@@ -363,6 +363,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if !(view.annotation is MKUserLocation){
         
         self.selectedAnnotation = view.annotation as! CustomPin?
         
@@ -419,6 +421,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.view.addSubview(popUpPinVC.view)
             popUpPinVC.didMove(toParentViewController: self)
             }
+            
+        }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
