@@ -295,6 +295,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let myRegion = MKCoordinateRegionMakeWithDistance(myLocation!, distanceSpan, distanceSpan)
         
         self.mapView.setRegion(myRegion, animated: true)
+        self.mapView.showsUserLocation = true
        
         
       }
@@ -364,6 +365,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
+//        if !(view.annotation is MKUserLocation){
+        
         self.selectedAnnotation = view.annotation as! CustomPin?
         
         let annotation = view.annotation as! CustomPin?
@@ -419,6 +422,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.view.addSubview(popUpPinVC.view)
             popUpPinVC.didMove(toParentViewController: self)
             }
+            
+//        }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
