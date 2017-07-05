@@ -64,7 +64,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UITextFieldDe
 //        self.addDoneButtonOnKeyboard()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EventViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
     }
     
