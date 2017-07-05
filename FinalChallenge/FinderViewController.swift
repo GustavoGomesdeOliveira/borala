@@ -364,7 +364,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        if !(view.annotation is MKUserLocation){
+//        if !(view.annotation is MKUserLocation){
         
         self.selectedAnnotation = view.annotation as! CustomPin?
         
@@ -422,7 +422,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             popUpPinVC.didMove(toParentViewController: self)
             }
             
-        }
+//        }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
