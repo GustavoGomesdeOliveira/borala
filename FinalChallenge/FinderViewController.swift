@@ -314,28 +314,28 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else {
-            
-            //if i want to set my pin
-            let annotationIdentifier = "mylocation"
-
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = myAnnotation
-            }
-            else {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            
-            annotationView?.annotation = myAnnotation
-            
-            if let annotationView = annotationView {
-                annotationView.canShowCallout = true
-                annotationView.image = UIImage(named: "mypin1")
-
-            }
-            annotationView?.isEnabled = false
-            
+//
+//            //if i want to set my pin
+//            let annotationIdentifier = "mylocation"
+//
+//            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+//                annotationView = dequeuedAnnotationView
+//                annotationView?.annotation = myAnnotation
+//            }
+//            else {
+//                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+//                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//            }
+//            
+//            annotationView?.annotation = myAnnotation
+//            
+//            if let annotationView = annotationView {
+//                annotationView.canShowCallout = true
+//                annotationView.image = UIImage(named: "mypin1")
+//
+//            }
+//            annotationView?.isEnabled = false
+//            
             return annotationView
         }
     
