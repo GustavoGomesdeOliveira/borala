@@ -316,12 +316,12 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         guard !(annotation is MKUserLocation) else {
 //
 //            //if i want to set my pin
-//            let annotationIdentifier = "mylocation"
+            let annotationIdentifier = "mylocation"
 //
-//            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-//                annotationView = dequeuedAnnotationView
+            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
 //                annotationView?.annotation = myAnnotation
-//            }
+            }
 //            else {
 //                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
 //                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
