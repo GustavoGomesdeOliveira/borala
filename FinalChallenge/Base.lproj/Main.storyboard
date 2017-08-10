@@ -745,9 +745,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-re-CCk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf1-vT-3Qy">
                                 <rect key="frame" x="0.0" y="-6" width="320" height="68"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -833,12 +830,13 @@
                                     <action selector="addEventAction:" destination="v2N-1W-59M" eventType="touchUpInside" id="HXW-Hp-8I4"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdJ-re-CCk">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bdJ-re-CCk" firstAttribute="centerX" secondItem="B4G-aJ-5Gs" secondAttribute="centerX" id="3fE-Dk-yDN"/>
                             <constraint firstAttribute="trailing" secondItem="MNu-Kh-fCd" secondAttribute="trailing" id="8IV-dp-Dy4"/>
-                            <constraint firstItem="bdJ-re-CCk" firstAttribute="height" secondItem="B4G-aJ-5Gs" secondAttribute="height" id="HES-Ff-FKQ"/>
                             <constraint firstItem="RjD-Eg-8Kp" firstAttribute="centerY" secondItem="H3K-Wj-OKO" secondAttribute="centerY" id="JTy-dd-akD"/>
                             <constraint firstItem="H3K-Wj-OKO" firstAttribute="trailing" secondItem="MNu-Kh-fCd" secondAttribute="trailing" id="O7l-YH-fkE"/>
                             <constraint firstItem="MNu-Kh-fCd" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="TxB-jN-I5A"/>
@@ -848,13 +846,15 @@
                             <constraint firstItem="MNu-Kh-fCd" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="cho-g6-CFm"/>
                             <constraint firstItem="H3K-Wj-OKO" firstAttribute="top" secondItem="d16-Pa-ADm" secondAttribute="bottom" id="f0S-si-ppG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RjD-Eg-8Kp" secondAttribute="trailing" id="fh0-0T-lQ7"/>
+                            <constraint firstAttribute="bottom" secondItem="bdJ-re-CCk" secondAttribute="bottom" id="i7e-1C-7hq"/>
                             <constraint firstAttribute="trailing" secondItem="D3W-Bc-B7s" secondAttribute="trailing" id="iT5-Ky-kyG"/>
+                            <constraint firstAttribute="trailing" secondItem="bdJ-re-CCk" secondAttribute="trailing" id="ilO-c0-1sM"/>
                             <constraint firstItem="yf1-vT-3Qy" firstAttribute="centerY" secondItem="B4G-aJ-5Gs" secondAttribute="centerY" multiplier="0.1" id="kH2-0s-vp4"/>
                             <constraint firstItem="D3W-Bc-B7s" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="l4m-79-pjh"/>
-                            <constraint firstItem="bdJ-re-CCk" firstAttribute="width" secondItem="B4G-aJ-5Gs" secondAttribute="width" id="mhD-BK-83H"/>
+                            <constraint firstItem="bdJ-re-CCk" firstAttribute="top" secondItem="H3K-Wj-OKO" secondAttribute="bottom" id="n17-FS-Jci"/>
                             <constraint firstItem="yf1-vT-3Qy" firstAttribute="height" secondItem="B4G-aJ-5Gs" secondAttribute="height" multiplier="0.12" id="pbf-pw-n5M"/>
-                            <constraint firstItem="bdJ-re-CCk" firstAttribute="centerY" secondItem="B4G-aJ-5Gs" secondAttribute="centerY" id="tYK-0y-lSt"/>
                             <constraint firstItem="yf1-vT-3Qy" firstAttribute="width" secondItem="B4G-aJ-5Gs" secondAttribute="width" id="yKR-7M-bIK"/>
+                            <constraint firstItem="bdJ-re-CCk" firstAttribute="leading" secondItem="B4G-aJ-5Gs" secondAttribute="leading" id="yRC-Of-Li3"/>
                             <constraint firstItem="mCM-EG-1Pw" firstAttribute="centerY" secondItem="H3K-Wj-OKO" secondAttribute="centerY" id="z3I-74-DJg"/>
                             <constraint firstItem="yf1-vT-3Qy" firstAttribute="centerX" secondItem="B4G-aJ-5Gs" secondAttribute="centerX" id="zc7-XC-QO5"/>
                         </constraints>
@@ -870,7 +870,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqa-eY-bpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3971" y="1109"/>
+            <point key="canvasLocation" x="3969.375" y="1108.0985915492959"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="4Yh-fI-FTd">
@@ -1715,7 +1715,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcf-zk-Vb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4310" y="1584"/>
+            <point key="canvasLocation" x="3969" y="1853"/>
         </scene>
     </scenes>
     <resources>
