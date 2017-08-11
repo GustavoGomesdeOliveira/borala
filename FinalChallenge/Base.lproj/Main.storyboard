@@ -91,11 +91,11 @@
                             <constraint firstItem="8tI-Nj-xtR" firstAttribute="width" secondItem="XK1-Im-5bh" secondAttribute="width" id="NYk-YH-ifi"/>
                             <constraint firstItem="XK1-Im-5bh" firstAttribute="top" secondItem="FjY-mo-6Hf" secondAttribute="bottom" constant="14" id="Pqh-DO-Pnp"/>
                             <constraint firstItem="FjY-mo-6Hf" firstAttribute="centerX" secondItem="Vdm-Fd-82M" secondAttribute="centerX" id="RAB-VN-dka"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="d3e-Lz-bkd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Oa-ts-2KH" secondAttribute="bottom" constant="12" id="hFs-Jh-ef9"/>
                             <constraint firstItem="2Oa-ts-2KH" firstAttribute="top" secondItem="8tI-Nj-xtR" secondAttribute="bottom" constant="4" id="ieT-sK-K9L"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vdm-Fd-82M" secondAttribute="bottom" id="o8y-je-OPQ"/>
                             <constraint firstAttribute="trailing" secondItem="Vdm-Fd-82M" secondAttribute="trailing" id="pZr-5E-fuE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XK1-Im-5bh" secondAttribute="trailing" id="vlZ-Jj-ofg"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Oa-ts-2KH" secondAttribute="bottom" constant="12" id="yLU-yO-AYf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oCh-Wd-n6s">
@@ -210,15 +210,14 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="ZLb-lL-OrB"/>
-                                            <constraint firstAttribute="width" constant="265" id="nto-va-yPX"/>
                                         </constraints>
                                     </stackView>
                                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjr-F2-rRe">
                                         <rect key="frame" x="0.0" y="25" width="265" height="3"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="277" id="DoT-34-ID6"/>
                                             <constraint firstAttribute="height" constant="3" id="FkB-ZX-XBT"/>
+                                            <constraint firstAttribute="width" constant="265" id="pLr-1J-adi"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="125" translatesAutoresizingMaskIntoConstraints="NO" id="iyB-tr-17P">
@@ -247,7 +246,6 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="cJi-Uo-I6D"/>
-                                            <constraint firstAttribute="width" constant="265" id="fZK-Ep-FpR"/>
                                         </constraints>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCu-9l-vkh">
@@ -255,7 +253,7 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="3" id="HiU-V0-cZ0"/>
-                                            <constraint firstAttribute="width" constant="277" id="l39-Ol-8di"/>
+                                            <constraint firstAttribute="width" constant="265" id="u1z-fH-BHc"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -292,7 +290,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-mi-iqx">
-                                <rect key="frame" x="27.5" y="370" width="265" height="30"/>
+                                <rect key="frame" x="27.5" y="370" width="265" height="29.5"/>
                                 <color key="backgroundColor" red="0.65417641400000004" green="0.1421726942" blue="0.29793119429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                 <state key="normal" title="Friends list">
@@ -1050,13 +1048,13 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="jde-K4-RSd">
-                                        <rect key="frame" x="22" y="238" width="227" height="33"/>
+                                        <rect key="frame" x="22.5" y="238" width="226" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kt6-Bx-OzC">
-                                                <rect key="frame" x="0.0" y="0.0" width="79" height="33"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="78" height="33"/>
                                                 <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Kt6-Bx-OzC" secondAttribute="height" multiplier="19:8" id="2gF-ss-ruP"/>
+                                                    <constraint firstAttribute="width" constant="78" id="NVQ-JN-92O"/>
                                                 </constraints>
                                                 <state key="normal" title="Profile">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1071,10 +1069,11 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK6-J0-PxK">
-                                                <rect key="frame" x="149" y="0.0" width="78" height="33"/>
+                                                <rect key="frame" x="148" y="0.0" width="78" height="33"/>
                                                 <color key="backgroundColor" red="0.69708275789999996" green="0.25996199250000002" blue="0.3939160109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="pK6-J0-PxK" secondAttribute="height" multiplier="19:8" id="mMf-M3-1h5"/>
+                                                    <constraint firstAttribute="width" constant="78" id="gT4-Oj-ttI"/>
+                                                    <constraint firstAttribute="height" constant="33" id="z1b-Ph-a7U"/>
                                                 </constraints>
                                                 <state key="normal" title="message">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1090,8 +1089,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="Kt6-Bx-OzC" firstAttribute="width" secondItem="jde-K4-RSd" secondAttribute="height" multiplier="95:289" constant="68.702422145328725" id="eYa-HJ-7u0"/>
-                                            <constraint firstItem="pK6-J0-PxK" firstAttribute="width" secondItem="jde-K4-RSd" secondAttribute="height" multiplier="95:289" constant="68.702422145328725" id="gw4-eW-hTc"/>
+                                            <constraint firstItem="Kt6-Bx-OzC" firstAttribute="width" secondItem="pK6-J0-PxK" secondAttribute="width" id="dOJ-qz-okq"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-8v-YID">
