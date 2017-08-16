@@ -61,8 +61,11 @@ exports.sendMessageNotification = functions.database.ref('/chats/{chatsUid}').on
     chatMembersId = chatMembersId.filter(checkSenderID);
     var i;
     for (i = 0; i < chatMembersId.length; i++){
+      console.log('chamou');
+
         const tokenPromise = admin.database().ref('/users/' + chatMembersId[i] + '/notificationToken').once('value');
         return Promise.all([tokenPromise]).then( result => {
+          console.log(result[0].val());
           return admin.messaging().sendToDevice(result[0].val(), payload).then(response => {});
         });
     }
@@ -70,7 +73,7 @@ exports.sendMessageNotification = functions.database.ref('/chats/{chatsUid}').on
   });
 });
 
-exports.deleteOldEvents = functions.database.ref('/events/{EventsId}')
+/*exports.deleteOldEvents = functions.database.ref('/events/{EventsId}')
 .onWrite( event => {
   var ref = event.data.ref.parent; // reference to the items
   var now = Date.now();
@@ -84,5 +87,5 @@ exports.deleteOldEvents = functions.database.ref('/events/{EventsId}')
     });
     // execute all updates in one go and return the result to end the function
     return ref.update(updates);
-  });
-});
+  });*/
+//});
