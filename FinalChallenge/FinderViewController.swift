@@ -641,7 +641,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         })
         
-        print("fazer alguma coisa")
+        //print("fazer alguma coisa")
     }
     
 //    func showControllerForSetting(_ setting: Setting) {
