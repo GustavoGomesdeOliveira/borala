@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
+class ProfileViewController: UIViewController, PopUpViewControllerDelegate, SettingsLauncherDelegate {
     
     
     @IBOutlet weak var backRoundView: UIView!
@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
     @IBOutlet weak var dislikeLabel: UILabel!
     
     @IBOutlet weak var friendListBtn: UIButton!
+    let settingsLauncher = SettingsLauncher()
     
     var friendListUserDefaults = [String]()
     
@@ -343,6 +344,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate {
         UserDefaults.standard.set(friendListUserDefaults, forKey: "friendList")
         
     }
+    
+    @IBAction func menuAction(_ sender: Any) {
+        
+        settingsLauncher.parentview = self.view
+        settingsLauncher.delegate = self
+        settingsLauncher.tabBarheight = (self.tabBarController?.tabBar.frame.height)!
+        settingsLauncher.showSettings()
+        
+    }
+    
+    func showControllerForSetting(setting: Setting){
+        
+
+        
+    }
+    
     
     
 }
