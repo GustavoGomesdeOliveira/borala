@@ -412,6 +412,15 @@ class FirebaseHelper{
         
     }
     
+    
+    /// Save on real time database the id of the reported user. That triggers a cloud function that
+    /// sends an email to administrators with the user id reported.
+    ///
+    /// - Parameter id: id of reported user
+    static func saveReportedUser(id: String){
+        rootRefDatabase.child("reportedUsers").updateChildValues( [id: true] )
+    }
+    
 //    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
 //        rootRefDatabase.child("messages").observe( .childAdded , with:{
 //            snapshot in
