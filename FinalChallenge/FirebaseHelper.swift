@@ -16,20 +16,6 @@ class FirebaseHelper{
     static let rootRefDatabase = FIRDatabase.database().reference()
     static var firebaseUser: FIRUser? = nil
     
-//    static func saveProfilePic(userId : String, pic: Data, completionHandler:((_ error: Error?) -> ())? ){
-//        let profilePicRef = rootRefStorage.child("/users/\(userId)/profilePic.jpg")
-//        let _ = profilePicRef.put(pic, metadata: nil) {
-//            metadata, error in
-//            
-//            if let downloadUrl = metadata!.downloadURL()?.absoluteString{
-//                rootRefDatabase.child("users/\(String(describing: firebaseUser?.uid))").updateChildValues(["picURL": downloadUrl])
-//            }
-//            if let errorOnPutData = completionHandler{
-//                errorOnPutData(error)
-//            }
-//        }
-//    }
-    
     static func saveThumbnail(userId : String, thumbnail: Data, completionHandler:((_ error: Error?) -> ())? ){
         let profilePicRef = rootRefStorage.child("/users/\(userId)/profileThumbnail.jpg")
         let _ = profilePicRef.put(thumbnail, metadata: nil) {
@@ -126,6 +112,23 @@ class FirebaseHelper{
         rootRefDatabase.child("users/" + (id) + "/likeIds/" + (firebaseUser?.uid)!).setValue(nil)//removes the id from likeIds node.
     }
 
+    static func addUserToBlockedList(id: String){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "blockedUser").updateChildValues([id: true])
+        //remove it from friendlist
+        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).setValue(nil)
+    }
+    
+    /// It checks if this user is blocked by user whose id is given at parameter.
+    ///
+    /// - Parameter id: user id 
+    static func checkBlockedUser(id: String,completionHandler:@escaping (_ isBlocked: Bool) -> ()){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "blockedUser").observeSingleEvent(of: .value, with: { snapshot in
+            if let ids = (snapshot.value as? [String: Bool])?.keys{
+                completionHandler( ids.contains(id) )
+            }
+            completionHandler(false)
+        })
+    }
     
     static func getUserData(userID: String,completionHandler:@escaping (_ user: User) -> ()){
         rootRefDatabase.child("users/" + userID).observeSingleEvent(of: .value, with:{
@@ -135,6 +138,14 @@ class FirebaseHelper{
                 completionHandler(userFromFirebase)
             }
         })
+    }
+    
+    /// Save on real time database the id of the reported user. That triggers a cloud function that
+    /// sends an email to administrators with the user id reported.
+    ///
+    /// - Parameter id: id of reported user
+    static func saveReportedUser(id: String){
+        rootRefDatabase.child("reportedUsers").updateChildValues( [id: true] )
     }
     
     static func getUserName(userID: String,completionHandler:@escaping (_ name: String?) -> ()){
@@ -410,15 +421,6 @@ class FirebaseHelper{
             //print("online \(snapshot.value)")
         })
         
-    }
-    
-    
-    /// Save on real time database the id of the reported user. That triggers a cloud function that
-    /// sends an email to administrators with the user id reported.
-    ///
-    /// - Parameter id: id of reported user
-    static func saveReportedUser(id: String){
-        rootRefDatabase.child("reportedUsers").updateChildValues( [id: true] )
     }
     
 //    static func observerMessages(ofChatId: String, completionHandler:@escaping (_ messages: [Message]?) -> ()){
