@@ -35,28 +35,20 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
-    var menuType = 0
+    var myMenu = 0
     var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
+    //var settings: [Setting]
     
     
-    
-    
-    
-    if self.menuType == 0 {
-    
-        let settings: [Setting] = {
-            return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
-        }()
-    
-    } else {
-    
-        let settings: [Setting] = {
+    var settings: [Setting] = {
+        
         return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
-        }()
     
-    }
+    }()
+    
+    
     
     
     //var homeController: FinderViewController?
@@ -154,6 +146,26 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         let setting = self.settings[indexPath.item]
         handleDismiss(setting)
     }
+    
+    func defineSettings(){
+    
+        
+        if myMenu == 0 {
+
+            self.settings =
+                [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
+
+
+        } else {
+
+             self.settings =
+                [Setting(name: "Block user", imageName: "block"),Setting(name: "Report user", imageName: "cancel"), Setting(name: "Cancel", imageName: "cancel")]
+        
+        }
+    
+    }
+    
+    
     
 
     override init() {
