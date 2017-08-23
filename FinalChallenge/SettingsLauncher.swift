@@ -166,5 +166,15 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellID)
     }
     
+    func blockUser(id: String) {
+        
+        FirebaseHelper.addUserToBlockedList(id: id)
+    }
+    
+    func reportUser(id: String) {
+        
+        FirebaseHelper.saveReportedUser(id: id)
+    }
+    
     
 }

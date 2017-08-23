@@ -95,7 +95,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.mapView.delegate = self
 
         //Requesting user location authorization
-        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
         
         //if user give permission we'll get the current location
         if CLLocationManager.locationServicesEnabled() {
