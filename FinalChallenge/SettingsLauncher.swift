@@ -159,7 +159,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         } else {
 
              self.settings =
-                [Setting(name: "Block user", imageName: "block"),Setting(name: "Report user", imageName: "cancel"), Setting(name: "Cancel", imageName: "cancel")]
+                [Setting(name: "Block user", imageName: "block"),Setting(name: "Report user", imageName: "report"), Setting(name: "Cancel", imageName: "cancel")]
         
         }
     
