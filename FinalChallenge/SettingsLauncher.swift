@@ -35,14 +35,29 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
+    var menuType = 0
     var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
-    // changed
     
-    let settings: [Setting] = {
+    
+    
+    
+    
+    if self.menuType == 0 {
+    
+        let settings: [Setting] = {
+            return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
+        }()
+    
+    } else {
+    
+        let settings: [Setting] = {
         return [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
-    }()
+        }()
+    
+    }
+    
     
     //var homeController: FinderViewController?
     
