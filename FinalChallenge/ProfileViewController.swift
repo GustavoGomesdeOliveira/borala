@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
         self.likeLabel.isHidden = false
         self.dislikeLabel.isHidden = false
         self.friendListBtn.isHidden = true
+        settingsLauncher.defineSettings(menu: 1)
         
         self.backRoundView.layer.borderColor = UIColor(red: 167/255, green: 36/255, blue: 76/255, alpha: 1).cgColor
                 
@@ -349,6 +350,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
         
         settingsLauncher.parentview = self.view
         settingsLauncher.delegate = self
+//        settingsLauncher.defineSettings(menu: 1)
         settingsLauncher.tabBarheight = (self.tabBarController?.tabBar.frame.height)!
         settingsLauncher.showSettings()
         

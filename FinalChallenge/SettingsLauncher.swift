@@ -35,11 +35,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
-    var myMenu = 0
+    //var myMenu = 0
     var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
-    //var settings: [Setting]
     
     
     var settings: [Setting] = {
@@ -69,19 +68,11 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 //é aqui que acontece a magica de chamar a outra modal
                 if setting.name == "Filter by persons" {
                     //filter by friends
-//                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
-//                    
-//                    let mycontroller = parent.selectedViewController as! FinderViewController
-//                    mycontroller.showControllerForSetting(setting)
                     
                     self.delegate.showControllerForSetting(setting: setting)
 
                 }else {
                     //filter by distance
-//                    let parent = UIApplication.shared.keyWindow?.rootViewController as! TabBarViewController
-//
-//                    let mycontroller = parent.selectedViewController as! FinderViewController
-//                    mycontroller.showControllerForSetting(setting)
                 
                 
                 }
@@ -147,10 +138,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         handleDismiss(setting)
     }
     
-    func defineSettings(){
+    func defineSettings(menu:Int){
     
         
-        if myMenu == 0 {
+        if menu == 0 {
 
             self.settings =
                 [Setting(name: "Filter by persons", imageName: "filter"), Setting(name: "Cancel", imageName: "cancel")]
