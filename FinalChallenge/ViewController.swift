@@ -59,6 +59,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                         let facebookID = userDictionary["id"] as! String
                         appDelegate.getImageFromURL(url: picURL, completionHandler: {
                             picData in
+
                             let newUser = User(withId: (user?.uid)!, name: user?.displayName, pic: picData, socialNetworkID: facebookID, gender: gender, notificationToken: appDelegate.FMCToken!)
                             appDelegate.saveFacebookFriends()
                             FirebaseHelper.saveUser(user: newUser, completionHandler: {
