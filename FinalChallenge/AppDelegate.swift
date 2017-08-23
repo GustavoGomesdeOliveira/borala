@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     let gcmMessageIDKey = "gcm.message_id"
     var facebookFriendsID = [String]()
     var badgeCount = 0
-    var FMCToken: String?
+    var FCMToken: String?
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //self.enableRemoteNotificationFeatures()
         //send token to firebase
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         //print("registrou \(deviceToken)")
         //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         //let token = deviceToken.base64EncodedData(options: Data.Base64EncodingOptions.endLineWithLineFeed)
@@ -330,7 +330,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     var imageData: Data
                     if let _ = data{ imageData = data! }
                     else{ imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "profileImage"), 0.8)! }
-                    let user = User(withId: (firebaseUser?.uid)!, name: user.profile.name, pic: imageData, socialNetworkID: user.userID, gender: "", notificationToken: self.FMCToken ?? "")
+                    let user = User(withId: (firebaseUser?.uid)!, name: user.profile.name, pic: imageData, socialNetworkID: user.userID, gender: "", notificationToken: UserDefaults.standard.string(forKey: "fcmToken")!)
                     FirebaseHelper.saveUser(user: user, completionHandler: {
                         error in
                         if let error = error{
@@ -396,9 +396,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func refreshToken(_ notification: Notification){
         if let newToken = FIRInstanceID.instanceID().token(){
-            self.FMCToken = newToken
+            self.FCMToken = newToken
+            UserDefaults.standard.set(newToken, forKey: "fcmToken")
         }
     }
+    
 }
 
 @available(iOS 10, *)
@@ -456,6 +458,7 @@ extension AppDelegate : FIRMessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: FIRMessaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
+        self.FCMToken = fcmToken
     }
     
     // [END refresh_token]
