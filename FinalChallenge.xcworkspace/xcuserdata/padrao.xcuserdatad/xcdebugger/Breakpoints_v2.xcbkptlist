@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FirebaseHelper.swift"
-            timestampString = "522340432.18692"
+            timestampString = "525270979.114923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "getNotFriendsEvents(completionHandler:)"
             landmarkType = "7">
             <Locations>

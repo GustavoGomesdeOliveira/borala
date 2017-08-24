@@ -115,7 +115,8 @@ class FirebaseHelper{
     static func addUserToBlockedList(id: String){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").updateChildValues([id: true])
         //remove it from friendlist
-        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).setValue(nil)
+//        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).removeValue()
+//        rootRefDatabase.child("users/" + id + "/friendsId/" + (self.firebaseUser?.uid)!).removeValue()
     }
     
     /// It checks if this user is blocked by user whose id is given at parameter.
@@ -145,7 +146,7 @@ class FirebaseHelper{
     ///
     /// - Parameter id: id of reported user
     static func saveReportedUser(id: String){
-        rootRefDatabase.child("reportedUsers").updateChildValues( [id: true] )
+        rootRefDatabase.child("reportedUsers/").updateChildValues( [id: true] )
     }
     
     static func getUserName(userID: String,completionHandler:@escaping (_ name: String?) -> ()){
