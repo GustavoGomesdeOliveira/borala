@@ -38,4 +38,20 @@ class PrivacyViewController: UIViewController {
             task.resume()
         }
     }
+    
+    @IBAction func back(_ sender: Any) {
+        
+        print("teste sucedido")
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+//    @IBAction func back(_ sender: Any) {
+//        print("teste sucedido")
+//       // self.navigationController?.popViewController(animated: true)
+//        //self.removeFromParentViewController()
+//    }
+    
+    
+    
 }
