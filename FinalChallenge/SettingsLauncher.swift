@@ -71,10 +71,19 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                     
                     self.delegate.showControllerForSetting(setting: setting)
 
-                }else {
+                }else if setting.name == "Filter by distance" {
                     //filter by distance
                 
                 
+                }else if setting.name == "Block user" {
+                    //Block user
+                    print("block user")
+                    
+                    
+                }else if setting.name == "Report user" {
+                    //Block user
+                    print("report user")
+                    
                 }
             }
         }
