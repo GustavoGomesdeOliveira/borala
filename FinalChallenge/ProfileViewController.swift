@@ -350,6 +350,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
         
         settingsLauncher.parentview = self.view
         settingsLauncher.delegate = self
+        settingsLauncher.userID = self.currentUser?.id
 //        settingsLauncher.defineSettings(menu: 1)
         settingsLauncher.tabBarheight = (self.tabBarController?.tabBar.frame.height)!
         settingsLauncher.showSettings()

@@ -39,6 +39,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     var tabBarheight: CGFloat = 0
     let cellID = "cellID"
     let cellHeight: CGFloat = 55
+    var userID:String?
     
     
     var settings: [Setting] = {
@@ -77,12 +78,19 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 
                 }else if setting.name == "Block user" {
                     //Block user
-                    print("block user")
                     
+                    print("block user")
+                    if self.userID != nil{
+                        self.blockUser(id: self.userID!)
+                    }
                     
                 }else if setting.name == "Report user" {
                     //Block user
+                    
                     print("report user")
+                    if self.userID != nil{
+                        self.reportUser(id: self.userID!)
+                    }
                     
                 }
             }
