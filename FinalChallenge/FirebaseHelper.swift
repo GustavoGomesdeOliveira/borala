@@ -113,7 +113,7 @@ class FirebaseHelper{
     }
 
     static func addUserToBlockedList(id: String){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "blockedUser").updateChildValues([id: true])
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").updateChildValues([id: true])
         //remove it from friendlist
         rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).setValue(nil)
     }
@@ -122,7 +122,7 @@ class FirebaseHelper{
     ///
     /// - Parameter id: user id 
     static func checkBlockedUser(id: String,completionHandler:@escaping (_ isBlocked: Bool) -> ()){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "blockedUser").observeSingleEvent(of: .value, with: { snapshot in
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observeSingleEvent(of: .value, with: { snapshot in
             if let ids = (snapshot.value as? [String: Bool])?.keys{
                 completionHandler( ids.contains(id) )
             }
