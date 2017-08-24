@@ -37,7 +37,7 @@
                                 </constraints>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="qeo-sG-ucM"/>
+                                    <action selector="back:" destination="Uaf-cv-LXt" eventType="touchUpInside" id="KXp-F0-LfW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0m-X8-9EO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584.375" y="1075.3521126760563"/>
+            <point key="canvasLocation" x="1328" y="1163"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -132,7 +132,7 @@
                                 </constraints>
                                 <state key="normal" title="You agree with our Terms and Privacy"/>
                                 <connections>
-                                    <segue destination="Uaf-cv-LXt" kind="show" identifier="showTerms" id="4JW-fS-o7P"/>
+                                    <segue destination="Uaf-cv-LXt" kind="presentation" identifier="showTerms" id="4JW-fS-o7P"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -39,6 +39,12 @@ class PrivacyViewController: UIViewController {
         }
     }
     
+    @IBAction func back(_ sender: Any) {
+        
+        print("teste sucedido")
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     
 //    @IBAction func back(_ sender: Any) {
 //        print("teste sucedido")
