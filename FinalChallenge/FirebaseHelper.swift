@@ -119,6 +119,16 @@ class FirebaseHelper{
 //        rootRefDatabase.child("users/" + id + "/friendsId/" + (self.firebaseUser?.uid)!).removeValue()
     }
     
+    static private func getBlockedList( completitionHandler: @escaping (_ ids: [String] ) -> () ){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observeSingleEvent(of: .value, with:{ snapshot in
+            if let keys = (snapshot.value as? [String: Bool])?.keys{
+                var result = [String]()
+                keys.forEach{ result.append($0) }
+                completitionHandler(result)
+            }
+        })
+    }
+    
     /// It checks if this user is blocked by user whose id is given at parameter.
     ///
     /// - Parameter id: user id 
@@ -188,12 +198,22 @@ class FirebaseHelper{
         rootRefDatabase.child("events").observe(.value,with:{
             snapshot in
             var eventsFromFirebase = [Event]()
-            if let dic = snapshot.value as? [String: Any]{
-                for key in dic.keys{
-                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+            self.getBlockedList( completitionHandler: {
+                blockedIds in
+                if let dic = snapshot.value as? [String: Any]{
+                    let keys = dic.keys.filter{!blockedIds.contains($0) }
+                    for key in keys{
+                        eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                    }
                 }
-            }
-            completionHandler(eventsFromFirebase)
+                completionHandler(eventsFromFirebase)
+            })
+//            if let dic = snapshot.value as? [String: Any]{
+//                for key in dic.keys{
+//                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+//                }
+//            }
+//            completionHandler(eventsFromFirebase)
         })
     }
     
