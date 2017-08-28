@@ -20,6 +20,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
     
     @IBOutlet weak var password: UITextField!
     
+    @IBOutlet weak var loginView: UIView!
+    
+    
     @IBOutlet weak var googleLoginBtn: GIDSignInButton!
     
     @IBOutlet weak var facebookLoginBtn: FBSDKLoginButton!
@@ -32,6 +35,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         facebookLoginBtn.delegate = self
         facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
+        self.loginView.isHidden = true
     }
 
     
@@ -120,6 +124,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         
     }
+    
+    @IBAction func loginAction(_ sender: Any) {
+        
+        self.loginView.isHidden = false
+        
+    }
+    
+    
 
 }
 
