@@ -420,8 +420,7 @@
                                 </constraints>
                                 <state key="normal" image="atention"/>
                                 <connections>
-                                    <action selector="menuAction:" destination="v2N-1W-59M" eventType="touchUpInside" id="Uhe-Db-tof"/>
-                                    <action selector="menuAction:" destination="b5z-ud-nTd" eventType="touchUpInside" id="bXg-Gb-Ztm"/>
+                                    <action selector="menuAction:" destination="b5z-ud-nTd" eventType="touchUpInside" id="w9R-PO-mxN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -476,6 +475,7 @@
                         <outlet property="likeBtn" destination="Oib-zj-H1P" id="sdW-JU-xNA"/>
                         <outlet property="likeLabel" destination="npQ-tJ-5zM" id="csw-he-3qq"/>
                         <outlet property="profileImage" destination="KJJ-Ws-k6l" id="pNt-5T-aEp"/>
+                        <outlet property="reportButton" destination="MYt-Zj-ORt" id="Kw9-ho-uM4"/>
                         <outlet property="userAgeLabel" destination="cMd-aX-9YI" id="d4H-G8-PsV"/>
                         <outlet property="userGenderLabel" destination="3fX-gv-9ab" id="x7r-5G-KND"/>
                         <outlet property="userNameLabel" destination="pAS-j5-RZ1" id="r79-dB-ZOK"/>

@@ -15,6 +15,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     @IBOutlet weak var backRoundView: UIView!
     @IBOutlet weak var backUserView: UIView!
  
+    @IBOutlet weak var reportButton: UIButton!
+   
+    
     @IBOutlet weak var editButton: UIButton!
 
     @IBOutlet weak var chatButton: UIButton!
@@ -63,6 +66,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     override func viewWillAppear(_ animated: Bool) {
         
         if currentUser == nil{
+            //aqui
             
             self.chatButton.isHidden = true
             self.user = getUser()
@@ -75,7 +79,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
             self.dislikeBtn.isHidden = true
             self.dislikeLabel.isHidden = true
             self.likeLabel.isEnabled = false
-
+            self.reportButton.isHidden = true
+           
             
         } else {
             
@@ -85,6 +90,8 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
             self.chatButton.isHidden = false
+            self.reportButton.isHidden = false
+            
 
             self.userNameLabel.text = user?.name
             if user.age! >= 0 {
