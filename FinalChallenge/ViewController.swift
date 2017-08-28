@@ -128,9 +128,28 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
     @IBAction func loginAction(_ sender: Any) {
         
         self.loginView.isHidden = false
+        self.loginView.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.loginView.alpha = 1
+
+        }, completion: nil)
+        
+        
+        
+        
         
     }
     
+    @IBAction func cancelLogin(_ sender: Any) {
+        self.loginView.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.loginView.alpha = 0
+            
+        }, completion: nil)
+        self.loginView.isHidden = true
+        
+    }
     
 
 }
