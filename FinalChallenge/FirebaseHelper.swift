@@ -114,6 +114,7 @@ class FirebaseHelper{
 
     static func addUserToBlockedList(id: String){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").updateChildValues([id: true])
+        rootRefDatabase.child("users/" + id + "/blockedUser").updateChildValues([(firebaseUser?.uid)!: true])
         NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
         //remove it from friendlist
 //        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).removeValue()
