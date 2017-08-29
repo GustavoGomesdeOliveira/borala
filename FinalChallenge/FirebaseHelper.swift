@@ -121,11 +121,12 @@ class FirebaseHelper{
     
     static private func getBlockedList( completitionHandler: @escaping (_ ids: [String] ) -> () ){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observeSingleEvent(of: .value, with:{ snapshot in
+            var result = [String]()
             if let keys = (snapshot.value as? [String: Bool])?.keys{
-                var result = [String]()
                 keys.forEach{ result.append($0) }
-                completitionHandler(result)
             }
+            completitionHandler(result)
+
         })
     }
     
