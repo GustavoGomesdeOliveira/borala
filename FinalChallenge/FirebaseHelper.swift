@@ -115,7 +115,6 @@ class FirebaseHelper{
     static func addUserToBlockedList(id: String){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").updateChildValues([id: true])
         rootRefDatabase.child("users/" + id + "/blockedUser").updateChildValues([(firebaseUser?.uid)!: true])
-        NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
         //remove it from friendlist
 //        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).removeValue()
 //        rootRefDatabase.child("users/" + id + "/friendsId/" + (self.firebaseUser?.uid)!).removeValue()
@@ -130,6 +129,19 @@ class FirebaseHelper{
             completitionHandler(result)
 
         })
+    }
+    
+    static func listenBlockedList(){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observe(.childAdded, with: {snapshot in
+            NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
+        })
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observe(.childRemoved, with: {snapshot in
+            NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
+        })
+    }
+    
+    static func removeListenBlockedList(){
+        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").removeAllObservers()
     }
     
     /// It checks if this user is blocked by user whose id is given at parameter.

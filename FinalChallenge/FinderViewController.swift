@@ -175,6 +175,16 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        FirebaseHelper.listenBlockedList()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        FirebaseHelper.removeListenBlockedList()
+    }
+    
     /// it adds an proper pin on mapView for the given event.
     ///
     /// - Parameter event: An event which you wish adds a pin on mapView.
