@@ -79,6 +79,38 @@
             endingLineNumber = "49"
             landmarkName = "loginButton(_:didCompleteWith:error:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.ViewController.loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
+                  timestampString = "525706908.69779"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "552">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
+                  timestampString = "525706908.69937"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,38 +127,6 @@
             endingLineNumber = "53"
             landmarkName = "loginButton(_:didCompleteWith:error:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "525615182.144519"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "486">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "525615182.146347"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "63">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FirebaseHelper.swift"
-            timestampString = "525617489.428737"
+            timestampString = "525706907.42122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "getNotFriendsEvents(completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -152,12 +152,12 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
-                  timestampString = "525615182.150953"
+                  timestampString = "525706908.705714"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "223"
-                  endingLineNumber = "223"
-                  offsetFromSymbolStart = "797">
+                  startingLineNumber = "237"
+                  endingLineNumber = "237"
+                  offsetFromSymbolStart = "668">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -167,12 +167,12 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
-                  timestampString = "525615182.155063"
+                  timestampString = "525706908.707139"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "223"
-                  endingLineNumber = "223"
-                  offsetFromSymbolStart = "1010">
+                  startingLineNumber = "237"
+                  endingLineNumber = "237"
+                  offsetFromSymbolStart = "760">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FinderViewController.swift"
-            timestampString = "520784726.703337"
+            timestampString = "525706907.42122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "changeFilter(filter:)"
             landmarkType = "7">
             <Locations>
@@ -200,12 +200,12 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FinderViewController.swift"
-                  timestampString = "525615182.160821"
+                  timestampString = "525706908.710508"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "246"
-                  endingLineNumber = "246"
-                  offsetFromSymbolStart = "595">
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "552">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -215,12 +215,12 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FinderViewController.swift"
-                  timestampString = "525615182.163078"
+                  timestampString = "525706908.711951"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "16">
+                  startingLineNumber = "249"
+                  endingLineNumber = "249"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -335,38 +335,6 @@
             endingLineNumber = "63"
             landmarkName = "loginButton(_:didCompleteWith:error:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "525615182.194015"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FinalChallenge.ViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "FinalChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/ViewController.swift"
-                  timestampString = "525615182.195823"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "2291">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -408,12 +376,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/FirebaseHelper.swift"
-            timestampString = "525617489.428737"
+            timestampString = "525706907.42122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "getEvents(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getEvents (completionHandler : (Swift.Array&lt;FinalChallenge.Event&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "525706908.740323"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FinalChallenge.FirebaseHelper.(getEvents (completionHandler : (Swift.Array&lt;FinalChallenge.Event&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/padrao/Desktop/borala/FinalChallenge/FirebaseHelper.swift"
+                  timestampString = "525706908.741735"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FirebaseHelper.swift"
+            timestampString = "525706907.42122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "getEvents(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/FinderViewController.swift"
+            timestampString = "525706757.783982"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "blockedListUpdated()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

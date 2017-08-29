@@ -114,6 +114,7 @@ class FirebaseHelper{
 
     static func addUserToBlockedList(id: String){
         rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").updateChildValues([id: true])
+        NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
         //remove it from friendlist
 //        rootRefDatabase.child("users/" + (self.firebaseUser?.uid)! + "/friendsId" + id).removeValue()
 //        rootRefDatabase.child("users/" + id + "/friendsId/" + (self.firebaseUser?.uid)!).removeValue()
@@ -202,19 +203,20 @@ class FirebaseHelper{
             self.getBlockedList( completitionHandler: {
                 blockedIds in
                 if let dic = snapshot.value as? [String: Any]{
-                    let keys = dic.keys.filter{!blockedIds.contains($0) }
-                    for key in keys{
-                        eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                    for (key, value) in dic{
+                        let creatorId = (value as! [String: Any])["creatorId"] as! String
+                        if !blockedIds.contains(creatorId){
+                            eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+                        }
+                        
                     }
+//                    let keys = dic.keys.filter{ !blockedIds.contains($0) }
+//                    for key in keys{
+//                        eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
+//                    }
                 }
                 completionHandler(eventsFromFirebase)
             })
-//            if let dic = snapshot.value as? [String: Any]{
-//                for key in dic.keys{
-//                    eventsFromFirebase.append(Event(dict: dic[key] as! [String: Any] ))
-//                }
-//            }
-//            completionHandler(eventsFromFirebase)
         })
     }
     

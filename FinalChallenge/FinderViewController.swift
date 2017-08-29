@@ -123,6 +123,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         }
         NotificationCenter.default.addObserver( self , selector: #selector(self.refreshToken), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)//listen to token refresh
+        NotificationCenter.default.addObserver( self, selector: #selector(self.blockedListUpdated), name: NSNotification.Name( "blockedListUpdated" ), object: nil)
         
         let user = getUser()
         self.myID = user?.id
@@ -269,6 +270,11 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
 
+    func blockedListUpdated(){
+        let searchOption = UserDefaults.standard.integer(forKey: "search")
+        self.changeFilter(filter: Search(rawValue: searchOption)! )
+    }
+    
     func loadFriends(){
         let barViewControllers = self.tabBarController?.viewControllers
         let newViewController = barViewControllers![3] as! FriendListController
