@@ -131,17 +131,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ei-Sn-zr7">
                                 <rect key="frame" x="0.0" y="366" width="320" height="187"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg6-TQ-6AP">
-                                        <rect key="frame" x="31" y="110" width="258" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Opl-cn-ZyC"/>
-                                            <constraint firstAttribute="width" constant="258" id="zRg-kN-0Zp"/>
-                                        </constraints>
-                                        <state key="normal" title="You agree with our Terms and Privacy"/>
-                                        <connections>
-                                            <segue destination="Uaf-cv-LXt" kind="presentation" identifier="showTerms" id="4JW-fS-o7P"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-Nj-xtR" customClass="FBSDKLoginButton">
                                         <rect key="frame" x="16" y="2" width="288" height="41"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -158,7 +147,7 @@
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oa-ts-2KH" customClass="GIDSignInButton">
                                         <rect key="frame" x="16" y="56" width="288" height="48"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="288" id="hxN-TU-HHp"/>
                                             <constraint firstAttribute="height" constant="48" id="ohE-Qq-cTa"/>
@@ -187,6 +176,28 @@
                                             <action selector="cancelLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5z1-tq-spU"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg6-TQ-6AP">
+                                        <rect key="frame" x="179" y="109" width="111" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="111" id="V2V-Hx-Oq7"/>
+                                            <constraint firstAttribute="height" constant="27" id="biX-sW-VQX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Terms and Privacy"/>
+                                        <connections>
+                                            <segue destination="Uaf-cv-LXt" kind="presentation" identifier="showTerms" id="4JW-fS-o7P"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By sign up you agree to our" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTt-iC-nhh">
+                                        <rect key="frame" x="31" y="112" width="150" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="6sx-iq-wBG"/>
+                                            <constraint firstAttribute="width" constant="150" id="MhT-Rg-qJY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -196,9 +207,11 @@
                                     <constraint firstAttribute="height" constant="187" id="FIe-ga-BeI"/>
                                     <constraint firstItem="Yxl-rV-KG2" firstAttribute="centerX" secondItem="1ei-Sn-zr7" secondAttribute="centerX" id="G7C-Fc-bKQ"/>
                                     <constraint firstAttribute="bottom" secondItem="Yxl-rV-KG2" secondAttribute="bottom" id="J3U-J5-IxA"/>
+                                    <constraint firstItem="yg6-TQ-6AP" firstAttribute="leading" secondItem="Yxl-rV-KG2" secondAttribute="trailing" constant="-118" id="JfQ-2k-dKL"/>
+                                    <constraint firstItem="mTt-iC-nhh" firstAttribute="top" secondItem="2Oa-ts-2KH" secondAttribute="bottom" constant="8" id="LkO-pm-2XN"/>
+                                    <constraint firstItem="yg6-TQ-6AP" firstAttribute="centerY" secondItem="mTt-iC-nhh" secondAttribute="centerY" id="S71-Yc-Cgt"/>
                                     <constraint firstItem="8tI-Nj-xtR" firstAttribute="top" secondItem="1ei-Sn-zr7" secondAttribute="top" constant="2" id="YA0-Ue-Y6g"/>
-                                    <constraint firstItem="yg6-TQ-6AP" firstAttribute="top" secondItem="2Oa-ts-2KH" secondAttribute="bottom" constant="6" id="sjA-zU-Wqp"/>
-                                    <constraint firstItem="yg6-TQ-6AP" firstAttribute="centerX" secondItem="1ei-Sn-zr7" secondAttribute="centerX" id="ycA-9v-HUs"/>
+                                    <constraint firstItem="yg6-TQ-6AP" firstAttribute="leading" secondItem="mTt-iC-nhh" secondAttribute="trailing" constant="-2" id="cGq-Xx-mnP"/>
                                 </constraints>
                             </view>
                         </subviews>
