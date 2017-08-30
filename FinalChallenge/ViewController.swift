@@ -105,25 +105,25 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if !(segue.identifier == "showTerms") {
-            
-            let destination = segue.destination as! TabBarViewController
-            
-            destination.userNotLogged = self.userNotLogged
-            
-        }
-        
-        
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if !(segue.identifier == "showTerms") {
+//            
+//            let destination = segue.destination as! TabBarViewController
+//            
+//            destination.userNotLogged = self.userNotLogged
+//            
+//        }
+//        
+//        
+//    }
     
-    @IBAction func showTerm(_ sender: Any) {
-        
-        performSegue(withIdentifier: "showTerms", sender: nil)
-        
-        
-    }
+//    @IBAction func showTerm(_ sender: Any) {
+//        
+//        performSegue(withIdentifier: "showTerms", sender: nil)
+//        
+//        
+//    }
     
     @IBAction func loginAction(_ sender: Any) {
         

@@ -77,6 +77,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.notLoggedView.isHidden = false
 
         //self.menuButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, -4)
         //self.menuButton.imageView?.contentMode = .center
