@@ -132,12 +132,14 @@ class FirebaseHelper{
     }
     
     static func listenBlockedList(){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observe(.childAdded, with: {snapshot in
+        if let user = firebaseUser{
+            rootRefDatabase.child("users/" + user.uid + "/blockedUser").observe(.childAdded, with: {snapshot in
             NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
-        })
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").observe(.childRemoved, with: {snapshot in
+            })
+            rootRefDatabase.child("users/" + user.uid + "/blockedUser").observe(.childRemoved, with: {snapshot in
             NotificationCenter.default.post(name: NSNotification.Name("blockedListUpdated"), object: nil)
-        })
+            })
+        }
     }
     
     static func removeListenBlockedList(){
