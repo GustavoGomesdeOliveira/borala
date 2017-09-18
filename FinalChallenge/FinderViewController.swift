@@ -450,7 +450,6 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
             self.tabBarController?.tabBar.isUserInteractionEnabled = true
 
-
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.tokenString)
             FIRAuth.auth()?.signIn(with: credential, completion: {
@@ -459,7 +458,35 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                     
                     print(error.debugDescription)
                     
-                } 
+                }
+                else{
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.fetchProfileFromFacebook(completionHandler: {
+                        userDictionary in
+                        let picture = userDictionary["picture"] as! NSDictionary
+                        let data = picture["data"] as! NSDictionary
+                        let picURL = data["url"] as! String
+                        let gender = userDictionary["gender"] as! String
+                        let facebookID = userDictionary["id"] as! String
+                        appDelegate.getImageFromURL(url: picURL, completionHandler: {
+                            picData in
+                            
+                            let newUser = User(withId: (user?.uid)!, name: user?.displayName, pic: picData, socialNetworkID: facebookID, gender: gender, notificationToken: UserDefaults.standard.string(forKey: "fcmToken")!)
+                            appDelegate.saveFacebookFriends()
+                            FirebaseHelper.saveUser(user: newUser, completionHandler: {
+                                error in
+                                if error == nil{
+                                    DispatchQueue.main.async {
+                                        self.performSegue(withIdentifier: "segue", sender: nil)
+                                    }
+                                }
+                            })
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: newUser)
+                            UserDefaults.standard.set(userData, forKey: "user")
+                            UserDefaults.standard.set(Search.Everyone.rawValue, forKey: "search")
+                        })
+                    })
+                }
             })
         }
         
