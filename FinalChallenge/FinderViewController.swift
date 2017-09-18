@@ -323,8 +323,9 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      }
     
     func refreshToken(_ notification: Notification){
-        if let newToken = FIRInstanceID.instanceID().token(), let uid = FirebaseHelper.firebaseUser?.uid{
-            FirebaseHelper.updateUser(userId: uid, userInfo: ["notificationTokens": newToken])
+        if let newToken = FIRInstanceID.instanceID().token(), let uid = FirebaseHelper.firebaseUser?.uid,
+            let _ = UserDefaults.standard.object(forKey: "user"){
+                FirebaseHelper.updateUser(userId: uid, userInfo: ["notificationTokens": newToken])
         }
     }
     
@@ -477,7 +478,7 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                                 error in
                                 if error == nil{
                                     DispatchQueue.main.async {
-                                        self.performSegue(withIdentifier: "segue", sender: nil)
+                                        self.notLoggedView.removeFromSuperview()
                                     }
                                 }
                             })

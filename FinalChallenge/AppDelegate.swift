@@ -337,6 +337,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             print("error in save user on firebase. \(error)")
                             return
                         }
+                        
                     })
                     let userData = NSKeyedArchiver.archivedData(withRootObject: user)
                     UserDefaults.standard.set(userData, forKey: "user")//saves user on userDefaults.
