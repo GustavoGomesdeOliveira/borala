@@ -323,8 +323,8 @@ class FinderViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
      }
     
     func refreshToken(_ notification: Notification){
-        if let newToken = FIRInstanceID.instanceID().token(){
-            FirebaseHelper.updateUser(userId: (FirebaseHelper.firebaseUser?.uid)!, userInfo: ["notificationTokens": newToken])
+        if let newToken = FIRInstanceID.instanceID().token(), let uid = FirebaseHelper.firebaseUser?.uid{
+            FirebaseHelper.updateUser(userId: uid, userInfo: ["notificationTokens": newToken])
         }
     }
     
