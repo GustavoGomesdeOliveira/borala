@@ -143,7 +143,9 @@ class FirebaseHelper{
     }
     
     static func removeListenBlockedList(){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/blockedUser").removeAllObservers()
+        if let user = firebaseUser{
+            rootRefDatabase.child("users/" + user.uid + "/blockedUser").removeAllObservers()
+        }
     }
     
     /// It checks if this user is blocked by user whose id is given at parameter.

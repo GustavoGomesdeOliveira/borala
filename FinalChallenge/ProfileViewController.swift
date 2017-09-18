@@ -16,7 +16,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     @IBOutlet weak var backUserView: UIView!
  
     @IBOutlet weak var reportButton: UIButton!
-   
     
     @IBOutlet weak var editButton: UIButton!
 
@@ -65,11 +64,22 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if currentUser == nil{
-            //aqui
+        if getUserFromUserDefaults() == nil{
+            reportButton.isHidden = true
+            editButton.isHidden = true
+            chatButton.isHidden = true
+            likeBtn.isHidden = true
+            dislikeBtn.isHidden = true
+            let alertController = UIAlertController(title: "We Love it", message: "You must be logged to see your profile.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else if currentUser == nil{
             
             self.chatButton.isHidden = true
-            self.user = getUser()
+
+            self.user = getUserFromUserDefaults()
             setUserInterface()
             self.editButton.isEnabled = true
             self.editButton.isHidden = false
@@ -84,7 +94,6 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
             
         } else {
             
-            //self.friendListBtn.isHidden = true
             self.user = self.currentUser
             setUserInterface()
             self.editButton.isEnabled = false
@@ -159,9 +168,9 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     }
     
     
-    func getUser() -> User{
+    func getUserFromUserDefaults() -> User?{
         
-        var userToReturn: User!
+        var userToReturn:User? = nil
         
         if let userData = UserDefaults.standard.data(forKey: "user") {
             
@@ -225,7 +234,7 @@ class ProfileViewController: UIViewController, PopUpViewControllerDelegate, Sett
     
     func didUpdateUser() {
         
-        self.user = self.getUser()
+        self.user = self.getUserFromUserDefaults()
         setUserInterface()
     }
 
