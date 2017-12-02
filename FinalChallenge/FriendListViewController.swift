@@ -25,7 +25,10 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         self.friendList.removeAll()
         self.friendImageList.removeAll()
 
-        FirebaseHelper.getFriends(userId: (FirebaseHelper.firebaseUser?.uid)!, completionHandler: {
+        guard let firebaseUSerUid = FirebaseHelper.firebaseUser?.uid else {
+            return
+        }
+        FirebaseHelper.getFriends(userId: firebaseUSerUid, completionHandler: {
             friend in
             if let friend = friend{
                 

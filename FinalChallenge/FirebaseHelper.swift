@@ -345,7 +345,8 @@ class FirebaseHelper{
     }
     
     static func getChats(completionHandler: @escaping (_ chat: Chat) -> () ){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/partnersIds").observe( .value, with: {
+        guard let firebaseUserUid = firebaseUser?.uid else{ return }
+        rootRefDatabase.child("users/" + firebaseUserUid + "/partnersIds").observe( .value, with: {
             snapshot in
             if let partnersDictionary = snapshot.value as? [String: String]{
                 for (_, value) in partnersDictionary{
@@ -416,7 +417,10 @@ class FirebaseHelper{
     }
     
     static func removeChatObserver(){
-        rootRefDatabase.child("users/" + (firebaseUser?.uid)! + "/chatsId").removeAllObservers()
+        guard  let firebaseUserUid =  firebaseUser?.uid else {
+            return
+        }
+        rootRefDatabase.child("users/" + firebaseUserUid + "/chatsId").removeAllObservers()
     }
     //**********************************************************************************************************************
     
